@@ -1,0 +1,56 @@
+#cookie, #cookie2, #l5 {
+    display: none;
+}
+
+canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    font-family: "CoffeCake", sans-serif;
+}
+
+.button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 350%);
+    background-color: #EA5C2B;
+    width: 450px;
+    border-radius: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    outline: 3px solid black;
+}
+
+.button-container:hover {
+    background-color: #FF7F3F;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.button-container:active {
+    background-color: #95CD41;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+#switchButton {
+    font-family: CoffeCake, sans-serif;
+    background: transparent;
+    font-size: 60px;
+    padding: 16px 32px;
+    border: none;
+    color: #FFD2BB;
+    cursor: pointer;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 2%);
+    caret-color: transparent;
+    -webkit-text-stroke: 3px black; /* Added text-stroke property */
+}
+
+#switchButton:active{
+    color: #DFFFAE;
+}
+
+
