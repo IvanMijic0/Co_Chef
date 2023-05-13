@@ -9,12 +9,25 @@
 <body>
     <canvas id="intro-canvas" width="100%" height="100%"></canvas>
     <canvas id="start-menu-canvas" width="100%" height="100%"></canvas>
+    <canvas id="test-canvas" width="100%" height="100%"></canvas>
 
     <img id="cookie" src="Assets/Sprites/cookie.png" alt="Cookie image">
     <img id="cookie2" src="Assets/Sprites/cookie2.png" alt="Cookie2 image">
-    <div class="button-container">
-        <button id="switchButton">Switch Scene</button>
+    <img id="test" src="Assets/Sprites/test-image.jpg" alt="Test image">
+
+    <div class="Button-column">
+        <div class="Button-container" id="switchButton-container">
+            <button class="Button" id="switchButton">Switch Scene</button>
+        </div>
+        <div class="Button-container" id="testButton-container">
+            <button class="Button" id="testButton">Test</button>
+        </div>
+        <div class="Button-container" id="backButton-container">
+            <button class="Button" id="backButton">Back</button>
+        </div>
     </div>
+
+
 
     <script type="module" src="Control/controller.js"></script>
 </body>

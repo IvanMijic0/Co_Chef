@@ -1,7 +1,4 @@
-#cookie, #cookie2, #l5 {
-    display: none;
-}
-
+/* Canvas styles */
 canvas {
     position: absolute;
     top: 50%;
@@ -12,45 +9,66 @@ canvas {
     font-family: "CoffeCake", sans-serif;
 }
 
-.button-container {
+/* Image styles */
+#cookie, #cookie2, #test {
+    display: none;
+}
+
+.Button-column {
     position: absolute;
-    top: 50%;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, 350%);
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+}
+
+
+.Button-container {
     background-color: #EA5C2B;
-    width: 450px;
+    width: 100%;
     border-radius: 250px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     outline: 3px solid black;
+    z-index: 1; /* Add a higher z-index value */
+    display: flex;
+    justify-content: center;
 }
 
-.button-container:hover {
+
+.Button-container:hover {
     background-color: #FF7F3F;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-.button-container:active {
+.Button-container:active {
     background-color: #95CD41;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-#switchButton {
+.Button {
     font-family: CoffeCake, sans-serif;
     background: transparent;
-    font-size: 60px;
-    padding: 16px 32px;
+    font-size: 300%;
+    padding: 3vh 6vw;
     border: none;
     color: #FFD2BB;
     cursor: pointer;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 2%);
     caret-color: transparent;
     -webkit-text-stroke: 3px black; /* Added text-stroke property */
 }
 
-#switchButton:active{
+.Button:active {
     color: #DFFFAE;
 }
 
+#testButton-container {
+    margin-top: 4%;
+}
 
+#backButton-container {
+    margin-top: 4%;
+}
