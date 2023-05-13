@@ -8,7 +8,7 @@ export const sceneData = {
     START_MENU:  {
         canvasId: "start-menu-canvas",
         backgroundColor: "#FFD2BB",
-        image: {element: document.getElementById("cookie2"), width: 1024, height: 1024},
+        image: {element: document.getElementById("startMenu"), width: 1920, height: 771},
         sceneId: 1
     },
     TEST:  {

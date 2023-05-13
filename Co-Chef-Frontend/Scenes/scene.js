@@ -1,4 +1,4 @@
-export default class Scene {
+export  class Scene {
     constructor(canvasId, backgroundColor, image, showButtons) {
         this.canvas = document.getElementById(canvasId);
         this.context = this.canvas.getContext("2d");
@@ -40,6 +40,22 @@ export default class Scene {
             this.image.element,
             (this.canvas.width - this.image.width) * 0.5,
             (this.canvas.height - this.image.height) * 0.5 - this.image.height * 0.2
+        );
+    }
+}
+
+export class StartMenuScene extends Scene {
+    constructor(canvasId, backgroundColor, image, showButtons) {
+        super(canvasId, backgroundColor, image, showButtons);
+    }
+    draw = () => {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.fillStyle = this.backgroundColor;
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.drawImage(
+            this.image.element,
+            (this.canvas.width - this.image.width) * 0.5,
+            (this.canvas.height - this.image.height) * 0.5 + this.image.height * .1
         );
     }
 }

@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+                        <!-- Title & CSS -->
     <title>Co-Chef</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+                        <!-- Canvases -->
     <canvas id="intro-canvas" width="100%" height="100%"></canvas>
     <canvas id="start-menu-canvas" width="100%" height="100%"></canvas>
     <canvas id="test-canvas" width="100%" height="100%"></canvas>
 
-    <img id="cookie" src="Assets/Sprites/cookie.png" alt="Cookie image">
-    <img id="cookie2" src="Assets/Sprites/cookie2.png" alt="Cookie2 image">
-    <img id="test" src="Assets/Sprites/test-image.jpg" alt="Test image">
+                        <!-- Images -->
+    <img id="startMenu" src="Assets/Sprites/startMenuImage.png" alt="Start Menu Image">
     <img id="logo" src="Assets/Sprites/logo.png" alt="Logo image">
 
+                        <!-- Buttons -->
     <div id="button-column" class="Button-column">
-        <div class="Button-container" id="switchButton-container">
-            <button class="Button" id="switchButton">Start Menu</button>
+        <h1 id="menuHeader">Co-Chef</h1>
+        <div class="Button-container" id="tutorialButton-container">
+            <button class="Button" id="tutorialButton">Tutorial</button>
         </div>
-        <div class="Button-container" id="testButton-container">
-            <button class="Button" id="testButton">Test</button>
+        <div class="Button-container" id="connectButton-container">
+            <button class="Button" id="connectButton">Connect</button>
         </div>
-        <div class="Button-container" id="backButton-container">
-            <button class="Button" id="backButton">Back</button>
+        <div class="Button-container" id="optionsButton-container">
+            <button class="Button" id="optionsButton">Options</button>
         </div>
+        <div class="Button-container" id="restartButton-container">
+            <button class="Button" id="restartButton">Restart</button>
+        </div>
+
     </div>
 
+                        <!-- Scripts -->
     <script type="module" src="Control/controller.js"></script>
 </body>
 </html>
