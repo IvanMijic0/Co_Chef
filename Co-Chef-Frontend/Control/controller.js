@@ -1,16 +1,22 @@
-import { createScene } from "../Scenes/scene.js";
+import Scene  from "../Scenes/scene.js";
 import { sceneData } from "../Scenes/scene-data.js";
 
 const scenes = [
-    createScene(sceneData.INTRO.canvasId, sceneData.INTRO.backgroundColor, sceneData.INTRO.image),
-    createScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.backgroundColor, sceneData.START_MENU.image),
-    createScene(sceneData.TEST.canvasId, sceneData.TEST.backgroundColor, sceneData.TEST.image)
+    new Scene(sceneData.INTRO.canvasId, sceneData.INTRO.backgroundColor, sceneData.INTRO.image, false),
+    new Scene(sceneData.START_MENU.canvasId, sceneData.START_MENU.backgroundColor, sceneData.START_MENU.image, true),
+    new Scene(sceneData.TEST.canvasId, sceneData.TEST.backgroundColor, sceneData.TEST.image, false)
 ];
 
 let activeScene = 0;
 let previousScene = 0;
 
+
+
 const drawActiveScene = () => {
+    if (activeScene === 0) {
+        setTimeout(() => {switchToScene(1);}, 3500);
+    }
+    scenes[activeScene].show();
     scenes[activeScene].draw();
     requestAnimationFrame(drawActiveScene);
 };
