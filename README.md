@@ -1,1 +1,3 @@
 # Co-Chef
+online multiplayer co-op mini-game.
+In development...
