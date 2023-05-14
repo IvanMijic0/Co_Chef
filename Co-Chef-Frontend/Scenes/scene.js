@@ -7,7 +7,6 @@ export  class Scene {
         this.backgroundColor = backgroundColor;
         this.image = image;
         this.showButtons = showButtons;
-
     }
 
     show = () => {

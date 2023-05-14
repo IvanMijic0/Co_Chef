@@ -33,7 +33,7 @@ canvas {
     border-radius: 250px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     outline: 3px solid black;
-    z-index: 1; /* Add a higher z-index value */
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +61,7 @@ canvas {
     color: #FFD2BB;
     cursor: pointer;
     caret-color: transparent;
-    -webkit-text-stroke: 3px black; /* Added text-stroke property */
+    -webkit-text-stroke: 3px black;
 }
 
 .Button:active {
