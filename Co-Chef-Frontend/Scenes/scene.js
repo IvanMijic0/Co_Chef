@@ -88,5 +88,4 @@ export class TutorialScene extends Scene {
             (this.canvas.height - this.image.height) * 0.5
         );
     }
-
 }
