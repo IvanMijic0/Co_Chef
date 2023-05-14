@@ -8,6 +8,7 @@ export const sceneData = {
     START_MENU:  {
         canvasId: "start-menu-canvas",
         background: {source: document.getElementById("startMenu"), width: 1920, height: 1080},
+        audioId: 0,
         sceneId: 1
     },
     TUTORIAL:  {
