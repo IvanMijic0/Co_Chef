@@ -67,16 +67,6 @@ canvas {
     color: #DFFFAE;
 }
 
-/* Header styles */
-#menuHeader {
-    font-family: CoffeCake, sans-serif;
-    font-size: 1400%;
-    color: #FF7F3F;
-    caret-color: transparent;
-    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
-    margin-bottom: 0;
-}
-
 .Back-Button {
     display: none;
     position: absolute;
@@ -93,4 +83,28 @@ canvas {
 #backButton {
     font-size: 300%;
     padding: 12px 24px;
+}
+
+/* Header styles */
+#menuHeader {
+    font-family: CoffeCake, sans-serif;
+    font-size: 1400%;
+    color: #FF7F3F;
+    caret-color: transparent;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    margin-bottom: 0;
+}
+
+#introHeader {
+    font-family: CoffeCake, sans-serif;
+    display: none;
+    font-size: 400%;
+    color: #FF7F3F;
+    caret-color: transparent;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    margin: 0;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
 }

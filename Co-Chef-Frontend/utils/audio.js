@@ -2,6 +2,9 @@ export class LazyAudio {
     constructor(audioId) {
         this.audio = new Audio(document.getElementById(audioId).getAttribute("src"));
     }
+    /*
+    Did not Find any usages yet, will keep for future
+     */
     playLoop = () => {
         this.audio.addEventListener('canplaythrough', () => {
             this.audio.loop = true;
@@ -9,6 +12,9 @@ export class LazyAudio {
         }, {once: true});
     }
 
+    /*
+    Switches audio with new HTML audioId provided
+     */
     switchAudio = (newAudioId) => {
         const newAudio = new Audio(document.getElementById(newAudioId).getAttribute("src"));
         newAudio.addEventListener('canplaythrough', () => {
@@ -19,6 +25,10 @@ export class LazyAudio {
             this.audio.play().then(() => "Played successfully");
         }, {once: true});
     }
+
+    /*
+    Restarts audio
+     */
     restart = () => {
         this.audio.pause();
         this.audio.currentTime = 0;
@@ -27,6 +37,9 @@ export class LazyAudio {
         });
     }
 
+    /*
+    Stops audio from playing
+     */
     stop = () => {
         this.audio.pause();
         this.audio.currentTime = 0;

@@ -10,6 +10,7 @@ const scenes = [
 
 const audio = new LazyAudio("startMenuAudio");
 
+let introText = document.getElementById("introHeader");
 let activeScene = 0;
 let previousScene = 0;
 
@@ -18,8 +19,12 @@ const intro = () => {
     audio.stop();
     if (activeScene === 0) {
         setTimeout(() => {
-            switchToScene(sceneData.START_MENU.sceneId);
-            audio.restart();
+            introText.style.display = "flex";
+            document.addEventListener("click", () => {
+                switchToScene(sceneData.START_MENU.sceneId);
+                introText.style.display = "none";
+                audio.restart();
+            }, {once: true});
         }, 3500);
     }
 }

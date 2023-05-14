@@ -89,3 +89,10 @@ export class TutorialScene extends Scene {
         );
     }
 }
+
+export class OptionsScene extends Scene {
+    constructor(canvasId, image, showButtons) {
+        super(canvasId, showButtons);
+        this.image = image;
+    }
+}
