@@ -31,6 +31,7 @@ export class IntroScene extends Scene {
         this.logo = logo;
         this.background = background;
     }
+
     draw = () => {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.drawImage(
@@ -51,6 +52,7 @@ export class StartMenuScene extends Scene {
         super(canvasId, showButtons);
         this.background = background;
     }
+
     draw = () => {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.drawImage(
@@ -75,6 +77,7 @@ export class TutorialScene extends Scene {
         this.canvas.style.display = "block";
         this.canvas.style.pointerEvents = "auto";
     }
+
     draw = () => {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.fillStyle = "black";
