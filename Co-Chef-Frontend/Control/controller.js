@@ -38,10 +38,6 @@ const switchToScene = (sceneId) => {
     // console.log("Previous scene -> " + previousScene);
 };
 
-document.getElementById("tutorialButton-container").addEventListener("click", () => {
-    switchToScene(sceneData.START_MENU.sceneId);
-});
-
 document.getElementById("connectButton-container").addEventListener("click", () => {
     console.log("Connect Scene -> In development...")
 });

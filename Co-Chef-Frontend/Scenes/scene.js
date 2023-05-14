@@ -11,15 +11,9 @@ export  class Scene {
     }
 
     show = () => {
-        if (!this.showButtons) {
-            document.querySelectorAll(".Button-column").forEach(element => {
-                element.style.display = "none";
-            });
-        } else {
-            document.querySelectorAll(".Button-column").forEach(element => {
-                element.style.display = "flex";
-            });
-        }
+        document.querySelectorAll(".Button-column").forEach(element => {
+            element.style.display = this.showButtons ? "flex" : "none";
+        });
         this.canvas.style.display = "block";
         this.canvas.style.pointerEvents = "auto";
     }
