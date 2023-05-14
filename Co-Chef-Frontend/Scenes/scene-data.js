@@ -14,6 +14,7 @@ export const sceneData = {
     TUTORIAL:  {
         canvasId: "tutorial-canvas",
         image: {source: document.getElementById("tutorial"), width: 1920, height: 1080},
+        audioId: 1,
         sceneId: 2
     },
 }

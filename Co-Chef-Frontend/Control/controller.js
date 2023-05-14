@@ -7,20 +7,19 @@ const scenes = [
     new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.background, true),
     new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
 ];
-const startMenuAudio = new LazyAudio("startMenuAudio");
+
+const audio = new LazyAudio("startMenuAudio");
 
 let activeScene = 0;
 let previousScene = 0;
 
-
-
 const intro = () => {
     scenes[activeScene].show();
-    startMenuAudio.stop();
+    audio.stop();
     if (activeScene === 0) {
         setTimeout(() => {
             switchToScene(sceneData.START_MENU.sceneId);
-            startMenuAudio.restart();
+            audio.restart();
         }, 3500);
     }
 }
@@ -64,7 +63,7 @@ const switchToScene = (sceneId) => {
 
 document.getElementById("tutorialButton-container").addEventListener("click", () => {
     switchToScene(sceneData.TUTORIAL.sceneId);
-    startMenuAudio.restart();
+    audio.switchAudio("tutorialAudio");
 });
 
 document.getElementById("connectButton-container").addEventListener("click", () => {
@@ -84,7 +83,7 @@ document.getElementById("restartButton-container").addEventListener("click", () 
 
 document.getElementById("backButton-container").addEventListener("click", () => {
     switchToScene(sceneData.START_MENU.sceneId);
-    startMenuAudio.restart();
+    audio.switchAudio("startMenuAudio");
 });
 
 
