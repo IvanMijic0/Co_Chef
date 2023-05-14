@@ -9,7 +9,6 @@ const scenes = [
 let activeScene = 0;
 let previousScene = 0;
 
-
 const intro = () => {
     scenes[activeScene].show();
     if (activeScene === 0) {
@@ -39,13 +38,16 @@ const switchToScene = (sceneId) => {
 };
 
 document.getElementById("connectButton-container").addEventListener("click", () => {
+    // TODO Finish Connect Scene
     console.log("Connect Scene -> In development...")
 });
 
 document.getElementById("tutorialButton-container").addEventListener("click", () => {
+    // TODO Finish Tutorial Scene
     console.log("Tutorial Scene -> In development...")
 });
 document.getElementById("optionsButton-container").addEventListener("click", () => {
+    // TODO Finish Options Scene
     console.log("Options Scene -> In development...")
 });
 
@@ -56,7 +58,6 @@ document.getElementById("restartButton-container").addEventListener("click", () 
             break;
         }
     }
-
     const currentScene = scenes[activeScene];
     const nextScene = scenes[previousScene];
 
