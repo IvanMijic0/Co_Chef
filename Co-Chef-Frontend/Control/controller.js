@@ -1,9 +1,10 @@
-import { Scene, StartMenuScene }  from "../Scenes/scene.js";
+import {IntroScene, StartMenuScene, TutorialScene} from "../Scenes/scene.js";
 import { sceneData } from "../Scenes/scene-data.js";
 
 const scenes = [
-    new Scene(sceneData.INTRO.canvasId, sceneData.INTRO.backgroundColor, sceneData.INTRO.image, false),
-    new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.backgroundColor, sceneData.START_MENU.image, true),
+    new IntroScene(sceneData.INTRO.canvasId, sceneData.INTRO.logo, sceneData.INTRO.background, false),
+    new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.background, true),
+    new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
 ];
 
 let activeScene = 0;
@@ -37,15 +38,15 @@ const switchToScene = (sceneId) => {
     // console.log("Previous scene -> " + previousScene);
 };
 
+document.getElementById("tutorialButton-container").addEventListener("click", () => {
+    switchToScene(sceneData.TUTORIAL.sceneId);
+});
+
 document.getElementById("connectButton-container").addEventListener("click", () => {
     // TODO Finish Connect Scene
     console.log("Connect Scene -> In development...")
 });
 
-document.getElementById("tutorialButton-container").addEventListener("click", () => {
-    // TODO Finish Tutorial Scene
-    console.log("Tutorial Scene -> In development...")
-});
 document.getElementById("optionsButton-container").addEventListener("click", () => {
     // TODO Finish Options Scene
     console.log("Options Scene -> In development...")
@@ -69,6 +70,10 @@ document.getElementById("restartButton-container").addEventListener("click", () 
 
     // console.log("Active scene -> " + activeScene);
     // console.log("Previous scene -> " + previousScene);
+});
+
+document.getElementById("backButton-container").addEventListener("click", () => {
+    switchToScene(sceneData.START_MENU.sceneId);
 });
 
 

@@ -10,7 +10,7 @@ canvas {
 }
 
 /* Image styles */
-#startMenu, #test, #logo {
+#startMenu, #test, #logo, #tutorial, #background {
     display: none;
 }
 
@@ -28,12 +28,11 @@ canvas {
 
 .Button-container {
     background-color: #EA5C2B;
-    width: 70%;
+    width: 60%;
     height: 7%;
     border-radius: 250px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     outline: 3px solid black;
-    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,4 +75,23 @@ canvas {
     caret-color: transparent;
     text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     margin-bottom: 0;
+}
+
+
+.Back-Button {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 1%;
+    margin-left: 18%;
+}
+
+#backButton-container {
+    width: 200%;
+}
+
+#backButton {
+    font-size: 300%;
+    padding: 12px 24px;
 }
