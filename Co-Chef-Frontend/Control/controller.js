@@ -1,4 +1,4 @@
-import {IntroScene, StartMenuScene, TutorialScene} from "../Scenes/scene.js";
+import { IntroScene, StartMenuScene, TutorialScene } from "../Scenes/scene.js";
 import { sceneData } from "../Scenes/scene-data.js";
 
 const scenes = [

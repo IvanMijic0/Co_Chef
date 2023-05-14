@@ -46,7 +46,6 @@ export class IntroScene extends Scene {
     }
 }
 
-
 export class StartMenuScene extends Scene {
     constructor(canvasId, background, showButtons) {
         super(canvasId, showButtons);
