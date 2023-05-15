@@ -1,14 +1,17 @@
-import { IntroScene, StartMenuScene, TutorialScene } from "../Scenes/scene.js";
+import { IntroScene, OptionsScene, StartMenuScene, TutorialScene } from "../Scenes/scene.js";
 import { sceneData } from "../Scenes/scene-data.js";
 import { LazyAudio } from "../utils/audio.js";
+import { VolumeBar } from "../utils/volume-bar.js";
 
 const scenes = [
     new IntroScene(sceneData.INTRO.canvasId, sceneData.INTRO.logo, sceneData.INTRO.background, false),
     new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.background, true),
     new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
+    new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
 ];
 
 const audio = new LazyAudio("startMenuAudio");
+const volumeBar = new VolumeBar('volumeBar', 'volumeContainer', audio);
 
 let introText = document.getElementById("introHeader");
 let activeScene = 0;
@@ -68,7 +71,7 @@ const switchToScene = (sceneId) => {
 
 document.getElementById("tutorialButton-container").addEventListener("click", () => {
     switchToScene(sceneData.TUTORIAL.sceneId);
-    audio.switchAudio("tutorialAudio");
+    audio.switchAudio("tutorialAudio", audio.audio.volume);
 });
 
 document.getElementById("connectButton-container").addEventListener("click", () => {
@@ -77,8 +80,11 @@ document.getElementById("connectButton-container").addEventListener("click", () 
 });
 
 document.getElementById("optionsButton-container").addEventListener("click", () => {
-    // TODO Finish Options Scene
-    console.log("Options Scene -> In development...")
+    switchToScene(sceneData.OPTIONS.sceneId);
+    document.getElementById("optionsHeader").style.display = "flex";
+    document.getElementById("options-backButton-container").style.display = "flex";
+    volumeBar.show();
+    volumeBar.setup();
 });
 
 document.getElementById("restartButton-container").addEventListener("click", () => {
@@ -86,9 +92,13 @@ document.getElementById("restartButton-container").addEventListener("click", () 
     intro();
 });
 
-document.getElementById("backButton-container").addEventListener("click", () => {
+document.getElementById("tutorial-backButton-container").addEventListener("click", () => {
     switchToScene(sceneData.START_MENU.sceneId);
-    audio.switchAudio("startMenuAudio");
+    audio.switchAudio("startMenuAudio", audio.audio.volume);
 });
 
-
+document.getElementById("options-backButton-container").addEventListener("click", () => {
+    switchToScene(sceneData.START_MENU.sceneId);
+    // audio.switchAudio("startMenuAudio");
+    volumeBar.hide();
+});

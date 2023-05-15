@@ -17,6 +17,7 @@ canvas {
 /* Button styles */
 .Button-column {
     position: absolute;
+    display: none;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -68,7 +69,6 @@ canvas {
 }
 
 .Back-Button {
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -76,13 +76,30 @@ canvas {
     margin-left: 18%;
 }
 
-#backButton-container {
-    width: 200%;
+#tutorial-backButton-container {
+    display: none;
+    width: 110%;
 }
 
-#backButton {
+#tutorialBackButton {
     font-size: 300%;
     padding: 12px 24px;
+}
+
+#options-backButton-container {
+    position: fixed;
+    display: none;
+    bottom: 10%;
+    left: 42%;
+    background-color: #EA5C2B;
+    width: 15%;
+    height: 7%;
+    border-radius: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    outline: 3px solid black;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8%;
 }
 
 /* Header styles */
@@ -108,3 +125,61 @@ canvas {
     left: 50%;
     transform: translateX(-50%);
 }
+
+#optionsHeader {
+    font-family: CoffeCake, sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -32%);
+    display: none;
+    font-size: 1400%;
+    color: #FF7F3F;
+    caret-color: transparent;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    margin-bottom: 0;
+}
+
+/* Volume */
+#volumeContainer {
+    position: absolute;
+    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 40%;
+    width: 40%;
+    height: 7%;
+    border-radius: 250px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#volumeBar {
+    --value: 50%;
+    width: 100%;
+    height: 100%;
+    outline: 3px solid black;
+    border-radius: 250px;
+    background: linear-gradient(to right, #EA5C2B 0%, #EA5C2B calc(var(--value) * 100%), #FBDD0D 0, #FBDD0D 100%);
+    -webkit-appearance: none;
+}
+
+#volumeBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 100px;
+    background-color: #EA5C2B;
+    outline: 3px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#volumeBar::-webkit-slider-runnable-track {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 250px;
+    z-index: 1;
+}
+
+

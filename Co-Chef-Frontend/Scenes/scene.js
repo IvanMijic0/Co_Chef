@@ -19,7 +19,9 @@ class Scene {
         document.querySelectorAll(".Button-column").forEach(element => {
             element.style.display = "none";
         });
-        document.getElementById("Back-button").style.display = "none";
+        document.getElementById("tutorial-backButton-container").style.display = "none";
+        document.getElementById("options-backButton-container").style.display = "none";
+        document.getElementById("optionsHeader").style.display = "none";
         this.canvas.style.display = "none";
         this.canvas.style.pointerEvents = "none";
     }
@@ -73,7 +75,7 @@ export class TutorialScene extends Scene {
         document.querySelectorAll(".Button-column").forEach(element => {
             element.style.display = this.showButtons ? "flex" : "none";
         });
-        document.getElementById("Back-button").style.display = "flex";
+        document.getElementById("tutorial-backButton-container").style.display = "flex";
         this.canvas.style.display = "block";
         this.canvas.style.pointerEvents = "auto";
     }
@@ -94,5 +96,12 @@ export class OptionsScene extends Scene {
     constructor(canvasId, image, showButtons) {
         super(canvasId, showButtons);
         this.image = image;
+    }
+    draw = () => {
+        this.context.drawImage(
+            this.image.source,
+            (this.canvas.width - this.image.width) * 0.5,
+            (this.canvas.height - this.image.height) * 0.5
+        );
     }
 }

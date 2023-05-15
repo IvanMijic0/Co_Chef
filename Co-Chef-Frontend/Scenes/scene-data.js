@@ -8,13 +8,16 @@ export const sceneData = {
     START_MENU:  {
         canvasId: "start-menu-canvas",
         background: {source: document.getElementById("startMenu"), width: 1920, height: 1080},
-        audioId: 0,
         sceneId: 1
     },
     TUTORIAL:  {
         canvasId: "tutorial-canvas",
         image: {source: document.getElementById("tutorial"), width: 1920, height: 1080},
-        audioId: 1,
         sceneId: 2
     },
+    OPTIONS: {
+        canvasId: "options-canvas",
+        image: {source: document.getElementById("background"), width: 1920, height: 1080},
+        sceneId: 3
+    }
 }
