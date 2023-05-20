@@ -182,4 +182,134 @@ canvas {
     z-index: 1;
 }
 
+/* Login and Signup */
 
+#login-container, #signup-container {
+    display: none;
+    font-family: CoffeCake, sans-serif;
+    text-align: center;
+    font-size: 250%;
+    color: snow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%;
+    height: 60%;
+    background-image: url("Assets/Sprites/loginContainerBackground.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-text-stroke: 2px black;
+}
+
+#signup-container {
+    background-image: url("Assets/Sprites/signupContainerBackground.png");
+    width: 45%;
+    height: 72%;
+}
+
+#signup-container .input-group {
+    margin-top: 7%;
+    margin-bottom: 13px;
+}
+
+#login-container .input-group {
+    margin-top: 9%;
+    margin-bottom: 15px;
+}
+
+#login-container label,
+#signup-container label {
+    display: block;
+    margin-bottom: 1%;
+}
+
+#login-container input[type="text"],
+#login-container input[type="password"],
+#signup-container input[type="text"],
+#signup-container input[type="password"] {
+    font-family: CoffeCake, sans-serif;
+    font-size: 100%;
+    color: #95CD41;
+    padding: 1%;
+    width: 50%;
+    border-radius: 25px;
+    border: 2px solid black;
+}
+
+#login-container #username:hover,
+#login-container #password:hover,
+#signup-container #name:hover,
+#signup-container #username0:hover,
+#signup-container #password0:hover {
+    background-color: snow;
+}
+
+#login-container #loginButton,
+#signup-container #loginButton0
+ {
+    margin-top: 2%;
+    margin-right: 2%;
+    margin-left: 2%;
+    font-family: CoffeCake, sans-serif;
+    font-size: 80%;
+    background-color: #EA5C2B;
+    color: #FFD2BB;
+    border: 2px solid black;
+    padding: 1%;
+    width: 24%;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+#signup-container #loginButton0 {
+    background-color: #FFBB94;
+}
+
+#login-container #loginButton:hover {
+    background-color: #FF7F3F;
+}
+
+#signup-container #loginButton0:hover {
+    background-color: #F6D860;
+}
+
+#login-container #loginButton:active,
+#signup-container #loginButton0:active {
+    background-color: #95CD41;
+    color: #DFFFAE;
+}
+
+#login-container #signUpButton,
+#signup-container #signUpButton0 {
+    margin-right: 2%;
+    margin-left: 2%;
+    font-family: CoffeCake, sans-serif;
+    font-size: 80%;
+    background-color: #FFBB94;
+    color: #FFD2BB;
+    border: 2px solid black;
+    padding: 1%;
+    width: 24%;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+#signup-container #signUpButton0 {
+    background-color: #EA5C2B
+}
+
+#login-container #signUpButton:hover {
+    background-color: #F6D860;
+}
+
+#signup-container #signUpButton0:hover {
+    background-color: #FF7F3F;
+}
+
+#login-container #signUpButton:active,
+#signup-container #signUpButton0:active {
+    background-color: #95CD41;
+    color: #DFFFAE;
+}

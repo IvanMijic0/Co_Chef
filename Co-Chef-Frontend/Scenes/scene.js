@@ -22,6 +22,8 @@ class Scene {
         document.getElementById("tutorial-backButton-container").style.display = "none";
         document.getElementById("options-backButton-container").style.display = "none";
         document.getElementById("optionsHeader").style.display = "none";
+        document.getElementById("login-container").style.display = "none";
+        document.getElementById("signup-container").style.display = "none";
         this.canvas.style.display = "none";
         this.canvas.style.pointerEvents = "none";
     }
@@ -103,5 +105,37 @@ export class OptionsScene extends Scene {
             (this.canvas.width - this.image.width) * 0.5,
             (this.canvas.height - this.image.height) * 0.5
         );
+    }
+}
+export class LoginScene extends Scene {
+    constructor(canvasId, image, showButtons) {
+        super(canvasId, showButtons);
+        this.image = image;
+    }
+    draw = () => {
+        this.context.drawImage(
+            this.image.source,
+            (this.canvas.width - this.image.width) * 0.5,
+            (this.canvas.height - this.image.height) * 0.5
+        );
+    }
+    show = () => {
+        document.getElementById("login-container").style.display = "block";
+    }
+}
+export class SignupScene extends Scene {
+    constructor(canvasId, image, showButtons) {
+        super(canvasId, showButtons);
+        this.image = image;
+    }
+    draw = () => {
+        this.context.drawImage(
+            this.image.source,
+            (this.canvas.width - this.image.width) * 0.5,
+            (this.canvas.height - this.image.height) * 0.5
+        );
+    }
+    show = () => {
+        document.getElementById("signup-container").style.display = "block";
     }
 }
