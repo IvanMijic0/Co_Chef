@@ -10,7 +10,8 @@ canvas {
 }
 
 /* Image styles */
-#startMenu, #test, #logo, #tutorial, #background {
+#startMenu, #test, #logo, #tutorial, #background,
+#speech, #introBackground, #volumeIcon, #muteVolumeIcon{
     display: none;
 }
 
@@ -86,7 +87,7 @@ canvas {
     padding: 12px 24px;
 }
 
-#options-backButton-container {
+#options-backButton-container, #CharSelect-backButton-container {
     position: fixed;
     display: none;
     bottom: 10%;
@@ -100,6 +101,22 @@ canvas {
     justify-content: center;
     align-items: center;
     margin-top: 8%;
+}
+
+#CharSelect-backButton-container {
+    margin-top: 3%;
+    top: 4%;
+    left: 4%;
+}
+
+#options-backButton-container:hover, #CharSelect-backButton-container:hover{
+    background-color: #FF7F3F;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+#options-backButton-container:active, #CharSelect-backButton-container:active {
+    background-color: #95CD41;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Header styles */
@@ -121,7 +138,7 @@ canvas {
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     margin: 0;
     position: absolute;
-    bottom: 10%;
+    bottom: 16%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -130,7 +147,7 @@ canvas {
     font-family: CoffeCake, sans-serif;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -32%);
+    transform: translate(-50%, -28.8%);
     display: none;
     font-size: 1400%;
     color: #FF7F3F;
@@ -141,6 +158,7 @@ canvas {
 
 /* Volume */
 #volumeContainer {
+    caret: transparent;
     position: absolute;
     display: none;
     left: 50%;
@@ -151,6 +169,15 @@ canvas {
     border-radius: 250px;
     cursor: pointer;
     padding: 5px;
+}
+
+#volumeIcon {
+    position: absolute;
+    top: 50%;
+    transform: translate(-180%, -50%);
+    width: 15%;
+    height: 120%;
+    caret: transparent;
 }
 
 #volumeBar {
@@ -173,6 +200,10 @@ canvas {
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
+}
+
+#volumeBar::-webkit-slider-thumb:hover {
+    background-color: #FF7F3F;
 }
 
 #volumeBar::-webkit-slider-runnable-track {

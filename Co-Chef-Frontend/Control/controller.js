@@ -1,6 +1,6 @@
 import {
     IntroScene, OptionsScene, StartMenuScene,
-    TutorialScene, LoginScene, SignupScene
+    TutorialScene, LoginScene, SignupScene, CharacterSelectScene
 } from "../Scenes/scene.js";
 import { sceneData } from "../Scenes/scene-data.js";
 import { LazyAudio } from "../utils/audio.js";
@@ -13,13 +13,14 @@ const scenes = [
     new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.background, true),
     new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
     new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
+    new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, sceneData.CHARACTER_SELECT.pupSpeechImage, false),
 ];
 
 export const audio = new LazyAudio("startMenuAudio");
-export const volumeBar = new VolumeBar('volumeBar', 'volumeContainer', audio);
+export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
 let introText = document.getElementById("introHeader");
-export let activeScene = 0;
+export let activeScene = 3;
 let previousScene = 0;
 
 scenes[activeScene].show();
@@ -36,6 +37,7 @@ export const intro = () => {
         }, {once: true});
     }, 3500);
 }
+if (activeScene === 2){intro();}
 
 const drawActiveScene = () => {
     scenes[activeScene].draw();

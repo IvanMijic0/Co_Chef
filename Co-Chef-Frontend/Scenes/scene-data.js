@@ -11,7 +11,7 @@ export const sceneData = {
     },
     INTRO:  {
         canvasId: "intro-canvas",
-        background: {source: document.getElementById("background"), width: 1920, height: 1080},
+        background: {source: document.getElementById("introBackground"), width: 1920, height: 1080},
         logo: {source: document.getElementById("logo"), width: 740, height: 640},
         sceneId: 2
     },
@@ -29,5 +29,10 @@ export const sceneData = {
         canvasId: "options-canvas",
         image: {source: document.getElementById("background"), width: 1920, height: 1080},
         sceneId: 5
+    },
+    CHARACTER_SELECT: {
+        canvasId: "characterSelect-canvas",
+        pupSpeechImage: {source: document.getElementById("speech"), width: 1920, height: 297},
+        sceneId: 6,
     },
 }

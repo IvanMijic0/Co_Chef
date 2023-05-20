@@ -20,9 +20,19 @@ export class VolumeBar {
     }
 
     setVolume(value) {
+        let volumeBefore = this.volume;
+        localStorage.setItem("volumeBefore", volumeBefore);
         this.volume = value;
-        localStorage.setItem('volume', value); // save the volume value in localStorage
+        localStorage.setItem("volume", value);
         this.audio.changeVolume(this.volume);
+        this.volumeBar.style.setProperty("--value", this.volume);
+        this.updateVolumeBar();
+    }
+
+    unmuteVolume() {
+        this.volume = localStorage.getItem("volumeBefore");
+        this.audio.changeVolume(this.volume);
+        this.volumeBar.style.setProperty("--value", this.volume);
         this.updateVolumeBar();
     }
 

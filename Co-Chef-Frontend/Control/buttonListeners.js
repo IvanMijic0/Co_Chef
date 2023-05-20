@@ -1,5 +1,5 @@
 import { sceneData } from "../Scenes/scene-data.js";
-import { switchToScene, volumeBar, audio, intro, activeScene } from "./controller.js";
+import { switchToScene, volumeBar, audio, intro } from "./controller.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginButton0 = document.getElementById("loginButton0");
     const signupButton = document.getElementById("signUpButton");
     const signupButton0 = document.getElementById("signUpButton0");
+    const volumeIcon = document.getElementById("volumeIcon");
+    const charSelectBackButton = document.getElementById("CharSelect-backButton-container");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -42,14 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     connectButton.addEventListener("click", () => {
-        // TODO: Finish Connect Scene
-        console.log("Connect Scene -> In development...");
+        switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+        document.getElementById("CharSelect-backButton-container").style.display = "flex";
     });
 
     optionsButton.addEventListener("click", () => {
         switchToScene(sceneData.OPTIONS.sceneId);
         document.getElementById("optionsHeader").style.display = "flex";
         document.getElementById("options-backButton-container").style.display = "flex";
+        document.getElementById("volumeIcon").style.display = "flex";
         volumeBar.show();
         volumeBar.setup();
     });
@@ -62,11 +65,32 @@ document.addEventListener("DOMContentLoaded", () => {
     tutorialBackButton.addEventListener("click", () => {
         switchToScene(sceneData.START_MENU.sceneId);
         audio.switchAudio("startMenuAudio", audio.audio.volume);
+        tutorialBackButton.style.display = "none";
     });
 
     optionsBackButton.addEventListener("click", () => {
         switchToScene(sceneData.START_MENU.sceneId);
-        // audio.switchAudio("startMenuAudio");
         volumeBar.hide();
+        optionsBackButton.style.display = "none";
     });
+
+    volumeIcon.addEventListener("click", () => {
+        if (volumeIcon.src.includes("muteVolumeIcon.png")) {
+            volumeIcon.src = "Assets/Sprites/volumeIcon.png";
+            volumeIcon.style.width = "15%";
+            volumeIcon.style.transform = "translate(-180%, -50%)"
+            volumeBar.unmuteVolume();
+        }
+        else {
+            volumeIcon.src = "Assets/Sprites/muteVolumeIcon.png";
+            volumeIcon.style.width = "13%";
+            volumeIcon.style.transform = "translate(-210%, -50%)"
+            volumeBar.setVolume(0);
+        }
+    });
+
+    charSelectBackButton.addEventListener("click", () => {
+        switchToScene(sceneData.START_MENU.sceneId);
+        charSelectBackButton.style.display = "none";
+    })
 });
