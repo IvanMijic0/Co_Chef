@@ -105,3 +105,15 @@ export class OptionsScene extends Scene {
         );
     }
 }
+
+export class DishSelectionScene extends Scene {
+    constructor(canvasId, showButtons) {
+        super(canvasId, showButtons);
+    }
+    draw = () => {
+        this.context.fillStyle = "#F6D860";
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height,);
+    }
+}
+
+

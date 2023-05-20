@@ -19,5 +19,10 @@ export const sceneData = {
         canvasId: "options-canvas",
         image: {source: document.getElementById("background"), width: 1920, height: 1080},
         sceneId: 3
-    }
+    },
+    DISH_SELECTION: {
+        canvasId: "dishSelection-canvas",
+        image: {source: document.getElementById("background"), width: 1920, height: 1080},
+        sceneId: 4
+    },
 }
