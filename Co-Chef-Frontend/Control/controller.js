@@ -19,48 +19,45 @@ export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar('volumeBar', 'volumeContainer', audio);
 
 let introText = document.getElementById("introHeader");
-let activeScene = 0;
+export let activeScene = 0;
 let previousScene = 0;
 
+scenes[activeScene].show();
 export const intro = () => {
-    if (activeScene === 2) {
-        scenes[activeScene].show();
-        audio.stop();
+    scenes[activeScene].show();
+    audio.stop();
 
-        setTimeout(() => {
-            introText.style.display = "flex";
-            document.addEventListener("click", () => {
-                switchToScene(sceneData.START_MENU.sceneId);
-                introText.style.display = "none";
-                audio.restart();
-            }, {once: true});
-        }, 3500);
-    }
+    setTimeout(() => {
+        introText.style.display = "flex";
+        document.addEventListener("click", () => {
+            switchToScene(sceneData.START_MENU.sceneId);
+            introText.style.display = "none";
+            audio.restart();
+        }, {once: true});
+    }, 3500);
 }
-intro();
 
 const drawActiveScene = () => {
     scenes[activeScene].draw();
-    scenes[activeScene].show();
     requestAnimationFrame(drawActiveScene);
 };
 drawActiveScene();
 
-function backToPrev() {
-    for (let i = 2; i < scenes.length; i++) {
-        if (activeScene === i && previousScene === i) {
-            previousScene = sceneData.INTRO.sceneId;
-            break;
-        }
-    }
-    const currentScene = scenes[activeScene];
-    const nextScene = scenes[previousScene];
-
-    currentScene.hide();
-    nextScene.show();
-
-    activeScene = previousScene;
-}
+// function backToPrev() {
+//     for (let i = 2; i < scenes.length; i++) {
+//         if (activeScene === i && previousScene === i) {
+//             previousScene = sceneData.INTRO.sceneId;
+//             break;
+//         }
+//     }
+//     const currentScene = scenes[activeScene];
+//     const nextScene = scenes[previousScene];
+//
+//     currentScene.hide();
+//     nextScene.show();
+//
+//     activeScene = previousScene;
+// }
 
 export const switchToScene = (sceneId) => {
     const currentScene = scenes[activeScene];
@@ -72,6 +69,6 @@ export const switchToScene = (sceneId) => {
     previousScene = activeScene;
     activeScene = sceneId;
 
-    // console.log("Active scene -> " + activeScene);
-    // console.log("Previous scene -> " + previousScene);
+    //console.log("Active scene -> " + activeScene);
+    //console.log("Previous scene -> " + previousScene);
 };

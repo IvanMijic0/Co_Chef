@@ -1,11 +1,11 @@
 export const sceneData = {
     SIGNUP: {
-        canvasId: "options-canvas",
+        canvasId: "signup-canvas",
         image: {source: document.getElementById("background"), width: 1920, height: 1080},
         sceneId: 0
     },
     LOGIN: {
-        canvasId: "options-canvas",
+        canvasId: "login-canvas",
         image: {source: document.getElementById("background"), width: 1920, height: 1080},
         sceneId: 1
     },

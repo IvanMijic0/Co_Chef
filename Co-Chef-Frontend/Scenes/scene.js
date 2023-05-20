@@ -121,6 +121,8 @@ export class LoginScene extends Scene {
     }
     show = () => {
         document.getElementById("login-container").style.display = "block";
+        this.canvas.style.display = "block";
+        this.canvas.style.pointerEvents = "auto";
     }
 }
 export class SignupScene extends Scene {
@@ -137,5 +139,7 @@ export class SignupScene extends Scene {
     }
     show = () => {
         document.getElementById("signup-container").style.display = "block";
+        this.canvas.style.display = "block";
+        this.canvas.style.pointerEvents = "auto";
     }
 }
