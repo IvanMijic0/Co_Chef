@@ -98,3 +98,4 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("character-container").style.display = "none";
     })
 });
+

@@ -12,7 +12,8 @@ canvas {
 /* Image styles */
 #startMenu, #test, #logo, #tutorial, #background,
 #speech, #introBackground, #volumeIcon, #muteVolumeIcon,
-#character{
+#character
+{
     display: none;
 }
 

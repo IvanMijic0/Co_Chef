@@ -189,16 +189,63 @@ export class CharacterSelectScene extends Scene {
         const character = document.getElementById("character");
         character.src = this.characters[this.currentIndex].src;
 
-            const characterX = (this.canvas.width - this.characters[this.currentIndex].width) * .5;
-            const characterY = (this.canvas.height - this.characters[this.currentIndex].height) * .4;
-            this.context.drawImage(
-                character,
-                characterX,
-                characterY,
-                sceneData.CHARACTER_SELECT.pupDim.width,
-                sceneData.CHARACTER_SELECT.pupDim.height
-            );
-    }
+        const characterX = (this.canvas.width - this.characters[this.currentIndex].width) * .5;
+        const characterY = (this.canvas.height - this.characters[this.currentIndex].height) * .4;
+        this.context.drawImage(
+            character,
+            characterX,
+            characterY,
+            sceneData.CHARACTER_SELECT.pupDim.width,
+            sceneData.CHARACTER_SELECT.pupDim.height
+        );
+
+        const throttledMouseMove = this.throttle((event) => {
+            const rect = this.canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            // Check collision with character's bounding box
+            if (
+                mouseX >= characterX &&
+                mouseX <= characterX + sceneData.CHARACTER_SELECT.pupDim.width - 150 &&
+                mouseY >= characterY &&
+                mouseY <= characterY + sceneData.CHARACTER_SELECT.pupDim.height - 80
+            ) {
+                // Collision detected
+                console.log("yo");
+                sceneData.CHARACTER_SELECT.pupDim.width = 545;
+                sceneData.CHARACTER_SELECT.pupDim.height = 585;
+            } else {
+                sceneData.CHARACTER_SELECT.pupDim.width = 525;
+                sceneData.CHARACTER_SELECT.pupDim.height = 565;
+            }
+        }, 2500); // Adjust the throttle delay as needed
+
+        this.canvas.addEventListener("mousemove", throttledMouseMove);
+    };
+
+    throttle = (func, delay) => {
+        let timeoutId;
+        let lastExecTime = 0;
+
+        return (...args) => {
+            const context = this;
+            const currentTimestamp = Date.now();
+
+            const execute = () => {
+                func.apply(context, args);
+                lastExecTime = currentTimestamp;
+            };
+
+            if (currentTimestamp >= lastExecTime + delay) {
+                execute();
+            } else {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(execute, delay);
+            }
+        };
+    };
+
 
     drawSpeechBubble = () => {
         this.context.drawImage(
