@@ -150,8 +150,9 @@ export class CharacterSelectScene extends Scene {
     constructor(canvasId, speech, showButtons) {
         super(canvasId, showButtons);
         this.speech = speech;
+        // TODO Finish this
         this.characters = [
-            "Assets/Sprites/pup.png",
+            {src: "Assets/Sprites/pup.png", width: sceneData.CHARACTER_SELECT.pupDim.width, height: sceneData.CHARACTER_SELECT.pupDim.height},
             "Assets/Sprites/isabelle.png",
             "Assets/Sprites/celine.png",
             "Assets/Sprites/amu.png",
@@ -186,10 +187,10 @@ export class CharacterSelectScene extends Scene {
 
     drawCharacter = () => {
         const character = document.getElementById("character");
-        character.src = this.characters[this.currentIndex];
+        character.src = this.characters[this.currentIndex].src;
 
-            const characterX = (this.canvas.width - sceneData.CHARACTER_SELECT.pupDim.width) * .5;
-            const characterY = (this.canvas.height - sceneData.CHARACTER_SELECT.pupDim.height) * .4;
+            const characterX = (this.canvas.width - this.characters[this.currentIndex].width) * .5;
+            const characterY = (this.canvas.height - this.characters[this.currentIndex].height) * .4;
             this.context.drawImage(
                 character,
                 characterX,
