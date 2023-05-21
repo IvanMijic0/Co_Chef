@@ -26,6 +26,8 @@
     <img id="tutorial" src="Assets/Sprites/tutorial.jpg" alt="Tutorial Image">
     <img id="logo" src="Assets/Sprites/logo.png" alt="Logo image">
     <img id="speech" src="Assets/Sprites/pupSpeech.png" alt="Speech Bubble image">
+    <img id="character" src="" alt="Character Select image">
+
 
                         <!-- Audio -->
     <audio id="myAudio">
@@ -76,9 +78,21 @@
         </div>
     </div>
 
+    <div id="character-container" class="character-container">
+        <img id="leftArrow" src="Assets/Sprites/LeftArrowIdle.png" alt="Left Arrow" class="arrow"
+             onmouseover="this.src='Assets/Sprites/LeftArrowHover.png'" onmouseout="this.src='Assets/Sprites/LeftArrowIdle.png'"
+             onmousedown="this.src='Assets/Sprites/LeftArrowActive.png'" onmouseup="this.src='Assets/Sprites/LeftArrowHover.png'">
+        <img id="rightArrow" src="Assets/Sprites/RightArrowIdle.png" alt="Right Arrow" class="arrow"
+             onmouseover="this.src='Assets/Sprites/RightArrowHover.png'" onmouseout="this.src='Assets/Sprites/RightArrowIdle.png'"
+             onmousedown="this.src='Assets/Sprites/RightArrowActive.png'" onmouseup="this.src='Assets/Sprites/RightArrowHover.png'">
+    </div>
+
+
                         <!-- Text -->
     <h1 id="introHeader">Press anywhere to start...</h1>
     <h1 id="optionsHeader">Co-Chef</h1>
+    <div id="character-name">Jacques Le Pup</div>
+
 
                         <!-- Login Form -->
     <div id="login-container">

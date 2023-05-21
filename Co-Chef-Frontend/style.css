@@ -11,7 +11,8 @@ canvas {
 
 /* Image styles */
 #startMenu, #test, #logo, #tutorial, #background,
-#speech, #introBackground, #volumeIcon, #muteVolumeIcon{
+#speech, #introBackground, #volumeIcon, #muteVolumeIcon,
+#character{
     display: none;
 }
 
@@ -120,13 +121,22 @@ canvas {
 }
 
 /* Header styles */
-#menuHeader {
+#menuHeader, #character-name {
     font-family: CoffeCake, sans-serif;
     font-size: 1400%;
     color: #FF7F3F;
     caret-color: transparent;
     text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     margin-bottom: 0;
+}
+
+#character-name {
+    display: none;
+    position: absolute;
+    font-size: 600%;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #introHeader {
@@ -343,4 +353,30 @@ canvas {
 #signup-container #signUpButton0:active {
     background-color: #95CD41;
     color: #DFFFAE;
+}
+
+/* Arrows */
+
+.character-container {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    caret: transparent;
+}
+
+.arrow {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+#leftArrow{
+    left: -230%;
+}
+
+#rightArrow{
+    right: -230%;
 }

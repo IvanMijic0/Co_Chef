@@ -1,4 +1,5 @@
-import { textData } from "../utils/text.js";
+import { textData } from "../utils/text-data.js";
+import { sceneData } from "./scene-data.js";
 
 class Scene {
     constructor(canvasId, showButtons) {
@@ -149,10 +150,21 @@ export class CharacterSelectScene extends Scene {
     constructor(canvasId, speech, showButtons) {
         super(canvasId, showButtons);
         this.speech = speech;
+        this.characters = [
+            "Assets/Sprites/pup.png",
+            "Assets/Sprites/isabelle.png",
+            "Assets/Sprites/celine.png",
+            "Assets/Sprites/amu.png",
+            "Assets/Sprites/chaton.png"
+        ];
+        this.currentIndex = 0;
     }
+
     draw = () => {
         this.context.fillStyle = "#DFFFAE";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.drawCharacter();
 
         this.drawSpeechBubble();
 
@@ -169,6 +181,22 @@ export class CharacterSelectScene extends Scene {
         const lines = this.splitTextIntoLines(text, maxWidth);
 
         this.drawTextLines(lines, textX, textY);
+
+    }
+
+    drawCharacter = () => {
+        const character = document.getElementById("character");
+        character.src = this.characters[this.currentIndex];
+
+            const characterX = (this.canvas.width - sceneData.CHARACTER_SELECT.pupDim.width) * .5;
+            const characterY = (this.canvas.height - sceneData.CHARACTER_SELECT.pupDim.height) * .4;
+            this.context.drawImage(
+                character,
+                characterX,
+                characterY,
+                sceneData.CHARACTER_SELECT.pupDim.width,
+                sceneData.CHARACTER_SELECT.pupDim.height
+            );
     }
 
     drawSpeechBubble = () => {
@@ -200,8 +228,9 @@ export class CharacterSelectScene extends Scene {
 
     drawTextLines = (lines, textX, textY) => {
         lines.forEach((line, index) => {
-            const lineY = textY + (index * 40);
+            const lineY = textY + (index * 37.38);
             this.context.fillText(line, textX, lineY);
         });
     }
+
 }

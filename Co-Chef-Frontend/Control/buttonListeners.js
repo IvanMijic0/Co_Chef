@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
     connectButton.addEventListener("click", () => {
         switchToScene(sceneData.CHARACTER_SELECT.sceneId);
         document.getElementById("CharSelect-backButton-container").style.display = "flex";
+        document.getElementById("character-name").style.display = "flex";
+        document.getElementById("character-container").style.display = "flex";
     });
 
     optionsButton.addEventListener("click", () => {
@@ -92,5 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     charSelectBackButton.addEventListener("click", () => {
         switchToScene(sceneData.START_MENU.sceneId);
         charSelectBackButton.style.display = "none";
+        document.getElementById("character-name").style.display = "none";
+        document.getElementById("character-container").style.display = "none";
     })
 });

@@ -33,6 +33,7 @@ export const sceneData = {
     CHARACTER_SELECT: {
         canvasId: "characterSelect-canvas",
         pupSpeechImage: {source: document.getElementById("speech"), width: 1920, height: 297},
+        pupDim: {width: 525, height: 565},
         sceneId: 6,
     },
 }
