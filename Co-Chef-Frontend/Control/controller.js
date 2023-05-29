@@ -1,19 +1,22 @@
-import {
-    IntroScene, OptionsScene, StartMenuScene,
-    TutorialScene, LoginScene, SignupScene, CharacterSelectScene
-} from "../Scenes/scene.js";
-import { sceneData } from "../Scenes/scene-data.js";
-import { LazyAudio } from "../utils/audio.js";
-import { VolumeBar } from "../utils/volume-bar.js";
+import {LoginScene} from "../Scenes/loginScreen.js";
+import {SignupScene} from "../Scenes/signupScreen.js";
+import {CharacterSelectScene} from "../Scenes/characterSelectScene.js";
+import {IntroScene} from "../Scenes/introScene.js";
+import {StartMenuScene} from "../Scenes/startMenuScene.js";
+import {TutorialScene} from "../Scenes/tutorialScene.js";
+import {OptionsScene} from "../Scenes/optionsScene.js";
+import {sceneData} from "../data-utils/scene-data.js";
+import {LazyAudio} from "../utils/audio.js";
+import {VolumeBar} from "../utils/volume-bar.js";
 
-const scenes = [
+export const scenes = [
     new SignupScene(sceneData.SIGNUP.canvasId, sceneData.SIGNUP.image, false),
     new LoginScene(sceneData.LOGIN.canvasId, sceneData.LOGIN.image, false),
     new IntroScene(sceneData.INTRO.canvasId, sceneData.INTRO.logo, sceneData.INTRO.background, false),
     new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.background, true),
     new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
     new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
-    new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, sceneData.CHARACTER_SELECT.pupSpeechImage, false),
+    new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, false),
 ];
 
 export const audio = new LazyAudio("startMenuAudio");
@@ -37,7 +40,9 @@ export const intro = () => {
         }, {once: true});
     }, 3500);
 }
-if (activeScene === 2){intro();}
+if (activeScene === 2) {
+    intro();
+}
 
 const drawActiveScene = () => {
     scenes[activeScene].draw();
@@ -74,3 +79,4 @@ export const switchToScene = (sceneId) => {
     //console.log("Active scene -> " + activeScene);
     //console.log("Previous scene -> " + previousScene);
 };
+

@@ -1,5 +1,5 @@
-import { sceneData } from "../Scenes/scene-data.js";
-import { switchToScene, volumeBar, audio, intro } from "./controller.js";
+import {sceneData} from "../data-utils/scene-data.js";
+import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./controller.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const signupButton0 = document.getElementById("signUpButton0");
     const volumeIcon = document.getElementById("volumeIcon");
     const charSelectBackButton = document.getElementById("CharSelect-backButton-container");
+    const charSelectRightArrowButton = document.getElementById("rightArrow");
+    const charSelectLeftArrowButton = document.getElementById("leftArrow");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -82,8 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             volumeIcon.style.width = "15%";
             volumeIcon.style.transform = "translate(-180%, -50%)"
             volumeBar.unmuteVolume();
-        }
-        else {
+        } else {
             volumeIcon.src = "Assets/Sprites/muteVolumeIcon.png";
             volumeIcon.style.width = "13%";
             volumeIcon.style.transform = "translate(-210%, -50%)"
@@ -97,5 +98,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("character-name").style.display = "none";
         document.getElementById("character-container").style.display = "none";
     })
+
+    charSelectRightArrowButton.addEventListener("click", () => {
+        scenes[activeScene].changeCharacterRight();
+    })
+
+    charSelectLeftArrowButton.addEventListener("click", () => {
+        scenes[activeScene].changeCharacterLeft();
+    })
+
+
 });
 

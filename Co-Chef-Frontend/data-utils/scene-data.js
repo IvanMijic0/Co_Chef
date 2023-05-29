@@ -9,18 +9,18 @@ export const sceneData = {
         image: {source: document.getElementById("background"), width: 1920, height: 1080},
         sceneId: 1
     },
-    INTRO:  {
+    INTRO: {
         canvasId: "intro-canvas",
         background: {source: document.getElementById("introBackground"), width: 1920, height: 1080},
         logo: {source: document.getElementById("logo"), width: 740, height: 640},
         sceneId: 2
     },
-    START_MENU:  {
+    START_MENU: {
         canvasId: "start-menu-canvas",
         background: {source: document.getElementById("startMenu"), width: 1920, height: 1080},
         sceneId: 3
     },
-    TUTORIAL:  {
+    TUTORIAL: {
         canvasId: "tutorial-canvas",
         image: {source: document.getElementById("tutorial"), width: 1920, height: 1080},
         sceneId: 4
@@ -32,8 +32,17 @@ export const sceneData = {
     },
     CHARACTER_SELECT: {
         canvasId: "characterSelect-canvas",
-        pupSpeechImage: {source: document.getElementById("speech"), width: 1920, height: 297},
-        pupDim: {width: 525, height: 565},
+        pupSpeechImage: {source: document.getElementById("pupSpeech"), width: 3000, height: 321},
+        isabelleSpeechImage: {source: document.getElementById("isabelleSpeech"), width: 3000, height: 321},
+        celineSpeechImage: {source: document.getElementById("celineSpeech"), width: 3000, height: 321},
+        amuSpeechImage: {source: document.getElementById("amuSpeech"),width: 3000, height: 321},
+        chatonSpeechImage: {source: document.getElementById("chatonSpeech"), width: 3000, height: 321},
+        pupName: "Jacques Le pup",
+        isabelleName: "Isabelle Le Fromage",
+        celineName: "Celine La Lapine",
+        amuName: "Petit Amu",
+        chatonName: "Chaton Chanceux",
+        characterDim: {width: 747, height: 747},
         sceneId: 6,
     },
 }
