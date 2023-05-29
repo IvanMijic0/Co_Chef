@@ -63,7 +63,6 @@ export class CharacterSelectScene extends Scene {
         this.character.src = this.characters[this.currentIndex].src;
         this.characterName.innerHTML = this.characters[this.currentIndex].name;
         this.isClicked = false;
-
     }
 
     draw = () => {

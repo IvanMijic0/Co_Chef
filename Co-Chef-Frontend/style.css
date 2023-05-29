@@ -3,6 +3,7 @@
     font-family: "Handlee";
     src: url("Assets/Fonts/Handlee-Regular.woff2") format("woff2")
 }
+
 @font-face {
     font-family: "CoffeCake";
     src: url("Assets/Fonts/Coffecake.ttf") format("truetype")
@@ -143,7 +144,6 @@ canvas {
     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
     margin-bottom: .05vw;
 }
-
 
 
 #character-name {
@@ -414,6 +414,7 @@ canvas {
         justify-content: center;
         align-items: center;
     }
+
     .Button-container {
         background-color: #EA5C2B;
         width: calc(60% + .8vw);
@@ -426,6 +427,7 @@ canvas {
         align-items: center;
         margin-top: 10%
     }
+
     .Button {
         text-align: center;
         background: transparent;
@@ -445,6 +447,16 @@ canvas {
         caret-color: transparent;
         text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
         margin-bottom: .05vw;
+    }
+
+    #tutorial-backButton-container {
+        display: none;
+        width: 70%;
+    }
+
+    #tutorialBackButton {
+        font-size: 4vw;
+        padding: 12px 24px;
     }
 }
 
@@ -547,6 +559,17 @@ canvas {
         text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
         margin-bottom: .05vw;
     }
+
+    #tutorial-backButton-container {
+        display: none;
+        width: 8vw;
+        height: 6vw;
+    }
+
+    #tutorialBackButton {
+        font-size: 3.5vw;
+        padding: 12px 24px;
+    }
 }
 
 @media (min-width: 844px) and (orientation: landscape) {
@@ -625,17 +648,6 @@ canvas {
 
 @media (min-width: 1180px) and (orientation: landscape) {
     /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 14vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
-
-@media (min-width: 1180px) and (orientation: landscape) {
     .Button-container {
         background-color: #EA5C2B;
         width: calc(50% + .1vw);
@@ -749,7 +761,7 @@ canvas {
     }
 }
 
-@media (min-width: 200px)  {
+@media (min-width: 2000px) {
     .Button-column {
         position: absolute;
         display: none;
@@ -797,6 +809,7 @@ canvas {
         text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
         margin-bottom: .05vw;
     }
+
     #character-name {
         font-family: CoffeCake, sans-serif;
         font-size: calc(100% + 5vw);
