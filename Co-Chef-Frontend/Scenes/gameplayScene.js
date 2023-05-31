@@ -20,15 +20,6 @@ export class GameplayScene extends Scene {
             this.canvas.height
         );
 
-        // Calculate the scaled position and size based on canvas dimensions
-        // const scaleX = this.canvas.width / this.originalCanvasWidth;
-        // const scaleY = this.canvas.height / this.originalCanvasHeight;
-        // const scaledX = originalX * scaleX;
-        // const scaledY = originalY * scaleY;
-        // const scaledWidth = boxWidth * scaleX;
-        // const scaledHeight = boxHeight * scaleY;
-
-        // Draw the scaled box
         this.context.strokeStyle = "red";
         this.context.lineWidth = 5;
         this.context.strokeRect(
@@ -37,6 +28,29 @@ export class GameplayScene extends Scene {
             sceneData.Gameplay.sinkDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
             sceneData.Gameplay.sinkDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
         );
+        this.context.strokeRect(
+            sceneData.Gameplay.knifeDim.originalX * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.knifeDim.originalY * (this.canvas.height / this.originalCanvasHeight),
+            sceneData.Gameplay.knifeDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.knifeDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+        );
+        this.context.strokeRect(
+            sceneData.Gameplay.stirringDim.originalX * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.stirringDim.originalY * (this.canvas.height / this.originalCanvasHeight),
+            sceneData.Gameplay.stirringDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.stirringDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+        );
+        this.context.strokeRect(
+            sceneData.Gameplay.fryingDim.originalX * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.fryingDim.originalY * (this.canvas.height / this.originalCanvasHeight),
+            sceneData.Gameplay.fryingDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.fryingDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+        );
+        this.context.strokeRect(
+            sceneData.Gameplay.inventoryDim.originalX * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.inventoryDim.originalY * (this.canvas.height / this.originalCanvasHeight),
+            sceneData.Gameplay.inventoryDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.inventoryDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+        );
     }
-
 }
