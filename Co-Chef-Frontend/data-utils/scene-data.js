@@ -54,6 +54,13 @@ export const sceneData = {
     },
     Gameplay: {
         canvasId: "gameplay-canvas",
+        background: document.getElementById("kitchenBackground"),
+        sinkDim: {
+            originalX: 950,
+            originalY: 1850,
+            boxWidth: 300,
+            boxHeight: 1060,
+        },
         sceneId: 8,
     },
 }

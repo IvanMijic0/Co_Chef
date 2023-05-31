@@ -1,4 +1,5 @@
 import {Scene} from "./scene.js";
+import {sceneData} from "../data-utils/scene-data.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, image, showButtons) {
@@ -6,25 +7,36 @@ export class GameplayScene extends Scene {
         this.image = image;
     }
 
-
     draw = () => {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+        // Draw the background image
+        this.context.drawImage(
+            this.image,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
 
-        this.context.font = "100px CoffeCake";
-        this.context.fillStyle = "black";
-        this.context.textAlign = "center";
+        // Calculate the scaled position and size based on canvas dimensions
+        // const scaleX = this.canvas.width / this.originalCanvasWidth;
+        // const scaleY = this.canvas.height / this.originalCanvasHeight;
+        // const scaledX = originalX * scaleX;
+        // const scaledY = originalY * scaleY;
+        // const scaledWidth = boxWidth * scaleX;
+        // const scaledHeight = boxHeight * scaleY;
 
-        this.context.save();
-
-        const text = "Gameplay";
-        this.context.fillStyle = "white";
-        const x = this.canvas.width / 2;
-        const y = this.canvas.height / 2;
-
-        this.context.fillText(text, x, y);
-
-        this.context.restore();
+        // Draw the scaled box
+        this.context.strokeStyle = "red";
+        this.context.lineWidth = 5;
+        this.context.strokeRect(
+            sceneData.Gameplay.sinkDim.originalX * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.sinkDim.originalY * (this.canvas.height / this.originalCanvasHeight),
+            sceneData.Gameplay.sinkDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
+            sceneData.Gameplay.sinkDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+        );
     }
+
 }

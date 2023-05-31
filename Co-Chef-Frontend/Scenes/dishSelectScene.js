@@ -42,7 +42,7 @@ export class DishSelectScene extends Scene {
     }
 
     drawDish = () => {
-        this.scaledWidth = this.canvas.width * 0.25;
+        this.scaledWidth = this.canvas.width * 0.28;
         this.scaledHeight = this.canvas.height * 0.45;
         const dishX = (this.canvas.width - this.scaledWidth) * 0.5;
         const dishY = (this.canvas.height - this.scaledHeight) * 0.3;

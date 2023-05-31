@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].changeText();
         } else {
             switchToScene(sceneData.START_MENU.sceneId);
+            speechText.style.display = "none";
             SelectBackButton.style.display = "none";
             SelectConfirmButton.style.display = "none";
             characterName.style.display = "none";
@@ -126,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             SelectConfirmButton.style.display = "none";
             characterName.style.display = "none";
             dishName.style.display = "flex";
+            scenes[activeScene].changeText();
         } else {
             dishName.style.display = "none";
             SelectBackButton.style.display = "none";

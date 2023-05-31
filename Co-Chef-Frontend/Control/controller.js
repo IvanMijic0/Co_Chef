@@ -20,14 +20,14 @@ export const scenes = [
     new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
     new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, false),
     new DishSelectScene(sceneData.DISH_SELECT.canvasId, false),
-    new GameplayScene(sceneData.Gameplay.canvasId, false)
+    new GameplayScene(sceneData.Gameplay.canvasId, sceneData.Gameplay.background,false)
 ];
 
 export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
 let introText = document.getElementById("introHeader");
-export let activeScene = 3;
+export let activeScene = 8;
 let previousScene = 0;
 
 scenes[activeScene].show();

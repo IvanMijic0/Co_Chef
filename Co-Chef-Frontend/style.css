@@ -27,7 +27,7 @@ canvas {
 #startMenu, #test, #logo, #tutorial, #background,
 #pupSpeech, #pierSpeech, #isabelleSpeech, #celineSpeech, #amuSpeech, #chatonSpeech,
 #introBackground, #volumeIcon, #muteVolumeIcon,
-#character, #dish {
+#character, #dish, #kitchenBackground {
     display: none;
 }
 

@@ -5,6 +5,8 @@ export class Scene {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.showButtons = showButtons;
+        this.originalCanvasWidth = 0;
+        this.originalCanvasHeight = 0;
         this.initialize();
     }
 
@@ -29,6 +31,8 @@ export class Scene {
     }
 
     initialize = () => {
+        this.originalCanvasWidth = this.canvas.width;
+        this.originalCanvasHeight = this.canvas.height;
         window.addEventListener('resize', this.resizeCanvas, false);
         this.resizeCanvas();
     }
