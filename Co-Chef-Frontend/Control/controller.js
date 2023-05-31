@@ -1,10 +1,12 @@
 import {LoginScene} from "../Scenes/loginScreen.js";
 import {SignupScene} from "../Scenes/signupScreen.js";
 import {CharacterSelectScene} from "../Scenes/characterSelectScene.js";
+import {DishSelectScene} from "../Scenes/dishSelectScene.js";
 import {IntroScene} from "../Scenes/introScene.js";
 import {StartMenuScene} from "../Scenes/startMenuScene.js";
 import {TutorialScene} from "../Scenes/tutorialScene.js";
 import {OptionsScene} from "../Scenes/optionsScene.js";
+import {GameplayScene} from "../Scenes/gameplayScene.js";
 import {sceneData} from "../data-utils/scene-data.js";
 import {LazyAudio} from "../utils/audio.js";
 import {VolumeBar} from "../utils/volume-bar.js";
@@ -17,6 +19,8 @@ export const scenes = [
     new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
     new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
     new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, false),
+    new DishSelectScene(sceneData.DISH_SELECT.canvasId, false),
+    new GameplayScene(sceneData.Gameplay.canvasId, false)
 ];
 
 export const audio = new LazyAudio("startMenuAudio");

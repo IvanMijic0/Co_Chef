@@ -12,13 +12,15 @@
 
 <body>
 <!-- Canvases -->
-<canvas id="signup-canvas" width="100%" height="100%"></canvas>
-<canvas id="login-canvas" width="100%" height="100%"></canvas>
-<canvas id="intro-canvas" width="100%" height="100%"></canvas>
+<canvas id="signup-canvas"></canvas>
+<canvas id="login-canvas"></canvas>
+<canvas id="intro-canvas"></canvas>
 <canvas id="start-menu-canvas"></canvas>
-<canvas id="tutorial-canvas" width="100%" height="100%"></canvas>
-<canvas id="options-canvas" width="100%" height="100%"></canvas>
-<canvas id="characterSelect-canvas" width="100%" height="100%"></canvas>
+<canvas id="tutorial-canvas"></canvas>
+<canvas id="options-canvas"></canvas>
+<canvas id="characterSelect-canvas"></canvas>
+<canvas id="dishSelect-canvas"></canvas>
+<canvas id="gameplay-canvas"></canvas>
 
 
 <!-- Images -->
@@ -32,7 +34,9 @@
 <img id="celineSpeech" src="Assets/Sprites/Speech_Bubbles/celineSpeech.png" alt="Celine Speech Bubble image">
 <img id="amuSpeech" src="Assets/Sprites/Speech_Bubbles/amuSpeech.png" alt="Amu Speech Bubble image">
 <img id="chatonSpeech" src="Assets/Sprites/Speech_Bubbles/chatonSpeech.png" alt="Chaton Speech Bubble image">
-<img id="character" src="" alt="Character Select image">
+<img id="pierSpeech" src="Assets/Sprites/Speech_Bubbles/pierSpeech.png" alt="Pier Speech Bubble image">
+<img id="character" src="" alt="Character Selection image">
+<img id="dish" src="" alt="Dish Selection image">
 
 
 <!-- Audio -->
@@ -84,6 +88,12 @@
     </div>
 </div>
 
+<div id="CharSelect-Confirm-button">
+    <div id="CharSelect-confirmButton-container">
+        <button class="Button" id="CharSelectConfirmButton">Confirm</button>
+    </div>
+</div>
+
 <div id="character-container" class="character-container">
     <img id="leftArrow" src="Assets/Sprites/Arrows/LeftArrowIdle.png" alt="Left Arrow" class="arrow"
          onmouseover="this.src='Assets/Sprites/Arrows/LeftArrowHover.png'"
@@ -102,6 +112,8 @@
 <h1 id="introHeader">Press anywhere to start...</h1>
 <h1 id="optionsHeader">Co-Chef</h1>
 <div id="character-name">Jacques Le Pup</div>
+<div id="dish-name">Choose your dish</div>
+<div id="speechText">Talk</div>
 
 
 <!-- Login Form -->

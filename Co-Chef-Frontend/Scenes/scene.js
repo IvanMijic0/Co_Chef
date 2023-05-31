@@ -36,6 +36,6 @@ export class Scene {
     resizeCanvas = () => {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        console.log("Canvas width " + this.canvas.width + "\nCanvas height " + this.canvas.height);
+        console.log(this.canvas.width + "\n" + this.canvas.height);
     }
 }

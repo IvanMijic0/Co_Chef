@@ -20,7 +20,7 @@ export class IntroScene extends Scene {
         this.context.drawImage(
             this.logo.source,
             (this.canvas.width - this.logo.width) * 0.5,
-            (this.canvas.height - this.logo.height) * 0.5 - this.logo.height * .2
+            (this.canvas.height - this.logo.height) * 0.5 - this.logo.height * .5
         );
     }
 }

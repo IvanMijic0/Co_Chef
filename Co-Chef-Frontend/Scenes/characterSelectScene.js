@@ -1,6 +1,7 @@
 import {sceneData} from "../data-utils/scene-data.js";
 import {textData} from "../data-utils/text-data.js";
 import {Scene} from "./scene.js"
+import {throttle} from "../utils/throttling.js"
 
 export class CharacterSelectScene extends Scene {
     constructor(canvasId, showButtons) {
@@ -9,52 +10,37 @@ export class CharacterSelectScene extends Scene {
             {
                 src: "Assets/Sprites/Characters/pup.png",
                 name: sceneData.CHARACTER_SELECT.pupName,
-                width: sceneData.CHARACTER_SELECT.characterDim.width,
-                height: sceneData.CHARACTER_SELECT.characterDim.height,
-                hoverWidth: sceneData.CHARACTER_SELECT.characterDim.width + 20,
-                hoverHeight: sceneData.CHARACTER_SELECT.characterDim.height + 20,
                 speechImage: sceneData.CHARACTER_SELECT.pupSpeechImage,
-                text: textData.pup
+                defaultText: textData.pup,
+                selectText: textData.pupSelected
             },
             {
                 src: "Assets/Sprites/Characters/isabelle.png",
                 name: sceneData.CHARACTER_SELECT.isabelleName,
-                width: sceneData.CHARACTER_SELECT.characterDim.width,
-                height: sceneData.CHARACTER_SELECT.characterDim.height,
-                hoverWidth: sceneData.CHARACTER_SELECT.characterDim.width + 20,
-                hoverHeight: sceneData.CHARACTER_SELECT.characterDim.height + 20,
                 speechImage: sceneData.CHARACTER_SELECT.isabelleSpeechImage,
-                text: textData.isabelle
+                defaultText: textData.isabelle,
+                selectText: textData.isabelleSelected
             },
             {
                 src: "Assets/Sprites/Characters/celine.png",
                 name: sceneData.CHARACTER_SELECT.celineName,
-                width: sceneData.CHARACTER_SELECT.characterDim.width,
-                height: sceneData.CHARACTER_SELECT.characterDim.height,
-                hoverWidth: sceneData.CHARACTER_SELECT.characterDim.width + 20,
-                hoverHeight: sceneData.CHARACTER_SELECT.characterDim.height + 20,
                 speechImage: sceneData.CHARACTER_SELECT.celineSpeechImage,
-                text: textData.celine
+                defaultText: textData.celine,
+                selectText: textData.celineSelected
             },
             {
                 src: "Assets/Sprites/Characters/amu.png",
                 name: sceneData.CHARACTER_SELECT.amuName,
-                width: sceneData.CHARACTER_SELECT.characterDim.width,
-                height: sceneData.CHARACTER_SELECT.characterDim.height,
-                hoverWidth: sceneData.CHARACTER_SELECT.characterDim.width + 20,
-                hoverHeight: sceneData.CHARACTER_SELECT.characterDim.height + 20,
                 speechImage: sceneData.CHARACTER_SELECT.amuSpeechImage,
-                text: textData.amu
+                defaultText: textData.amu,
+                selectText: textData.amuSelected
             },
             {
                 src: "Assets/Sprites/Characters/chaton.png",
                 name: sceneData.CHARACTER_SELECT.chatonName,
-                width: sceneData.CHARACTER_SELECT.characterDim.width,
-                height: sceneData.CHARACTER_SELECT.characterDim.height,
-                hoverWidth: sceneData.CHARACTER_SELECT.characterDim.width + 20,
-                hoverHeight: sceneData.CHARACTER_SELECT.characterDim.height + 20,
                 speechImage: sceneData.CHARACTER_SELECT.chatonSpeechImage,
-                text: textData.chaton
+                defaultText: textData.chaton,
+                selectText: textData.chatonSelected
             }
         ];
         this.currentIndex = 0;
@@ -62,7 +48,12 @@ export class CharacterSelectScene extends Scene {
         this.character = document.getElementById("character");
         this.character.src = this.characters[this.currentIndex].src;
         this.characterName.innerHTML = this.characters[this.currentIndex].name;
-        this.isClicked = false;
+        this.rememberCharacter = 0;
+        this.text = document.getElementById("speechText");
+        this.text.textContent = this.characters[this.currentIndex].defaultText;
+        this.scaledWidth = 0;
+        this.scaledHeight = 0;
+        this.sizeModifier = 0;
     }
 
     draw = () => {
@@ -71,148 +62,116 @@ export class CharacterSelectScene extends Scene {
 
         this.drawCharacter();
         this.drawSpeechBubble();
-
-        this.context.font = "40px Handlee";
-        this.context.fillStyle = "black";
-        this.context.textAlign = "left";
-
-        const text = this.characters[this.currentIndex].text;
-
-        const textX = this.canvas.width * 0.2;
-        const textY = this.canvas.height - this.characters[this.currentIndex].speechImage.height +
-            this.characters[this.currentIndex].speechImage.height * 0.6;
-
-        const maxWidth = this.canvas.width - (textX + 2);
-        const lines = this.splitTextIntoLines(text, maxWidth);
-
-        this.drawTextLines(lines, textX, textY);
-
     }
 
     drawCharacter = () => {
-        const characterX = (this.canvas.width - this.characters[this.currentIndex].width) * .5;
-        const characterY = (this.canvas.height - this.characters[this.currentIndex].height) * .4;
+        this.scaledWidth = this.canvas.width * 0.3;
+        this.scaledHeight = this.canvas.height * 0.6;
+        const characterX = (this.canvas.width - this.scaledWidth) * 0.5;
+        const characterY = (this.canvas.height - this.scaledHeight) * 0.4;
+
         this.context.drawImage(
             this.character,
             characterX,
             characterY,
-            this.characters[this.currentIndex].width,
-            this.characters[this.currentIndex].height,
+            this.scaledWidth + this.sizeModifier,
+            this.scaledHeight + this.sizeModifier
         );
 
-        const throttledMouseMove = this.throttle((event) => {
-            const rect = this.canvas.getBoundingClientRect();
-            const mouseX = event.clientX - rect.left;
-            const mouseY = event.clientY - rect.top;
+        // Draw collision box
+        this.context.strokeStyle = "black";
+        this.context.lineWidth = 5;
+        this.context.strokeRect(
+            characterX,
+            characterY,
+            this.scaledWidth + this.sizeModifier,
+            this.scaledHeight + this.sizeModifier
+        );
 
-            // Check collision with character's bounding box
-            if (
-                mouseX >= characterX &&
-                mouseX <= characterX + this.characters[this.currentIndex].width &&
-                mouseY >= characterY &&
-                mouseY <= characterY + this.characters[this.currentIndex].height
-            ) {
-                // Collision detected
-                this.characters[this.currentIndex].width = this.characters[this.currentIndex].hoverWidth;
-                this.characters[this.currentIndex].height = this.characters[this.currentIndex].hoverHeight;
-            } else {
-                this.characters[this.currentIndex].width = this.characters[this.currentIndex].hoverWidth - 20;
-                this.characters[this.currentIndex].height = this.characters[this.currentIndex].hoverHeight - 20;
-            }
+        const throttledMouseMove = throttle((event) => {
+            this.handleCharacterCollision(event, characterX, characterY, this.scaledWidth, this.scaledHeight);
+        }, 1000); // Adjust the throttle delay as needed
 
-        }, 2000); // Adjust the throttle delay as needed
+        const handleCharacterClick = (event) => {
+            this.handleCharacterCollision(event, characterX, characterY, this.scaledWidth, this.scaledHeight, true);
+            this.canvas.removeEventListener("click", handleCharacterClick);
+        };
 
-        const handleCharacterClick = () => {
+        this.canvas.addEventListener("click", handleCharacterClick);
+        this.canvas.addEventListener("mousemove", throttledMouseMove);
+    };
 
-            if (!this.isClicked) {
-                console.log("clicked");
+    handleCharacterCollision = (event, characterX, characterY, scaledWidth, scaledHeight, isClickEvent = false) => {
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+
+        // Check collision with character's bounding box
+        const collisionDetected =
+            mouseX >= characterX &&
+            mouseX <= characterX + scaledWidth &&
+            mouseY >= characterY &&
+            mouseY <= characterY + scaledHeight;
+
+        if (collisionDetected) {
+            this.sizeModifier = 40;
+            this.canvas.style.cursor = "pointer"; // Change cursor to finger pointer
+
+            if (isClickEvent && !this.isClicked) {
+                const charConfirmBackButton = document.getElementById("CharSelect-confirmButton-container");
+                charConfirmBackButton.style.display = "flex";
+                this.sizeModifier = 40;
+                this.text.textContent = this.characters[this.currentIndex].selectText;
                 this.isClicked = true;
             }
-
-            this.canvas.removeEventListener("click", handleCharacterClick);
-
-        };
-
-        this.canvas.addEventListener("mousemove", throttledMouseMove);
-        this.canvas.addEventListener("click", handleCharacterClick);
-    };
-
-    throttle = (func, delay) => {
-        let timeoutId;
-        let lastExecTime = 0;
-
-        return (...args) => {
-            const context = this;
-            const currentTimestamp = Date.now();
-
-            const execute = () => {
-                func.apply(context, args);
-                lastExecTime = currentTimestamp;
-            };
-
-            if (currentTimestamp >= lastExecTime + delay) {
-                execute();
-            } else {
-                clearTimeout(timeoutId);
-                timeoutId = setTimeout(execute, delay);
+        } else {
+            if (!this.isClicked) {
+                this.sizeModifier = 0;
             }
-        };
+            this.canvas.style.cursor = "default"; // Change cursor back to default
+        }
     };
+
 
     drawSpeechBubble = () => {
         this.context.drawImage(
             this.characters[this.currentIndex].speechImage.source,
             0,
-            this.canvas.height - this.characters[this.currentIndex].speechImage.height,
-            this.characters[this.currentIndex].speechImage.width + 400,
-            this.characters[this.currentIndex].speechImage.height
+            this.canvas.height - this.canvas.height * .25,
+            this.canvas.width * 1.6,
+            this.canvas.height * .25,
         );
     }
 
-    splitTextIntoLines = (text, maxWidth) => {
-        const words = text.split(' ');
-        const lines = [];
-        let currentLine = words.shift();
-
-        for (const word of words) {
-            const width = this.context.measureText(`${currentLine} ${word}`).width;
-            if (width < maxWidth) {
-                currentLine += ` ${word}`;
-            } else {
-                lines.push(currentLine);
-                currentLine = word;
-            }
-        }
-
-        lines.push(currentLine);
-        return lines;
-    }
-
-    drawTextLines = (lines, textX, textY) => {
-        lines.forEach((line, index) => {
-            const lineY = textY + (index * 55);
-            this.context.fillText(line, textX, lineY);
-        });
-    }
-
-    changeCharacterRight = () => {
+    changeRight = () => {
         if (this.currentIndex >= this.characters.length - 1) {
             this.currentIndex = this.characters.length - 1
         } else {
             this.currentIndex++;
             this.character.src = this.characters[this.currentIndex].src;
             this.characterName.innerHTML = this.characters[this.currentIndex].name
-            this.isClicked = false;
         }
     }
-    changeCharacterLeft = () => {
+    changeLeft = () => {
         if (this.currentIndex <= 0) {
             this.currentIndex = 0
         } else {
             this.currentIndex--;
             this.character.src = this.characters[this.currentIndex].src;
             this.characterName.innerHTML = this.characters[this.currentIndex].name
-            this.isClicked = false;
         }
+    }
+
+    rememberPick = () => {
+        this.rememberCharacter = this.characters[this.currentIndex].name;
+        console.log("Picked character: " + this.rememberCharacter);
+    }
+
+    restartClick = () => {
+        this.isClicked = false;
+    }
+
+    changeText = () => {
+        this.text.textContent = this.characters[this.currentIndex].defaultText;
     }
 }

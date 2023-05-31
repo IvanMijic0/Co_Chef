@@ -14,9 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const signupButton = document.getElementById("signUpButton");
     const signupButton0 = document.getElementById("signUpButton0");
     const volumeIcon = document.getElementById("volumeIcon");
-    const charSelectBackButton = document.getElementById("CharSelect-backButton-container");
-    const charSelectRightArrowButton = document.getElementById("rightArrow");
-    const charSelectLeftArrowButton = document.getElementById("leftArrow");
+    const speechText = document.getElementById("speechText");
+    const SelectBackButton = document.getElementById("CharSelect-backButton-container");
+    const SelectConfirmButton = document.getElementById("CharSelect-confirmButton-container");
+    const SelectRightArrowButton = document.getElementById("rightArrow");
+    const SelectLeftArrowButton = document.getElementById("leftArrow");
+    const characterName = document.getElementById("character-name");
+    const dishName = document.getElementById("dish-name");
+    const characterContainer = document.getElementById("character-container");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -47,9 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     connectButton.addEventListener("click", () => {
         switchToScene(sceneData.CHARACTER_SELECT.sceneId);
-        document.getElementById("CharSelect-backButton-container").style.display = "flex";
-        document.getElementById("character-name").style.display = "flex";
-        document.getElementById("character-container").style.display = "flex";
+        SelectBackButton.style.display = "flex";
+        characterName.style.display = "flex";
+        speechText.style.display = "flex";
+        characterContainer.style.display = "flex";
     });
 
     optionsButton.addEventListener("click", () => {
@@ -80,33 +86,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
     volumeIcon.addEventListener("click", () => {
         if (volumeIcon.src.includes("muteVolumeIcon.png")) {
-            volumeIcon.src = "Assets/Sprites/volumeIcon.png";
+            volumeIcon.src = "Assets/Sprites/Icons/volumeIcon.png";
             volumeIcon.style.width = "15%";
             volumeIcon.style.transform = "translate(-180%, -50%)"
             volumeBar.unmuteVolume();
         } else {
-            volumeIcon.src = "Assets/Sprites/muteVolumeIcon.png";
+            volumeIcon.src = "Assets/Sprites/Icons/muteVolumeIcon.png";
             volumeIcon.style.width = "13%";
             volumeIcon.style.transform = "translate(-210%, -50%)"
             volumeBar.setVolume(0);
         }
     });
 
-    charSelectBackButton.addEventListener("click", () => {
-        switchToScene(sceneData.START_MENU.sceneId);
-        charSelectBackButton.style.display = "none";
-        document.getElementById("character-name").style.display = "none";
-        document.getElementById("character-container").style.display = "none";
+    SelectBackButton.addEventListener("click", () => {
+        if (SelectConfirmButton.style.display === "flex") {
+            SelectConfirmButton.style.display = "none";
+            scenes[activeScene].restartClick();
+            scenes[activeScene].changeText();
+        } else if (activeScene === sceneData.DISH_SELECT.sceneId) {
+            switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+            dishName.style.display = "none";
+            characterName.style.display = "flex";
+            scenes[activeScene].restartClick();
+            scenes[activeScene].changeText();
+        } else {
+            switchToScene(sceneData.START_MENU.sceneId);
+            SelectBackButton.style.display = "none";
+            SelectConfirmButton.style.display = "none";
+            characterName.style.display = "none";
+            characterContainer.style.display = "none";
+            dishName.style.display = "none";
+        }
     })
 
-    charSelectRightArrowButton.addEventListener("click", () => {
-        scenes[activeScene].changeCharacterRight();
+    SelectConfirmButton.addEventListener("click", () => {
+        if (activeScene === sceneData.CHARACTER_SELECT.sceneId) {
+            scenes[activeScene].rememberPick();
+            switchToScene(sceneData.DISH_SELECT.sceneId);
+            SelectConfirmButton.style.display = "none";
+            characterName.style.display = "none";
+            dishName.style.display = "flex";
+        } else {
+            dishName.style.display = "none";
+            SelectBackButton.style.display = "none";
+            SelectConfirmButton.style.display = "none";
+            characterContainer.style.display = "none";
+            switchToScene(sceneData.Gameplay.sceneId);
+        }
     })
 
-    charSelectLeftArrowButton.addEventListener("click", () => {
-        scenes[activeScene].changeCharacterLeft();
+    SelectRightArrowButton.addEventListener("click", () => {
+        scenes[activeScene].changeRight();
+        SelectConfirmButton.style.display = "none";
+        scenes[activeScene].restartClick();
+        scenes[activeScene].changeText();
+
     })
 
-
+    SelectLeftArrowButton.addEventListener("click", () => {
+        scenes[activeScene].changeLeft();
+        SelectConfirmButton.style.display = "none";
+        scenes[activeScene].restartClick();
+        scenes[activeScene].changeText();
+    })
 });
 
