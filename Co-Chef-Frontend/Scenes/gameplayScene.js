@@ -5,6 +5,11 @@ export class GameplayScene extends Scene {
     constructor(canvasId, image, showButtons) {
         super(canvasId, showButtons);
         this.image = image;
+        // The coordinates were set based on primary computer screen
+        // Could affect the formula if played on a screen bigger than mine...
+        // I'll cross that bridge when I get there
+        this.originalCanvasWidth = 7680;
+        this.originalCanvasHeight = 3916;
     }
 
     draw = () => {
@@ -20,37 +25,56 @@ export class GameplayScene extends Scene {
             this.canvas.height
         );
 
+        this.drawColliders();
+    }
+
+    drawCollider = (originalX, originalY, boxWidth, boxHeight) => {
         this.context.strokeStyle = "red";
         this.context.lineWidth = 5;
-        this.context.strokeRect(
-            sceneData.Gameplay.sinkDim.originalX * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.sinkDim.originalY * (this.canvas.height / this.originalCanvasHeight),
-            sceneData.Gameplay.sinkDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.sinkDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+
+        const scaledX = originalX * (this.canvas.width / this.originalCanvasWidth);
+        const scaledY = originalY * (this.canvas.height / this.originalCanvasHeight);
+        const scaledWidth = boxWidth * (this.canvas.width / this.originalCanvasWidth);
+        const scaledHeight = boxHeight * (this.canvas.height / this.originalCanvasHeight);
+
+        this.context.strokeRect(scaledX, scaledY, scaledWidth, scaledHeight);
+    }
+
+    drawColliders = () => {
+        this.drawCollider(
+            sceneData.Gameplay.sinkDim.originalX,
+            sceneData.Gameplay.sinkDim.originalY,
+            sceneData.Gameplay.sinkDim.boxWidth,
+            sceneData.Gameplay.sinkDim.boxHeight
         );
-        this.context.strokeRect(
-            sceneData.Gameplay.knifeDim.originalX * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.knifeDim.originalY * (this.canvas.height / this.originalCanvasHeight),
-            sceneData.Gameplay.knifeDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.knifeDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+
+        this.drawCollider(
+            sceneData.Gameplay.knifeDim.originalX,
+            sceneData.Gameplay.knifeDim.originalY,
+            sceneData.Gameplay.knifeDim.boxWidth,
+            sceneData.Gameplay.knifeDim.boxHeight
         );
-        this.context.strokeRect(
-            sceneData.Gameplay.stirringDim.originalX * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.stirringDim.originalY * (this.canvas.height / this.originalCanvasHeight),
-            sceneData.Gameplay.stirringDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.stirringDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+
+        this.drawCollider(
+            sceneData.Gameplay.stirringDim.originalX,
+            sceneData.Gameplay.stirringDim.originalY,
+            sceneData.Gameplay.stirringDim.boxWidth,
+            sceneData.Gameplay.stirringDim.boxHeight
         );
-        this.context.strokeRect(
-            sceneData.Gameplay.fryingDim.originalX * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.fryingDim.originalY * (this.canvas.height / this.originalCanvasHeight),
-            sceneData.Gameplay.fryingDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.fryingDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+
+        this.drawCollider(
+            sceneData.Gameplay.fryingDim.originalX,
+            sceneData.Gameplay.fryingDim.originalY,
+            sceneData.Gameplay.fryingDim.boxWidth,
+            sceneData.Gameplay.fryingDim.boxHeight
         );
-        this.context.strokeRect(
-            sceneData.Gameplay.inventoryDim.originalX * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.inventoryDim.originalY * (this.canvas.height / this.originalCanvasHeight),
-            sceneData.Gameplay.inventoryDim.boxWidth * (this.canvas.width / this.originalCanvasWidth),
-            sceneData.Gameplay.inventoryDim.boxHeight * (this.canvas.height / this.originalCanvasHeight)
+
+        this.drawCollider(
+            sceneData.Gameplay.inventoryDim.originalX,
+            sceneData.Gameplay.inventoryDim.originalY,
+            sceneData.Gameplay.inventoryDim.boxWidth,
+            sceneData.Gameplay.inventoryDim.boxHeight
         );
     }
+
 }

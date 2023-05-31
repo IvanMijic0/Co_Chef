@@ -74,7 +74,7 @@ export const sceneData = {
             boxHeight: 100,
         },
         fryingDim: {
-            originalX: 2650,
+            originalX: 2600,
             originalY: 870,
             boxWidth: 550,
             boxHeight: 100,
