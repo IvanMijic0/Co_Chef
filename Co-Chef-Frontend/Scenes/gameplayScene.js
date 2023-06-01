@@ -112,6 +112,7 @@ export class GameplayScene extends Scene {
         this.context.restore()
     }
 
+    // TODO As of now this wont work, I need to store these values for each collider, because they change dimensions depending on screen
     drawCollider = (originalX, originalY, boxWidth, boxHeight, color = "red") => {
         this.context.save()
 

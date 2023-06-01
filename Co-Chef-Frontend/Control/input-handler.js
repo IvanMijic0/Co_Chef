@@ -9,7 +9,8 @@ const KEYS = {
     KEY_RIGHT: "d",
     SHIFT: "Shift",
     ENTER: "Enter",
-    SPACE: " "
+    SPACE: " ",
+    E: "e"
 };
 
 export class InputHandler {
