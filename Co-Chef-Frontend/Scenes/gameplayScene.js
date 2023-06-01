@@ -5,6 +5,36 @@ import {InputHandler} from "../Control/input-handler.js";
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
         super(canvasId, showButtons);
+        this.dynamicSink = {
+            scaledX: 0,
+            scaledY: 0,
+            scaledWidth: 0,
+            scaledHeight: 0
+        }
+        this.dynamicknife = {
+            scaledX: 0,
+            scaledY: 0,
+            scaledWidth: 0,
+            scaledHeight: 0
+        }
+        this.dynamicStirr = {
+            scaledX: 0,
+            scaledY: 0,
+            scaledWidth: 0,
+            scaledHeight: 0
+        }
+        this.dynamicFry = {
+            scaledX: 0,
+            scaledY: 0,
+            scaledWidth: 0,
+            scaledHeight: 0
+        }
+        this.dynamicInventory = {
+            scaledX: 0,
+            scaledY: 0,
+            scaledWidth: 0,
+            scaledHeight: 0
+        }
         this.backgroundImage = backgroundImage;
         this.playerImage = playerImage;
         // The coordinates were set based on primary computer screen
@@ -19,10 +49,11 @@ export class GameplayScene extends Scene {
         this.input = new InputHandler();
         this.speed = 0;
         this.speedModifier = 8;
+        this.speedMod = .1;
     }
 
     update = () => {
-        this.speedModifier = Math.min(this.scaledWidth, this.scaledHeight) * .02
+        this.speedModifier = Math.min(this.scaledWidth, this.scaledHeight) * this.speedMod
         if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
             this.playerImage.src = "Assets/Sprites/Player/Chef_back.png"
             this.speed = this.speedModifier;
