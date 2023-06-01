@@ -82,8 +82,39 @@ export class GameplayScene extends Scene {
         } else {
             this.speed = 0;
         }
+
+        this.updateScale();
     }
 
+    updateScale = () => {
+        const canvasScaleWidth = this.canvas.width / this.originalCanvasWidth;
+        const canvasScaleHeight = this.canvas.height / this.originalCanvasHeight;
+
+        this.dynamicSink.scaledX = sceneData.Gameplay.sinkDim.originalX * canvasScaleWidth;
+        this.dynamicSink.scaledY = sceneData.Gameplay.sinkDim.originalY * canvasScaleHeight;
+        this.dynamicSink.scaledWidth = sceneData.Gameplay.sinkDim.boxWidth * canvasScaleWidth;
+        this.dynamicSink.scaledHeight = sceneData.Gameplay.sinkDim.boxHeight * canvasScaleHeight;
+
+        this.dynamicknife.scaledX = sceneData.Gameplay.knifeDim.originalX * canvasScaleWidth;
+        this.dynamicknife.scaledY = sceneData.Gameplay.knifeDim.originalY * canvasScaleHeight;
+        this.dynamicknife.scaledWidth = sceneData.Gameplay.knifeDim.boxWidth * canvasScaleWidth;
+        this.dynamicknife.scaledHeight = sceneData.Gameplay.knifeDim.boxHeight * canvasScaleHeight;
+
+        this.dynamicStirr.scaledX = sceneData.Gameplay.stirringDim.originalX * canvasScaleWidth;
+        this.dynamicStirr.scaledY = sceneData.Gameplay.stirringDim.originalY * canvasScaleHeight;
+        this.dynamicStirr.scaledWidth = sceneData.Gameplay.stirringDim.boxWidth * canvasScaleWidth;
+        this.dynamicStirr.scaledHeight = sceneData.Gameplay.stirringDim.boxHeight * canvasScaleHeight;
+
+        this.dynamicFry.scaledX = sceneData.Gameplay.fryingDim.originalX * canvasScaleWidth;
+        this.dynamicFry.scaledY = sceneData.Gameplay.fryingDim.originalY * canvasScaleHeight;
+        this.dynamicFry.scaledWidth = sceneData.Gameplay.fryingDim.boxWidth * canvasScaleWidth;
+        this.dynamicFry.scaledHeight = sceneData.Gameplay.fryingDim.boxHeight * canvasScaleHeight;
+
+        this.dynamicInventory.scaledX = sceneData.Gameplay.inventoryDim.originalX * canvasScaleWidth;
+        this.dynamicInventory.scaledY = sceneData.Gameplay.inventoryDim.originalY * canvasScaleHeight;
+        this.dynamicInventory.scaledWidth = sceneData.Gameplay.inventoryDim.boxWidth * canvasScaleWidth;
+        this.dynamicInventory.scaledHeight = sceneData.Gameplay.inventoryDim.boxHeight * canvasScaleHeight;
+    }
 
     draw = () => {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -144,16 +175,16 @@ export class GameplayScene extends Scene {
     }
 
     // TODO As of now this wont work, I need to store these values for each collider, because they change dimensions depending on screen
-    drawCollider = (originalX, originalY, boxWidth, boxHeight, color = "red") => {
+    drawCollider = (scaledX, scaledY, scaledWidth, scaledHeight, color = "red") => {
         this.context.save()
 
         this.context.strokeStyle = color;
         this.context.lineWidth = 8;
 
-        const scaledX = originalX * (this.canvas.width / this.originalCanvasWidth);
-        const scaledY = originalY * (this.canvas.height / this.originalCanvasHeight);
-        const scaledWidth = boxWidth * (this.canvas.width / this.originalCanvasWidth);
-        const scaledHeight = boxHeight * (this.canvas.height / this.originalCanvasHeight);
+        // const scaledX = originalX * (this.canvas.width / this.originalCanvasWidth);
+        // const scaledY = originalY * (this.canvas.height / this.originalCanvasHeight);
+        // const scaledWidth = boxWidth * (this.canvas.width / this.originalCanvasWidth);
+        // const scaledHeight = boxHeight * (this.canvas.height / this.originalCanvasHeight);
 
         this.context.strokeRect(scaledX, scaledY, scaledWidth, scaledHeight);
         this.context.restore()
@@ -161,38 +192,38 @@ export class GameplayScene extends Scene {
 
     drawColliders = () => {
         this.drawCollider(
-            sceneData.Gameplay.sinkDim.originalX,
-            sceneData.Gameplay.sinkDim.originalY,
-            sceneData.Gameplay.sinkDim.boxWidth,
-            sceneData.Gameplay.sinkDim.boxHeight,
+            this.dynamicSink.scaledX,
+            this.dynamicSink.scaledY,
+            this.dynamicSink.scaledWidth,
+            this.dynamicSink.scaledHeight,
         );
 
         this.drawCollider(
-            sceneData.Gameplay.knifeDim.originalX,
-            sceneData.Gameplay.knifeDim.originalY,
-            sceneData.Gameplay.knifeDim.boxWidth,
-            sceneData.Gameplay.knifeDim.boxHeight,
+            this.dynamicknife.scaledX,
+            this.dynamicknife.scaledY,
+            this.dynamicknife.scaledWidth,
+            this.dynamicknife.scaledHeight,
         );
 
         this.drawCollider(
-            sceneData.Gameplay.stirringDim.originalX,
-            sceneData.Gameplay.stirringDim.originalY,
-            sceneData.Gameplay.stirringDim.boxWidth,
-            sceneData.Gameplay.stirringDim.boxHeight,
+            this.dynamicStirr.scaledX,
+            this.dynamicStirr.scaledY,
+            this.dynamicStirr.scaledWidth,
+            this.dynamicStirr.scaledHeight,
         );
 
         this.drawCollider(
-            sceneData.Gameplay.fryingDim.originalX,
-            sceneData.Gameplay.fryingDim.originalY,
-            sceneData.Gameplay.fryingDim.boxWidth,
-            sceneData.Gameplay.fryingDim.boxHeight,
+            this.dynamicFry.scaledX,
+            this.dynamicFry.scaledY,
+            this.dynamicFry.scaledWidth,
+            this.dynamicFry.scaledHeight,
         );
 
         this.drawCollider(
-            sceneData.Gameplay.inventoryDim.originalX,
-            sceneData.Gameplay.inventoryDim.originalY,
-            sceneData.Gameplay.inventoryDim.boxWidth,
-            sceneData.Gameplay.inventoryDim.boxHeight,
+            this.dynamicInventory.scaledX,
+            this.dynamicInventory.scaledY,
+            this.dynamicInventory.scaledWidth,
+            this.dynamicInventory.scaledHeight,
         );
     }
 }

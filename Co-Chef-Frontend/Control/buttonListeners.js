@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             SelectBackButton.style.display = "none";
             SelectConfirmButton.style.display = "none";
             characterContainer.style.display = "none";
+            speechText.style.display = "none";
             switchToScene(sceneData.Gameplay.sceneId);
         }
     })
