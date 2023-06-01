@@ -5,6 +5,8 @@ export class Scene {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.showButtons = showButtons;
+        this.playerX = this.canvas.width * 0.3;
+        this.playerY = this.canvas.height * 0.3;
         this.initialize();
     }
 
@@ -29,13 +31,19 @@ export class Scene {
     }
 
     initialize = () => {
-        window.addEventListener('resize', this.resizeCanvas, false);
+        window.addEventListener('resize', this.resizeCanvas.bind(this), false);
         this.resizeCanvas();
     }
 
     resizeCanvas = () => {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        console.log(this.canvas.width + "\n" + this.canvas.height);
+        this.reset();
+        // console.log(this.canvas.width + "\n" + this.canvas.height);
+    }
+
+    reset = () => {
+        this.playerX = window.innerWidth * 0.3;
+        this.playerY = window.innerHeight * 0.3;
     }
 }

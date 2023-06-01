@@ -20,9 +20,8 @@ export const scenes = [
     new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
     new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, false),
     new DishSelectScene(sceneData.DISH_SELECT.canvasId, false),
-    new GameplayScene(sceneData.Gameplay.canvasId, sceneData.Gameplay.background,false)
+    new GameplayScene(sceneData.Gameplay.canvasId, sceneData.Gameplay.background, sceneData.Gameplay.playerImage, false)
 ];
-
 export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
@@ -49,6 +48,9 @@ if (activeScene === 2) {
 }
 
 const drawActiveScene = () => {
+    if (activeScene === sceneData.Gameplay.sceneId) {
+        scenes[activeScene].update();
+    }
     scenes[activeScene].draw();
     requestAnimationFrame(drawActiveScene);
 };
