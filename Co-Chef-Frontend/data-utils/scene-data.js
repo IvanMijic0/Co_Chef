@@ -69,9 +69,9 @@ export const sceneData = {
             boxHeight: 400,
         },
         stirringDim: {
-            originalX: 1400,
+            originalX: 1260,
             originalY: 870,
-            boxWidth: 450,
+            boxWidth: 500,
             boxHeight: 100,
         },
         fryingDim: {
@@ -87,9 +87,9 @@ export const sceneData = {
             boxHeight: 100,
         },
         playerPlatform: {
-            originalX: 490,
+            originalX: 790,
             originalY: 300,
-            boxWidth: 4300,
+            boxWidth: 4000,
             boxHeight: 2700,
         },
         sceneId: 8,

@@ -55,7 +55,7 @@ export class InputHandler {
             {
                 this.keys.push(e.key);
             }
-            console.log(this.keys)
+            // console.log(this.keys)
         });
 
         window.addEventListener("keyup", e => {
@@ -89,7 +89,7 @@ export class InputHandler {
             if (index !== -1) {
                 this.keys.splice(index, 1);
             }
-            console.log(this.keys)
+            // console.log(this.keys)
         });
     }
 }

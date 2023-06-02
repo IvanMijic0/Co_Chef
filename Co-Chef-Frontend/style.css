@@ -27,7 +27,7 @@ canvas {
 #startMenu, #test, #logo, #tutorial, #background,
 #pupSpeech, #pierSpeech, #isabelleSpeech, #celineSpeech, #amuSpeech, #chatonSpeech,
 #introBackground, #volumeIcon, #muteVolumeIcon,
-#character, #dish, #kitchenBackground, #player {
+#character, #dish, #kitchenBackground, #player, #gameplayText {
     display: none;
 }
 
@@ -175,7 +175,7 @@ canvas {
     transform: translateX(-50%);
 }
 
-#introHeader {
+#introHeader, #gameplayText {
     font-family: CoffeCake, sans-serif;
     display: none;
     font-size: calc(100% + 2vw);
@@ -204,6 +204,14 @@ canvas {
 
 #character-name, #dish-name {
     white-space: nowrap;
+}
+
+#gameplayText {
+    left: 40%;
+    transform: translateX(-50%);
+    font-size: calc(100% + 2.5vw);
+    bottom: 2.5vw;
+    text-shadow: -6px 0 black, 0 6px black, 6px 0 black, 0 -6px black;
 }
 
 /* Volume */

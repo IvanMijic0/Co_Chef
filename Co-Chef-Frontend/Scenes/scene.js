@@ -5,8 +5,17 @@ export class Scene {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.showButtons = showButtons;
-        this.playerX = this.canvas.width * 0.3;
-        this.playerY = this.canvas.height * 0.3;
+        // ...
+        import("./gameplayScene.js")
+            .then(({ GameplayScene }) => {
+                if (this instanceof GameplayScene) {
+                    this.playerX = this.canvas.width * 0.3;
+                    this.playerY = this.canvas.height * 0.3;
+                }
+            })
+            .catch(error => {
+                console.error("Cannot access GameplayScene before it is instantiated.", error);
+            });
         this.initialize();
     }
 
