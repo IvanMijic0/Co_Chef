@@ -55,17 +55,6 @@ export class DishSelectScene extends Scene {
             this.scaledHeight + this.sizeModifier
         );
 
-        // Draw collision box
-        this.context.strokeStyle = "black";
-        this.context.lineWidth = 5;
-        this.context.strokeRect(
-            dishX,
-            dishY,
-            this.scaledWidth + this.sizeModifier,
-            this.scaledHeight + this.sizeModifier
-        );
-
-
         const throttledDishMouseMove = throttle((event) => {
             this.handleDishCollision(event, dishX, dishY, this.scaledWidth, this.scaledHeight);
         }, 1000); // Adjust the throttle delay as needed

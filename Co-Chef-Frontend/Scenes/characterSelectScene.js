@@ -78,16 +78,6 @@ export class CharacterSelectScene extends Scene {
             this.scaledHeight + this.sizeModifier
         );
 
-        // Draw collision box
-        this.context.strokeStyle = "black";
-        this.context.lineWidth = 5;
-        this.context.strokeRect(
-            characterX,
-            characterY,
-            this.scaledWidth + this.sizeModifier,
-            this.scaledHeight + this.sizeModifier
-        );
-
         const throttledMouseMove = throttle((event) => {
             this.handleCharacterCollision(event, characterX, characterY, this.scaledWidth, this.scaledHeight);
         }, 1000); // Adjust the throttle delay as needed

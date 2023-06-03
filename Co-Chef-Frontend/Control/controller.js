@@ -42,7 +42,7 @@ export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
 let introText = document.getElementById("introHeader");
 
-export let activeScene = 3;
+export let activeScene = 8;
 let previousScene = 0;
 
 scenes[activeScene].show();

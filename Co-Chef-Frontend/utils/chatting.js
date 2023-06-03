@@ -2,7 +2,7 @@
 const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
 const inputField = document.querySelector(".chat-input");
-const MAX_CHAT_LOG_HEIGHT = 1460; // Adjust the maximum height as desired
+const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
 export let canMove = true;
 let chatMessages = [];
 
@@ -23,9 +23,11 @@ chatField.addEventListener("keydown", (e) => {
             displayChatMessages();
             input.value = "";
         }
+    } else if (e.key === "Escape") {
+        canMove = true;
+        inputField.disabled = true;
     }
 });
-
 
 const displayChatMessages = () => {
     chatLog.innerHTML = '';

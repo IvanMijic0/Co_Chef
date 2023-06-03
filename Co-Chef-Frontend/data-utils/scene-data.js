@@ -89,7 +89,7 @@ export const sceneData = {
         playerPlatform: {
             originalX: 790,
             originalY: 300,
-            boxWidth: 4000,
+            boxWidth: 4200,
             boxHeight: 2700,
         },
         sceneId: 8,

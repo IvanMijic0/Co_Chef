@@ -3,6 +3,7 @@ import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./con
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // Caching everything
     const tutorialButton = document.getElementById("tutorialButton-container");
     const connectButton = document.getElementById("connectButton-container");
     const optionsButton = document.getElementById("optionsButton-container");
@@ -22,6 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const characterName = document.getElementById("character-name");
     const dishName = document.getElementById("dish-name");
     const characterContainer = document.getElementById("character-container");
+    const ic_options = document.getElementById("ic_options");
+    const ic_recipes = document.getElementById("ic_recipe");
+    const ic_slot = document.getElementById("ic_slot");
+    const ic_com = document.getElementById("ic_com");
+    const ic_timer = document.getElementById("ic_timer");
+    const timer = document.getElementById("timer");
+    const chat_container = document.getElementById("chat-container");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -135,6 +143,13 @@ document.addEventListener("DOMContentLoaded", () => {
             characterContainer.style.display = "none";
             speechText.style.display = "none";
             switchToScene(sceneData.Gameplay.sceneId);
+            ic_options.style.display = "flex";
+            ic_recipes.style.display = "flex";
+            ic_slot.style.display = "flex";
+            ic_com.style.display = "flex";
+            ic_timer.style.display = "flex";
+            timer.style.display = "flex";
+            chat_container.style.display = "block";
         }
     })
 
@@ -143,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
         SelectConfirmButton.style.display = "none";
         scenes[activeScene].restartClick();
         scenes[activeScene].changeText();
-
     })
 
     SelectLeftArrowButton.addEventListener("click", () => {

@@ -160,25 +160,42 @@
 </div>
 
 <!-- Chat Field -->
-<div class="chat-container">
+<div id="chat-container" class="chat-container">
     <div class="chat-log-container">
         <div class="chat-log" id="chatLog"></div>
     </div>
     <div class="chat-field">
-        <input type="text" class="chat-input" placeholder="Type your message...">
+        <input type="text" class="chat-input" placeholder="Double click to chat...">
     </div>
 </div>
 
 
 <!-- GP UI -->
-<img id="ic_options" src="Assets/Sprites/GameplayUI/ic_options.png" alt="Options icon">
-<img id="ic_recipe" src="Assets/Sprites/GameplayUI/ic_recipe.png" alt="Recipes icon">
+<img id="ic_options" src="Assets/Sprites/GameplayUI/ic_options.png"
+     onmouseover="this.src='Assets/Sprites/GameplayUI/ic_options_hover.png'"
+     onmouseout="this.src='Assets/Sprites/GameplayUI/ic_options.png'"
+     onmousedown="this.src='Assets/Sprites/GameplayUI/ic_options_click.png'"
+     onmouseup="this.src='Assets/Sprites/GameplayUI/ic_options_hover.png'"
+     alt="Options Icon"
+>
+<img id="ic_recipe" src="Assets/Sprites/GameplayUI/ic_recipe.png"
+     onmouseover="this.src='Assets/Sprites/GameplayUI/ic_recipe_hover.png'"
+     onmouseout="this.src='Assets/Sprites/GameplayUI/ic_recipe.png'"
+     onmousedown="this.src='Assets/Sprites/GameplayUI/ic_recipe_hover.png'"
+     onmouseup="this.src='Assets/Sprites/GameplayUI/ic_recipe.png'"
+     alt="Recipes icon"
+>
 <img id="ic_slot" src="Assets/Sprites/GameplayUI/ic_slot.png" alt="Slot icon">
 <img id="ic_timer" src="Assets/Sprites/GameplayUI/ic_timer.png" alt="Timer icon">
-<img id="ic_com" src="Assets/Sprites/GameplayUI/ic_com.png" alt="Communications icon">
+<img id="ic_com" src="Assets/Sprites/GameplayUI/ic_com.png" alt="Communications icon"
+     onmouseover="this.src='Assets/Sprites/GameplayUI/ic_com_hover.png'"
+     onmouseout="this.src='Assets/Sprites/GameplayUI/ic_com.png'"
+     onmousedown="this.src='Assets/Sprites/GameplayUI/ic_com_click.png'"
+     onmouseup="this.src='Assets/Sprites/GameplayUI/ic_com_hover.png'"
+>
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>-->
 <script type="module" src="Control/controller.js"></script>
 <script type="module" src="Control/buttonListeners.js"></script>
 <script type="module" src="utils/chatting.js"></script>

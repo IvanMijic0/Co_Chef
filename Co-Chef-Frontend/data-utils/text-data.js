@@ -51,5 +51,5 @@ export const textData = {
 
     fishSelect: "Bienvenue, mon ami! Some people believe that the first fish taco was created by a surfer in San Felipe, Mexico, who had some " +
         "leftover fish and decided to put it in a tortilla. Can you imagine that? Did you know that fish tacos have their own holiday?" +
-        "National Fish Taco Day is celebrated on October 4th every year. That's the perfect excuse to eat some fish tacos!"
+        " National Fish Taco Day is celebrated on October 4th every year."
 }
