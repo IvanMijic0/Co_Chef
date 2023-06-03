@@ -27,8 +27,9 @@ export class InputHandler {
                     !this.keys.includes(e.key)
                 ) {
                     this.keys.push(e.key);
-                } else if (e.key === "v") {
+                } else if (e.key === "F2") {
                     this.debug = !this.debug;
+                    e.defaultPrevented();
                 }
                 // console.log(this.keys)
             }

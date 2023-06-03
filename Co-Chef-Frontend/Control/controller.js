@@ -11,6 +11,21 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {LazyAudio} from "../utils/audio.js";
 import {VolumeBar} from "../utils/volume-bar.js";
 
+// Check if the Screen Orientation API is supported
+if (screen.orientation && screen.orientation.lock) {
+    // Attempt to lock the screen orientation to landscape
+    screen.orientation
+        .lock("landscape")
+        .then(() => {
+            console.log("Screen orientation locked to landscape");
+        })
+        .catch((error) => {
+            console.log("Failed to lock screen orientation:", error);
+        });
+} else {
+    console.log("Screen Orientation API is not supported");
+}
+
 export const scenes = [
     new SignupScene(sceneData.SIGNUP.canvasId, sceneData.SIGNUP.image, false),
     new LoginScene(sceneData.LOGIN.canvasId, sceneData.LOGIN.image, false),
@@ -27,7 +42,7 @@ export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
 let introText = document.getElementById("introHeader");
 
-export let activeScene = 8;
+export let activeScene = 3;
 let previousScene = 0;
 
 scenes[activeScene].show();

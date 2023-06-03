@@ -8,7 +8,7 @@ export class LoginScene extends Scene {
 
     draw = () => {
         this.context.drawImage(
-            this.image.source,
+            this.image,
             0,
             0,
             this.canvas.width,

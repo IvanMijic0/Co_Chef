@@ -5,9 +5,14 @@ export class IntroScene extends Scene {
         super(canvasId, showButtons);
         this.logo = logo;
         this.background = background;
+        this.sizeModifier = .2;
     }
 
     draw = () => {
+        this.scaledWidth = this.canvas.width * 0.32;
+        this.scaledHeight = this.canvas.height * 0.5;
+        const logoX = (this.canvas.width - this.scaledWidth) * 0.5;
+        const logoY = (this.canvas.height - this.scaledHeight) * 0.1;
 
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.drawImage(
@@ -18,9 +23,11 @@ export class IntroScene extends Scene {
             this.canvas.height
         );
         this.context.drawImage(
-            this.logo.source,
-            (this.canvas.width - this.logo.width) * 0.5,
-            (this.canvas.height - this.logo.height) * 0.5 - this.logo.height * .5
+            this.logo,
+            logoX,
+            logoY,
+            this.scaledWidth + this.sizeModifier,
+            this.scaledHeight + this.sizeModifier
         );
     }
 }

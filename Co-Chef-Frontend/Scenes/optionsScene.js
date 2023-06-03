@@ -5,7 +5,6 @@ export class OptionsScene extends Scene {
         super(canvasId, showButtons);
         this.image = image;
     }
-
     draw = () => {
         this.context.drawImage(
             this.image.source,

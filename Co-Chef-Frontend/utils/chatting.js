@@ -14,7 +14,7 @@ chatField.addEventListener("click", () => {
 chatField.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         canMove = true;
-        inputField.disabled = true;
+        inputField.disabled = !inputField.disabled;
         const input = e.target;
         const message = input.value.trim();
 

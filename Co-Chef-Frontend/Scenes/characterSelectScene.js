@@ -135,7 +135,7 @@ export class CharacterSelectScene extends Scene {
 
     drawSpeechBubble = () => {
         this.context.drawImage(
-            this.characters[this.currentIndex].speechImage.source,
+            this.characters[this.currentIndex].speechImage,
             0,
             this.canvas.height - this.canvas.height * .25,
             this.canvas.width * 1.6,

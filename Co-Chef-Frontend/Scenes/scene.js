@@ -20,17 +20,15 @@ export class Scene {
     }
 
     show = () => {
-        document.querySelectorAll(".Button-column").forEach(element => {
-            element.style.display = this.showButtons ? "flex" : "none";
-        });
+        document.getElementById("button-column").style.display = this.showButtons ? "flex" : "none";
+
         this.canvas.style.display = "block";
         this.canvas.style.pointerEvents = "auto";
     }
 
     hide = () => {
-        document.querySelectorAll(".Button-column").forEach(element => {
-            element.style.display = "none";
-        });
+        document.getElementById("button-column").style.display = "none";
+
         document.getElementById("optionsHeader").style.display = "none";
         document.getElementById("login-container").style.display = "none";
         document.getElementById("signup-container").style.display = "none";

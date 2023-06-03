@@ -29,7 +29,7 @@ canvas {
 #introBackground, #volumeIcon, #muteVolumeIcon,
 #character, #dish, #kitchenBackground, #player,
 #gameplayText, #ic_options, #ic_recipe, #ic_slot,
-#ic_com, #ic_timer{
+#ic_com, #ic_timer, #timer, .chat-container {
     display: none;
 }
 
@@ -37,7 +37,7 @@ canvas {
 .Button-column {
     position: absolute;
     display: none;
-    bottom: 8%;
+    bottom: 5vw;
     left: 50%;
     transform: translateX(-50%);
     flex-direction: column;
@@ -47,25 +47,25 @@ canvas {
 
 .Button-container {
     background-color: #EA5C2B;
-    width: calc(50% + .5vw);
-    height: 5vw;
-    border-radius: 250px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    outline: 3px solid black;
+    width: 15vw;
+    height: 4vw;
+    border-radius: 3vw;
+    box-shadow: 0 .2vw 2vw rgba(0, 0, 0, 0.3);
+    outline: .2vw solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8%
+    margin-top: 5.8vh
 }
 
 .Button-container:hover {
     background-color: #FF7F3F;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 .2vw 1vw rgba(0, 0, 0, 0.5);
 }
 
 .Button-container:active {
     background-color: #95CD41;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 .6vw 2vw rgba(0, 0, 0, 0.3);
 }
 
 .Button {
@@ -73,13 +73,13 @@ canvas {
     justify-content: center;
     text-align: center;
     background: transparent;
-    font-size: calc(100% + 2.5vw);
+    font-size: 3vw;
     padding: 3vh 6vw;
     border: none;
     color: #FFD2BB;
     cursor: pointer;
     caret-color: transparent;
-    -webkit-text-stroke: 3px black;
+    -webkit-text-stroke: .1vw black;
 }
 
 .Button:active {
@@ -92,32 +92,31 @@ canvas {
     left: 0;
     margin-top: 1%;
     margin-left: 18%;
+
 }
 
 #tutorial-backButton-container {
     display: none;
-    width: 110%;
+    width: 7vw;
 }
 
 #tutorialBackButton {
-    font-size: 300%;
-    padding: 12px 24px;
+    font-size: 2vw;
 }
 
 #options-backButton-container, #CharSelect-backButton-container, #CharSelect-confirmButton-container {
     position: fixed;
     display: none;
-    bottom: 10%;
+    bottom: 5vw;
     left: 42%;
     background-color: #EA5C2B;
-    width: 15%;
-    height: 7%;
-    border-radius: 250px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    outline: 3px solid black;
+    width: 13vw;
+    height: 4vw;
+    border-radius: 3vw;
+    box-shadow: 0 .2vw .5vw rgba(0, 0, 0, 0.3);
+    outline: .2vw solid black;
     justify-content: center;
     align-items: center;
-    margin-top: 8%;
 }
 
 #CharSelect-backButton-container {
@@ -134,17 +133,16 @@ canvas {
 
 #options-backButton-container:hover, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:hover {
     background-color: #FF7F3F;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 .4vw .8vw rgba(0, 0, 0, 0.3);
 }
 
 #options-backButton-container:active, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:active {
     background-color: #95CD41;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 .4vw 1vw rgba(0, 0, 0, 0.3);
 }
 
 #ic_options {
     position: absolute;
-    display: flex;
     width: 4.5vw;
     height: 4.5vw;
     left: 3vw;
@@ -154,7 +152,6 @@ canvas {
 
 #ic_recipe {
     position: absolute;
-    display: flex;
     width: 4.5vw;
     height: 4.5vw;
     left: 4vw;
@@ -164,7 +161,6 @@ canvas {
 
 #ic_slot {
     position: absolute;
-    display: flex;
     width: 4.5vw;
     height: 4.5vw;
     left: 12.5vw;
@@ -174,7 +170,6 @@ canvas {
 
 #ic_timer {
     position: absolute;
-    display: flex;
     width: 4.5vw;
     height: 5.5vw;
     right: -.5vw;
@@ -184,7 +179,6 @@ canvas {
 
 #ic_com {
     position: absolute;
-    display: flex;
     width: 2.8vw;
     height: 2.8vw;
     right: 25vw;
@@ -194,11 +188,11 @@ canvas {
 
 /* Header styles */
 #menuHeader, #character-name, #dish-name {
-    font-family: CoffeCake, sans-serif;
-    font-size: calc(100% + 12vw);
+    font-family: CoffeCake, serif;
+    font-size: 11vw;
     color: #FF7F3F;
     caret-color: transparent;
-    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+    -webkit-text-stroke: .01vw black;
     margin-bottom: .05vw;
 }
 
@@ -229,13 +223,13 @@ canvas {
 #introHeader, #gameplayText {
     font-family: CoffeCake, sans-serif;
     display: none;
-    font-size: calc(100% + 2vw);
+    font-size: 4vw;
     color: #FF7F3F;
     caret-color: transparent;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    -webkit-text-stroke: .01vw black;
     margin: 0;
     position: absolute;
-    bottom: 15vw;
+    bottom: 12vw;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -244,12 +238,12 @@ canvas {
     font-family: CoffeCake, sans-serif;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -28.8%);
+    transform: translate(-50%, -10.2%);
     display: none;
-    font-size: 1400%;
+    font-size: 11vw;
     color: #FF7F3F;
     caret-color: transparent;
-    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    -webkit-text-stroke: .01vw black;
     margin-bottom: 0;
 }
 
@@ -258,13 +252,11 @@ canvas {
 }
 
 #gameplayText {
-    display: flex;
-    left: 12vw;
+    left: 40%;
     transform: translateX(-50%);
-    font-size: 12vw;
-    bottom: 10vw;
+    font-size: 3.5vw;
+    bottom: 2.5vw;
     -webkit-text-stroke: .1vw black;
-    color: white;
 }
 
 #timer {
@@ -279,6 +271,7 @@ canvas {
 }
 
 /* Volume */
+/* TODO continue this */
 #volumeContainer {
     caret: transparent;
     position: absolute;
@@ -394,41 +387,41 @@ canvas {
     display: none;
     font-family: CoffeCake, sans-serif;
     text-align: center;
-    font-size: 250%;
+    font-size: 2.5vw;
     color: snow;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 45%;
-    height: 60%;
+    width: 65vw;
+    height: 43vw;
     background-image: url("Assets/Sprites/Backgrounds/loginContainerBackground.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    -webkit-text-stroke: 2px black;
+    -webkit-text-stroke: .08vw black;
 }
 
 #signup-container {
     background-image: url("Assets/Sprites/Backgrounds/signupContainerBackground.png");
-    width: 45%;
-    height: 72%;
+    width: 52vw;
+    height: 43vw;
 }
 
 #signup-container .input-group {
-    margin-top: 7%;
-    margin-bottom: 13px;
+    margin-top: 3.5vw;
+    margin-bottom: 3vw;
 }
 
 #login-container .input-group {
-    margin-top: 9%;
-    margin-bottom: 15px;
+    margin-top: 6vw;
+    margin-bottom: 3vw;
 }
 
 #login-container label,
 #signup-container label {
     display: block;
-    margin-bottom: 1%;
+    margin-bottom: .01vw;
 }
 
 #login-container input[type="text"],
@@ -436,85 +429,77 @@ canvas {
 #signup-container input[type="text"],
 #signup-container input[type="password"] {
     font-family: CoffeCake, sans-serif;
-    font-size: 100%;
+    font-size: 3vw;
     color: #95CD41;
     padding: 1%;
     width: 50%;
-    border-radius: 25px;
-    border: 2px solid black;
+    border-radius: 3vw;
+    border: .1vw solid black;
 }
 
-#login-container #username:hover,
-#login-container #password:hover,
-#signup-container #name:hover,
-#signup-container #username0:hover,
-#signup-container #password0:hover {
+#username:hover,
+#password:hover,
+#name:hover,
+#username0:hover,
+#password0:hover {
     background-color: snow;
 }
 
-#login-container #loginButton,
-#signup-container #loginButton0 {
-    margin-top: 2%;
-    margin-right: 2%;
-    margin-left: 2%;
+
+
+#loginButton, #loginButton0,
+#signUpButton, #signUpButton0{
+    margin-top: 1vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
     font-family: CoffeCake, sans-serif;
-    font-size: 80%;
+    font-size: 2.5vw;
     background-color: #EA5C2B;
     color: #FFD2BB;
-    border: 2px solid black;
-    padding: 1%;
-    width: 24%;
+    border: .1vw solid black;
+    padding: .5vw;
+    width: 13vw;
     cursor: pointer;
-    border-radius: 25px;
+    border-radius: 3vw;
 }
 
-#signup-container #loginButton0 {
+#loginButton0,
+#signUpButton {
     background-color: #FFBB94;
+    color: #FFD2BB;
 }
 
-#login-container #loginButton:hover {
+
+#loginButton:hover {
     background-color: #FF7F3F;
 }
 
-#signup-container #loginButton0:hover {
+#loginButton0:hover {
     background-color: #F6D860;
 }
 
-#login-container #loginButton:active,
-#signup-container #loginButton0:active {
+#loginButton:active,
+#loginButton0:active {
     background-color: #95CD41;
     color: #DFFFAE;
 }
 
-#login-container #signUpButton,
-#signup-container #signUpButton0 {
-    margin-right: 2%;
-    margin-left: 2%;
-    font-family: CoffeCake, sans-serif;
-    font-size: 80%;
-    background-color: #FFBB94;
-    color: #FFD2BB;
-    border: 2px solid black;
-    padding: 1%;
-    width: 24%;
-    cursor: pointer;
-    border-radius: 25px;
-}
 
-#signup-container #signUpButton0 {
+
+#signUpButton0 {
     background-color: #EA5C2B
 }
 
-#login-container #signUpButton:hover {
+#signUpButton:hover {
     background-color: #F6D860;
 }
 
-#signup-container #signUpButton0:hover {
+#signUpButton0:hover {
     background-color: #FF7F3F;
 }
 
-#login-container #signUpButton:active,
-#signup-container #signUpButton0:active {
+#signUpButton:active,
+#signUpButton0:active {
     background-color: #95CD41;
     color: #DFFFAE;
 }
@@ -550,510 +535,510 @@ canvas {
 /* Fixes */
 
 
-@media (min-width: 650px) and (orientation: landscape) {
-    .Button-column {
-        position: absolute;
-        display: none;
-        bottom: 8%;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+/*@media (min-width: 650px) and (orientation: landscape) {*/
+/*    .Button-column {*/
+/*        position: absolute;*/
+/*        display: none;*/
+/*        bottom: 8%;*/
+/*        left: 50%;*/
+/*        transform: translateX(-50%);*/
+/*        flex-direction: column;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*    }*/
 
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(60% + .8vw);
-        height: 5vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%
-    }
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(60% + .8vw);*/
+/*        height: 5vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 10%*/
+/*    }*/
 
-    .Button {
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 2vw);
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 1vw black;
-    }
+/*    .Button {*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 2vw);*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 1.5px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 12vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 12vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
 
-    #tutorial-backButton-container {
-        display: none;
-        width: 70%;
-    }
+/*    #tutorial-backButton-container {*/
+/*        display: none;*/
+/*        width: 70%;*/
+/*    }*/
 
-    #tutorialBackButton {
-        font-size: 4vw;
-        padding: 12px 24px;
-    }
-}
+/*    #tutorialBackButton {*/
+/*        font-size: 4vw;*/
+/*        padding: 12px 24px;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 730px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(60% + .1vw);
-        height: 5vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 8%
-    }
+/*@media (min-width: 730px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(60% + .1vw);*/
+/*        height: 5vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 8%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 2vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 2px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 2vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 2px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 10vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 10vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 720px) and (min-height: 540px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(60% + .1vw);
-        height: 7vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 11%
-    }
+/*@media (min-width: 720px) and (min-height: 540px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(60% + .1vw);*/
+/*        height: 7vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 11%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 3vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 2px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 3vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 2px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 15vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 15vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 717px) and (min-height: 512px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(60% + .1vw);
-        height: 7vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%
-    }
+/*@media (min-width: 717px) and (min-height: 512px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(60% + .1vw);*/
+/*        height: 7vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 10%*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 15vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 15vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
 
-    #tutorial-backButton-container {
-        display: none;
-        width: 8vw;
-        height: 6vw;
-    }
+/*    #tutorial-backButton-container {*/
+/*        display: none;*/
+/*        width: 8vw;*/
+/*        height: 6vw;*/
+/*    }*/
 
-    #tutorialBackButton {
-        font-size: 3.5vw;
-        padding: 12px 24px;
-    }
-}
+/*    #tutorialBackButton {*/
+/*        font-size: 3.5vw;*/
+/*        padding: 12px 24px;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 844px) and (orientation: landscape) {
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 9vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
+/*@media (min-width: 844px) and (orientation: landscape) {*/
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 9vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 896px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(65% + .1vw);
-        height: 4.5vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+/*@media (min-width: 896px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(65% + .1vw);*/
+/*        height: 4.5vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 9vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: 1vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 9vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: 1vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1024px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(50% + .1vw);
-        height: 7vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%
-    }
+/*@media (min-width: 1024px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(50% + .1vw);*/
+/*        height: 7vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 10%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 3.5vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 2px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 3.5vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 2px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 16vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 16vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1180px) and (orientation: landscape) {
-    /* Header styles */
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(50% + .1vw);
-        height: 7vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 3px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%
-    }
+/*@media (min-width: 1180px) and (orientation: landscape) {*/
+/*    !* Header styles *!*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(50% + .1vw);*/
+/*        height: 7vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 3px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 10%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 3.5vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 3px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 3.5vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 3px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 14vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
-        margin-bottom: .05vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 14vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1024px) and (max-height: 600px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(50% + .1vw);
-        height: 6vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%
-    }
+/*@media (min-width: 1024px) and (max-height: 600px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(50% + .1vw);*/
+/*        height: 6vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 10%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 2.8vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 2px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 2.8vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 2px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 12vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 12vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1280px) and (max-height: 800px) and (orientation: landscape) {
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(50% + .1vw);
-        height: 6vw;
-        border-radius: 4vw;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 2px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%
-    }
+/*@media (min-width: 1280px) and (max-height: 800px) and (orientation: landscape) {*/
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(50% + .1vw);*/
+/*        height: 6vw;*/
+/*        border-radius: 4vw;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 2px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 10%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 2.8vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 2px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 2.8vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 2px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader, #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 14vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
-        margin-bottom: .05vw;
-    }
-}
+/*    !* Header styles *!*/
+/*    #menuHeader, #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 14vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
+/*}*/
 
-@media (min-width: 1440px) {
-    .Button-column {
-        position: absolute;
-        display: none;
-        bottom: 8%;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+/*@media (min-width: 1440px) {*/
+/*    .Button-column {*/
+/*        position: absolute;*/
+/*        display: none;*/
+/*        bottom: 8%;*/
+/*        left: 50%;*/
+/*        transform: translateX(-50%);*/
+/*        flex-direction: column;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*    }*/
 
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(50% + .5vw);
-        height: 6vw;
-        border-radius: 250px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 3px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 11%
-    }
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(50% + .5vw);*/
+/*        height: 6vw;*/
+/*        border-radius: 250px;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 3px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 11%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        justify-content: center;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 3vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 3px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        justify-content: center;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 3vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 3px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 15vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
-        margin-bottom: .05vw;
-    }
+/*    !* Header styles *!*/
+/*    #menuHeader {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 15vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
 
-    #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 5vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
-        margin-bottom: .05vw;
-    }
+/*    #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 5vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
 
-}
+/*}*/
 
-@media (min-width: 2300px) {
-    .Button-column {
-        position: absolute;
-        display: none;
-        bottom: 8%;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+/*@media (min-width: 2300px) {*/
+/*    .Button-column {*/
+/*        position: absolute;*/
+/*        display: none;*/
+/*        bottom: 8%;*/
+/*        left: 50%;*/
+/*        transform: translateX(-50%);*/
+/*        flex-direction: column;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*    }*/
 
-    .Button-container {
-        background-color: #EA5C2B;
-        width: calc(50% + .5vw);
-        height: 5vw;
-        border-radius: 250px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        outline: 3px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 8%
-    }
+/*    .Button-container {*/
+/*        background-color: #EA5C2B;*/
+/*        width: calc(50% + .5vw);*/
+/*        height: 5vw;*/
+/*        border-radius: 250px;*/
+/*        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);*/
+/*        outline: 3px solid black;*/
+/*        display: flex;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*        margin-top: 8%*/
+/*    }*/
 
-    .Button {
-        font-family: CoffeCake, sans-serif;
-        justify-content: center;
-        text-align: center;
-        background: transparent;
-        font-size: calc(100% + 2.5vw);
-        padding: 3vh 6vw;
-        border: none;
-        color: #FFD2BB;
-        cursor: pointer;
-        caret-color: transparent;
-        -webkit-text-stroke: 5px black;
-    }
+/*    .Button {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        justify-content: center;*/
+/*        text-align: center;*/
+/*        background: transparent;*/
+/*        font-size: calc(100% + 2.5vw);*/
+/*        padding: 3vh 6vw;*/
+/*        border: none;*/
+/*        color: #FFD2BB;*/
+/*        cursor: pointer;*/
+/*        caret-color: transparent;*/
+/*        -webkit-text-stroke: 5px black;*/
+/*    }*/
 
-    /* Header styles */
-    #menuHeader {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 12vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
-        margin-bottom: .05vw;
-    }
+/*    !* Header styles *!*/
+/*    #menuHeader {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 12vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
 
-    #character-name {
-        font-family: CoffeCake, sans-serif;
-        font-size: calc(100% + 5vw);
-        color: #FF7F3F;
-        caret-color: transparent;
-        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;
-        margin-bottom: .05vw;
-    }
+/*    #character-name {*/
+/*        font-family: CoffeCake, sans-serif;*/
+/*        font-size: calc(100% + 5vw);*/
+/*        color: #FF7F3F;*/
+/*        caret-color: transparent;*/
+/*        text-shadow: -5px 0 black, 0 5px black, 5px 0 black, 0 -5px black;*/
+/*        margin-bottom: .05vw;*/
+/*    }*/
 
-    /*Arrows*/
+/*    !*Arrows*!*/
 
-    .character-container {
-        display: none;
-        pointer-events: none;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        caret: transparent;
-    }
+/*    .character-container {*/
+/*        display: none;*/
+/*        pointer-events: none;*/
+/*        position: absolute;*/
+/*        left: 50%;*/
+/*        top: 50%;*/
+/*        transform: translate(-50%, -50%);*/
+/*        caret: transparent;*/
+/*    }*/
 
-    .arrow {
-        position: relative;
-        pointer-events: auto;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
+/*    .arrow {*/
+/*        position: relative;*/
+/*        pointer-events: auto;*/
+/*        top: 50%;*/
+/*        transform: translateY(-50%);*/
+/*        cursor: pointer;*/
+/*    }*/
 
-    #leftArrow {
-        width: 4vw;
-        left: -230%;
-    }
+/*    #leftArrow {*/
+/*        width: 4vw;*/
+/*        left: -230%;*/
+/*    }*/
 
-    #rightArrow {
-        width: 4vw;
-        right: -230%;
-    }
+/*    #rightArrow {*/
+/*        width: 4vw;*/
+/*        right: -230%;*/
+/*    }*/
 
-}
+/*}*/
