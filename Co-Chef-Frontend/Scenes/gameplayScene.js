@@ -114,6 +114,10 @@ export class GameplayScene extends Scene {
             ) {
                 this.isColliding = true;
                 this.collisionCollider = collider.name;
+                if (this.input.lastKey === "e"){
+                    console.log(this.collisionCollider);
+                    this.input.lastKey = "";
+                }
                 break;
             }
         }
@@ -130,9 +134,13 @@ export class GameplayScene extends Scene {
             this.canvas.width,
             this.canvas.height
         );
-        this.drawMiniGameColliders();
-        this.drawPlatform();
+        if (this.input.debug) {
+            this.drawMiniGameColliders();
+            this.drawPlatform();
+        }
+
         this.drawPlayer();
+        this.updatePlatform();
 
         if (this.isColliding) {
             this.gamePlayText.style.display = "flex";
@@ -141,7 +149,13 @@ export class GameplayScene extends Scene {
         } else {
             this.gamePlayText.style.display = "none";
         }
+    }
 
+    updatePlatform = () => {
+        this.platformX = sceneData.Gameplay.playerPlatform.originalX * (this.canvas.width / this.originalCanvasWidth);
+        this.platformY = sceneData.Gameplay.playerPlatform.originalY * (this.canvas.height / this.originalCanvasHeight);
+        this.platformWidth = sceneData.Gameplay.playerPlatform.boxWidth * (this.canvas.width / this.originalCanvasWidth);
+        this.platformHeight = sceneData.Gameplay.playerPlatform.boxHeight * (this.canvas.height / this.originalCanvasHeight);
     }
 
     drawPlayer = () => {
@@ -159,38 +173,35 @@ export class GameplayScene extends Scene {
             this.scaledWidth,
             this.scaledHeight
         );
-        this.context.save()
-        this.context.strokeStyle = "yellow";
-        this.context.lineWidth = 10;
-        this.context.strokeRect(
-            this.playerX,
-            this.playerY,
-            this.scaledWidth,
-            this.scaledHeight
-        );
-        this.context.restore()
+        if (this.input.debug) {
+            this.context.save()
+            this.context.strokeStyle = "yellow";
+            this.context.lineWidth = 10;
+            this.context.strokeRect(
+                this.playerX,
+                this.playerY,
+                this.scaledWidth,
+                this.scaledHeight
+            );
+            this.context.restore()
 
-        this.context.save()
-        this.context.strokeStyle = "cyan";
-        this.context.lineWidth = 10;
-        this.context.strokeRect(
-            this.playerColliderX,
-            this.playerColliderY,
-            this.playerColliderWidth,
-            this.playerColliderHeight
-        );
-        this.context.restore()
+            this.context.save()
+            this.context.strokeStyle = "cyan";
+            this.context.lineWidth = 10;
+            this.context.strokeRect(
+                this.playerColliderX,
+                this.playerColliderY,
+                this.playerColliderWidth,
+                this.playerColliderHeight
+            );
+            this.context.restore()
+        }
     }
 
     drawPlatform = () => {
         this.context.save()
         this.context.strokeStyle = "blue";
         this.context.lineWidth = 9;
-
-        this.platformX = sceneData.Gameplay.playerPlatform.originalX * (this.canvas.width / this.originalCanvasWidth);
-        this.platformY = sceneData.Gameplay.playerPlatform.originalY * (this.canvas.height / this.originalCanvasHeight);
-        this.platformWidth = sceneData.Gameplay.playerPlatform.boxWidth * (this.canvas.width / this.originalCanvasWidth);
-        this.platformHeight = sceneData.Gameplay.playerPlatform.boxHeight * (this.canvas.height / this.originalCanvasHeight);
 
         this.context.strokeRect(this.platformX, this.platformY, this.platformWidth, this.platformHeight);
         this.context.restore()

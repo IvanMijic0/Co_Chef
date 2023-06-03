@@ -27,12 +27,13 @@ canvas {
 #startMenu, #test, #logo, #tutorial, #background,
 #pupSpeech, #pierSpeech, #isabelleSpeech, #celineSpeech, #amuSpeech, #chatonSpeech,
 #introBackground, #volumeIcon, #muteVolumeIcon,
-#character, #dish, #kitchenBackground, #player, #gameplayText {
+#character, #dish, #kitchenBackground, #player,
+#gameplayText, #ic_options, #ic_recipe, #ic_slot,
+#ic_com, #ic_timer{
     display: none;
 }
 
 /* Button styles */
-
 .Button-column {
     position: absolute;
     display: none;
@@ -141,6 +142,56 @@ canvas {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
+#ic_options {
+    position: absolute;
+    display: flex;
+    width: 4.5vw;
+    height: 4.5vw;
+    left: 3vw;
+    top: .5vw;
+    transform: translate(-50%);
+}
+
+#ic_recipe {
+    position: absolute;
+    display: flex;
+    width: 4.5vw;
+    height: 4.5vw;
+    left: 4vw;
+    bottom: 2vw;
+    transform: translate(-50%);
+}
+
+#ic_slot {
+    position: absolute;
+    display: flex;
+    width: 4.5vw;
+    height: 4.5vw;
+    left: 12.5vw;
+    bottom: 2vw;
+    transform: translate(-50%);
+}
+
+#ic_timer {
+    position: absolute;
+    display: flex;
+    width: 4.5vw;
+    height: 5.5vw;
+    right: -.5vw;
+    top: .2vw;
+    transform: translate(-50%);
+}
+
+#ic_com {
+    position: absolute;
+    display: flex;
+    width: 2.8vw;
+    height: 2.8vw;
+    right: 25vw;
+    bottom: 1.8vw;
+    transform: translate(-50%);
+}
+
 /* Header styles */
 #menuHeader, #character-name, #dish-name {
     font-family: CoffeCake, sans-serif;
@@ -207,11 +258,24 @@ canvas {
 }
 
 #gameplayText {
-    left: 40%;
+    display: flex;
+    left: 12vw;
     transform: translateX(-50%);
-    font-size: calc(100% + 2.5vw);
-    bottom: 2.5vw;
-    text-shadow: -6px 0 black, 0 6px black, 6px 0 black, 0 -6px black;
+    font-size: 12vw;
+    bottom: 10vw;
+    -webkit-text-stroke: .1vw black;
+    color: white;
+}
+
+#timer {
+    font-family: CoffeCake, serif;
+    top: 7vw;
+    right: -1vw;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 3.5vw;
+    /*text-shadow: -8px 0 black, 0 8px black, 8px 0 black, 0 -8px black;*/
+    -webkit-text-stroke: .1vw black;
 }
 
 /* Volume */
@@ -270,6 +334,59 @@ canvas {
     border-radius: 250px;
     z-index: 1;
 }
+
+/* Text Field */
+.chat-container {
+    position: fixed;
+    bottom: 1.5vw;
+    right: 3vw;
+    width: 20vw;
+    padding: .3vw;
+}
+
+.chat-field {
+    width: 100%;
+    background-color: #FF7F3F;
+    border-radius: 3vw;
+    border: .2vw solid black;
+    padding: .2vw;
+    cursor: pointer;
+}
+
+.chat-log-container {
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.chat-log {
+    height: 0;
+    overflow: auto;
+    background-color: rgba(34, 28, 25, 0.95);
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    margin-left: 1vw;
+    margin-right: .35vw;
+    caret-color: transparent;
+}
+
+.chat-input {
+    font-size: 1vw;
+    border: transparent;
+    width: 100%;
+    padding-top: .3vw;
+    padding-left: 1vw;
+    padding-bottom: .5vw;
+    background-color: #FF7F3F;
+    border-radius: 3vw;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.chat-input::placeholder {
+    color: rgba(255, 250, 250, 0.56);
+}
+
 
 /* Login and Signup */
 
@@ -466,7 +583,7 @@ canvas {
         color: #FFD2BB;
         cursor: pointer;
         caret-color: transparent;
-        -webkit-text-stroke: 1.5px black;
+        -webkit-text-stroke: 1vw black;
     }
 
     /* Header styles */
