@@ -269,6 +269,11 @@ document.addEventListener("DOMContentLoaded", () => {
             case "ArrowDown":
                 updateImageSource(downArrow, "Assets/Sprites/GameplayUI/arrowDown-press.png");
                 break;
+
+            case "p":
+                rememberCharacter = "Chef";
+                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
+                break;
         }
     });
 
