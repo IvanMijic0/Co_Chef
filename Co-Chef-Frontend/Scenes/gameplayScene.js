@@ -38,12 +38,13 @@ export class GameplayScene extends Scene {
         this.colliders = [
             {name: "sink", collider: this.dynamicSink},
             {name: "knife", collider: this.dynamicknife},
-            {name: "stirr", collider: this.dynamicStirr},
+            {name: "stir", collider: this.dynamicStirr},
             {name: "fry", collider: this.dynamicFry},
             {name: "inventory", collider: this.dynamicInventory}
         ];
         this.backgroundImage = backgroundImage;
         this.playerImage = playerImage;
+
         // The coordinates were set based on primary computer screen
         // Could affect the formula if played on a screen bigger than mine...
         // I'll cross that bridge when I get there
@@ -65,12 +66,25 @@ export class GameplayScene extends Scene {
         this.playerColliderHeight = 0;
         this.gamePlayText = document.getElementById("gameplayText");
         this.menuX = 0;
+        this.minGameX = 0;
         this.menuY = 0;
         this.menuWidth = 0;
         this.menuHeight = 0;
         this.showOptions = false;
         this.showRecipe = false;
         this.showSinkMiniGame = false;
+        this.showKnifeMiniGame = false;
+        this.showStirrMiniGame = false;
+        this.showFryMiniGame = false;
+        this.showInventoryMiniGame = false;
+        this.canInteract = true;
+
+        // Terrible solution, but I do not have time right now
+        this.options = document.getElementById("ic_options")
+        this.recipe = document.getElementById("ic_recipe")
+        this.slot = document.getElementById("ic_slot")
+        this.controls = document.getElementById("controls");
+        this.chat = document.querySelector(".chat-input");
     }
 
     update = () => {
@@ -122,15 +136,50 @@ export class GameplayScene extends Scene {
             ) {
                 this.isColliding = true;
                 this.collisionCollider = collider.name;
-                if (this.input.lastKey === "e") {
-                    console.log(this.collisionCollider);
-                    this.input.lastKey = "";
-                    if (this.collisionCollider === "sink") {
-                        this.showSinkMiniGame = true;
+                if (this.canInteract) {
+                    if (this.input.lastKey === "e") {
+                        console.log(this.collisionCollider);
+                        this.input.lastKey = "";
+                        if (this.collisionCollider === "sink") {
+                            this.showSinkMiniGame = !this.showSinkMiniGame;
+                            this.handleVisibility();
+                        }
+                        else if (this.collisionCollider === "knife") {
+                            this.showKnifeMiniGame = !this.showKnifeMiniGame;
+                            this.handleVisibility();
+                        }
+                        else if (this.collisionCollider === "stir") {
+                            this.showStirrMiniGame = !this.showStirrMiniGame;
+                            this.handleVisibility();
+                        }
+                        else if (this.collisionCollider === "fry") {
+                            this.showFryMiniGame = !this.showFryMiniGame;
+                            this.handleVisibility();
+                        }
+                        else if (this.collisionCollider === "inventory") {
+                            this.showInventoryMiniGame = !this.showInventoryMiniGame;
+                            this.handleVisibility();
+                        }
                     }
                 }
                 break;
             }
+        }
+    }
+
+    handleVisibility = () => {
+        canMove = !canMove;
+        if (!canMove) {
+            this.controls.style.display = "block";
+            this.options.style.display = "none";
+            this.recipe.style.display = "none";
+            this.chat.disabled = true;
+            this.slot.style.display = "none";
+        } else {
+            this.controls.style.display = "none";
+            this.options.style.display = "flex";
+            this.recipe.style.display = "flex";
+            this.slot.style.display = "flex";
         }
     }
 
@@ -153,35 +202,141 @@ export class GameplayScene extends Scene {
         this.drawPlayer();
         this.updatePlatform();
         this.textPopup();
+
         if (this.showOptions) {
             this.drawOptions();
         }
-        if (this.showRecipe) {
+        else if (this.showRecipe) {
             this.drawRecipe();
         }
-        if (this.showSinkMiniGame) {
-            this.ctx.drawImage(
-                sceneData.Gameplay.mini_game_background,
-                0,
-                0,
-                this.canvas.width,
-                this.canvas.height
-            );
-            this.ctx.drawImage(
-                sceneData.Gameplay.sink_mini_game,
-                this.menuX,
-                this.menuY,
-                this.menuWidth,
-                this.menuHeight
-            );
+        else if (this.showSinkMiniGame) {
+            this.drawSinkMiniGame();
         }
+        else if (this.showKnifeMiniGame) {
+            this.drawKnifeMiniGame();
+        }
+        else if (this.showStirrMiniGame) {
+            this.drawStirMiniGame();
+        }
+        else if (this.showFryMiniGame) {
+            this.drawFryMiniGame();
+        }
+        else if (this.showInventoryMiniGame) {
+            this.drawInventoryMiniGame();
+        }
+    }
+
+    drawKnifeMiniGame = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.knife_mini_game,
+            this.minGameX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+    drawStirMiniGame = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.stir_mini_game,
+            this.minGameX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+    drawFryMiniGame = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.fry_mini_game,
+            this.minGameX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+    drawInventoryMiniGame = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.inventory_mini_game,
+            this.minGameX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+
+    drawSinkMiniGame() {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.sink_mini_game,
+            this.minGameX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
     }
 
     textPopup() {
         if (this.isColliding) {
             this.gamePlayText.style.display = "flex";
-            this.gamePlayText.innerHTML = "Press <span style='color: white'>&nbsp;E&nbsp;</span> to interact with " +
-                "<span style='color: white'>&nbsp;" + this.collisionCollider + "&nbsp;</span>";
+            if (this.showSinkMiniGame) {
+                this.gamePlayText.style.fontSize = "3.15vw";
+                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Hold up &nbsp;</span> " +
+                    "<span style='color: #FF7F3F'>arrow key to wash</span>";
+
+            }
+            else if (this.showKnifeMiniGame) {
+                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press up &nbsp;</span> and " +
+                    "<span style='color: white'>&nbsp; down &nbsp;</span><br><span style='color: #FF7F3F'>arrow keys to cut</span>";
+            }
+            else if (this.showStirrMiniGame){
+                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press left &nbsp;</span> and " +
+                    "<span style='color: white'>&nbsp; right &nbsp;</span><br><span style='color: #FF7F3F'>arrow keys to stir</span>";
+            }
+            else if (this.showFryMiniGame){
+                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press up &nbsp;</span> " +
+                    "<span style='color: #FF7F3F'>arrow key to flip</span>";
+            }
+            else if (this.showInventoryMiniGame){
+                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Click &nbsp;</span> on " +
+                    "<span style='color: white'>&nbsp; food &nbsp;</span><br><span style='color: #FF7F3F'>to add to inventory</span>";
+            }
+            else {
+                this.gamePlayText.innerHTML = "Press <span style='color: white'>&nbsp;E&nbsp;</span> to interact with " +
+                    "<span style='color: white'>&nbsp;" + this.collisionCollider + "&nbsp;</span>";
+            }
         } else {
             this.gamePlayText.style.display = "none";
         }
@@ -357,6 +512,7 @@ export class GameplayScene extends Scene {
     }
 
     updateMenuScale = () => {
+        this.minGameX = this.canvas.width * .13
         this.menuX = this.canvas.width * .1;
         this.menuY = this.canvas.height * .1;
         this.menuWidth = this.canvas.width * .55;
@@ -372,6 +528,11 @@ export class GameplayScene extends Scene {
         this.showRecipe = !this.showRecipe;
         canMove = !canMove;
     }
+
+    allowInteract = (yes) => {
+        this.canInteract = yes;
+    }
+
 
 }
 

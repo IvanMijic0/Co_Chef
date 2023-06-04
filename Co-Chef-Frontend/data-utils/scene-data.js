@@ -96,6 +96,10 @@ export const sceneData = {
         options_background: document.getElementById("optionsBackground"),
         recipe_background: document.getElementById("recipeBackground"),
         sink_mini_game: document.getElementById("sink-mini-game"),
+        knife_mini_game: document.getElementById("knife-mini-game"),
+        stir_mini_game: document.getElementById("stir-mini-game"),
+        fry_mini_game: document.getElementById("fry-mini-game"),
+        inventory_mini_game: document.getElementById("inventory-mini-game"),
         sceneId: 8,
     },
 }

@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameplayBackButton = document.getElementById("Gameplay-backButton-container")
     const gameplayMenuButton = document.getElementById("Gameplay-Menu-container");
     const recipeText = document.getElementById("recipeContainer");
+    const leftArrow = document.getElementById("left");
+    const upArrow = document.getElementById("up");
+    const rightArrow = document.getElementById("right");
+    const downArrow = document.getElementById("down");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -191,6 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
         volumeBar.setup();
         volumeIcon.classList.toggle("newVolumeIcon");
         if (!canMove) {
+            scenes[activeScene].allowInteract(false);
             volumeIcon.style.display = "flex";
             volumeContainer.style.display = "flex";
             gameplayBackButton.style.display = "flex";
@@ -202,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gameplayBackButton.style.display = "none";
             gameplayMenuButton.style.display = "none";
             ic_recipes.style.display = "flex";
+            scenes[activeScene].allowInteract(true);
         }
     });
 
@@ -215,6 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
         volumeContainer.style.display = "none";
         gameplayBackButton.style.display = "none";
         gameplayMenuButton.style.display = "none";
+        scenes[activeScene].allowInteract(true);
     });
 
     gameplayMenuButton.addEventListener("click", () => {
@@ -235,11 +242,52 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].toggleRecipe()
             ic_options.style.display = "none";
             recipeText.style.display = "flex";
+            scenes[activeScene].allowInteract(false);
         } else {
             scenes[activeScene].toggleRecipe()
             ic_options.style.display = "flex";
             recipeText.style.display = "none";
+            scenes[activeScene].allowInteract(true);
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        const key = e.key;
+        switch (key) {
+            case "ArrowLeft":
+                updateImageSource(leftArrow, "Assets/Sprites/GameplayUI/arrowLeft-press.png");
+                break;
+            case "ArrowUp":
+                updateImageSource(upArrow, "Assets/Sprites/GameplayUI/arrowUp-press.png");
+                break;
+            case "ArrowRight":
+                updateImageSource(rightArrow, "Assets/Sprites/GameplayUI/arrowRight-press.png");
+                break;
+            case "ArrowDown":
+                updateImageSource(downArrow, "Assets/Sprites/GameplayUI/arrowDown-press.png");
+                break;
+        }
+    });
+
+    document.addEventListener("keyup", (e) => {
+        const key = e.key;
+        switch (key) {
+            case "ArrowLeft":
+                updateImageSource(leftArrow, "Assets/Sprites/GameplayUI/arrowLeft.png");
+                break;
+            case "ArrowUp":
+                updateImageSource(upArrow, "Assets/Sprites/GameplayUI/arrowUp.png");
+                break;
+            case "ArrowRight":
+                updateImageSource(rightArrow, "Assets/Sprites/GameplayUI/arrowRight.png");
+                break;
+            case "ArrowDown":
+                updateImageSource(downArrow, "Assets/Sprites/GameplayUI/arrowDown.png");
+                break;
         }
     });
 });
 
+const updateImageSource = (element, src) => {
+    element.src = src;
+}
