@@ -268,6 +268,7 @@ canvas {
     justify-content: center;
     margin: 0;
     font-family: Arial, sans-serif;
+    caret-color: transparent;
 
 }
 
@@ -275,7 +276,7 @@ canvas {
     position: relative;
     left: -31vw;
     margin-bottom: 5vh;
-    cursor: pointer;
+    cursor: default;
 }
 
 .recipe-item, #RecipeHeader {
@@ -293,6 +294,7 @@ canvas {
     top: 0;
     left: 8vw;
     font-size: 3vw;
+    cursor: default;
 }
 
 .recipe-item:before {

@@ -139,6 +139,7 @@ export class GameplayScene extends Scene {
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
                         console.log(this.collisionCollider);
+                        console.log(this.input.lastKey)
                         this.input.lastKey = "";
                         if (this.collisionCollider === "sink") {
                             this.showSinkMiniGame = !this.showSinkMiniGame;

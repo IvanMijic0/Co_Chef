@@ -19,6 +19,9 @@ export class InputHandler {
         this.lastKey = "";
         this.debug = false;
         window.addEventListener("keydown", e => {
+            if (e.key === "e"){
+                this.lastKey = e.key;
+            }
             if (canMove) {
                 if (
                     Object.values(KEYS).includes(e.key) &&
@@ -35,9 +38,7 @@ export class InputHandler {
         });
 
         window.addEventListener("keyup", e => {
-            if (e.key === "e"){
-                this.lastKey = e.key;
-            }
+            this.lastKey = "";
             const index = this.keys.indexOf(e.key);
             if (index !== -1) {
                 this.keys.splice(index, 1);
