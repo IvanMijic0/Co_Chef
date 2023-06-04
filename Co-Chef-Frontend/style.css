@@ -198,6 +198,27 @@ canvas {
     transform: translate(-50%);
 }
 
+#item {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    width: 4vw;
+    height: 3vw;
+    left: 12.5vw;
+    bottom: 2.8vw;
+    transform: translate(-50%);
+}
+#sink-item {
+    display: none;
+    z-index: 1;
+    position: absolute;
+    width: 10vw;
+    height: 7.5vw;
+    left: 40vw;
+    bottom: 8vw;
+    transform: translate(-50%);
+}
+
 #ic_timer {
     position: absolute;
     width: 25vw;

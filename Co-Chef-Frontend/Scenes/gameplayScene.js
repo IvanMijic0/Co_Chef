@@ -85,42 +85,50 @@ export class GameplayScene extends Scene {
         this.slot = document.getElementById("ic_slot")
         this.controls = document.getElementById("controls");
         this.chat = document.querySelector(".chat-input");
+        this.slotItem = document.getElementById("item");
+        this.sinkItem = document.getElementById("sink-item");
     }
 
     update = () => {
-        this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * this.speedModifer;
-        if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
-            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_back.png";
-            this.speed = this.speedScaler;
-            if (this.playerY - this.speed >= this.platformY) {
-                this.playerY -= this.speed;
+        if (canMove) {
+            this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * this.speedModifer;
+            if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
+                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_back.png";
+                this.speed = this.speedScaler;
+                if (this.playerY - this.speed >= this.platformY) {
+                    this.playerY -= this.speed;
+                }
+            } else if (this.input.keys.includes("ArrowDown") || this.input.keys.includes("s")) {
+                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
+                this.speed = this.speedScaler;
+                if (this.playerY + this.scaledHeight <= this.platformY + this.platformHeight) {
+                    this.playerY += this.speed;
+                }
             }
-        } else if (this.input.keys.includes("ArrowDown") || this.input.keys.includes("s")) {
-            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
-            this.speed = this.speedScaler;
-            if (this.playerY + this.scaledHeight <= this.platformY + this.platformHeight) {
-                this.playerY += this.speed;
+            if (this.input.keys.includes("ArrowLeft") || this.input.keys.includes("a")) {
+                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_left.png";
+                this.speed = this.speedScaler;
+                if (this.playerX >= this.platformX) {
+                    this.playerX -= this.speed;
+                }
+            } else if (this.input.keys.includes("ArrowRight") || this.input.keys.includes("d")) {
+                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_right.png";
+                this.speed = this.speedScaler;
+                if (this.playerX + this.scaledWidth <= this.platformX + this.platformWidth) {
+                    this.playerX += this.speed;
+                }
+            } else {
+                this.speed = 0;
             }
         }
-        if (this.input.keys.includes("ArrowLeft") || this.input.keys.includes("a")) {
-            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_left.png";
-            this.speed = this.speedScaler;
-            if (this.playerX >= this.platformX) {
-                this.playerX -= this.speed;
-            }
-        } else if (this.input.keys.includes("ArrowRight") || this.input.keys.includes("d")) {
-            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_right.png";
-            this.speed = this.speedScaler;
-            if (this.playerX + this.scaledWidth <= this.platformX + this.platformWidth) {
-                this.playerX += this.speed;
-            }
-        } else {
-            this.speed = 0;
-        }
-
         this.updateScale();
         this.checkCollision();
         this.updateMenuScale();
+
+        if (!canMove && this.collisionCollider === "sink" && this.input.keys.includes("ArrowUp")) {
+                console.log("yo")
+                this.sinkItem.style.bottom = "20vw";
+        }
     }
 
     checkCollision = () => {
@@ -138,30 +146,42 @@ export class GameplayScene extends Scene {
                 this.collisionCollider = collider.name;
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
-                        console.log(this.collisionCollider);
-                        console.log(this.input.lastKey)
-                        this.input.lastKey = "";
                         if (this.collisionCollider === "sink") {
                             this.showSinkMiniGame = !this.showSinkMiniGame;
-                            this.handleVisibility();
-                        }
-                        else if (this.collisionCollider === "knife") {
+                            canMove = !canMove;
+                            if (!canMove) {
+                                this.controls.style.display = "block";
+                                this.options.style.display = "none";
+                                this.recipe.style.display = "none";
+                                this.chat.disabled = true;
+                                this.slot.style.display = "none";
+                                this.slotItem.style.display = "none";
+                                this.sinkItem.style.display = "flex";
+
+                            } else {
+                                this.controls.style.display = "none";
+                                this.options.style.display = "flex";
+                                this.recipe.style.display = "flex";
+                                this.slot.style.display = "flex";
+                                this.slotItem.style.display = "flex";
+                                this.sinkItem.style.display = "none";
+                            }
+
+                        } else if (this.collisionCollider === "knife") {
                             this.showKnifeMiniGame = !this.showKnifeMiniGame;
                             this.handleVisibility();
-                        }
-                        else if (this.collisionCollider === "stir") {
+                        } else if (this.collisionCollider === "stir") {
                             this.showStirrMiniGame = !this.showStirrMiniGame;
                             this.handleVisibility();
-                        }
-                        else if (this.collisionCollider === "fry") {
+                        } else if (this.collisionCollider === "fry") {
                             this.showFryMiniGame = !this.showFryMiniGame;
                             this.handleVisibility();
-                        }
-                        else if (this.collisionCollider === "inventory") {
+                        } else if (this.collisionCollider === "inventory") {
                             this.showInventoryMiniGame = !this.showInventoryMiniGame;
                             this.handleVisibility();
                         }
                     }
+                    this.input.lastKey = "";
                 }
                 break;
             }
@@ -176,11 +196,13 @@ export class GameplayScene extends Scene {
             this.recipe.style.display = "none";
             this.chat.disabled = true;
             this.slot.style.display = "none";
+            this.slotItem.style.display = "none";
         } else {
             this.controls.style.display = "none";
             this.options.style.display = "flex";
             this.recipe.style.display = "flex";
             this.slot.style.display = "flex";
+            this.slotItem.style.display = "flex";
         }
     }
 
@@ -206,23 +228,17 @@ export class GameplayScene extends Scene {
 
         if (this.showOptions) {
             this.drawOptions();
-        }
-        else if (this.showRecipe) {
+        } else if (this.showRecipe) {
             this.drawRecipe();
-        }
-        else if (this.showSinkMiniGame) {
+        } else if (this.showSinkMiniGame) {
             this.drawSinkMiniGame();
-        }
-        else if (this.showKnifeMiniGame) {
+        } else if (this.showKnifeMiniGame) {
             this.drawKnifeMiniGame();
-        }
-        else if (this.showStirrMiniGame) {
+        } else if (this.showStirrMiniGame) {
             this.drawStirMiniGame();
-        }
-        else if (this.showFryMiniGame) {
+        } else if (this.showFryMiniGame) {
             this.drawFryMiniGame();
-        }
-        else if (this.showInventoryMiniGame) {
+        } else if (this.showInventoryMiniGame) {
             this.drawInventoryMiniGame();
         }
     }
@@ -317,30 +333,25 @@ export class GameplayScene extends Scene {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Hold up &nbsp;</span> " +
                     "<span style='color: #FF7F3F'>arrow key to wash</span>";
 
-            }
-            else if (this.showKnifeMiniGame) {
+            } else if (this.showKnifeMiniGame) {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press up &nbsp;</span> and " +
                     "<span style='color: white'>&nbsp; down &nbsp;</span><br><span style='color: #FF7F3F'>arrow keys to cut</span>";
-            }
-            else if (this.showStirrMiniGame){
+            } else if (this.showStirrMiniGame) {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press left &nbsp;</span> and " +
                     "<span style='color: white'>&nbsp; right &nbsp;</span><br><span style='color: #FF7F3F'>arrow keys to stir</span>";
-            }
-            else if (this.showFryMiniGame){
+            } else if (this.showFryMiniGame) {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press up &nbsp;</span> " +
                     "<span style='color: #FF7F3F'>arrow key to flip</span>";
-            }
-            else if (this.showInventoryMiniGame){
+            } else if (this.showInventoryMiniGame) {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Click &nbsp;</span> on " +
                     "<span style='color: white'>&nbsp; food &nbsp;</span><br><span style='color: #FF7F3F'>to add to inventory</span>";
-            }
-            else {
+            } else {
                 this.gamePlayText.innerHTML = "Press <span style='color: white'>&nbsp;E&nbsp;</span> to interact with " +
                     "<span style='color: white'>&nbsp;" + this.collisionCollider + "&nbsp;</span>";
             }
         } else {
             this.gamePlayText.style.display = "none";
-       }
+        }
     }
 
     updatePlatform = () => {
@@ -536,6 +547,10 @@ export class GameplayScene extends Scene {
 
     setPlayerImage = () => {
         this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
+    }
+
+    chefMode = (char) => {
+        this.playerImage.src = "Assets/Sprites/Player/" + char + "_front.png";
     }
 }
 

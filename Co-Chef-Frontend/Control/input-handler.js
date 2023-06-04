@@ -22,7 +22,9 @@ export class InputHandler {
             if (e.key === "e"){
                 this.lastKey = e.key;
             }
-            if (canMove) {
+            else if (e.key === "ArrowUp"){
+                this.lastKey = e.key;
+            }
                 if (
                     Object.values(KEYS).includes(e.key) &&
                     !this.keys.includes(e.key)
@@ -30,10 +32,10 @@ export class InputHandler {
                     this.keys.push(e.key);
                 } else if (e.key === "F2") {
                     this.debug = !this.debug;
-                    e.defaultPrevented();
+                    e.preventDefault();
                 }
-                // console.log(this.keys)
-            }
+                console.log(this.keys)
+                // console.log(this.lastKey)
 
         });
 
@@ -43,7 +45,8 @@ export class InputHandler {
             if (index !== -1) {
                 this.keys.splice(index, 1);
             }
-            // console.log(this.keys)
+            console.log(this.keys)
+            // console.log(this.lastKey)
         });
     }
 }

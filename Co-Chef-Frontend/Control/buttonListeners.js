@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const upArrow = document.getElementById("up");
     const rightArrow = document.getElementById("right");
     const downArrow = document.getElementById("down");
+    const slotItem = document.getElementById("item");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -173,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ic_timer.style.display = "flex";
             timer.style.display = "flex";
             chat_container.style.display = "block";
+            slotItem.style.display = "flex";
         }
     })
 
@@ -272,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             case "p":
                 rememberCharacter = "Chef";
-                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
+                scenes[activeScene].chefMode(rememberCharacter);
                 break;
         }
     });
