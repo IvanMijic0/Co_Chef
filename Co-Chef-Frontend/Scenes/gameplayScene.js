@@ -90,26 +90,26 @@ export class GameplayScene extends Scene {
     update = () => {
         this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * this.speedModifer;
         if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
-            this.playerImage.src = "Assets/Sprites/Player/Chef_back.png";
+            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_back.png";
             this.speed = this.speedScaler;
             if (this.playerY - this.speed >= this.platformY) {
                 this.playerY -= this.speed;
             }
         } else if (this.input.keys.includes("ArrowDown") || this.input.keys.includes("s")) {
-            this.playerImage.src = "Assets/Sprites/Player/Chef_front.png";
+            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
             this.speed = this.speedScaler;
             if (this.playerY + this.scaledHeight <= this.platformY + this.platformHeight) {
                 this.playerY += this.speed;
             }
         }
         if (this.input.keys.includes("ArrowLeft") || this.input.keys.includes("a")) {
-            this.playerImage.src = "Assets/Sprites/Player/Chef_left.png";
+            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_left.png";
             this.speed = this.speedScaler;
             if (this.playerX >= this.platformX) {
                 this.playerX -= this.speed;
             }
         } else if (this.input.keys.includes("ArrowRight") || this.input.keys.includes("d")) {
-            this.playerImage.src = "Assets/Sprites/Player/Chef_right.png";
+            this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_right.png";
             this.speed = this.speedScaler;
             if (this.playerX + this.scaledWidth <= this.platformX + this.platformWidth) {
                 this.playerX += this.speed;
@@ -312,8 +312,8 @@ export class GameplayScene extends Scene {
     textPopup() {
         if (this.isColliding) {
             this.gamePlayText.style.display = "flex";
+            this.gamePlayText.style.fontSize = "3.15vw";
             if (this.showSinkMiniGame) {
-                this.gamePlayText.style.fontSize = "3.15vw";
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Hold up &nbsp;</span> " +
                     "<span style='color: #FF7F3F'>arrow key to wash</span>";
 
@@ -340,7 +340,7 @@ export class GameplayScene extends Scene {
             }
         } else {
             this.gamePlayText.style.display = "none";
-        }
+       }
     }
 
     updatePlatform = () => {
@@ -534,6 +534,8 @@ export class GameplayScene extends Scene {
         this.canInteract = yes;
     }
 
-
+    setPlayerImage = () => {
+        this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
+    }
 }
 

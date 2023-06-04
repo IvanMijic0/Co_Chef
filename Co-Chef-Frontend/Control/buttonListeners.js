@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
             speechText.style.display = "none";
             switchToScene(sceneData.Gameplay.sceneId);
             audio.switchAudio("gameplayAudio", audio.audio.volume);
+            scenes[activeScene].setPlayerImage();
             ic_options.style.display = "flex";
             ic_recipes.style.display = "flex";
             ic_slot.style.display = "flex";

@@ -10,12 +10,14 @@ export class CharacterSelectScene extends Scene {
             {
                 src: "Assets/Sprites/Characters/pup.png",
                 name: sceneData.CHARACTER_SELECT.pupName,
+                remember: "Dog",
                 speechImage: sceneData.CHARACTER_SELECT.pupSpeechImage,
                 defaultText: textData.pup,
                 selectText: textData.pupSelected
             },
             {
                 src: "Assets/Sprites/Characters/isabelle.png",
+                remember: "Mouse",
                 name: sceneData.CHARACTER_SELECT.isabelleName,
                 speechImage: sceneData.CHARACTER_SELECT.isabelleSpeechImage,
                 defaultText: textData.isabelle,
@@ -23,6 +25,7 @@ export class CharacterSelectScene extends Scene {
             },
             {
                 src: "Assets/Sprites/Characters/celine.png",
+                remember: "Bunny",
                 name: sceneData.CHARACTER_SELECT.celineName,
                 speechImage: sceneData.CHARACTER_SELECT.celineSpeechImage,
                 defaultText: textData.celine,
@@ -30,6 +33,7 @@ export class CharacterSelectScene extends Scene {
             },
             {
                 src: "Assets/Sprites/Characters/amu.png",
+                remember: "Amu",
                 name: sceneData.CHARACTER_SELECT.amuName,
                 speechImage: sceneData.CHARACTER_SELECT.amuSpeechImage,
                 defaultText: textData.amu,
@@ -37,6 +41,7 @@ export class CharacterSelectScene extends Scene {
             },
             {
                 src: "Assets/Sprites/Characters/chaton.png",
+                remember: "Cat",
                 name: sceneData.CHARACTER_SELECT.chatonName,
                 speechImage: sceneData.CHARACTER_SELECT.chatonSpeechImage,
                 defaultText: textData.chaton,
@@ -48,7 +53,6 @@ export class CharacterSelectScene extends Scene {
         this.character = document.getElementById("character");
         this.character.src = this.characters[this.currentIndex].src;
         this.characterName.innerHTML = this.characters[this.currentIndex].name;
-        this.rememberCharacter = 0;
         this.text = document.getElementById("speechText");
         this.text.textContent = this.characters[this.currentIndex].defaultText;
         this.scaledWidth = 0;
@@ -153,8 +157,8 @@ export class CharacterSelectScene extends Scene {
     }
 
     rememberPick = () => {
-        this.rememberCharacter = this.characters[this.currentIndex].name;
-        console.log("Picked character: " + this.rememberCharacter);
+        rememberCharacter = this.characters[this.currentIndex].remember;
+        console.log("Picked character: " + rememberCharacter);
     }
 
     restartClick = () => {
