@@ -5,6 +5,7 @@ const signUpButton0 = document.getElementById("signUpButton0");
 loginButton.disabled = true;
 signUpButton0.disabled =  true;
 
+
 // Login form validation
 const loginForm = document.getElementById("login-form");
 loginForm.addEventListener("input", function (event) {
@@ -74,6 +75,7 @@ signupForm.addEventListener("input", function (event) {
     // Enable/disable the submit button based on input validity
     signUpButton0.disabled = !isSignUpFormValid();
 });
+
 
 // Function to check if the login form is valid
 function isLoginFormValid() {

@@ -507,6 +507,15 @@ canvas {
     width: 13vw;
     cursor: pointer;
     border-radius: 3vw;
+    opacity: 1;
+}
+
+#loginButton:disabled,
+#loginButton0:disabled,
+#signUpButton:disabled,
+#signUpButton0:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 #loginButton0,
