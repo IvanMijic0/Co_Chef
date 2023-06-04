@@ -28,9 +28,9 @@ canvas {
 #pupSpeech, #pierSpeech, #isabelleSpeech, #celineSpeech, #amuSpeech, #chatonSpeech,
 #introBackground, #volumeIcon, #muteVolumeIcon,
 #character, #dish, #kitchenBackground, #player,
-#gameplayText
-/*#ic_options, #ic_recipe, #ic_slot,*/
-/*#ic_com, #ic_timer, #timer, .chat-container*/
+#gameplayText,
+#ic_options, #ic_recipe, #ic_slot,
+#ic_com, #ic_timer, #timer, .chat-container
 {
     display: none;
 }
@@ -459,19 +459,43 @@ canvas {
     border: .1vw solid black;
 }
 
+
+.error-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.error-container .error-message {
+    font-family: "Handlee", sans-serif;
+    color: white;
+    font-size: .85vw;
+    white-space: nowrap;
+}
+
+
 #username:hover,
 #password:hover,
 #name:hover,
 #username0:hover,
 #password0:hover {
-    background-color: snow;
+    background-color: #FFF8DB;
+}
+#username:focus,
+#password:focus,
+#name:focus,
+#username0:focus,
+#password0:focus {
+    background-color: #FFF1B7;
 }
 
 
 
 #loginButton, #loginButton0,
 #signUpButton, #signUpButton0{
-    margin-top: 1vw;
+    margin-top: -1vw;
     margin-right: 1vw;
     margin-left: 1vw;
     font-family: CoffeCake, sans-serif;

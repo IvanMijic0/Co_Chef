@@ -124,7 +124,7 @@
 <div id="login-container">
     <form id="login-form">
         <div class="input-group">
-            <label for="username">Username:</label>
+            <label for="username">Email:</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div class="input-group">
@@ -137,6 +137,7 @@
         </div>
     </form>
 </div>
+
 <!-- Signup Form -->
 <div id="signup-container">
     <form id="signup-form">
@@ -165,7 +166,9 @@
         <div class="chat-log" id="chatLog"></div>
     </div>
     <div class="chat-field">
-        <input type="text" class="chat-input" placeholder="Double click to chat...">
+        <label>
+            <input type="text" class="chat-input" placeholder="Double click to chat...">
+        </label>
     </div>
 </div>
 
@@ -198,6 +201,7 @@
 <!--<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>-->
 <script type="module" src="Control/controller.js"></script>
 <script type="module" src="Control/buttonListeners.js"></script>
+<script type="module" src="utils/validation.js"></script>
 <script type="module" src="utils/chatting.js"></script>
 </body>
 </html>
