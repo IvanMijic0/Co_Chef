@@ -6,7 +6,7 @@ export class OptionsScene extends Scene {
         this.image = image;
     }
     draw = () => {
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.image.source,
             0,
             0,

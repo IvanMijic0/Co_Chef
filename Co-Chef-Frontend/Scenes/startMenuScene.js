@@ -7,8 +7,8 @@ export class StartMenuScene extends Scene {
 
     }
     draw = () => {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.drawImage(
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(
             this.background.source,
             0,
             0,

@@ -57,8 +57,8 @@ export class CharacterSelectScene extends Scene {
     }
 
     draw = () => {
-        this.context.fillStyle = "#DFFFAE";
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = "#DFFFAE";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.drawCharacter();
         this.drawSpeechBubble();
@@ -70,7 +70,7 @@ export class CharacterSelectScene extends Scene {
         const characterX = (this.canvas.width - this.scaledWidth) * 0.5;
         const characterY = (this.canvas.height - this.scaledHeight) * 0.4;
 
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.character,
             characterX,
             characterY,
@@ -124,7 +124,7 @@ export class CharacterSelectScene extends Scene {
 
 
     drawSpeechBubble = () => {
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.characters[this.currentIndex].speechImage,
             0,
             this.canvas.height - this.canvas.height * .25,

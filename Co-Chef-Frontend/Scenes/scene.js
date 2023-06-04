@@ -1,7 +1,7 @@
 export class Scene {
     constructor(canvasId, showButtons) {
         this.canvas = document.getElementById(canvasId);
-        this.context = this.canvas.getContext("2d");
+        this.ctx = this.canvas.getContext("2d");
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.showButtons = showButtons;

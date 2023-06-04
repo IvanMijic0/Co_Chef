@@ -39,6 +39,10 @@
 <img id="dish" src="" alt="Dish Selection image">
 <img id="kitchenBackground" src="Assets/Sprites/Backgrounds/kitchenBackground.png" alt="Kitchen Background">
 <img id="player" src="Assets/Sprites/Player/Chef_front.png" alt="Player image">
+<img id="gameplayBackground" src="Assets/Sprites/GameplayUI/mini-gameBackground.png" alt="Mini-game Background">
+<img id="optionsBackground" src="Assets/Sprites/GameplayUI/options_background.png" alt="Option Menu Background">
+<img id="recipeBackground" src="Assets/Sprites/GameplayUI/recipe_background1.png" alt="Recipe Menu Background">
+<img id="sink-mini-game" src="Assets/Sprites/GameplayUI/sink_mini-game.png" alt="Sink Mini-Game image">
 
 
 <!-- Audio -->
@@ -96,6 +100,18 @@
     </div>
 </div>
 
+<div id="Gameplay-Back-button">
+    <div id="Gameplay-backButton-container">
+        <button class="Button" id="GameplayBackButton">Back</button>
+    </div>
+</div>
+
+<div id="Gameplay-Menu-button">
+    <div id="Gameplay-Menu-container">
+        <button class="Button" id="GameplayMenuButton">Menu</button>
+    </div>
+</div>
+
 <div id="character-container" class="character-container">
     <img id="leftArrow" src="Assets/Sprites/Arrows/LeftArrowIdle.png" alt="Left Arrow" class="arrow"
          onmouseover="this.src='Assets/Sprites/Arrows/LeftArrowHover.png'"
@@ -118,7 +134,26 @@
 <div id="speechText">Talk</div>
 <div id="gameplayText">Press E to interact</div>
 <div id="timer">5:00</div>
+<div id="recipeContainer" class="recipe-container">
+    <h1 id="RecipeHeader">Recipe</h1>
+    <ul class="recipe-list">
+        <li class="recipe-item"><span>Wash the vegetables</span></li>
+        <li class="recipe-item"><span>Slice 1 onion, 2 garlic cloves, 3 tomatoes</span></li>
+        <li class="recipe-item"><span>Add the vegetables to the pot</span></li>
+        <li class="recipe-item"><span>Cut meat into bite-sized pieces</span></li>
+        <li class="recipe-item"><span>Brown the meat for 10 seconds</span></li>
+        <li class="recipe-item"><span>Mix well for 20 seconds</span></li>
+    </ul>
+</div>
+<script>
+    const recipeItems = document.querySelectorAll('.recipe-item');
 
+    recipeItems.forEach((item) => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('done');
+        });
+    });
+</script>
 
 <!-- Login Form -->
 <div id="login-container">
@@ -202,6 +237,6 @@
 <script type="module" src="Control/controller.js"></script>
 <script type="module" src="Control/buttonListeners.js"></script>
 <script type="module" src="utils/validation.js"></script>
-<script type="module" src="utils/chatting.js"></script>
+<script src="Control/chatting.js"></script>
 </body>
 </html>

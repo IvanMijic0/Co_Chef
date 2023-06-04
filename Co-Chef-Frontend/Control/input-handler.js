@@ -1,5 +1,3 @@
-import {canMove} from "../utils/chatting.js";
-
 const KEYS = {
     ARROW_DOWN: "ArrowDown",
     KEY_DOWN: "s",

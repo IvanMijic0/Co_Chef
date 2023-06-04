@@ -92,6 +92,10 @@ export const sceneData = {
             boxWidth: 4200,
             boxHeight: 2700,
         },
+        mini_game_background: document.getElementById("gameplayBackground"),
+        options_background: document.getElementById("optionsBackground"),
+        recipe_background: document.getElementById("recipeBackground"),
+        sink_mini_game: document.getElementById("sink-mini-game"),
         sceneId: 8,
     },
 }

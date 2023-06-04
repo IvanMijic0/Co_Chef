@@ -64,6 +64,13 @@ export class GameplayScene extends Scene {
         this.playerColliderWidth = 0;
         this.playerColliderHeight = 0;
         this.gamePlayText = document.getElementById("gameplayText");
+        this.menuX = 0;
+        this.menuY = 0;
+        this.menuWidth = 0;
+        this.menuHeight = 0;
+        this.showOptions = false;
+        this.showRecipe = false;
+        this.showSinkMiniGame = false;
     }
 
     update = () => {
@@ -99,6 +106,7 @@ export class GameplayScene extends Scene {
 
         this.updateScale();
         this.checkCollision();
+        this.updateMenuScale();
     }
 
     checkCollision = () => {
@@ -114,9 +122,12 @@ export class GameplayScene extends Scene {
             ) {
                 this.isColliding = true;
                 this.collisionCollider = collider.name;
-                if (this.input.lastKey === "e"){
+                if (this.input.lastKey === "e") {
                     console.log(this.collisionCollider);
                     this.input.lastKey = "";
+                    if (this.collisionCollider === "sink") {
+                        this.showSinkMiniGame = true;
+                    }
                 }
                 break;
             }
@@ -124,10 +135,10 @@ export class GameplayScene extends Scene {
     }
 
     draw = () => {
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // Draw the background image
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.backgroundImage,
             0,
             0,
@@ -141,7 +152,32 @@ export class GameplayScene extends Scene {
 
         this.drawPlayer();
         this.updatePlatform();
+        this.textPopup();
+        if (this.showOptions) {
+            this.drawOptions();
+        }
+        if (this.showRecipe) {
+            this.drawRecipe();
+        }
+        if (this.showSinkMiniGame) {
+            this.ctx.drawImage(
+                sceneData.Gameplay.mini_game_background,
+                0,
+                0,
+                this.canvas.width,
+                this.canvas.height
+            );
+            this.ctx.drawImage(
+                sceneData.Gameplay.sink_mini_game,
+                this.menuX,
+                this.menuY,
+                this.menuWidth,
+                this.menuHeight
+            );
+        }
+    }
 
+    textPopup() {
         if (this.isColliding) {
             this.gamePlayText.style.display = "flex";
             this.gamePlayText.innerHTML = "Press <span style='color: white'>&nbsp;E&nbsp;</span> to interact with " +
@@ -166,7 +202,7 @@ export class GameplayScene extends Scene {
         this.playerColliderWidth = this.scaledWidth * .3;
         this.playerColliderHeight = this.scaledHeight * .2;
 
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.playerImage,
             this.playerX,
             this.playerY,
@@ -174,47 +210,47 @@ export class GameplayScene extends Scene {
             this.scaledHeight
         );
         if (this.input.debug) {
-            this.context.save()
-            this.context.strokeStyle = "yellow";
-            this.context.lineWidth = 10;
-            this.context.strokeRect(
+            this.ctx.save()
+            this.ctx.strokeStyle = "yellow";
+            this.ctx.lineWidth = 10;
+            this.ctx.strokeRect(
                 this.playerX,
                 this.playerY,
                 this.scaledWidth,
                 this.scaledHeight
             );
-            this.context.restore()
+            this.ctx.restore()
 
-            this.context.save()
-            this.context.strokeStyle = "cyan";
-            this.context.lineWidth = 10;
-            this.context.strokeRect(
+            this.ctx.save()
+            this.ctx.strokeStyle = "cyan";
+            this.ctx.lineWidth = 10;
+            this.ctx.strokeRect(
                 this.playerColliderX,
                 this.playerColliderY,
                 this.playerColliderWidth,
                 this.playerColliderHeight
             );
-            this.context.restore()
+            this.ctx.restore()
         }
     }
 
     drawPlatform = () => {
-        this.context.save()
-        this.context.strokeStyle = "blue";
-        this.context.lineWidth = 9;
+        this.ctx.save()
+        this.ctx.strokeStyle = "blue";
+        this.ctx.lineWidth = 9;
 
-        this.context.strokeRect(this.platformX, this.platformY, this.platformWidth, this.platformHeight);
-        this.context.restore()
+        this.ctx.strokeRect(this.platformX, this.platformY, this.platformWidth, this.platformHeight);
+        this.ctx.restore()
     }
 
     drawMiniGameCollider = (scaledX, scaledY, scaledWidth, scaledHeight, color = "red") => {
-        this.context.save()
+        this.ctx.save()
 
-        this.context.strokeStyle = color;
-        this.context.lineWidth = 8;
-        this.context.strokeRect(scaledX, scaledY, scaledWidth, scaledHeight);
+        this.ctx.strokeStyle = color;
+        this.ctx.lineWidth = 8;
+        this.ctx.strokeRect(scaledX, scaledY, scaledWidth, scaledHeight);
 
-        this.context.restore()
+        this.ctx.restore()
     }
 
     drawMiniGameColliders = () => {
@@ -283,4 +319,59 @@ export class GameplayScene extends Scene {
         this.dynamicInventory.scaledWidth = sceneData.Gameplay.inventoryDim.boxWidth * canvasScaleWidth;
         this.dynamicInventory.scaledHeight = sceneData.Gameplay.inventoryDim.boxHeight * canvasScaleHeight;
     }
+
+    drawOptions = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+
+        this.ctx.drawImage(
+            sceneData.Gameplay.options_background,
+            this.menuX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+
+    drawRecipe = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+
+        this.ctx.drawImage(
+            sceneData.Gameplay.recipe_background,
+            this.menuX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+
+    updateMenuScale = () => {
+        this.menuX = this.canvas.width * .1;
+        this.menuY = this.canvas.height * .1;
+        this.menuWidth = this.canvas.width * .55;
+        this.menuHeight = this.canvas.height * .75;
+    }
+
+    toggleOptions = () => {
+        this.showOptions = !this.showOptions;
+        canMove = !canMove;
+    }
+
+    toggleRecipe = () => {
+        this.showRecipe = !this.showRecipe;
+        canMove = !canMove;
+    }
+
 }
+

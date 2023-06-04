@@ -29,11 +29,16 @@ canvas {
 #introBackground, #volumeIcon, #muteVolumeIcon,
 #character, #dish, #kitchenBackground, #player,
 #gameplayText,
-#ic_options, #ic_recipe, #ic_slot,
-#ic_com, #ic_timer, #timer, .chat-container
+#sink-mini-game, #gameplayBackground, #optionsBackground,
+#recipeBackground
+    /*#ic_options, #ic_recipe, #ic_slot,*/
+    /*#ic_com, #ic_timer, #timer, .chat-container*/
 {
     display: none;
 }
+
+/* Gp Images */
+
 
 /* Button styles */
 .Button-column {
@@ -106,7 +111,8 @@ canvas {
     font-size: 2vw;
 }
 
-#options-backButton-container, #CharSelect-backButton-container, #CharSelect-confirmButton-container {
+#options-backButton-container, #CharSelect-backButton-container, #CharSelect-confirmButton-container,
+#Gameplay-backButton-container, #Gameplay-Menu-container {
     position: fixed;
     display: none;
     bottom: 5vw;
@@ -141,12 +147,26 @@ canvas {
     font-size: 3.5vw;
 }
 
-#options-backButton-container:hover, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:hover {
+#Gameplay-backButton-container {
+    width: 10vw;
+    left: 33vw;
+    bottom: 20vh;
+}
+#Gameplay-Menu-container {
+    width: 10vw;
+    left: 33vw;
+    bottom: 35vh;
+}
+
+#options-backButton-container:hover, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:hover,
+#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover
+ {
     background-color: #FF7F3F;
     box-shadow: 0 .4vw .8vw rgba(0, 0, 0, 0.3);
 }
 
-#options-backButton-container:active, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:active {
+#options-backButton-container:active, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:active,
+#Gameplay-Menu-container:active, #Gameplay-backButton-container:active{
     background-color: #95CD41;
     box-shadow: 0 .4vw 1vw rgba(0, 0, 0, 0.3);
 }
@@ -197,6 +217,59 @@ canvas {
 }
 
 /* Header styles */
+.recipe-container {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+}
+
+.recipe-list {
+    position: relative;
+    left: -31vw;
+    margin-bottom: 5vh;
+    cursor: pointer;
+}
+
+.recipe-item, #RecipeHeader {
+    font-family: Handlee, sans-serif;
+    font-size: 2vw;
+    width: 40vw;
+    position: relative;
+    padding-left: 1vw;
+    margin-bottom: .5vw;
+    cursor: pointer;
+    top: 16vw;
+}
+
+#RecipeHeader {
+    top: 0;
+    left: 8vw;
+    font-size: 3vw;
+}
+
+.recipe-item:before {
+    content: "";
+    position: absolute;
+    left: -1.8vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1vw;
+    height: 1vw;
+    border-radius: 50%;
+    background-color: #ff0000;
+}
+
+.recipe-item.done:before {
+    background-color: #47b04b;
+}
+
+.recipe-item span {
+    margin-left: .5vw;
+}
+
 #menuHeader, #character-name, #dish-name {
     font-family: CoffeCake, serif;
     font-size: 11vw;
@@ -290,8 +363,22 @@ canvas {
     display: none;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 20vw;
+    bottom: 40vh;
     width: 38vw;
+    height: 3vw;
+    cursor: pointer;
+    padding: .3vw;
+    caret-color: transparent;
+}
+
+#volumeContainer.newVolumeContainer {
+    caret: transparent;
+    position: absolute;
+    display: none;
+    left: 38%;
+    transform: translateX(-50%);
+    bottom: 55vh;
+    width: 30vw;
     height: 3vw;
     cursor: pointer;
     padding: .3vw;
@@ -306,13 +393,24 @@ canvas {
     caret: transparent;
 }
 
+#volumeIcon.newVolumeIcon {
+    position: absolute;
+    top: -7vw;
+    left: 23vw;
+    transform: translate(-180%, -50%);
+    width: 6vw;
+    height: 5vw;
+    caret: transparent;
+}
+
+
 #volumeBar {
     --value: 50%;
     width: 100%;
     height: 100%;
-    outline: 3px solid black;
+    outline: .2vw solid black;
     border-radius: 3vw;
-    background: linear-gradient(to right, #EA5C2B 0%, #EA5C2B calc(var(--value) * 100%), #FBDD0D 0, #FBDD0D 100%);
+    background: linear-gradient(to right, #FBDD0D 0%, #FBDD0D calc(var(--value) * 100%), #FFF1B7 0, #FFF1B7 100%);
     -webkit-appearance: none;
 }
 
@@ -322,7 +420,7 @@ canvas {
     width: 4vw;
     height: 4vw;
     background-color: #EA5C2B;
-    outline: .1vw solid black;
+    outline: .2vw solid black;
     border-radius: 3vw;
     cursor: pointer;
     z-index: 2;
@@ -483,6 +581,7 @@ canvas {
 #password0:hover {
     background-color: #FFF8DB;
 }
+
 #username:focus,
 #password:focus,
 #name:focus,
@@ -492,9 +591,8 @@ canvas {
 }
 
 
-
 #loginButton, #loginButton0,
-#signUpButton, #signUpButton0{
+#signUpButton, #signUpButton0 {
     margin-top: -1vw;
     margin-right: 1vw;
     margin-left: 1vw;
@@ -584,3 +682,4 @@ canvas {
 #rightArrow {
     right: -15vw;
 }
+

@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const signupButton = document.getElementById("signUpButton");
     const signupButton0 = document.getElementById("signUpButton0");
     const volumeIcon = document.getElementById("volumeIcon");
+    const volumeContainer = document.getElementById("volumeContainer");
     const speechText = document.getElementById("speechText");
     const SelectBackButton = document.getElementById("CharSelect-backButton-container");
     const SelectConfirmButton = document.getElementById("CharSelect-confirmButton-container");
@@ -30,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ic_timer = document.getElementById("ic_timer");
     const timer = document.getElementById("timer");
     const chat_container = document.getElementById("chat-container");
+    const gameplayBackButton = document.getElementById("Gameplay-backButton-container")
+    const gameplayMenuButton = document.getElementById("Gameplay-Menu-container");
+    const recipeText = document.getElementById("recipeContainer");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -93,16 +97,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     volumeIcon.addEventListener("click", () => {
-        if (volumeIcon.src.includes("muteVolumeIcon.png")) {
+        if (volumeIcon.src.includes("muteVolumeIcon.png") || volumeBar.volume <= 0) {
             volumeIcon.src = "Assets/Sprites/Icons/volumeIcon.png";
-            volumeIcon.style.width = "15%";
+            volumeIcon.style.width = "6vw";
             volumeIcon.style.transform = "translate(-180%, -50%)"
             volumeBar.unmuteVolume();
-        } else {
+        } else if (!volumeIcon.src.includes("muteVolumeIcon.png") || volumeBar.volume > 0) {
             volumeIcon.src = "Assets/Sprites/Icons/muteVolumeIcon.png";
-            volumeIcon.style.width = "13%";
-            volumeIcon.style.transform = "translate(-210%, -50%)"
+            volumeIcon.style.width = "5vw";
+            volumeIcon.style.transform = "translate(-214%, -50%)"
             volumeBar.setVolume(0);
+        }
+    });
+
+    volumeBar.volumeContainer.addEventListener("click", () => {
+        console.log(volumeBar.volume)
+        if (volumeBar.volume > 0) {
+            volumeIcon.src = "Assets/Sprites/Icons/volumeIcon.png";
+            volumeIcon.style.width = "6vw";
+            volumeIcon.style.transform = "translate(-180%, -50%)"
+        } else if (volumeBar.volume <= 0) {
+            volumeIcon.src = "Assets/Sprites/Icons/muteVolumeIcon.png";
+            volumeIcon.style.width = "5vw";
+            volumeIcon.style.transform = "translate(-214%, -50%)"
         }
     });
 
@@ -166,5 +183,63 @@ document.addEventListener("DOMContentLoaded", () => {
         scenes[activeScene].restartClick();
         scenes[activeScene].changeText();
     })
+
+    ic_options.addEventListener("click", () => {
+        scenes[activeScene].toggleOptions()
+        volumeContainer.classList.toggle("newVolumeContainer");
+        volumeBar.show();
+        volumeBar.setup();
+        volumeIcon.classList.toggle("newVolumeIcon");
+        if (!canMove) {
+            volumeIcon.style.display = "flex";
+            volumeContainer.style.display = "flex";
+            gameplayBackButton.style.display = "flex";
+            gameplayMenuButton.style.display = "flex";
+            ic_recipes.style.display = "none";
+        } else {
+            volumeIcon.style.display = "none";
+            volumeContainer.style.display = "none";
+            gameplayBackButton.style.display = "none";
+            gameplayMenuButton.style.display = "none";
+            ic_recipes.style.display = "flex";
+        }
+    });
+
+    gameplayBackButton.addEventListener("click", () => {
+        scenes[activeScene].toggleOptions()
+        volumeContainer.classList.toggle("newVolumeContainer");
+        volumeBar.show();
+        volumeBar.setup();
+        volumeIcon.classList.toggle("newVolumeIcon");
+        volumeIcon.style.display = "none";
+        volumeContainer.style.display = "none";
+        gameplayBackButton.style.display = "none";
+        gameplayMenuButton.style.display = "none";
+    });
+
+    gameplayMenuButton.addEventListener("click", () => {
+        scenes[activeScene].toggleOptions()
+        volumeContainer.classList.remove("newVolumeContainer");
+        volumeBar.show();
+        volumeBar.setup();
+        volumeIcon.classList.remove("newVolumeIcon");
+        volumeIcon.style.display = "none";
+        volumeContainer.style.display = "none";
+        gameplayBackButton.style.display = "none";
+        gameplayMenuButton.style.display = "none";
+        switchToScene(sceneData.START_MENU.sceneId);
+    });
+
+    ic_recipes.addEventListener("click", () => {
+        if (canMove) {
+            scenes[activeScene].toggleRecipe()
+            ic_options.style.display = "none";
+            recipeText.style.display = "flex";
+        } else {
+            scenes[activeScene].toggleRecipe()
+            ic_options.style.display = "flex";
+            recipeText.style.display = "none";
+        }
+    });
 });
 

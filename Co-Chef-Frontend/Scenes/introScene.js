@@ -14,15 +14,15 @@ export class IntroScene extends Scene {
         const logoX = (this.canvas.width - this.scaledWidth) * 0.5;
         const logoY = (this.canvas.height - this.scaledHeight) * 0.1;
 
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.drawImage(
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(
             this.background.source,
             0,
             0,
             this.canvas.width,
             this.canvas.height
         );
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.logo,
             logoX,
             logoY,

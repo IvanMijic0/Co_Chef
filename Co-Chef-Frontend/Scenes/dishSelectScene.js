@@ -34,8 +34,8 @@ export class DishSelectScene extends Scene {
     }
 
     draw = () => {
-        this.context.fillStyle = "#F6D860";
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = "#F6D860";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.drawDish();
         this.drawSpeechBubble();
@@ -47,7 +47,7 @@ export class DishSelectScene extends Scene {
         const dishX = (this.canvas.width - this.scaledWidth) * 0.5;
         const dishY = (this.canvas.height - this.scaledHeight) * 0.3;
 
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.dish,
             dishX,
             dishY,
@@ -100,7 +100,7 @@ export class DishSelectScene extends Scene {
     };
 
     drawSpeechBubble = () => {
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.speechImage.source,
             0,
             this.canvas.height - this.canvas.height * .25,

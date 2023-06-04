@@ -16,10 +16,10 @@ export class TutorialScene extends Scene {
     }
 
     draw = () => {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.fillStyle = "black";
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.drawImage(
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = "black";
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(
             this.image.source,
             0,
             0,

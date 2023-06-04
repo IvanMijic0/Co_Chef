@@ -7,7 +7,7 @@ export class SignupScene extends Scene {
     }
 
     draw = () => {
-        this.context.drawImage(
+        this.ctx.drawImage(
             this.image,
             0,
             0,
