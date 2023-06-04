@@ -31,10 +31,9 @@ canvas {
 #gameplayText,
 #sink-mini-game, #gameplayBackground, #optionsBackground,
 #recipeBackground, #knife-mini-game, #stir-mini-game,
-#fry-mini-game, #inventory-mini-game
-    /*#ic_options, #ic_recipe, #ic_slot,*/
-    /*#ic_com, #ic_timer, #timer, .chat-container*/
-{
+#fry-mini-game, #inventory-mini-game,
+#ic_options, #ic_recipe, #ic_slot,
+#ic_com, #ic_timer, #timer, .chat-container {
     display: none;
 }
 
@@ -153,6 +152,7 @@ canvas {
     left: 33vw;
     bottom: 20vh;
 }
+
 #Gameplay-Menu-container {
     width: 10vw;
     left: 33vw;
@@ -160,14 +160,13 @@ canvas {
 }
 
 #options-backButton-container:hover, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:hover,
-#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover
- {
+#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover {
     background-color: #FF7F3F;
     box-shadow: 0 .4vw .8vw rgba(0, 0, 0, 0.3);
 }
 
 #options-backButton-container:active, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:active,
-#Gameplay-Menu-container:active, #Gameplay-backButton-container:active{
+#Gameplay-Menu-container:active, #Gameplay-backButton-container:active {
     background-color: #95CD41;
     box-shadow: 0 .4vw 1vw rgba(0, 0, 0, 0.3);
 }
@@ -217,7 +216,7 @@ canvas {
     transform: translate(-50%);
 }
 
-.controls{
+.controls {
     display: none;
     position: absolute;
     z-index: 1;
@@ -228,28 +227,32 @@ canvas {
     transform: translate(-50%);
     caret-color: transparent;
 }
-#left{
+
+#left {
     position: absolute;
     width: 4vw;
     height: 4vw;
     left: -3vw;
     bottom: 2vh;
 }
-#up{
+
+#up {
     position: absolute;
     width: 4vw;
     height: 4vw;
     left: 1vw;
     bottom: 5vw;
 }
-#right{
+
+#right {
     position: absolute;
     width: 4vw;
     height: 4vw;
     left: 5vw;
     bottom: 2vh;
 }
-#down{
+
+#down {
     position: absolute;
     width: 4vw;
     height: 4vw;

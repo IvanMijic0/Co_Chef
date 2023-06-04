@@ -164,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             characterContainer.style.display = "none";
             speechText.style.display = "none";
             switchToScene(sceneData.Gameplay.sceneId);
+            audio.switchAudio("gameplayAudio", audio.audio.volume);
             ic_options.style.display = "flex";
             ic_recipes.style.display = "flex";
             ic_slot.style.display = "flex";
@@ -221,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
         volumeContainer.style.display = "none";
         gameplayBackButton.style.display = "none";
         gameplayMenuButton.style.display = "none";
+        ic_recipes.style.display = "flex";
         scenes[activeScene].allowInteract(true);
     });
 
