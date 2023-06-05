@@ -34,7 +34,7 @@ export class InputHandler {
                     this.debug = !this.debug;
                     e.preventDefault();
                 }
-                console.log(this.keys)
+                // console.log(this.keys)
                 // console.log(this.lastKey)
 
         });
@@ -45,7 +45,7 @@ export class InputHandler {
             if (index !== -1) {
                 this.keys.splice(index, 1);
             }
-            console.log(this.keys)
+            // console.log(this.keys)
             // console.log(this.lastKey)
         });
     }

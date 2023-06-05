@@ -87,6 +87,8 @@ export class GameplayScene extends Scene {
         this.chat = document.querySelector(".chat-input");
         this.slotItem = document.getElementById("item");
         this.sinkItem = document.getElementById("sink-item");
+
+        this.sinkImage = sceneData.Gameplay.sink_mini_game;
     }
 
     update = () => {
@@ -125,9 +127,19 @@ export class GameplayScene extends Scene {
         this.checkCollision();
         this.updateMenuScale();
 
-        if (!canMove && this.collisionCollider === "sink" && this.input.keys.includes("ArrowUp")) {
-                console.log("yo")
-                this.sinkItem.style.bottom = "20vw";
+        if (!canMove && this.collisionCollider === "sink") {
+            if (this.input.keys.includes("ArrowUp")) {
+                this.sinkItem.style.bottom = sceneData.Gameplay.sink_new_transform;
+                setTimeout(() => {
+                    this.sinkImage.src = sceneData.Gameplay.sink_mini_game_interact;
+                }, 200)
+            }
+            else {
+                this.sinkItem.style.bottom = sceneData.Gameplay.sink_original_transform;
+                setTimeout(() => {
+                    this.sinkImage.src = sceneData.Gameplay.sink_mini_game_idle;
+                }, 200)
+            }
         }
     }
 
@@ -317,7 +329,7 @@ export class GameplayScene extends Scene {
             this.canvas.height
         );
         this.ctx.drawImage(
-            sceneData.Gameplay.sink_mini_game,
+            this.sinkImage,
             this.minGameX,
             this.menuY,
             this.menuWidth,
