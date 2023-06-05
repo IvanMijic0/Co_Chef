@@ -208,7 +208,7 @@ canvas {
     bottom: 2.8vw;
     transform: translate(-50%);
 }
-#sink-item {
+#sink-item, #knife {
     display: none;
     z-index: 1;
     position: absolute;
@@ -217,6 +217,12 @@ canvas {
     left: 41vw;
     bottom: 8vw;
     transform: translate(-50%);
+}
+
+#knife {
+    width: 20vw;
+    height: 4vw;
+    bottom: 20vw;
 }
 
 #ic_timer {

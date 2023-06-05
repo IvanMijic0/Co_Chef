@@ -104,6 +104,8 @@ export const sceneData = {
         inventory_mini_game: document.getElementById("inventory-mini-game"),
         sink_original_transform: "8vw",
         sink_new_transform: "19vw",
+        knife_original_transform: "20vw",
+        knife_new_transform: "35vw",
         sceneId: 8,
     },
 }

@@ -87,8 +87,8 @@ export class GameplayScene extends Scene {
         this.chat = document.querySelector(".chat-input");
         this.slotItem = document.getElementById("item");
         this.sinkItem = document.getElementById("sink-item");
-
         this.sinkImage = sceneData.Gameplay.sink_mini_game;
+        this.knifeImage = document.getElementById("knife");
     }
 
     update = () => {
@@ -140,6 +140,13 @@ export class GameplayScene extends Scene {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_idle;
                 }, 200)
             }
+        } else if (!canMove && this.collisionCollider === "knife") {
+            if (this.input.keys.includes("ArrowUp")) {
+                this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+            }
+            else if (this.input.keys.includes("ArrowDown")) {
+                this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
+            }
         }
     }
 
@@ -181,7 +188,24 @@ export class GameplayScene extends Scene {
 
                         } else if (this.collisionCollider === "knife") {
                             this.showKnifeMiniGame = !this.showKnifeMiniGame;
-                            this.handleVisibility();
+                            canMove = !canMove;
+                            if (!canMove) {
+                                this.controls.style.display = "block";
+                                this.options.style.display = "none";
+                                this.recipe.style.display = "none";
+                                this.chat.disabled = true;
+                                this.slot.style.display = "none";
+                                this.slotItem.style.display = "none";
+                                this.knifeImage.style.display = "flex";
+
+                            } else {
+                                this.controls.style.display = "none";
+                                this.options.style.display = "flex";
+                                this.recipe.style.display = "flex";
+                                this.slot.style.display = "flex";
+                                this.slotItem.style.display = "flex";
+                                this.knifeImage.style.display = "none";
+                            }
                         } else if (this.collisionCollider === "stir") {
                             this.showStirrMiniGame = !this.showStirrMiniGame;
                             this.handleVisibility();
