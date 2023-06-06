@@ -417,7 +417,7 @@ canvas {
     -webkit-text-stroke: .1vw black;
 }
 
-#timer {
+#timer, #mini-game-timer {
     font-family: CoffeCake, serif;
     top: 4.5vw;
     right: 5.8vw;
@@ -428,6 +428,14 @@ canvas {
     color: white;
     z-index: 1;
     caret-color: transparent;
+}
+
+#mini-game-timer {
+    display: none;
+    right: 32vw;
+    top: 15vh;
+    font-size: 4vw;
+    color: #FBDD0D;
 }
 
 /* Volume */

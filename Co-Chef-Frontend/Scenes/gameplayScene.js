@@ -57,7 +57,7 @@ export class GameplayScene extends Scene {
         this.input = new InputHandler();
         this.speed = 0;
         this.speedScaler = 2;
-        this.speedModifer = .02;
+        this.speedModifer = .005;
         this.isColliding = false;
         this.collisionCollider = null;
         this.playerColliderX = 0;
@@ -90,13 +90,19 @@ export class GameplayScene extends Scene {
         this.sinkImage = sceneData.Gameplay.sink_mini_game;
         this.knifeImage = document.getElementById("knife");
         this.stirImage = sceneData.Gameplay.stir_mini_game;
+        this.mini_game_timer = document.getElementById("mini-game-timer");
+        this.timer = document.getElementById("timer")
+        this.timerValue = parseFloat(this.timer.innerText);
 
         this.currentBottom = 8;
     }
 
-    update = () => {
+    update = (deltaTime) => {
+        this.timerValue -= deltaTime;
+        this.timer.innerText = Math.max((this.timerValue * .001).toFixed(1), 0);
+
         if (canMove) {
-            this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * this.speedModifer;
+            this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * (deltaTime * this.speedModifer);
             if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
                 this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_back.png";
                 this.speed = this.speedScaler;
@@ -149,6 +155,7 @@ export class GameplayScene extends Scene {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
             }
         } else if (!canMove && this.collisionCollider === "stir") {
+
             if (this.sinkItem.style.display === "flex") {
                 this.currentBottom += 0.1;
                 this.sinkItem.style.bottom = this.currentBottom + "vw";
@@ -158,31 +165,37 @@ export class GameplayScene extends Scene {
                 this.sinkItem.style.display = "none";
                 this.currentBottom = 8;
             }
-            if (this.input.keys.includes("ArrowRight")) {
-                if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_left.png") {
-                    setTimeout(() => {
-                        this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png"
-                    }, 200);
+            if (this.sinkItem.style.bottom === sceneData.Gameplay.stir_item_new_transform) {
+                if (this.input.keys.includes("ArrowRight")) {
+                    if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_left.png") {
+                        setTimeout(() => {
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png"
+                        }, 200);
 
-                } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
-                    setTimeout(() => {
-                        this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_right.png"
-                    }, 200);
-                }
-            } else if (this.input.keys.includes("ArrowLeft")) {
-                if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_right.png") {
-                    setTimeout(() => {
-                        this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png"
-                    }, 200);
-                } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
-                    setTimeout(() => {
-                        this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_left.png"
-                    }, 200);
+                    } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
+                        setTimeout(() => {
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_right.png"
+                        }, 200);
+                    }
+                } else if (this.input.keys.includes("ArrowLeft")) {
+                    if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_right.png") {
+                        setTimeout(() => {
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png"
+                        }, 200);
+                    } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
+                        setTimeout(() => {
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_left.png"
+                        }, 200);
+                    }
                 }
             }
         }
         else if (!canMove && this.collisionCollider === "fry") {
-            console.log("fry")
+            if (this.input.keys.includes("ArrowUp")) {
+                this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_new_transform;
+            } else if (this.input.keys.includes("ArrowDown")) {
+                this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
+            }
         }
         else if (!canMove && this.collisionCollider === "inventory") {
             console.log("inventory")
@@ -218,6 +231,7 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "none";
                                 this.slotItem.style.display = "none";
                                 this.sinkItem.style.display = "flex";
+                                this.mini_game_timer.style.display = "flex";
 
                             } else {
                                 this.controls.style.display = "none";
@@ -226,6 +240,7 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "flex";
                                 this.slotItem.style.display = "flex";
                                 this.sinkItem.style.display = "none";
+                                this.mini_game_timer.style.display = "none";
                             }
 
                         } else if (this.collisionCollider === "knife") {
@@ -270,7 +285,26 @@ export class GameplayScene extends Scene {
                             }
                         } else if (this.collisionCollider === "fry") {
                             this.showFryMiniGame = !this.showFryMiniGame;
-                            this.handleVisibility();
+                            canMove = !canMove;
+                            if (!canMove) {
+                                this.controls.style.display = "block";
+                                this.options.style.display = "none";
+                                this.recipe.style.display = "none";
+                                this.chat.disabled = true;
+                                this.slot.style.display = "none";
+                                this.slotItem.style.display = "none";
+                                this.sinkItem.style.display = "flex";
+                                this.mini_game_timer.style.display = "flex";
+
+                            } else {
+                                this.controls.style.display = "none";
+                                this.options.style.display = "flex";
+                                this.recipe.style.display = "flex";
+                                this.slot.style.display = "flex";
+                                this.slotItem.style.display = "flex";
+                                this.sinkItem.style.display = "none";
+                                this.mini_game_timer.style.display = "none";
+                            }
                         } else if (this.collisionCollider === "inventory") {
                             this.showInventoryMiniGame = !this.showInventoryMiniGame;
                             this.handleVisibility();
@@ -435,8 +469,8 @@ export class GameplayScene extends Scene {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press left &nbsp;</span> and " +
                     "<span style='color: white'>&nbsp; right &nbsp;</span><br><span style='color: #FF7F3F'>arrow keys to stir</span>";
             } else if (this.showFryMiniGame) {
-                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press up &nbsp;</span> " +
-                    "<span style='color: #FF7F3F'>arrow key to flip</span>";
+                this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Press up &nbsp;</span> and " +
+                    "<span style='color: white'>&nbsp; down &nbsp;</span><br><span style='color: #FF7F3F'>arrow keys to fry</span>";
             } else if (this.showInventoryMiniGame) {
                 this.gamePlayText.innerHTML = "<span style='color: white'>&nbsp;Click &nbsp;</span> on " +
                     "<span style='color: white'>&nbsp; food &nbsp;</span><br><span style='color: #FF7F3F'>to add to inventory</span>";

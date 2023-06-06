@@ -108,6 +108,8 @@ export const sceneData = {
         knife_new_transform: "64vh",
         stir_item_original_transform: "40vh",
         stir_item_new_transform: "33vh",
+        fry_item_original_transform: "14vh",
+        fry_item_new_transform: "44vh",
         sceneId: 8,
     },
 }

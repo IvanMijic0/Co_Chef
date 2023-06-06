@@ -26,7 +26,7 @@ chatField.addEventListener("keydown", (e) => {
     }
 });
 
-window.addEventListener("keydown", (e) => {
+chatField.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         canMove = true;
         inputField.disabled = true;

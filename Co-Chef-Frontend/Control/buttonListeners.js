@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     connectButton.addEventListener("click", () => {
         switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+        scenes[activeScene].restartClick();
+        scenes[activeScene].changeText();
         SelectBackButton.style.display = "flex";
         characterName.style.display = "flex";
         speechText.style.display = "flex";
@@ -154,6 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (activeScene === sceneData.CHARACTER_SELECT.sceneId) {
             scenes[activeScene].rememberPick();
             switchToScene(sceneData.DISH_SELECT.sceneId);
+            scenes[activeScene].restartClick();
+            scenes[activeScene].changeText();
             SelectConfirmButton.style.display = "none";
             characterName.style.display = "none";
             dishName.style.display = "flex";
@@ -239,6 +243,15 @@ document.addEventListener("DOMContentLoaded", () => {
         volumeContainer.style.display = "none";
         gameplayBackButton.style.display = "none";
         gameplayMenuButton.style.display = "none";
+        ic_timer.style.display = "none";
+        timer.style.display = "none";
+        ic_recipes.style.display = "none";
+        slotItem.style.display = "none";
+        ic_slot.style.display = "none";
+        ic_options.style.display = "none";
+        ic_com.style.display = "none";
+        chat_container.style.display = "none";
+        audio.switchAudio("startMenuAudio", audio.audio.volume);
         switchToScene(sceneData.START_MENU.sceneId);
     });
 

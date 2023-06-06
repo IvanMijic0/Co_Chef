@@ -44,6 +44,7 @@ let introText = document.getElementById("introHeader");
 
 export let activeScene = 3;
 let previousScene = 0;
+let lastTime = 0;
 
 scenes[activeScene].show();
 export const intro = () => {
@@ -63,30 +64,16 @@ if (activeScene === 2) {
     intro();
 }
 
-const drawActiveScene = () => {
+const drawActiveScene = (timestamp) => {
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
     if (activeScene === sceneData.Gameplay.sceneId) {
-        scenes[activeScene].update();
+        scenes[activeScene].update(deltaTime);
     }
     scenes[activeScene].draw();
     requestAnimationFrame(drawActiveScene);
 };
-drawActiveScene();
-
-// function backToPrev() {
-//     for (let i = 2; i < scenes.length; i++) {
-//         if (activeScene === i && previousScene === i) {
-//             previousScene = sceneData.INTRO.sceneId;
-//             break;
-//         }
-//     }
-//     const currentScene = scenes[activeScene];
-//     const nextScene = scenes[previousScene];
-//
-//     currentScene.hide();
-//     nextScene.show();
-//
-//     activeScene = previousScene;
-// }
+drawActiveScene(0);
 
 export const switchToScene = (sceneId) => {
     const currentScene = scenes[activeScene];
@@ -97,9 +84,6 @@ export const switchToScene = (sceneId) => {
 
     previousScene = activeScene;
     activeScene = sceneId;
-
-    //console.log("Active scene -> " + activeScene);
-    //console.log("Previous scene -> " + previousScene);
 };
 
 
