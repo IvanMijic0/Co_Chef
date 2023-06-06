@@ -420,7 +420,8 @@ canvas {
 #timer, #mini-game-timer {
     font-family: CoffeCake, serif;
     top: 4.5vw;
-    right: 5.8vw;
+    width: 4vw; /* Add a fixed width */
+    right: 8.5vw;
     position: absolute;
     transform: translate(-50%, -50%);
     font-size: 4.5vw;
@@ -432,10 +433,10 @@ canvas {
 
 #mini-game-timer {
     display: none;
-    right: 32vw;
+    right: 33vw;
     top: 15vh;
     font-size: 4vw;
-    color: #FBDD0D;
+    color: #ffffff;
 }
 
 /* Volume */

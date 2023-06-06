@@ -93,75 +93,144 @@ export class GameplayScene extends Scene {
         this.mini_game_timer = document.getElementById("mini-game-timer");
         this.timer = document.getElementById("timer")
         this.timerValue = parseFloat(this.timer.innerText);
-
+        this.mini_game_timer_value = parseFloat(this.mini_game_timer.innerText);
+        this.mini_game_started = false;
         this.currentBottom = 8;
     }
 
     update = (deltaTime) => {
-        this.timerValue -= deltaTime;
-        this.timer.innerText = Math.max((this.timerValue * .001).toFixed(1), 0);
-
+        this.updateTimer(deltaTime);
+        if (this.mini_game_started) {
+            this.updateMiniGameTimer(deltaTime);
+        }
         if (canMove) {
-            this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * (deltaTime * this.speedModifer);
-            if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
-                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_back.png";
-                this.speed = this.speedScaler;
-                if (this.playerY - this.speed >= this.platformY) {
-                    this.playerY -= this.speed;
-                }
-            } else if (this.input.keys.includes("ArrowDown") || this.input.keys.includes("s")) {
-                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
-                this.speed = this.speedScaler;
-                if (this.playerY + this.scaledHeight <= this.platformY + this.platformHeight) {
-                    this.playerY += this.speed;
-                }
-            }
-            if (this.input.keys.includes("ArrowLeft") || this.input.keys.includes("a")) {
-                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_left.png";
-                this.speed = this.speedScaler;
-                if (this.playerX >= this.platformX) {
-                    this.playerX -= this.speed;
-                }
-            } else if (this.input.keys.includes("ArrowRight") || this.input.keys.includes("d")) {
-                this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_right.png";
-                this.speed = this.speedScaler;
-                if (this.playerX + this.scaledWidth <= this.platformX + this.platformWidth) {
-                    this.playerX += this.speed;
-                }
-            } else {
-                this.speed = 0;
-            }
+            this.updatePlayerMovement(deltaTime);
         }
         this.updateScale();
         this.checkCollision();
         this.updateMenuScale();
+        this.updateSinkItemInteraction();
+        this.updateKnifeItemInteraction();
+        this.updateStirItemInteraction();
+        this.updateFryItemInteraction();
+        this.handleInventoryInteraction();
+        this.showMiniGameTimer();
+    };
 
+    showMiniGameTimer() {
+        if (
+            !this.showSinkMiniGame && !this.showKnifeMiniGame &&
+            !this.showStirrMiniGame && !this.showFryMiniGame &&
+            !this.showFryMiniGame && !this.showInventoryMiniGame
+        ) {
+            this.mini_game_started = false;
+            this.mini_game_timer.style.display = "none";
+            this.mini_game_timer_value = 20000;
+            this.mini_game_timer.style.color = "white";
+        }
+    }
+
+    updateTimer = (deltaTime) => {
+        this.timerValue -= deltaTime;
+        const timerValueSec = (this.timerValue * 0.001).toFixed(0);
+
+        if (timerValueSec <= 15 && timerValueSec >= 6) {
+            this.timer.style.color = "#FBDD0D";
+        } else if (timerValueSec <= 5) {
+            this.timer.style.color = "#e10000";
+        }
+        this.timer.innerText = Math.max(timerValueSec, 0);
+    };
+
+    updateMiniGameTimer = (deltaTime) => {
+        this.mini_game_timer_value -= deltaTime;
+        const miniGameTimerValueSec = (this.mini_game_timer_value * 0.001).toFixed(0);
+
+        if (miniGameTimerValueSec <= 15 && miniGameTimerValueSec >= 6) {
+            this.mini_game_timer.style.color = "#FBDD0D";
+        } else if (miniGameTimerValueSec <= 5) {
+            this.mini_game_timer.style.color = "#e10000";
+        }
+        this.mini_game_timer.innerText = Math.max(miniGameTimerValueSec, 0);
+    };
+
+    updatePlayerMovement = (deltaTime) => {
+        this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * (deltaTime * this.speedModifer);
+
+        if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
+            this.updatePlayerImage("back");
+            this.speed = this.speedScaler;
+            if (this.playerY - this.speed >= this.platformY) {
+                this.playerY -= this.speed;
+            }
+        } else if (this.input.keys.includes("ArrowDown") || this.input.keys.includes("s")) {
+            this.updatePlayerImage("front");
+            this.speed = this.speedScaler;
+            if (this.playerY + this.scaledHeight <= this.platformY + this.platformHeight) {
+                this.playerY += this.speed;
+            }
+        } else if (this.input.keys.includes("ArrowLeft") || this.input.keys.includes("a")) {
+            this.updatePlayerImage("left");
+            this.speed = this.speedScaler;
+            if (this.playerX >= this.platformX) {
+                this.playerX -= this.speed;
+            }
+        } else if (this.input.keys.includes("ArrowRight") || this.input.keys.includes("d")) {
+            this.updatePlayerImage("right");
+            this.speed = this.speedScaler;
+            if (this.playerX + this.scaledWidth <= this.platformX + this.platformWidth) {
+                this.playerX += this.speed;
+            }
+        } else {
+            this.speed = 0;
+        }
+    };
+
+    updatePlayerImage = (direction) => {
+        this.playerImage.src = `Assets/Sprites/Player/${rememberCharacter}_${direction}.png`;
+    };
+
+    updateSinkItemInteraction = () => {
         if (!canMove && this.collisionCollider === "sink") {
             if (this.input.keys.includes("ArrowUp")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.sink_new_transform;
                 setTimeout(() => {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_interact;
+                    this.mini_game_timer.style.display = "flex";
                 }, 200);
+                this.mini_game_started = true;
+
             } else {
                 this.sinkItem.style.bottom = sceneData.Gameplay.sink_original_transform;
                 setTimeout(() => {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_idle;
+                    this.mini_game_started = false;
+                    this.mini_game_timer.style.display = "none";
+                    this.mini_game_timer_value = 20000;
+                    this.mini_game_timer.style.color = "white";
                 }, 200);
             }
-        } else if (!canMove && this.collisionCollider === "knife") {
+        }
+    };
+
+    updateKnifeItemInteraction = () => {
+        if (!canMove && this.collisionCollider === "knife") {
             if (this.input.keys.includes("ArrowUp")) {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
             } else if (this.input.keys.includes("ArrowDown")) {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
             }
-        } else if (!canMove && this.collisionCollider === "stir") {
+        }
+    };
 
+    updateStirItemInteraction = () => {
+        if (!canMove && this.collisionCollider === "stir") {
             if (this.sinkItem.style.display === "flex") {
                 this.currentBottom += 0.1;
                 this.sinkItem.style.bottom = this.currentBottom + "vw";
             }
             if (this.currentBottom >= 33) {
-                this.sinkItem.style.bottom = sceneData.Gameplay.stir_item_new_transform
+                this.sinkItem.style.bottom = sceneData.Gameplay.stir_item_new_transform;
                 this.sinkItem.style.display = "none";
                 this.currentBottom = 8;
             }
@@ -169,38 +238,54 @@ export class GameplayScene extends Scene {
                 if (this.input.keys.includes("ArrowRight")) {
                     if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_left.png") {
                         setTimeout(() => {
-                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png"
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png";
                         }, 200);
-
                     } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
                         setTimeout(() => {
-                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_right.png"
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_right.png";
                         }, 200);
                     }
                 } else if (this.input.keys.includes("ArrowLeft")) {
                     if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_right.png") {
                         setTimeout(() => {
-                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png"
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png";
                         }, 200);
                     } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
                         setTimeout(() => {
-                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_left.png"
+                            this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_left.png";
                         }, 200);
                     }
                 }
             }
         }
-        else if (!canMove && this.collisionCollider === "fry") {
+    };
+
+    updateFryItemInteraction = () => {
+        if (!canMove && this.collisionCollider === "fry") {
             if (this.input.keys.includes("ArrowUp")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_new_transform;
+                setTimeout(() => {
+                    this.mini_game_started = true;
+                    this.mini_game_timer.style.display = "flex";
+                }, 200)
             } else if (this.input.keys.includes("ArrowDown")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
+                setTimeout(() => {
+                    this.mini_game_timer.style.display = "none";
+                    this.mini_game_started = false;
+                    this.mini_game_timer_value = 20000;
+                    this.mini_game_timer.style.color = "white";
+                }, 200)
             }
         }
-        else if (!canMove && this.collisionCollider === "inventory") {
-            console.log("inventory")
+    };
+
+    handleInventoryInteraction = () => {
+        if (!canMove && this.collisionCollider === "inventory") {
+            console.log("inventory");
         }
-    }
+    };
+
     getFileNameFromPath = (path) => {
         return path.split("/").pop();
     }
@@ -231,8 +316,6 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "none";
                                 this.slotItem.style.display = "none";
                                 this.sinkItem.style.display = "flex";
-                                this.mini_game_timer.style.display = "flex";
-
                             } else {
                                 this.controls.style.display = "none";
                                 this.options.style.display = "flex";
@@ -240,9 +323,7 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "flex";
                                 this.slotItem.style.display = "flex";
                                 this.sinkItem.style.display = "none";
-                                this.mini_game_timer.style.display = "none";
                             }
-
                         } else if (this.collisionCollider === "knife") {
                             this.showKnifeMiniGame = !this.showKnifeMiniGame;
                             canMove = !canMove;
@@ -262,6 +343,7 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "flex";
                                 this.slotItem.style.display = "flex";
                                 this.knifeImage.style.display = "none";
+                                this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
                             }
                         } else if (this.collisionCollider === "stir") {
                             this.showStirrMiniGame = !this.showStirrMiniGame;
@@ -294,8 +376,6 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "none";
                                 this.slotItem.style.display = "none";
                                 this.sinkItem.style.display = "flex";
-                                this.mini_game_timer.style.display = "flex";
-
                             } else {
                                 this.controls.style.display = "none";
                                 this.options.style.display = "flex";
@@ -304,6 +384,10 @@ export class GameplayScene extends Scene {
                                 this.slotItem.style.display = "flex";
                                 this.sinkItem.style.display = "none";
                                 this.mini_game_timer.style.display = "none";
+                                this.mini_game_started = false;
+                                this.mini_game_timer_value = 20000;
+                                this.mini_game_timer.style.color = "white";
+                                this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
                             }
                         } else if (this.collisionCollider === "inventory") {
                             this.showInventoryMiniGame = !this.showInventoryMiniGame;
@@ -337,6 +421,7 @@ export class GameplayScene extends Scene {
 
     draw = () => {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
 
         // Draw the background image
         this.ctx.drawImage(
