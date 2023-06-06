@@ -25,7 +25,6 @@ export class Scene {
         this.canvas.style.display = "block";
         this.canvas.style.pointerEvents = "auto";
     }
-
     hide = () => {
         document.getElementById("button-column").style.display = "none";
 

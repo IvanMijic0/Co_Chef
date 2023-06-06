@@ -12,7 +12,6 @@ const KEYS = {
     SPACE: " ",
     E: "e"
 };
-
 export class InputHandler {
     constructor() {
         this.keys = [];

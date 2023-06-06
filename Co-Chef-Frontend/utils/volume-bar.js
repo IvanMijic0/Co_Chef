@@ -18,7 +18,6 @@ export class VolumeBar {
             this.updateVolumeBar();
         });
     }
-
     setVolume(value) {
         let volumeBefore = this.volume;
         localStorage.setItem("volumeBefore", volumeBefore);

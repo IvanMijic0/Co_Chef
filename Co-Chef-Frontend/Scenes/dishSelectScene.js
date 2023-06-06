@@ -135,7 +135,6 @@ export class DishSelectScene extends Scene {
         this.isClicked = false;
     }
 
-
     changeText = () => {
         this.text.textContent = textData.dishSelection;
     }
