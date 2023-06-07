@@ -12,29 +12,31 @@ const KEYS = {
     SPACE: " ",
     E: "e"
 };
+
 export class InputHandler {
     constructor() {
         this.keys = [];
         this.lastKey = "";
         this.debug = false;
         window.addEventListener("keydown", e => {
-            if (e.key === "e"){
+            if (e.key === "e") {
+                this.lastKey = e.key;
+            } else if (e.key === "ArrowUp") {
+                this.lastKey = e.key;
+            } else if (e.key === "ArrowDown") {
                 this.lastKey = e.key;
             }
-            else if (e.key === "ArrowUp"){
-                this.lastKey = e.key;
+            if (
+                Object.values(KEYS).includes(e.key) &&
+                !this.keys.includes(e.key)
+            ) {
+                this.keys.push(e.key);
+            } else if (e.key === "F2") {
+                this.debug = !this.debug;
+                e.preventDefault();
             }
-                if (
-                    Object.values(KEYS).includes(e.key) &&
-                    !this.keys.includes(e.key)
-                ) {
-                    this.keys.push(e.key);
-                } else if (e.key === "F2") {
-                    this.debug = !this.debug;
-                    e.preventDefault();
-                }
-                // console.log(this.keys)
-                // console.log(this.lastKey)
+            // console.log(this.keys)
+            // console.log(this.lastKey)
 
         });
 

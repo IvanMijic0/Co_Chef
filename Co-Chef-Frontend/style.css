@@ -222,7 +222,8 @@ canvas {
 #knife {
     width: 20vw;
     height: 4vw;
-    bottom: 40vh;
+    bottom: 64vh;
+    z-index: 2;
 }
 
 #ic_timer {

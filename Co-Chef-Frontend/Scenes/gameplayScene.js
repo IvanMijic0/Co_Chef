@@ -96,6 +96,8 @@ export class GameplayScene extends Scene {
         this.mini_game_timer_value = parseFloat(this.mini_game_timer.innerText);
         this.mini_game_started = false;
         this.currentBottom = 8;
+        this.cutCounter = 1;
+        this.canCut = true;
     }
 
     update = (deltaTime) => {
@@ -194,9 +196,19 @@ export class GameplayScene extends Scene {
         if (!canMove && this.collisionCollider === "sink") {
             if (this.input.keys.includes("ArrowUp")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.sink_new_transform;
+                const timerValueSec = (this.mini_game_timer_value * 0.001).toFixed(0)
                 setTimeout(() => {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_interact;
                     this.mini_game_timer.style.display = "flex";
+                    if (timerValueSec <= 15 && timerValueSec > 10) {
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/FishDirty2.png";
+                    } else if (timerValueSec <= 10 && timerValueSec > 1) {
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/FishDirty3.png";
+                    } else if (timerValueSec <= 0){
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/FishClean.png";
+                        this.slotItem.src = "Assets/Sprites/GameplayUI/FishClean.png";
+                    }
+
                 }, 200);
                 this.mini_game_started = true;
 
@@ -217,8 +229,16 @@ export class GameplayScene extends Scene {
         if (!canMove && this.collisionCollider === "knife") {
             if (this.input.keys.includes("ArrowUp")) {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                this.canCut = true;
             } else if (this.input.keys.includes("ArrowDown")) {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
+                if (this.canCut && this.cutCounter <= 3) {
+                    this.sinkItem.src = "Assets/Sprites/GameplayUI/FishCut" + this.cutCounter++ + ".png";
+                    this.canCut = false;
+                    if (this.cutCounter === 3) {
+                        this.slotItem.src = "Assets/Sprites/GameplayUI/FishCut" + this.cutCounter + ".png";
+                    }
+                }
             }
         }
     };
@@ -335,6 +355,8 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "none";
                                 this.slotItem.style.display = "none";
                                 this.knifeImage.style.display = "flex";
+                                this.sinkItem.style.bottom = sceneData.Gameplay.knife_original_transform;
+                                this.sinkItem.style.display = "flex";
 
                             } else {
                                 this.controls.style.display = "none";
@@ -343,7 +365,8 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "flex";
                                 this.slotItem.style.display = "flex";
                                 this.knifeImage.style.display = "none";
-                                this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
+                                this.sinkItem.style.display = "none";
+                                this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                             }
                         } else if (this.collisionCollider === "stir") {
                             this.showStirrMiniGame = !this.showStirrMiniGame;
@@ -375,6 +398,7 @@ export class GameplayScene extends Scene {
                                 this.chat.disabled = true;
                                 this.slot.style.display = "none";
                                 this.slotItem.style.display = "none";
+                                this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
                                 this.sinkItem.style.display = "flex";
                             } else {
                                 this.controls.style.display = "none";
