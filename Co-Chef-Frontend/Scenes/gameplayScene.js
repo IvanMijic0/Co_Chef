@@ -92,6 +92,9 @@ export class GameplayScene extends Scene {
         this.stirImage = sceneData.Gameplay.stir_mini_game;
         this.mini_game_timer = document.getElementById("mini-game-timer");
         this.timer = document.getElementById("timer")
+        this.inventoryTiles = document.querySelector(".inventory");
+
+
         this.timerValue = parseFloat(this.timer.innerText);
         this.mini_game_timer_value = parseFloat(this.mini_game_timer.innerText);
         this.mini_game_started = false;
@@ -115,7 +118,7 @@ export class GameplayScene extends Scene {
         this.updateKnifeItemInteraction();
         this.updateStirItemInteraction();
         this.updateFryItemInteraction();
-        this.handleInventoryInteraction();
+        // this.handleInventoryInteraction();
         this.showMiniGameTimer();
     };
 
@@ -204,7 +207,7 @@ export class GameplayScene extends Scene {
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/FishDirty2.png";
                     } else if (timerValueSec <= 10 && timerValueSec > 1) {
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/FishDirty3.png";
-                    } else if (timerValueSec <= 0){
+                    } else if (timerValueSec <= 0) {
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/FishClean.png";
                         this.slotItem.src = "Assets/Sprites/GameplayUI/FishClean.png";
                     }
@@ -300,11 +303,11 @@ export class GameplayScene extends Scene {
         }
     };
 
-    handleInventoryInteraction = () => {
-        if (!canMove && this.collisionCollider === "inventory") {
-            console.log("inventory");
-        }
-    };
+    // handleInventoryInteraction = () => {
+    //     if (!canMove && this.collisionCollider === "inventory") {
+    //
+    //     }
+    // };
 
     getFileNameFromPath = (path) => {
         return path.split("/").pop();
@@ -415,31 +418,29 @@ export class GameplayScene extends Scene {
                             }
                         } else if (this.collisionCollider === "inventory") {
                             this.showInventoryMiniGame = !this.showInventoryMiniGame;
-                            this.handleVisibility();
+                            canMove = !canMove;
+                            if (!canMove) {
+                                this.controls.style.display = "block";
+                                this.options.style.display = "none";
+                                this.recipe.style.display = "none";
+                                this.chat.disabled = true;
+                                this.slot.style.display = "none";
+                                this.slotItem.style.display = "none";
+                                this.inventoryTiles.style.display = "grid";
+                            } else {
+                                this.controls.style.display = "none";
+                                this.options.style.display = "flex";
+                                this.recipe.style.display = "flex";
+                                this.slot.style.display = "flex";
+                                this.slotItem.style.display = "flex";
+                                this.inventoryTiles.style.display = "none";
+                            }
                         }
                     }
                     this.input.lastKey = "";
                 }
                 break;
             }
-        }
-    }
-
-    handleVisibility = () => {
-        canMove = !canMove;
-        if (!canMove) {
-            this.controls.style.display = "block";
-            this.options.style.display = "none";
-            this.recipe.style.display = "none";
-            this.chat.disabled = true;
-            this.slot.style.display = "none";
-            this.slotItem.style.display = "none";
-        } else {
-            this.controls.style.display = "none";
-            this.options.style.display = "flex";
-            this.recipe.style.display = "flex";
-            this.slot.style.display = "flex";
-            this.slotItem.style.display = "flex";
         }
     }
 
@@ -789,6 +790,21 @@ export class GameplayScene extends Scene {
 
     chefMode = (char) => {
         this.playerImage.src = "Assets/Sprites/Player/" + char + "_front.png";
+    }
+
+    changeItemFromSlot = () => {
+        this.sinkItem.src = this.slotItem.src;
+    }
+
+    closeInventory = () => {
+        this.showInventoryMiniGame = false;
+        canMove = true;
+        this.controls.style.display = "none";
+        this.options.style.display = "flex";
+        this.recipe.style.display = "flex";
+        this.slot.style.display = "flex";
+        this.slotItem.style.display = "flex";
+        this.inventoryTiles.style.display = "none";
     }
 }
 

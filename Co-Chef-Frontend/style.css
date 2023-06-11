@@ -25,20 +25,16 @@ canvas {
 
 /* Image styles */
 #startMenu, #test, #logo, #tutorial, #background,
-#pupSpeech, #pierSpeech, #isabelleSpeech, #celineSpeech, #amuSpeech, #chatonSpeech,
-#introBackground, #volumeIcon, #muteVolumeIcon,
-#character, #dish, #kitchenBackground, #player,
-#gameplayText,
-#sink-mini-game, #gameplayBackground, #optionsBackground,
-#recipeBackground, #knife-mini-game, #stir-mini-game,
-#fry-mini-game, #inventory-mini-game,
-#ic_options, #ic_recipe, #ic_slot,
-#ic_com, #ic_timer, #timer, .chat-container {
+#pupSpeech, #pierSpeech, #isabelleSpeech, #celineSpeech,
+#amuSpeech, #chatonSpeech, #introBackground, #volumeIcon,
+#muteVolumeIcon, #character, #dish, #kitchenBackground,
+#player, #gameplayText, #sink-mini-game, #gameplayBackground,
+#optionsBackground, #recipeBackground, #knife-mini-game,
+#stir-mini-game, #fry-mini-game, #inventory-mini-game,
+#ic_options, #ic_recipe, #ic_slot, #ic_com, #ic_timer,
+#timer, .chat-container {
     display: none;
 }
-
-/* Gp Images */
-
 
 /* Button styles */
 .Button-column {
@@ -208,6 +204,7 @@ canvas {
     bottom: 2.8vw;
     transform: translate(-50%);
 }
+
 #sink-item, #knife {
     display: none;
     z-index: 1;
@@ -288,6 +285,139 @@ canvas {
     bottom: -2.5vw;
 }
 
+/* Inventory */
+.inventory {
+    display: none;
+    position: relative;
+    width: 48vw;
+    height: 45vh;
+    left: 40.4%;
+    transform: translate(-50%, 40%);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2vw;
+}
+
+/* Style for individual tiles */
+.inventory img {
+    width: 8vw;
+    height: 8vw;
+    object-fit: cover;
+    caret-color: transparent;
+}
+
+.inventory .inventory-tile {
+    position: relative;
+}
+
+.inventory .item, #fish, #avocado, #cabbage, #carrot,
+#garlic, #lettuce, #onion, #potato, #tomato, #red-pepper,
+#green-pepper, #mushroom1, #red-meat, #tortilla, #green-onion{
+    position: absolute;
+    top: .7vw;
+    left: .18vw;
+    width: 7vw;
+    height: 5vw;
+    pointer-events: none;
+}
+
+#avocado {
+    top: .9vw;
+    left: 2.2vw;
+    width: 3.2vw;
+    height: 4.7vw;
+}
+
+#cabbage {
+    top: .5vw;
+    left: .8vw;
+    width: 6vw;
+    height: 5.5vw;
+}
+
+#carrot {
+    top: .5vw;
+    left: .3vw;
+    width: 7vw;
+    height: 5.5vw;
+}
+
+#garlic {
+    top: 1.1vw;
+    left: 1.7vw;
+    width: 4vw;
+    height: 4.2vw;
+}
+
+#lettuce {
+    top: .5vw;
+    left: 1.25vw;
+    width: 5vw;
+    height: 5.8vw;
+}
+
+#onion {
+    top: .5vw;
+    left: 1.8vw;
+    width: 4vw;
+    height: 5.5vw;
+}
+
+#potato {
+    top: 1vw;
+    left: 1.8vw;
+    width: 4vw;
+    height: 5vw;
+}
+
+#tomato {
+    top: 1vw;
+    left: 1.7vw;
+    width: 4.1vw;
+    height: 4.5vw;
+}
+
+#red-pepper {
+    top: .5vw;
+    left: 1.7vw;
+    width: 4vw;
+    height: 5.1vw;
+}
+
+#green-pepper {
+    top: .5vw;
+    left: 1.7vw;
+    width: 4vw;
+    height: 5.1vw;
+}
+
+#mushroom1 {
+    top: 1.4vw;
+    left: 2.2vw;
+    width: 3.3vw;
+    height: 4vw;
+}
+
+#green-onion {
+    top: .6vw;
+    left: 1vw;
+    width: 6vw;
+    height: 5.3vw;
+}
+
+#red-meat {
+    top: 1.3vw;
+    left: .5vw;
+    width: 6.9vw;
+    height: 4.1vw;
+}
+
+#tortilla {
+    top: .3vw;
+    left: .7vw;
+    width: 6.2vw;
+    height: 6.3vw;
+}
 
 /* Header styles */
 .recipe-container {
@@ -367,7 +497,6 @@ canvas {
     text-align: left;
     transform: translateX(-50%);
 }
-
 
 #character-name, #dish-name {
     display: none;
@@ -487,7 +616,6 @@ canvas {
     caret: transparent;
 }
 
-
 #volumeBar {
     --value: 50%;
     width: 100%;
@@ -585,7 +713,6 @@ canvas {
     background-color: #EA5C2B;
 }
 
-
 /* Login and Signup */
 #login-container, #signup-container {
     display: none;
@@ -641,7 +768,6 @@ canvas {
     border: .1vw solid black;
 }
 
-
 .error-container {
     position: absolute;
     top: 0;
@@ -656,7 +782,6 @@ canvas {
     font-size: .85vw;
     white-space: nowrap;
 }
-
 
 #username:hover,
 #password:hover,
@@ -673,7 +798,6 @@ canvas {
 #password0:focus {
     background-color: #FFF1B7;
 }
-
 
 #loginButton, #loginButton0,
 #signUpButton, #signUpButton0 {
@@ -705,7 +829,6 @@ canvas {
     background-color: #FFBB94;
     color: #FFD2BB;
 }
-
 
 #loginButton:hover {
     background-color: #FF7F3F;
@@ -767,3 +890,25 @@ canvas {
     right: -15vw;
 }
 
+@media only screen and (max-width: 653px) and (max-height: 280px)  {
+    /* Inventory */
+    .inventory {
+        display: none;
+        position: relative;
+        width: 48vw;
+        height: 45vh;
+        left: 40.5%;
+        transform: translate(-50%, 40%);
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 2vw;
+        bottom: 2.5vw;
+    }
+
+    /* Style for individual tiles */
+    .inventory img {
+        width: 8vw;
+        height: 8vw;
+        object-fit: cover;
+    }
+}

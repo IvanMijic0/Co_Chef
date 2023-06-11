@@ -2,7 +2,6 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./controller.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-
     // Caching everything
     const tutorialButton = document.getElementById("tutorialButton-container");
     const connectButton = document.getElementById("connectButton-container");
@@ -39,6 +38,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const rightArrow = document.getElementById("right");
     const downArrow = document.getElementById("down");
     const slotItem = document.getElementById("item");
+    const fishTile = document.getElementById("fish-tile");
+    const avocadoTile = document.getElementById("avocado-tile");
+    const cabbageTile = document.getElementById("cabbage-tile");
+    const carrotTile = document.getElementById("carrot-tile");
+    const garlicTile = document.getElementById("garlic-tile");
+    const lettuceTile = document.getElementById("lettuce-tile");
+    const onionTile = document.getElementById("onion-tile");
+    const potatoTile = document.getElementById("potato-tile");
+    const tomatoTile = document.getElementById("tomato-tile");
+    const redPepperTile = document.getElementById("red-pepper-tile");
+    const greenPepperTile = document.getElementById("green-pepper-tile");
+    const mushroom1Tile = document.getElementById("mushroom1-tile");
+    const greenOnionTile = document.getElementById("green-onion-tile");
+    const redMeatTile = document.getElementById("red-meat-tile");
+    const tortillaTile = document.getElementById("tortilla-tile");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -308,6 +322,111 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateImageSource(downArrow, "Assets/Sprites/GameplayUI/arrowDown.png");
                 break;
         }
+    });
+
+    fishTile.addEventListener("click", () => {
+        slotItem.style.width = "4vw";
+        slotItem.src = fishTile.querySelector("#fish").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    avocadoTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = avocadoTile.querySelector("#avocado").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    cabbageTile.addEventListener("click", () => {
+        slotItem.style.width = "3vw";
+        slotItem.src = cabbageTile.querySelector("#cabbage").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    carrotTile.addEventListener("click", () => {
+        slotItem.style.width = "3.5vw";
+        slotItem.src = carrotTile.querySelector("#carrot").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    garlicTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = garlicTile.querySelector("#garlic").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    lettuceTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = lettuceTile.querySelector("#lettuce").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    onionTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = onionTile.querySelector("#onion").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    potatoTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = potatoTile.querySelector("#potato").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    tomatoTile.addEventListener("click", () => {
+        slotItem.style.width = "3vw";
+        slotItem.src = tomatoTile.querySelector("#tomato").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    redPepperTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = redPepperTile.querySelector("#red-pepper").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    greenPepperTile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = greenPepperTile.querySelector("#green-pepper").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    mushroom1Tile.addEventListener("click", () => {
+        slotItem.style.width = "2.5vw";
+        slotItem.src = mushroom1Tile.querySelector("#mushroom1").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    greenOnionTile.addEventListener("click", () => {
+        slotItem.style.width = "3.5vw";
+        slotItem.src = greenOnionTile.querySelector("#green-onion").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    tortillaTile.addEventListener("click", () => {
+        slotItem.style.width = "3vw";
+        slotItem.src = tortillaTile.querySelector("#tortilla").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
+    });
+
+    redMeatTile.addEventListener("click", () => {
+        slotItem.style.width = "4vw";
+        slotItem.src = redMeatTile.querySelector("#red-meat").src;
+        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].closeInventory();
     });
 });
 
