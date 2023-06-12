@@ -36,6 +36,39 @@ canvas {
     display: none;
 }
 
+.grid-container {
+    display: none;
+    position: absolute;
+    top: 6.5vw;
+    left: 51%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    row-gap: 1vw;
+    caret-color: transparent;
+}
+
+.grid-item {
+    position: relative;
+    padding: .1vw;
+    text-align: right;
+    width: 4.8vw;
+    height: 1.5vw;
+}
+
+.grid-item img {
+    width: 2.5vw;
+    margin-right: 8vw;
+}
+
+.grid-item_text {
+    font-family: Handlee, serif;
+    position: relative;
+    left: -1vw;
+    bottom: 4.5vh;
+    font-size: .9vw;
+    font-weight: bold;
+}
+
 /* Button styles */
 .Button-column {
     position: absolute;
@@ -547,8 +580,8 @@ canvas {
     -webkit-text-stroke: .1vw black;
 }
 
-#timer, #mini-game-timer {
-    font-family: CoffeCake, serif;
+#timer, #mini-game-timer, #Stir-text {
+    font-family: CoffeCake, sans-serif;
     top: 4.5vw;
     width: 4vw; /* Add a fixed width */
     right: 8.5vw;
@@ -559,6 +592,14 @@ canvas {
     color: white;
     z-index: 1;
     caret-color: transparent;
+}
+
+#Stir-text {
+    display: none;
+    font-size: 2vw;
+    top: 11vh;
+    left: 17vw;
+    white-space: nowrap;
 }
 
 #mini-game-timer {

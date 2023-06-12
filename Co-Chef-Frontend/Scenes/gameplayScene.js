@@ -93,6 +93,8 @@ export class GameplayScene extends Scene {
         this.mini_game_timer = document.getElementById("mini-game-timer");
         this.timer = document.getElementById("timer")
         this.inventoryTiles = document.querySelector(".inventory");
+        this.stirGridInterface = document.querySelector(".grid-container");
+        this.stirText = document.getElementById("Stir-text");
 
         this.timerValue = parseFloat(this.timer.innerText);
         this.mini_game_timer_value = parseFloat(this.mini_game_timer.innerText);
@@ -100,9 +102,11 @@ export class GameplayScene extends Scene {
         this.currentBottom = 8;
         this.cutCounter = 0;
         this.canCut = true;
+        this.sinkItemOGWidth = 0;
+        this.sinkItemOGHeight = 0;
 
         this.cuttableItems = [
-            "red-meat_Clean.png",
+            "red-meat.png",
             "red-pepper_Clean.png",
             "green-pepper_Clean.png",
             "tomato_Clean.png",
@@ -129,8 +133,8 @@ export class GameplayScene extends Scene {
         ];
 
         this.fryableItems = [
-            "red-meat_Cooked.png",
-            "fish_Cooked.png"
+            "red-meat_Pile.png",
+            "fish_Clean.png"
         ];
     }
 
@@ -268,11 +272,16 @@ export class GameplayScene extends Scene {
                 if (this.canCut && this.cutCounter <= 3) {
                     this.cutCounter++
                     this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cut" + this.cutCounter + ".png";
+
+                    this.sinkItem.style.width = "6vw"
+                    this.sinkItem.style.height = "4vw"
                     this.canCut = false;
                     if (this.cutCounter >= 3) {
                         this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
                         this.slotItem.style.width = "4vw";
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
+                        this.sinkItem.style.width = this.sinkItemOGWidth;
+                        this.sinkItem.style.height = this.sinkItemOGHeight;
                     }
                 }
             }
@@ -398,7 +407,7 @@ export class GameplayScene extends Scene {
                                 this.sinkItem.style.bottom = sceneData.Gameplay.knife_original_transform;
                                 this.sinkItem.style.display = "flex";
                             } else {
-                                if (this.cutCounter <= 2) {
+                                if (!this.showKnifeMiniGame) {
                                     setTimeout(() => {
                                         this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
                                     }, 400)
@@ -428,16 +437,9 @@ export class GameplayScene extends Scene {
                                     this.slot.style.display = "none";
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.style.display = "flex";
-                                }
-                            } else {
-                                if (this.cutCounter <= 3) {
-                                    setTimeout(() => {
-                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
-                                    }, 400)
-                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    this.stirGridInterface.style.display = "grid";
+                                    this.stirText.style.display = "flex";
                                 } else {
-                                    this.showKnifeMiniGame = !this.showKnifeMiniGame;
-                                    canMove = !canMove;
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
                                     this.recipe.style.display = "flex";
@@ -446,6 +448,15 @@ export class GameplayScene extends Scene {
                                     this.knifeImage.style.display = "none";
                                     this.sinkItem.style.display = "none";
                                     this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                    this.stirGridInterface.style.display = "none";
+                                    this.stirText.style.display = "none";
+                                }
+                            } else {
+                                if (!this.showStirrMiniGame) {
+                                    setTimeout(() => {
+                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                    }, 400)
+                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
                                 }
                             }
                         } else if (this.collisionCollider === "fry") {
@@ -461,16 +472,7 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
                                     this.sinkItem.style.display = "flex";
-                                }
-                            } else {
-                                if (this.cutCounter <= 3) {
-                                    setTimeout(() => {
-                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
-                                    }, 400)
-                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
                                 } else {
-                                    this.showKnifeMiniGame = !this.showKnifeMiniGame;
-                                    canMove = !canMove;
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
                                     this.recipe.style.display = "flex";
@@ -479,6 +481,13 @@ export class GameplayScene extends Scene {
                                     this.knifeImage.style.display = "none";
                                     this.sinkItem.style.display = "none";
                                     this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                }
+                            } else {
+                                if (!this.showFryMiniGame) {
+                                    setTimeout(() => {
+                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                    }, 400)
+                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
                                 }
                             }
                         } else if (this.collisionCollider === "inventory") {
@@ -860,6 +869,8 @@ export class GameplayScene extends Scene {
     changeItemFromSlot = (newWidth) => {
         this.sinkItem.src = this.slotItem.src;
         this.sinkItem.style.width = newWidth + "vw";
+        this.sinkItemOGWidth = this.sinkItem.style.width;
+        this.sinkItemOGHeight = this.sinkItem.style.height;
     }
 
     closeInventory = () => {
