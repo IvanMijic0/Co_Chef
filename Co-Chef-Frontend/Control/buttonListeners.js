@@ -192,7 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ic_timer.style.display = "flex";
             timer.style.display = "flex";
             chat_container.style.display = "block";
-            slotItem.style.display = "flex";
         }
     })
 
@@ -327,105 +326,105 @@ document.addEventListener("DOMContentLoaded", () => {
     fishTile.addEventListener("click", () => {
         slotItem.style.width = "4vw";
         slotItem.src = fishTile.querySelector("#fish").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(10);
         scenes[activeScene].closeInventory();
     });
 
     avocadoTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = avocadoTile.querySelector("#avocado").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(6.5);
         scenes[activeScene].closeInventory();
     });
 
     cabbageTile.addEventListener("click", () => {
         slotItem.style.width = "3vw";
         slotItem.src = cabbageTile.querySelector("#cabbage").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(8);
         scenes[activeScene].closeInventory();
     });
 
     carrotTile.addEventListener("click", () => {
         slotItem.style.width = "3.5vw";
         slotItem.src = carrotTile.querySelector("#carrot").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(8.5);
         scenes[activeScene].closeInventory();
     });
 
     garlicTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = garlicTile.querySelector("#garlic").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(7);
         scenes[activeScene].closeInventory();
     });
 
     lettuceTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = lettuceTile.querySelector("#lettuce").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(7);
         scenes[activeScene].closeInventory();
     });
 
     onionTile.addEventListener("click", () => {
-        slotItem.style.width = "2.5vw";
+        slotItem.style.width = "2vw";
         slotItem.src = onionTile.querySelector("#onion").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(5.5);
         scenes[activeScene].closeInventory();
     });
 
     potatoTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = potatoTile.querySelector("#potato").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(5.5);
         scenes[activeScene].closeInventory();
     });
 
     tomatoTile.addEventListener("click", () => {
-        slotItem.style.width = "3vw";
+        slotItem.style.width = "2.5vw";
         slotItem.src = tomatoTile.querySelector("#tomato").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(7);
         scenes[activeScene].closeInventory();
     });
 
     redPepperTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = redPepperTile.querySelector("#red-pepper").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(6);
         scenes[activeScene].closeInventory();
     });
 
     greenPepperTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = greenPepperTile.querySelector("#green-pepper").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(6);
         scenes[activeScene].closeInventory();
     });
 
     mushroom1Tile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
         slotItem.src = mushroom1Tile.querySelector("#mushroom1").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(5.5);
         scenes[activeScene].closeInventory();
     });
 
     greenOnionTile.addEventListener("click", () => {
         slotItem.style.width = "3.5vw";
         slotItem.src = greenOnionTile.querySelector("#green-onion").src;
-        scenes[activeScene].changeItemFromSlot();
-        scenes[activeScene].closeInventory();
-    });
-
-    tortillaTile.addEventListener("click", () => {
-        slotItem.style.width = "3vw";
-        slotItem.src = tortillaTile.querySelector("#tortilla").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(8);
         scenes[activeScene].closeInventory();
     });
 
     redMeatTile.addEventListener("click", () => {
         slotItem.style.width = "4vw";
         slotItem.src = redMeatTile.querySelector("#red-meat").src;
-        scenes[activeScene].changeItemFromSlot();
+        scenes[activeScene].changeItemFromSlot(10);
+        scenes[activeScene].closeInventory();
+    });
+
+    tortillaTile.addEventListener("click", () => {
+        slotItem.style.width = "3vw";
+        slotItem.src = tortillaTile.querySelector("#tortilla").src;
+        scenes[activeScene].changeItemFromSlot(8);
         scenes[activeScene].closeInventory();
     });
 });

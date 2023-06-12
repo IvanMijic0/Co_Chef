@@ -94,13 +94,44 @@ export class GameplayScene extends Scene {
         this.timer = document.getElementById("timer")
         this.inventoryTiles = document.querySelector(".inventory");
 
-
         this.timerValue = parseFloat(this.timer.innerText);
         this.mini_game_timer_value = parseFloat(this.mini_game_timer.innerText);
         this.mini_game_started = false;
         this.currentBottom = 8;
-        this.cutCounter = 1;
+        this.cutCounter = 0;
         this.canCut = true;
+
+        this.cuttableItems = [
+            "red-meat_Clean.png",
+            "red-pepper_Clean.png",
+            "green-pepper_Clean.png",
+            "tomato_Clean.png",
+            "garlic_Clean.png",
+            "onion_Clean.png",
+            "mushroom1_Clean.png",
+            "potato_Clean.png",
+            "avocado_Clean.png",
+            "carrot_Clean.png",
+            "green-onion_Clean.png"
+        ];
+
+        this.stirrableItems = [
+            "red-pepper_Pile.png",
+            "green-pepper_Pile.png",
+            "tomato_Pile.png",
+            "garlic_Pile.png",
+            "onion_Pile.png",
+            "mushroom1_Pile.png",
+            "potato_Pile.png",
+            "avocado_Pile.png",
+            "carrot_Pile.png",
+            "green-onion_Pile.png"
+        ];
+
+        this.fryableItems = [
+            "red-meat_Cooked.png",
+            "fish_Cooked.png"
+        ];
     }
 
     update = (deltaTime) => {
@@ -130,7 +161,7 @@ export class GameplayScene extends Scene {
         ) {
             this.mini_game_started = false;
             this.mini_game_timer.style.display = "none";
-            this.mini_game_timer_value = 20000;
+            this.mini_game_timer_value = 10000;
             this.mini_game_timer.style.color = "white";
         }
     }
@@ -151,7 +182,7 @@ export class GameplayScene extends Scene {
         this.mini_game_timer_value -= deltaTime;
         const miniGameTimerValueSec = (this.mini_game_timer_value * 0.001).toFixed(0);
 
-        if (miniGameTimerValueSec <= 15 && miniGameTimerValueSec >= 6) {
+        if (miniGameTimerValueSec <= 10 && miniGameTimerValueSec >= 6) {
             this.mini_game_timer.style.color = "#FBDD0D";
         } else if (miniGameTimerValueSec <= 5) {
             this.mini_game_timer.style.color = "#e10000";
@@ -203,25 +234,24 @@ export class GameplayScene extends Scene {
                 setTimeout(() => {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_interact;
                     this.mini_game_timer.style.display = "flex";
-                    if (timerValueSec <= 15 && timerValueSec > 10) {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/FishDirty2.png";
-                    } else if (timerValueSec <= 10 && timerValueSec > 1) {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/FishDirty3.png";
+                    if (timerValueSec <= 7 && timerValueSec > 5) {
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty2.png";
+                    } else if (timerValueSec <= 5 && timerValueSec > 3) {
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty3.png";
                     } else if (timerValueSec <= 0) {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/FishClean.png";
-                        this.slotItem.src = "Assets/Sprites/GameplayUI/FishClean.png";
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
+                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
                     }
 
                 }, 200);
                 this.mini_game_started = true;
-
             } else {
                 this.sinkItem.style.bottom = sceneData.Gameplay.sink_original_transform;
                 setTimeout(() => {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_idle;
                     this.mini_game_started = false;
                     this.mini_game_timer.style.display = "none";
-                    this.mini_game_timer_value = 20000;
+                    this.mini_game_timer_value = 10000;
                     this.mini_game_timer.style.color = "white";
                 }, 200);
             }
@@ -236,13 +266,18 @@ export class GameplayScene extends Scene {
             } else if (this.input.keys.includes("ArrowDown")) {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
                 if (this.canCut && this.cutCounter <= 3) {
-                    this.sinkItem.src = "Assets/Sprites/GameplayUI/FishCut" + this.cutCounter++ + ".png";
+                    this.cutCounter++
+                    this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cut" + this.cutCounter + ".png";
                     this.canCut = false;
-                    if (this.cutCounter === 3) {
-                        this.slotItem.src = "Assets/Sprites/GameplayUI/FishCut" + this.cutCounter + ".png";
+                    if (this.cutCounter >= 3) {
+                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
+                        this.slotItem.style.width = "4vw";
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
                     }
                 }
             }
+        } else {
+            this.cutCounter = 0;
         }
     };
 
@@ -259,21 +294,21 @@ export class GameplayScene extends Scene {
             }
             if (this.sinkItem.style.bottom === sceneData.Gameplay.stir_item_new_transform) {
                 if (this.input.keys.includes("ArrowRight")) {
-                    if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_left.png") {
+                    if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_left.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png";
                         }, 200);
-                    } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
+                    } else if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_middle.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_right.png";
                         }, 200);
                     }
                 } else if (this.input.keys.includes("ArrowLeft")) {
-                    if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_right.png") {
+                    if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_right.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png";
                         }, 200);
-                    } else if (this.getFileNameFromPath(this.stirImage.src) === "stir_mini-game_middle.png") {
+                    } else if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_middle.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_left.png";
                         }, 200);
@@ -303,15 +338,17 @@ export class GameplayScene extends Scene {
         }
     };
 
-    // handleInventoryInteraction = () => {
-    //     if (!canMove && this.collisionCollider === "inventory") {
-    //
-    //     }
-    // };
-
-    getFileNameFromPath = (path) => {
+    extractFileNameWithExtension = (path) => {
         return path.split("/").pop();
     }
+
+    extractFileNameWithoutExtension = (filePath) => {
+        const fileNameWithExtension = this.extractFileNameWithExtension(filePath);
+        const fileNameWithoutExtension = fileNameWithExtension.split('.').slice(0, -1).join('.');
+        const fileNameParts = fileNameWithoutExtension.split('_');
+        return fileNameParts[0];
+    }
+
 
     checkCollision = () => {
         this.isColliding = false;
@@ -348,9 +385,9 @@ export class GameplayScene extends Scene {
                                 this.sinkItem.style.display = "none";
                             }
                         } else if (this.collisionCollider === "knife") {
-                            this.showKnifeMiniGame = !this.showKnifeMiniGame;
-                            canMove = !canMove;
-                            if (!canMove) {
+                            if (this.cuttableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                                this.showKnifeMiniGame = !this.showKnifeMiniGame;
+                                canMove = !canMove;
                                 this.controls.style.display = "block";
                                 this.options.style.display = "none";
                                 this.recipe.style.display = "none";
@@ -360,61 +397,89 @@ export class GameplayScene extends Scene {
                                 this.knifeImage.style.display = "flex";
                                 this.sinkItem.style.bottom = sceneData.Gameplay.knife_original_transform;
                                 this.sinkItem.style.display = "flex";
-
                             } else {
-                                this.controls.style.display = "none";
-                                this.options.style.display = "flex";
-                                this.recipe.style.display = "flex";
-                                this.slot.style.display = "flex";
-                                this.slotItem.style.display = "flex";
-                                this.knifeImage.style.display = "none";
-                                this.sinkItem.style.display = "none";
-                                this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                if (this.cutCounter <= 2) {
+                                    setTimeout(() => {
+                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                    }, 400)
+                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                } else {
+                                    this.showKnifeMiniGame = !this.showKnifeMiniGame;
+                                    canMove = !canMove;
+                                    this.controls.style.display = "none";
+                                    this.options.style.display = "flex";
+                                    this.recipe.style.display = "flex";
+                                    this.slot.style.display = "flex";
+                                    this.slotItem.style.display = "flex";
+                                    this.knifeImage.style.display = "none";
+                                    this.sinkItem.style.display = "none";
+                                    this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                }
                             }
                         } else if (this.collisionCollider === "stir") {
-                            this.showStirrMiniGame = !this.showStirrMiniGame;
-                            canMove = !canMove;
-                            if (!canMove) {
-                                this.controls.style.display = "block";
-                                this.options.style.display = "none";
-                                this.recipe.style.display = "none";
-                                this.chat.disabled = true;
-                                this.slot.style.display = "none";
-                                this.slotItem.style.display = "none";
-                                this.sinkItem.style.display = "flex";
-
+                            if (this.stirrableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                                this.showStirrMiniGame = !this.showStirrMiniGame;
+                                canMove = !canMove;
+                                if (!canMove) {
+                                    this.controls.style.display = "block";
+                                    this.options.style.display = "none";
+                                    this.recipe.style.display = "none";
+                                    this.chat.disabled = true;
+                                    this.slot.style.display = "none";
+                                    this.slotItem.style.display = "none";
+                                    this.sinkItem.style.display = "flex";
+                                }
                             } else {
-                                this.controls.style.display = "none";
-                                this.options.style.display = "flex";
-                                this.recipe.style.display = "flex";
-                                this.slot.style.display = "flex";
-                                this.slotItem.style.display = "flex";
-                                this.sinkItem.style.display = "none";
+                                if (this.cutCounter <= 3) {
+                                    setTimeout(() => {
+                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                    }, 400)
+                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                } else {
+                                    this.showKnifeMiniGame = !this.showKnifeMiniGame;
+                                    canMove = !canMove;
+                                    this.controls.style.display = "none";
+                                    this.options.style.display = "flex";
+                                    this.recipe.style.display = "flex";
+                                    this.slot.style.display = "flex";
+                                    this.slotItem.style.display = "flex";
+                                    this.knifeImage.style.display = "none";
+                                    this.sinkItem.style.display = "none";
+                                    this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                }
                             }
                         } else if (this.collisionCollider === "fry") {
-                            this.showFryMiniGame = !this.showFryMiniGame;
-                            canMove = !canMove;
-                            if (!canMove) {
-                                this.controls.style.display = "block";
-                                this.options.style.display = "none";
-                                this.recipe.style.display = "none";
-                                this.chat.disabled = true;
-                                this.slot.style.display = "none";
-                                this.slotItem.style.display = "none";
-                                this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
-                                this.sinkItem.style.display = "flex";
+                            if (this.fryableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                                this.showFryMiniGame = !this.showFryMiniGame;
+                                canMove = !canMove;
+                                if (!canMove) {
+                                    this.controls.style.display = "block";
+                                    this.options.style.display = "none";
+                                    this.recipe.style.display = "none";
+                                    this.chat.disabled = true;
+                                    this.slot.style.display = "none";
+                                    this.slotItem.style.display = "none";
+                                    this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
+                                    this.sinkItem.style.display = "flex";
+                                }
                             } else {
-                                this.controls.style.display = "none";
-                                this.options.style.display = "flex";
-                                this.recipe.style.display = "flex";
-                                this.slot.style.display = "flex";
-                                this.slotItem.style.display = "flex";
-                                this.sinkItem.style.display = "none";
-                                this.mini_game_timer.style.display = "none";
-                                this.mini_game_started = false;
-                                this.mini_game_timer_value = 20000;
-                                this.mini_game_timer.style.color = "white";
-                                this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
+                                if (this.cutCounter <= 3) {
+                                    setTimeout(() => {
+                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                    }, 400)
+                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                } else {
+                                    this.showKnifeMiniGame = !this.showKnifeMiniGame;
+                                    canMove = !canMove;
+                                    this.controls.style.display = "none";
+                                    this.options.style.display = "flex";
+                                    this.recipe.style.display = "flex";
+                                    this.slot.style.display = "flex";
+                                    this.slotItem.style.display = "flex";
+                                    this.knifeImage.style.display = "none";
+                                    this.sinkItem.style.display = "none";
+                                    this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                }
                             }
                         } else if (this.collisionCollider === "inventory") {
                             this.showInventoryMiniGame = !this.showInventoryMiniGame;
@@ -792,8 +857,9 @@ export class GameplayScene extends Scene {
         this.playerImage.src = "Assets/Sprites/Player/" + char + "_front.png";
     }
 
-    changeItemFromSlot = () => {
+    changeItemFromSlot = (newWidth) => {
         this.sinkItem.src = this.slotItem.src;
+        this.sinkItem.style.width = newWidth + "vw";
     }
 
     closeInventory = () => {
