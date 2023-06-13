@@ -232,6 +232,7 @@ export class GameplayScene extends Scene {
     };
 
     updatePlayerImage = (direction) => {
+        console.log(this.extractFileNameWithExtension(this.sinkItem.src))
         this.playerImage.src = `Assets/Sprites/Player/${rememberCharacter}_${direction}.png`;
     };
 
@@ -348,10 +349,6 @@ export class GameplayScene extends Scene {
                 setTimeout(() => {
                     this.mini_game_started = true;
                     this.mini_game_timer.style.display = "flex";
-                    setTimeout(() => {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
-                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
-                    }, this.mini_game_timer_value);
                 }, 200)
             } else if (this.input.keys.includes("ArrowDown")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
@@ -361,6 +358,10 @@ export class GameplayScene extends Scene {
                     this.mini_game_timer_value = 10000;
                     this.mini_game_timer.style.color = "white";
                 }, 200)
+            }
+            if (this.mini_game_timer_value <= 0) {
+                this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
+                this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
             }
         }
     };
@@ -392,7 +393,7 @@ export class GameplayScene extends Scene {
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
                         if (this.collisionCollider === "sink") {
-                            if (!["tortilla.png", "red-meat.png", "noodles.png"].includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (!["tortilla.png", "red-meat.png", "noodles.png", "ic_slot.png"].includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showSinkMiniGame = !this.showSinkMiniGame;
                                 canMove = !canMove;
                                 if (!canMove) {
@@ -502,9 +503,18 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
                                     this.sinkItem.style.display = "flex";
+                                }  else {
+                                    this.controls.style.display = "none";
+                                    this.options.style.display = "flex";
+                                    this.recipe.style.display = "flex";
+                                    this.slot.style.display = "flex";
+                                    this.slotItem.style.display = "flex";
+                                    this.knifeImage.style.display = "none";
+                                    this.sinkItem.style.display = "none";
+                                    this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                                 }
                             } else {
-                                if (this.sinkItem.src === "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png") {
+                                if (!this.showFryMiniGame) {
                                     setTimeout(() => {
                                         this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
                                     }, 400)
