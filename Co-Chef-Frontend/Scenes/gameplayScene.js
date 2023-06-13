@@ -376,7 +376,6 @@ export class GameplayScene extends Scene {
         return fileNameParts[0];
     }
 
-
     checkCollision = () => {
         this.isColliding = false;
         this.collisionCollider = null;

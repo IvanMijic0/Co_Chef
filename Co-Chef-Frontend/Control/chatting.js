@@ -7,6 +7,8 @@ let canMove = true; // Global variable, I will think of something more clever if
 let chatMessages = [];
 
 chatField.addEventListener("click", () => {
+    document.getElementById("ic_options").style.display = "none";
+    document.getElementById("ic_recipe").style.display = "none";
     canMove = false;
     inputField.disabled = false;
 });
@@ -30,6 +32,8 @@ chatField.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         canMove = true;
         inputField.disabled = true;
+        document.getElementById("ic_options").style.display = "flex";
+        document.getElementById("ic_recipe").style.display = "flex";
     }
 });
 
