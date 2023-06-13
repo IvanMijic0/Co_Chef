@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cabbageTile = document.getElementById("cabbage-tile");
     const carrotTile = document.getElementById("carrot-tile");
     const garlicTile = document.getElementById("garlic-tile");
-    const lettuceTile = document.getElementById("lettuce-tile");
+    const noodlesTile = document.getElementById("noodles-tile");
     const onionTile = document.getElementById("onion-tile");
     const potatoTile = document.getElementById("potato-tile");
     const tomatoTile = document.getElementById("tomato-tile");
@@ -358,9 +358,9 @@ document.addEventListener("DOMContentLoaded", () => {
         scenes[activeScene].closeInventory();
     });
 
-    lettuceTile.addEventListener("click", () => {
+    noodlesTile.addEventListener("click", () => {
         slotItem.style.width = "2.5vw";
-        slotItem.src = lettuceTile.querySelector("#lettuce").src;
+        slotItem.src = noodlesTile.querySelector("#noodles").src;
         scenes[activeScene].changeItemFromSlot(7);
         scenes[activeScene].closeInventory();
     });
