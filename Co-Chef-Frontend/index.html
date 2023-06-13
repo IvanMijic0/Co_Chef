@@ -48,20 +48,22 @@
 <img id="inventory-mini-game" src="Assets/Sprites/GameplayUI/inventory_mini-game.png" alt="Inventory Mini-Game image">
 <img id="knife" src="Assets/Sprites/GameplayUI/knife.png" alt="Knife Image">
 <img id="plate-item" src="Assets/Sprites/GameplayUI/fish-tortilla_Combo.png" alt="Final Dish">
+<img id="win-screen" src="Assets/Sprites/GameplayUI/winScreen.png" alt="Win Screen Image">
+<img id="lose-screen" src="Assets/Sprites/GameplayUI/loseScreen.png" alt="Lose Screen Image">
 
 <!-- Stir interface -->
 <div class="grid-container">
     <div class="grid-item">
-        <img src="Assets/Sprites/GameplayUI/red-meat_Pile.png" alt="Red Meat Pile">
-        <p class="grid-item_text" id="red-meat_num">x0</p>
+        <img src="Assets/Sprites/GameplayUI/redMeat_Cooked.png" alt="Red Meat Pile">
+        <p class="grid-item_text" id="redMeat_num">x0</p>
     </div>
     <div class="grid-item">
-        <img src="Assets/Sprites/GameplayUI/red-pepper_Pile.png" alt="Red Pepper Pile">
-        <p class="grid-item_text" id="red-pepper_num">x0</p>
+        <img src="Assets/Sprites/GameplayUI/redPepper_Pile.png" alt="Red Pepper Pile">
+        <p class="grid-item_text" id="redPepper_num">x0</p>
     </div>
     <div class="grid-item">
-        <img src="Assets/Sprites/GameplayUI/green-pepper_Pile.png" alt="Green Pepper Pile">
-        <p class="grid-item_text" id="green-pepper_num">x0</p>
+        <img src="Assets/Sprites/GameplayUI/greenPepper_Pile.png" alt="Green Pepper Pile">
+        <p class="grid-item_text" id="greenPepper_num">x0</p>
     </div>
     <div class="grid-item">
         <img src="Assets/Sprites/GameplayUI/tomato_Pile.png" alt="Tomato Pile">
@@ -84,8 +86,8 @@
         <p class="grid-item_text" id="carrot_num">x0</p>
     </div>
     <div class="grid-item">
-        <img src="Assets/Sprites/GameplayUI/green-onion_Pile.png" alt="Green Onion Pile">
-        <p class="grid-item_text" id="green-onion_num">x0</p>
+        <img src="Assets/Sprites/GameplayUI/greenOnion_Pile.png" alt="Green Onion Pile">
+        <p class="grid-item_text" id="greenOnion_num">x0</p>
     </div>
     <div class="grid-item">
         <img src="Assets/Sprites/GameplayUI/onion_Pile.png" alt="Onion Pile">
@@ -200,7 +202,7 @@
              onmousedown="this.src='Assets/Sprites/GameplayUI/inventory_tile_press.png'"
              onmouseup="this.src='Assets/Sprites/GameplayUI/inventory_tile_hover.png'">
         <div class="item">
-            <img id="red-pepper" src="Assets/Sprites/GameplayUI/red-pepper_Dirty1.png" alt="Red-Pepper Item">
+            <img id="red-pepper" src="Assets/Sprites/GameplayUI/redPepper_Dirty1.png" alt="Red-Pepper Item">
         </div>
     </div>
     <div id="green-pepper-tile" class="inventory-tile">
@@ -210,7 +212,7 @@
              onmousedown="this.src='Assets/Sprites/GameplayUI/inventory_tile_press.png'"
              onmouseup="this.src='Assets/Sprites/GameplayUI/inventory_tile_hover.png'">
         <div class="item">
-            <img id="green-pepper" src="Assets/Sprites/GameplayUI/green-pepper_Dirty1.png" alt="Green-Pepper Item">
+            <img id="green-pepper" src="Assets/Sprites/GameplayUI/greenPepper_Dirty1.png" alt="Green-Pepper Item">
         </div>
     </div>
     <div id="mushroom1-tile" class="inventory-tile">
@@ -230,7 +232,7 @@
              onmousedown="this.src='Assets/Sprites/GameplayUI/inventory_tile_press.png'"
              onmouseup="this.src='Assets/Sprites/GameplayUI/inventory_tile_hover.png'">
         <div class="item">
-            <img id="green-onion" src="Assets/Sprites/GameplayUI/green-onion_Dirty1.png" alt="Green-onion Item">
+            <img id="green-onion" src="Assets/Sprites/GameplayUI/greenOnion_Dirty1.png" alt="Green-onion Item">
         </div>
     </div>
     <div id="red-meat-tile" class="inventory-tile">
@@ -240,7 +242,7 @@
              onmousedown="this.src='Assets/Sprites/GameplayUI/inventory_tile_press.png'"
              onmouseup="this.src='Assets/Sprites/GameplayUI/inventory_tile_hover.png'">
         <div class="item">
-            <img id="red-meat" src="Assets/Sprites/GameplayUI/red-meat.png" alt="Red-Meat Item">
+            <img id="red-meat" src="Assets/Sprites/GameplayUI/redMeat.png" alt="Red-Meat Item">
         </div>
     </div>
     <div id="tortilla-tile" class="inventory-tile">
@@ -350,6 +352,12 @@
     </div>
 </div>
 
+<div id="End-Menu-button">
+    <div id="End-Menu-container">
+        <button class="Button" id="EndMenuButton">Menu</button>
+    </div>
+</div>
+
 <div id="character-container" class="character-container">
     <img id="leftArrow" src="Assets/Sprites/Arrows/LeftArrowIdle.png" alt="Left Arrow" class="arrow"
          onmouseover="this.src='Assets/Sprites/Arrows/LeftArrowHover.png'"
@@ -370,7 +378,7 @@
 <div id="dish-name">Choose your dish</div>
 <div id="speechText">Talk</div>
 <div id="gameplayText">Press E to interact</div>
-<div id="timer">50000.2</div>
+<div id="timer">180000.2</div>
 <div id="mini-game-timer">10000</div>
 <div id="recipeContainer" class="recipe-container">
     <h1 id="RecipeHeader">Recipe</h1>

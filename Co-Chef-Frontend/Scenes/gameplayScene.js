@@ -2,6 +2,7 @@ import {Scene} from "./scene.js";
 import {sceneData} from "../data-utils/scene-data.js";
 import {InputHandler} from "../Control/input-handler.js";
 import {extractFileNameWithExtension, extractFileNameWithoutExtension} from "../utils/string-manipulation.js";
+import {checkAllPropertiesEqualMax} from "../utils/object-manipulation.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
@@ -78,6 +79,8 @@ export class GameplayScene extends Scene {
         this.showStirrMiniGame = false;
         this.showFryMiniGame = false;
         this.showInventoryMiniGame = false;
+        this.showWinScreen = false;
+        this.showLoseScreen = false;
         this.canInteract = true;
 
         // Terrible solution, but I do not have time right now
@@ -97,6 +100,8 @@ export class GameplayScene extends Scene {
         this.stirGridInterface = document.querySelector(".grid-container");
         this.stirText = document.getElementById("Stir-text");
         this.stirNumberElement = document.getElementById("stirNumber");
+        this.plateItem = document.getElementById("plate-item");
+        this.endGameMenuButton = document.getElementById("End-Menu-container");
         this.stirNumber = 0;
         this.changeStirNum = true;
 
@@ -108,11 +113,12 @@ export class GameplayScene extends Scene {
         this.canCut = true;
         this.sinkItemOGWidth = 0;
         this.sinkItemOGHeight = 0;
+        this.checkOnce = true;
 
         this.cuttableItems = [
-            "red-meat.png",
-            "red-pepper_Clean.png",
-            "green-pepper_Clean.png",
+            "redMeat.png",
+            "redPepper_Clean.png",
+            "greenPepper_Clean.png",
             "tomato_Clean.png",
             "garlic_Clean.png",
             "onion_Clean.png",
@@ -120,12 +126,12 @@ export class GameplayScene extends Scene {
             "potato_Clean.png",
             "avocado_Clean.png",
             "carrot_Clean.png",
-            "green-onion_Clean.png"
+            "greenOnion_Clean.png"
         ];
 
         this.stirrableItems = [
-            "red-pepper_Pile.png",
-            "green-pepper_Pile.png",
+            "redPepper_Pile.png",
+            "greenPepper_Pile.png",
             "tomato_Pile.png",
             "garlic_Pile.png",
             "onion_Pile.png",
@@ -133,14 +139,13 @@ export class GameplayScene extends Scene {
             "potato_Pile.png",
             "avocado_Pile.png",
             "carrot_Pile.png",
-            "green-onion_Pile.png",
-            "red-meat_Cooked.png",
-            "fish_Cooked.png",
+            "greenOnion_Pile.png",
+            "redMeat_Cooked.png",
             "noodles.png"
         ];
 
         this.fryableItems = [
-            "red-meat_Pile.png",
+            "redMeat_Pile.png",
             "fish_Clean.png"
         ];
     }
@@ -160,7 +165,6 @@ export class GameplayScene extends Scene {
         this.updateKnifeItemInteraction();
         this.updateStirItemInteraction();
         this.updateFryItemInteraction();
-        // this.handleInventoryInteraction();
         this.showMiniGameTimer();
     };
 
@@ -179,20 +183,79 @@ export class GameplayScene extends Scene {
 
     updateTimer = (deltaTime) => {
         this.timerValue -= deltaTime;
-        const timerValueSec = (this.timerValue * 0.001).toFixed(0);
-
+        let timerValueSec = Math.floor(this.timerValue * 0.001);
         if (timerValueSec <= 15 && timerValueSec >= 6) {
             this.timer.style.color = "#FBDD0D";
-        } else if (timerValueSec <= 5) {
+        } else if (timerValueSec <= 5 && timerValueSec >= 1) {
             this.timer.style.color = "#e10000";
+        } else if (timerValueSec === 0) {
+            this.timer.style.color = "#e10000";
+            if (this.checkOnce) {
+                timerValueSec = 0;
+                if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
+                    if (checkAllPropertiesEqualMax(NOODLE_RECIPE)) {
+                        console.log("Congrats, you won!")
+                        this.showWinScreen = true;
+                        this.endGameMenuButton.style.display = "flex";
+                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
+                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.display = "flex";
+                        canMove = false;
+                    } else {
+                        console.log("UnCograts, you lost!")
+                        this.showLoseScreen = true;
+                        this.endGameMenuButton.style.display = "flex";
+                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
+                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.display = "flex";
+                        canMove = false;
+                    }
+                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
+                    if (checkAllPropertiesEqualMax(CURRY_RECIPE)) {
+                        console.log("Congrats, you won!")
+                        this.showWinScreen = true;
+                        this.endGameMenuButton.style.display = "flex";
+                        this.plateItem.src = "Assets/Sprites/Dishes/curry.png";
+                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.display = "flex";
+                        canMove = false;
+                    } else {
+                        console.log("UnCograts, you lost!")
+                        this.showLoseScreen = true;
+                        this.endGameMenuButton.style.display = "flex";
+                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
+                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.display = "flex";
+                        canMove = false;
+                    }
+                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
+                    if (checkAllPropertiesEqualMax(FISH_TACO_RECIPE)) {
+                        console.log("Congrats, you won!")
+                        this.showWinScreen = true;
+                        this.endGameMenuButton.style.display = "flex";
+                        this.plateItem.src = "Assets/Sprites/Dishes/fishTaco.png";
+                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.display = "flex";
+                        canMove = false;
+                    } else {
+                        console.log("UnCograts, you lost!")
+                        this.showLoseScreen = true;
+                        this.endGameMenuButton.style.display = "flex";
+                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
+                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.display = "flex";
+                        canMove = false;
+                    }
+                }
+                this.checkOnce = false;
+            }
         }
         this.timer.innerText = Math.max(timerValueSec, 0);
     };
 
     updateMiniGameTimer = (deltaTime) => {
         this.mini_game_timer_value -= deltaTime;
-        const miniGameTimerValueSec = (this.mini_game_timer_value * 0.001).toFixed(0);
-
+        const miniGameTimerValueSec = Math.floor(this.mini_game_timer_value * 0.001);
         if (miniGameTimerValueSec <= 10 && miniGameTimerValueSec >= 6) {
             this.mini_game_timer.style.color = "#FBDD0D";
         } else if (miniGameTimerValueSec <= 5) {
@@ -203,7 +266,6 @@ export class GameplayScene extends Scene {
 
     updatePlayerMovement = (deltaTime) => {
         this.speedScaler = Math.min(this.scaledWidth, this.scaledHeight) * (deltaTime * this.speedModifer);
-
         if (this.input.keys.includes("ArrowUp") || this.input.keys.includes("w")) {
             this.updatePlayerImage("back");
             this.speed = this.speedScaler;
@@ -310,8 +372,16 @@ export class GameplayScene extends Scene {
                 this.sinkItem.style.bottom = sceneData.Gameplay.stir_item_new_transform;
                 this.sinkItem.style.display = "none";
                 let pileNumElement = document.getElementById(extractFileNameWithoutExtension(this.sinkItem.src) + "_num");
+                let propertyName = extractFileNameWithoutExtension(this.sinkItem.src) + "_num";
                 let pileNum = parseInt(pileNumElement.innerHTML[1]) + 1;
                 pileNumElement.innerHTML = "x" + pileNum;
+                if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
+                    NOODLE_RECIPE[propertyName]++;
+                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
+                    CURRY_RECIPE[propertyName]++;
+                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
+                    FISH_TACO_RECIPE[propertyName]++;
+                }
                 this.currentBottom = 8;
             }
             if (this.sinkItem.style.bottom === sceneData.Gameplay.stir_item_new_transform) {
@@ -326,6 +396,13 @@ export class GameplayScene extends Scene {
                             if (this.changeStirNum) {
                                 this.stirNumber++;
                                 this.stirNumberElement.innerHTML = this.stirNumber;
+                                if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
+                                    NOODLE_RECIPE.stir_num++;
+                                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
+                                    CURRY_RECIPE.stir_num++;
+                                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
+                                    FISH_TACO_RECIPE.stir_num++;
+                                }
                                 this.changeStirNum = false;
                             }
                         }, 200);
@@ -369,7 +446,6 @@ export class GameplayScene extends Scene {
             }
         }
     };
-    
 
     checkCollision = () => {
         this.isColliding = false;
@@ -515,7 +591,7 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
                                     this.sinkItem.style.display = "flex";
-                                }  else {
+                                } else {
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
                                     this.recipe.style.display = "flex";
@@ -581,7 +657,6 @@ export class GameplayScene extends Scene {
     draw = () => {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-
         // Draw the background image
         this.ctx.drawImage(
             this.backgroundImage,
@@ -613,9 +688,12 @@ export class GameplayScene extends Scene {
             this.drawFryMiniGame();
         } else if (this.showInventoryMiniGame) {
             this.drawInventoryMiniGame();
+        } else if (this.showWinScreen) {
+            this.drawWin();
+        } else if (this.showLoseScreen) {
+            this.drawLose();
         }
     }
-
     drawKnifeMiniGame = () => {
         this.ctx.drawImage(
             sceneData.Gameplay.mini_game_background,
@@ -664,6 +742,7 @@ export class GameplayScene extends Scene {
             this.menuHeight
         );
     }
+
     drawInventoryMiniGame = () => {
         this.ctx.drawImage(
             sceneData.Gameplay.mini_game_background,
@@ -691,6 +770,39 @@ export class GameplayScene extends Scene {
         );
         this.ctx.drawImage(
             this.sinkImage,
+            this.minGameX,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+
+    drawWin = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.win_screen,
+            this.minGameX * .8,
+            this.menuY,
+            this.menuWidth,
+            this.menuHeight
+        );
+    }
+    drawLose = () => {
+        this.ctx.drawImage(
+            sceneData.Gameplay.mini_game_background,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+        );
+        this.ctx.drawImage(
+            sceneData.Gameplay.lose_screen,
             this.minGameX,
             this.menuY,
             this.menuWidth,
@@ -913,6 +1025,12 @@ export class GameplayScene extends Scene {
         canMove = !canMove;
     }
 
+    toggleWinLose = () => {
+        this.showLoseScreen = false;
+        this.showWinScreen = false;
+        canMove = true;
+    }
+
     allowInteract = (yes) => {
         this.canInteract = yes;
     }
@@ -945,6 +1063,11 @@ export class GameplayScene extends Scene {
 
     updateSinkItemSrc = (newPng) => {
         this.sinkItem.src = "Assets/Sprites/GameplayUI/" + newPng;
+    }
+
+    resetTimer = () => {
+        this.timerValue = sceneData.Gameplay.timerValue;
+        console.log(this.timerValue)
     }
 }
 

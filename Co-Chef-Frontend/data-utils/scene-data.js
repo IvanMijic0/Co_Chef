@@ -104,6 +104,8 @@ export const sceneData = {
         stir_mini_game: document.getElementById("stir-mini-game"),
         fry_mini_game: document.getElementById("fry-mini-game"),
         inventory_mini_game: document.getElementById("inventory-mini-game"),
+        win_screen: document.getElementById("win-screen"),
+        lose_screen: document.getElementById("lose-screen"),
         sink_original_transform: "14vh",
         sink_new_transform: "35vh",
         knife_original_transform: "40vh",
@@ -112,6 +114,7 @@ export const sceneData = {
         stir_item_new_transform: "33vh",
         fry_item_original_transform: "14vh",
         fry_item_new_transform: "44vh",
+        timerValue: 180000.2,
         sceneId: 8,
     },
 }

@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tortillaTile = document.getElementById("tortilla-tile");
     const plateItem = document.getElementById("plate-item");
     const recipeListItems = document.getElementsByClassName("recipe-item");
+    const endMenuButton = document.getElementById("End-Menu-container")
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -207,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // ...
             audio.switchAudio("gameplayAudio", audio.audio.volume);
             scenes[activeScene].setPlayerImage();
+            scenes[activeScene].resetTimer();
             ic_options.style.display = "flex";
             ic_recipes.style.display = "flex";
             ic_slot.style.display = "flex";
@@ -290,6 +292,22 @@ document.addEventListener("DOMContentLoaded", () => {
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
+    endMenuButton.addEventListener("click", () => {
+        scenes[activeScene].toggleWinLose();
+        endMenuButton.style.display = "none";
+        ic_timer.style.display = "none";
+        ic_timer.style.display = "none";
+        timer.style.display = "none";
+        ic_recipes.style.display = "none";
+        slotItem.style.display = "none";
+        ic_slot.style.display = "none";
+        ic_options.style.display = "none";
+        ic_com.style.display = "none";
+        chat_container.style.display = "none";
+        audio.switchAudio("startMenuAudio", audio.audio.volume);
+        switchToScene(sceneData.START_MENU.sceneId);
+    });
+
     ic_recipes.addEventListener("click", () => {
         if (canMove) {
             scenes[activeScene].toggleRecipe()
@@ -320,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateImageSource(downArrow, "Assets/Sprites/GameplayUI/arrowDown-press.png");
                 break;
 
-            case "p":
+            case "F8":
                 REMEMBER_CHARACTER = "Chef";
                 scenes[activeScene].chefMode(REMEMBER_CHARACTER);
                 break;

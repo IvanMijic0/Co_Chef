@@ -32,7 +32,7 @@ canvas {
 #optionsBackground, #recipeBackground, #knife-mini-game,
 #stir-mini-game, #fry-mini-game, #inventory-mini-game,
 #ic_options, #ic_recipe, #ic_slot, #ic_com, #ic_timer,
-#timer, .chat-container {
+#timer, .chat-container, #win-screen, #lose-screen {
     display: none;
 }
 
@@ -141,7 +141,7 @@ canvas {
 }
 
 #options-backButton-container, #CharSelect-backButton-container, #CharSelect-confirmButton-container,
-#Gameplay-backButton-container, #Gameplay-Menu-container {
+#Gameplay-backButton-container, #Gameplay-Menu-container, #End-Menu-container {
     position: fixed;
     display: none;
     bottom: 5vw;
@@ -188,14 +188,19 @@ canvas {
     bottom: 35vh;
 }
 
+#End-Menu-container {
+    left: 50vw;
+    bottom: 9.5vw;
+}
+
 #options-backButton-container:hover, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:hover,
-#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover {
+#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover, #End-Menu-container:hover {
     background-color: #FF7F3F;
     box-shadow: 0 .4vw .8vw rgba(0, 0, 0, 0.3);
 }
 
 #options-backButton-container:active, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:active,
-#Gameplay-Menu-container:active, #Gameplay-backButton-container:active {
+#Gameplay-Menu-container:active, #Gameplay-backButton-container:active, #End-Menu-container:active {
     background-color: #95CD41;
     box-shadow: 0 .4vw 1vw rgba(0, 0, 0, 0.3);
 }
