@@ -393,23 +393,32 @@ export class GameplayScene extends Scene {
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
                         if (this.collisionCollider === "sink") {
-                            this.showSinkMiniGame = !this.showSinkMiniGame;
-                            canMove = !canMove;
-                            if (!canMove) {
-                                this.controls.style.display = "block";
-                                this.options.style.display = "none";
-                                this.recipe.style.display = "none";
-                                this.chat.disabled = true;
-                                this.slot.style.display = "none";
-                                this.slotItem.style.display = "none";
-                                this.sinkItem.style.display = "flex";
+                            if (!["tortilla.png", "red-meat.png", "noodles.png"].includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                                this.showSinkMiniGame = !this.showSinkMiniGame;
+                                canMove = !canMove;
+                                if (!canMove) {
+                                    this.controls.style.display = "block";
+                                    this.options.style.display = "none";
+                                    this.recipe.style.display = "none";
+                                    this.chat.disabled = true;
+                                    this.slot.style.display = "none";
+                                    this.slotItem.style.display = "none";
+                                    this.sinkItem.style.display = "flex";
+                                } else {
+                                    this.controls.style.display = "none";
+                                    this.options.style.display = "flex";
+                                    this.recipe.style.display = "flex";
+                                    this.slot.style.display = "flex";
+                                    this.slotItem.style.display = "flex";
+                                    this.sinkItem.style.display = "none";
+                                }
                             } else {
-                                this.controls.style.display = "none";
-                                this.options.style.display = "flex";
-                                this.recipe.style.display = "flex";
-                                this.slot.style.display = "flex";
-                                this.slotItem.style.display = "flex";
-                                this.sinkItem.style.display = "none";
+                                if (!this.showSinkMiniGame) {
+                                    setTimeout(() => {
+                                        this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                    }, 400)
+                                    this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                }
                             }
                         } else if (this.collisionCollider === "knife") {
                             if (this.cuttableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
