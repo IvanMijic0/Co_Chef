@@ -561,7 +561,6 @@ export class GameplayScene extends Scene {
                                     this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                                     this.stirGridInterface.style.display = "none";
                                     this.stirText.style.display = "none";
-                                    this.stirNumber = 0;
                                     this.stirNumberElement.innerHTML = this.stirNumber;
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.src = "";
