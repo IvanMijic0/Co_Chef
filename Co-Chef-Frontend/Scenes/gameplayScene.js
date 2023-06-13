@@ -135,7 +135,8 @@ export class GameplayScene extends Scene {
             "carrot_Pile.png",
             "green-onion_Pile.png",
             "red-meat_Cooked.png",
-            "fish_Cooked.png"
+            "fish_Cooked.png",
+            "noodles.png"
         ];
 
         this.fryableItems = [

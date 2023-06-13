@@ -49,7 +49,9 @@ export const sceneData = {
         canvasId: "dishSelect-canvas",
         title: "Choose your dish",
         pierSpeechImage: {source: document.getElementById("pierSpeech"), width: 4000, height: 360},
-        // dishDim: {width: 650, height: 538},
+        noodlesName: "noodles",
+        curryName: "curry",
+        fishTacoName: "fishTaco",
         sceneId: 7,
     },
     Gameplay: {

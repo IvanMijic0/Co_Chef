@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const redMeatTile = document.getElementById("red-meat-tile");
     const tortillaTile = document.getElementById("tortilla-tile");
     const plateItem = document.getElementById("plate-item");
+    const recipeListItems = document.getElementsByClassName("recipe-item");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -184,7 +185,26 @@ document.addEventListener("DOMContentLoaded", () => {
             SelectConfirmButton.style.display = "none";
             characterContainer.style.display = "none";
             speechText.style.display = "none";
+            scenes[activeScene].rememberPick();
             switchToScene(sceneData.Gameplay.sceneId);
+            // Handle Recipe Text
+            if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
+                for (let i = 0; i < recipeListItems.length; i++) {
+                    let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
+                    recipeItem.innerHTML = NOODLE_RECIPE.recipeArr[i];
+                }
+            } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
+                for (let i = 0; i < recipeListItems.length; i++) {
+                    let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
+                    recipeItem.innerHTML = CURRY_RECIPE.recipeArr[i];
+                }
+            } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
+                for (let i = 0; i < recipeListItems.length; i++) {
+                    let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
+                    recipeItem.innerHTML = FISH_TACO_RECIPE.recipeArr[i];
+                }
+            }
+            // ...
             audio.switchAudio("gameplayAudio", audio.audio.volume);
             scenes[activeScene].setPlayerImage();
             ic_options.style.display = "flex";

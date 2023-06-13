@@ -469,14 +469,15 @@ canvas {
     margin: 0;
     font-family: Arial, sans-serif;
     caret-color: transparent;
-
 }
 
 .recipe-list {
+    white-space: nowrap;
     position: relative;
-    left: -31vw;
+    left: -14vw;
     margin-bottom: 5vh;
     cursor: default;
+    top: 6vw;
 }
 
 .recipe-item, #RecipeHeader {
@@ -487,12 +488,13 @@ canvas {
     padding-left: 1vw;
     margin-bottom: .5vw;
     cursor: pointer;
-    top: 16vw;
+    top: 12vw;
 }
 
 #RecipeHeader {
-    top: 0;
-    left: 8vw;
+    position: absolute;
+    top: 11vw;
+    left: 13vw;
     font-size: 3vw;
     cursor: default;
 }

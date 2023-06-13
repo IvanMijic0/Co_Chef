@@ -16,6 +16,8 @@ chatField.addEventListener("click", () => {
 chatField.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         canMove = true;
+        document.getElementById("ic_options").style.display = "flex";
+        document.getElementById("ic_recipe").style.display = "flex";
         inputField.disabled = !inputField.disabled;
         const input = e.target;
         const message = input.value.trim();

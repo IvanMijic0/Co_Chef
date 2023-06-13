@@ -95,7 +95,10 @@
         <img src="Assets/Sprites/GameplayUI/garlic_Pile.png" alt="Garlic Pile">
         <p class="grid-item_text" id="garlic_num">x0</p>
     </div>
-    <div class="grid-item empty"></div>
+    <div class="grid-item">
+    <img id="noodles-grid-image" src="Assets/Sprites/GameplayUI/noodles_Cooked.png" alt="Cooked Noodles">
+    <p class="grid-item_text" id="noodles_num">x0</p>
+    </div>
 </div>
 
 <!-- Inventory -->
@@ -372,12 +375,10 @@
 <div id="recipeContainer" class="recipe-container">
     <h1 id="RecipeHeader">Recipe</h1>
     <ul class="recipe-list">
-        <li class="recipe-item"><span>Wash the vegetables</span></li>
-        <li class="recipe-item"><span>Slice 1 onion, 2 garlic cloves, 3 tomatoes</span></li>
-        <li class="recipe-item"><span>Add the vegetables to the pot</span></li>
-        <li class="recipe-item"><span>Cut meat into bite-sized pieces</span></li>
-        <li class="recipe-item"><span>Brown the meat for 10 seconds</span></li>
-        <li class="recipe-item"><span>Mix well for 20 seconds</span></li>
+        <li id="rec-item_1" class="recipe-item"><span>Wash the vegetables</span></li>
+        <li id="rec-item_2" class="recipe-item"><span>Slice 1 onion, 2 garlic cloves, 3 tomatoes and 1 red meat</span></li>
+        <li id="rec-item_3" class="recipe-item"><span>Mix vegetables 20 times</span></li>
+        <li id="rec-item_4" class="recipe-item"><span>Brown the meat for 10 seconds</span></li>
     </ul>
 </div>
 <script>

@@ -8,14 +8,17 @@ export class DishSelectScene extends Scene {
         super(canvasId, showButtons);
         this.dishes = [
             {
+                name: sceneData.DISH_SELECT.noodlesName,
                 src: "Assets/Sprites/Dishes/noodles.png",
                 text: textData.noodlesSelect,
             },
             {
+                name: sceneData.DISH_SELECT.curryName,
                 src: "Assets/Sprites/Dishes/curry.png",
                 text: textData.currySelect
             },
             {
+                name: sceneData.DISH_SELECT.fishTacoName,
                 src: "Assets/Sprites/Dishes/fishTaco.png",
                 text: textData.fishSelect
             },
@@ -127,8 +130,8 @@ export class DishSelectScene extends Scene {
     }
 
     rememberPick = () => {
-        this.rememberCharacter = this.dishes[this.currentDishIndex].name;
-        console.log("Picked Dish: " + this.rememberCharacter);
+        REMEMBER_DISH = this.dishes[this.currentDishIndex].name;
+        console.log("Picked dish: " + REMEMBER_DISH);
     }
 
     restartClick = () => {
