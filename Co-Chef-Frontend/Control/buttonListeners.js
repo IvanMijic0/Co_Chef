@@ -305,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ic_com.style.display = "none";
         chat_container.style.display = "none";
         audio.switchAudio("startMenuAudio", audio.audio.volume);
+        plateItem.style.display = "none";
         switchToScene(sceneData.START_MENU.sceneId);
     });
 

@@ -345,15 +345,15 @@ export class GameplayScene extends Scene {
                 if (this.canCut && this.cutCounter <= 3) {
                     this.cutCounter++
                     this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Cut" + this.cutCounter + ".png";
-                    this.sinkItem.style.width = "8vw"
-                    this.sinkItem.style.height = "4vw"
+                    this.sinkItem.style.width = "10vw"
+                    this.sinkItem.style.height = "3vw"
                     this.canCut = false;
                     if (this.cutCounter >= 3) {
                         this.slotItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
                         this.slotItem.style.width = "4vw";
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
-                        this.sinkItem.style.width = this.sinkItemOGWidth;
-                        this.sinkItem.style.height = this.sinkItemOGHeight;
+                        this.sinkItem.style.width = "10vw"
+                        this.sinkItem.style.height = "3vw"
                     }
                 }
             }
