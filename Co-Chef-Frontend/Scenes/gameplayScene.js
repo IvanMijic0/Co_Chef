@@ -198,16 +198,13 @@ export class GameplayScene extends Scene {
                         this.showWinScreen = true;
                         this.endGameMenuButton.style.display = "flex";
                         this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
-                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.bottom = "2vw";
                         this.plateItem.style.display = "flex";
                         canMove = false;
                     } else {
                         console.log("UnCograts, you lost!")
                         this.showLoseScreen = true;
                         this.endGameMenuButton.style.display = "flex";
-                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
-                        this.plateItem.style.bottom = "1vw";
-                        this.plateItem.style.display = "flex";
                         canMove = false;
                     }
                 } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
@@ -216,16 +213,13 @@ export class GameplayScene extends Scene {
                         this.showWinScreen = true;
                         this.endGameMenuButton.style.display = "flex";
                         this.plateItem.src = "Assets/Sprites/Dishes/curry.png";
-                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.bottom = "2vw";
                         this.plateItem.style.display = "flex";
                         canMove = false;
                     } else {
                         console.log("UnCograts, you lost!")
                         this.showLoseScreen = true;
                         this.endGameMenuButton.style.display = "flex";
-                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
-                        this.plateItem.style.bottom = "1vw";
-                        this.plateItem.style.display = "flex";
                         canMove = false;
                     }
                 } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
@@ -234,16 +228,13 @@ export class GameplayScene extends Scene {
                         this.showWinScreen = true;
                         this.endGameMenuButton.style.display = "flex";
                         this.plateItem.src = "Assets/Sprites/Dishes/fishTaco.png";
-                        this.plateItem.style.bottom = "1vw";
+                        this.plateItem.style.bottom = "2vw";
                         this.plateItem.style.display = "flex";
                         canMove = false;
                     } else {
                         console.log("UnCograts, you lost!")
                         this.showLoseScreen = true;
                         this.endGameMenuButton.style.display = "flex";
-                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
-                        this.plateItem.style.bottom = "1vw";
-                        this.plateItem.style.display = "flex";
                         canMove = false;
                     }
                 }
