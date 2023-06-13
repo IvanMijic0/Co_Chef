@@ -364,6 +364,8 @@ export class GameplayScene extends Scene {
 
     updateStirItemInteraction = () => {
         if (!canMove && this.collisionCollider === "stir") {
+            this.sinkItem.style.width = this.sinkItemOGWidth;
+            this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.sinkItem.style.display === "flex") {
                 this.currentBottom += 0.1;
                 this.sinkItem.style.bottom = this.currentBottom + "vw";
