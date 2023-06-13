@@ -89,6 +89,8 @@ export class GameplayScene extends Scene {
         this.slot = document.getElementById("ic_slot")
         this.controls = document.getElementById("controls");
         this.chat = document.querySelector(".chat-input");
+        this.chatContainer = document.getElementById("chat-container");
+        this.com = document.getElementById("ic_com");
         this.slotItem = document.getElementById("item");
         this.sinkItem = document.getElementById("sink-item");
         this.sinkImage = sceneData.Gameplay.sink_mini_game;
@@ -836,6 +838,8 @@ export class GameplayScene extends Scene {
     updateWinLoseScreen = () =>  {
         this.options.style.display = "none";
         this.recipe.style.display = "none";
+        this.com.style.display = "none";
+        this.chatContainer.style.display = "none";
     }
 
     updatePlatform = () => {

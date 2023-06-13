@@ -246,12 +246,16 @@ document.addEventListener("DOMContentLoaded", () => {
             gameplayBackButton.style.display = "flex";
             gameplayMenuButton.style.display = "flex";
             ic_recipes.style.display = "none";
+            chat_container.style.display = "none";
+            ic_com.style.display = "none";
         } else {
             volumeIcon.style.display = "none";
             volumeContainer.style.display = "none";
             gameplayBackButton.style.display = "none";
             gameplayMenuButton.style.display = "none";
             ic_recipes.style.display = "flex";
+            chat_container.style.display = "flex";
+            ic_com.style.display = "flex";
             scenes[activeScene].allowInteract(true);
         }
     });
@@ -267,6 +271,9 @@ document.addEventListener("DOMContentLoaded", () => {
         gameplayBackButton.style.display = "none";
         gameplayMenuButton.style.display = "none";
         ic_recipes.style.display = "flex";
+        ic_recipes.style.display = "flex";
+        chat_container.style.display = "flex";
+        ic_com.style.display = "flex";
         scenes[activeScene].allowInteract(true);
     });
 
@@ -316,11 +323,15 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].toggleRecipe()
             ic_options.style.display = "none";
             recipeText.style.display = "flex";
+            chat_container.style.display = "none";
+            ic_com.style.display = "none";
             scenes[activeScene].allowInteract(false);
         } else {
             scenes[activeScene].toggleRecipe()
             ic_options.style.display = "flex";
             recipeText.style.display = "none";
+            chat_container.style.display = "flex";
+            ic_com.style.display = "flex";
             scenes[activeScene].allowInteract(true);
         }
     });
