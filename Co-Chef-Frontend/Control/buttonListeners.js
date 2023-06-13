@@ -289,11 +289,13 @@ document.addEventListener("DOMContentLoaded", () => {
         ic_com.style.display = "none";
         chat_container.style.display = "none";
         audio.switchAudio("startMenuAudio", audio.audio.volume);
+        scenes[activeScene].resetCollider();
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
     endMenuButton.addEventListener("click", () => {
         scenes[activeScene].toggleWinLose();
+        scenes[activeScene].resetCollider();
         endMenuButton.style.display = "none";
         ic_timer.style.display = "none";
         ic_timer.style.display = "none";

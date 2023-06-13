@@ -166,6 +166,9 @@ export class GameplayScene extends Scene {
         this.updateStirItemInteraction();
         this.updateFryItemInteraction();
         this.showMiniGameTimer();
+        if (this.showWinScreen || this.showLoseScreen) {
+            this.updateWinLoseScreen();
+        }
     };
 
     showMiniGameTimer() {
@@ -830,6 +833,11 @@ export class GameplayScene extends Scene {
         }
     }
 
+    updateWinLoseScreen = () =>  {
+        this.options.style.display = "none";
+        this.recipe.style.display = "none";
+    }
+
     updatePlatform = () => {
         this.platformX = sceneData.Gameplay.playerPlatform.originalX * (this.canvas.width / this.originalCanvasWidth);
         this.platformY = sceneData.Gameplay.playerPlatform.originalY * (this.canvas.height / this.originalCanvasHeight);
@@ -1060,6 +1068,10 @@ export class GameplayScene extends Scene {
     resetTimer = () => {
         this.timerValue = sceneData.Gameplay.timerValue;
         console.log(this.timerValue)
+    }
+
+    resetCollider = () => {
+        this.gamePlayText.style.display = "none";
     }
 }
 
