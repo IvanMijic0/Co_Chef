@@ -274,6 +274,15 @@ canvas {
     transform: translate(-50%);
 }
 
+#plate-item {
+    display: none;
+    z-index: 0;
+    width: 5vw;
+    position: absolute;
+    right: 26.5vw;
+    top: 15.3vw;
+}
+
 .controls {
     display: none;
     position: absolute;

@@ -1,6 +1,7 @@
 import {Scene} from "./scene.js";
 import {sceneData} from "../data-utils/scene-data.js";
 import {InputHandler} from "../Control/input-handler.js";
+import {extractFileNameWithExtension, extractFileNameWithoutExtension} from "../utils/string-manipulation.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
@@ -232,8 +233,7 @@ export class GameplayScene extends Scene {
     };
 
     updatePlayerImage = (direction) => {
-        console.log(this.extractFileNameWithExtension(this.sinkItem.src))
-        this.playerImage.src = `Assets/Sprites/Player/${rememberCharacter}_${direction}.png`;
+        this.playerImage.src = `Assets/Sprites/Player/${REMEMBER_CHARACTER}_${direction}.png`;
     };
 
     updateSinkItemInteraction = () => {
@@ -245,12 +245,12 @@ export class GameplayScene extends Scene {
                     this.sinkImage.src = sceneData.Gameplay.sink_mini_game_interact;
                     this.mini_game_timer.style.display = "flex";
                     if (timerValueSec <= 7 && timerValueSec > 5) {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty2.png";
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty2.png";
                     } else if (timerValueSec <= 5 && timerValueSec > 3) {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty3.png";
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty3.png";
                     } else if (timerValueSec <= 0) {
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
-                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
+                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
                     }
 
                 }, 200);
@@ -263,6 +263,10 @@ export class GameplayScene extends Scene {
                     this.mini_game_timer.style.display = "none";
                     this.mini_game_timer_value = 10000;
                     this.mini_game_timer.style.color = "white";
+                    if (extractFileNameWithExtension(this.sinkItem.src) !== extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png") {
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty1.png";
+                    }
+
                 }, 200);
             }
         }
@@ -277,14 +281,14 @@ export class GameplayScene extends Scene {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_original_transform;
                 if (this.canCut && this.cutCounter <= 3) {
                     this.cutCounter++
-                    this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cut" + this.cutCounter + ".png";
+                    this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Cut" + this.cutCounter + ".png";
                     this.sinkItem.style.width = "8vw"
                     this.sinkItem.style.height = "4vw"
                     this.canCut = false;
                     if (this.cutCounter >= 3) {
-                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
+                        this.slotItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
                         this.slotItem.style.width = "4vw";
-                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
+                        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Pile.png";
                         this.sinkItem.style.width = this.sinkItemOGWidth;
                         this.sinkItem.style.height = this.sinkItemOGHeight;
                     }
@@ -304,19 +308,18 @@ export class GameplayScene extends Scene {
             if (this.currentBottom >= 33) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.stir_item_new_transform;
                 this.sinkItem.style.display = "none";
-                console.log(this.extractFileNameWithoutExtension(this.sinkItem.src))
-                let pileNumElement = document.getElementById(this.extractFileNameWithoutExtension(this.sinkItem.src) + "_num");
+                let pileNumElement = document.getElementById(extractFileNameWithoutExtension(this.sinkItem.src) + "_num");
                 let pileNum = parseInt(pileNumElement.innerHTML[1]) + 1;
                 pileNumElement.innerHTML = "x" + pileNum;
                 this.currentBottom = 8;
             }
             if (this.sinkItem.style.bottom === sceneData.Gameplay.stir_item_new_transform) {
                 if (this.input.keys.includes("ArrowRight")) {
-                    if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_left.png") {
+                    if (extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_left.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png";
                         }, 200);
-                    } else if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_middle.png") {
+                    } else if (extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_middle.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_right.png";
                             if (this.changeStirNum) {
@@ -327,11 +330,11 @@ export class GameplayScene extends Scene {
                         }, 200);
                     }
                 } else if (this.input.keys.includes("ArrowLeft")) {
-                    if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_right.png") {
+                    if (extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_right.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_middle.png";
                         }, 200);
-                    } else if (this.extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_middle.png") {
+                    } else if (extractFileNameWithExtension(this.stirImage.src) === "stir_mini-game_middle.png") {
                         setTimeout(() => {
                             this.stirImage.src = "Assets/Sprites/GameplayUI/stir_mini-game_left.png";
                             this.changeStirNum = true;
@@ -360,22 +363,12 @@ export class GameplayScene extends Scene {
                 }, 200)
             }
             if (this.mini_game_timer_value <= 0) {
-                this.sinkItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
-                this.slotItem.src = "Assets/Sprites/GameplayUI/" + this.extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
+                this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
+                this.slotItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Cooked.png";
             }
         }
     };
-
-    extractFileNameWithExtension = (path) => {
-        return path.split("/").pop();
-    }
-
-    extractFileNameWithoutExtension = (filePath) => {
-        const fileNameWithExtension = this.extractFileNameWithExtension(filePath);
-        const fileNameWithoutExtension = fileNameWithExtension.split('.').slice(0, -1).join('.');
-        const fileNameParts = fileNameWithoutExtension.split('_');
-        return fileNameParts[0];
-    }
+    
 
     checkCollision = () => {
         this.isColliding = false;
@@ -393,7 +386,7 @@ export class GameplayScene extends Scene {
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
                         if (this.collisionCollider === "sink") {
-                            if (!["tortilla.png", "red-meat.png", "noodles.png", "ic_slot.png"].includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (!["tortilla.png", "red-meat.png", "noodles.png", "ic_slot.png"].includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showSinkMiniGame = !this.showSinkMiniGame;
                                 canMove = !canMove;
                                 if (!canMove) {
@@ -416,12 +409,18 @@ export class GameplayScene extends Scene {
                                 if (!this.showSinkMiniGame) {
                                     setTimeout(() => {
                                         this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                        if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot_err.png") {
+                                            this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot.png"
+                                        }
                                     }, 400)
                                     this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot.png") {
+                                        this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    }
                                 }
                             }
                         } else if (this.collisionCollider === "knife") {
-                            if (this.cuttableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (this.cuttableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showKnifeMiniGame = !this.showKnifeMiniGame;
                                 canMove = !canMove;
                                 this.controls.style.display = "block";
@@ -437,8 +436,14 @@ export class GameplayScene extends Scene {
                                 if (!this.showKnifeMiniGame) {
                                     setTimeout(() => {
                                         this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                        if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot_err.png") {
+                                            this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot.png"
+                                        }
                                     }, 400)
                                     this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot.png") {
+                                        this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    }
                                 } else {
                                     this.showKnifeMiniGame = !this.showKnifeMiniGame;
                                     canMove = !canMove;
@@ -453,7 +458,7 @@ export class GameplayScene extends Scene {
                                 }
                             }
                         } else if (this.collisionCollider === "stir") {
-                            if (this.stirrableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (this.stirrableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showStirrMiniGame = !this.showStirrMiniGame;
                                 canMove = !canMove;
                                 if (!canMove) {
@@ -486,12 +491,18 @@ export class GameplayScene extends Scene {
                                 if (!this.showStirrMiniGame) {
                                     setTimeout(() => {
                                         this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                        if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot_err.png") {
+                                            this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot.png"
+                                        }
                                     }, 400)
                                     this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot.png") {
+                                        this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    }
                                 }
                             }
                         } else if (this.collisionCollider === "fry") {
-                            if (this.fryableItems.includes(this.extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (this.fryableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showFryMiniGame = !this.showFryMiniGame;
                                 canMove = !canMove;
                                 if (!canMove) {
@@ -517,8 +528,14 @@ export class GameplayScene extends Scene {
                                 if (!this.showFryMiniGame) {
                                     setTimeout(() => {
                                         this.slot.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+                                        if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot_err.png") {
+                                            this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot.png"
+                                        }
                                     }, 400)
                                     this.slot.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    if (extractFileNameWithExtension(this.slotItem.src) === "ic_slot.png") {
+                                        this.slotItem.src = "Assets/Sprites/GameplayUI/ic_slot_err.png"
+                                    }
                                 } else {
                                     this.showFryMiniGame = !this.showFryMiniGame;
                                     canMove = !canMove;
@@ -900,7 +917,7 @@ export class GameplayScene extends Scene {
     }
 
     setPlayerImage = () => {
-        this.playerImage.src = "Assets/Sprites/Player/" + rememberCharacter + "_front.png";
+        this.playerImage.src = "Assets/Sprites/Player/" + REMEMBER_CHARACTER + "_front.png";
     }
 
     chefMode = (char) => {
@@ -923,6 +940,10 @@ export class GameplayScene extends Scene {
         this.slot.style.display = "flex";
         this.slotItem.style.display = "flex";
         this.inventoryTiles.style.display = "none";
+    }
+
+    updateSinkItemSrc = (newPng) => {
+        this.sinkItem.src = "Assets/Sprites/GameplayUI/" + newPng;
     }
 }
 

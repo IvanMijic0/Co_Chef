@@ -1,5 +1,6 @@
 import {sceneData} from "../data-utils/scene-data.js";
 import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./controller.js";
+import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     // Caching everything
@@ -53,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const greenOnionTile = document.getElementById("green-onion-tile");
     const redMeatTile = document.getElementById("red-meat-tile");
     const tortillaTile = document.getElementById("tortilla-tile");
+    const plateItem = document.getElementById("plate-item");
 
     loginButton.addEventListener("click", (e) => {
         // TODO Add login functionality
@@ -299,8 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
 
             case "p":
-                rememberCharacter = "Chef";
-                scenes[activeScene].chefMode(rememberCharacter);
+                REMEMBER_CHARACTER = "Chef";
+                scenes[activeScene].chefMode(REMEMBER_CHARACTER);
                 break;
         }
     });
@@ -422,10 +424,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     tortillaTile.addEventListener("click", () => {
-        slotItem.style.width = "3vw";
-        slotItem.src = tortillaTile.querySelector("#tortilla").src;
-        scenes[activeScene].changeItemFromSlot(8);
-        scenes[activeScene].closeInventory();
+        if (extractFileNameWithExtension(slotItem.src) === "fish_Cooked.png") {
+            scenes[activeScene].closeInventory();
+            scenes[activeScene].updateSinkItemSrc("ic_slot.png");
+            slotItem.src = "Assets/Sprites/GameplayUI/ic_slot.png";
+            plateItem.style.display = "flex";
+        } else {
+            slotItem.style.width = "3vw";
+            slotItem.src = tortillaTile.querySelector("#tortilla").src;
+            scenes[activeScene].changeItemFromSlot(8);
+            scenes[activeScene].closeInventory();
+        }
     });
 });
 

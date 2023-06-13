@@ -157,8 +157,8 @@ export class CharacterSelectScene extends Scene {
     }
 
     rememberPick = () => {
-        rememberCharacter = this.characters[this.currentIndex].remember;
-        console.log("Picked character: " + rememberCharacter);
+        REMEMBER_CHARACTER = this.characters[this.currentIndex].remember;
+        console.log("Picked character: " + REMEMBER_CHARACTER);
     }
 
     restartClick = () => {
