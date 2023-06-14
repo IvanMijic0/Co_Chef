@@ -195,18 +195,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     recipeItem.innerHTML = NOODLE_RECIPE.recipeArr[i];
                 }
                 scenes[activeScene].resetRecipe(NOODLE_RECIPE);
+                scenes[activeScene].resetWinLose();
             } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
                 for (let i = 0; i < recipeListItems.length; i++) {
                     let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
                     recipeItem.innerHTML = CURRY_RECIPE.recipeArr[i];
                 }
                 scenes[activeScene].resetRecipe(CURRY_RECIPE);
+                scenes[activeScene].resetWinLose();
             } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
                 for (let i = 0; i < recipeListItems.length; i++) {
                     let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
                     recipeItem.innerHTML = FISH_TACO_RECIPE.recipeArr[i];
                 }
                 scenes[activeScene].resetRecipe(FISH_TACO_RECIPE);
+                scenes[activeScene].resetWinLose();
             }
             // ...
             audio.switchAudio("gameplayAudio", audio.audio.volume);

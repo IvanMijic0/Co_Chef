@@ -201,8 +201,8 @@ export class GameplayScene extends Scene {
             this.timer.style.color = "#e10000";
         } else if (timerValueSec === 0) {
             this.timer.style.color = "#e10000";
+            timerValueSec = 0;
             if (this.checkOnce) {
-                timerValueSec = 0;
                 if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
                     if (checkAllPropertiesEqualMax(NOODLE_RECIPE)) {
                         console.log("Congrats, you won!")
@@ -216,6 +216,7 @@ export class GameplayScene extends Scene {
                         console.log("UnCograts, you lost!")
                         this.showLoseScreen = true;
                         this.endGameMenuButton.style.display = "flex";
+                        console.log(this.showLoseScreen )
                         canMove = false;
                     }
                 } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
@@ -1154,6 +1155,7 @@ export class GameplayScene extends Scene {
             element.innerHTML = "x0";
         });
         this.timer.style.color = "#ffffff";
+        this.checkOnce = true;
     }
 }
 
