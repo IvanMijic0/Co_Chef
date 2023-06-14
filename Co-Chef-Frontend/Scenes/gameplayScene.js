@@ -104,6 +104,12 @@ export class GameplayScene extends Scene {
         this.stirNumberElement = document.getElementById("stirNumber");
         this.plateItem = document.getElementById("plate-item");
         this.endGameMenuButton = document.getElementById("End-Menu-container");
+        this.recipeText = document.getElementById("recipeContainer");
+        this.volumeIcon = document.getElementById("volumeIcon");
+        this.volumeContainer = document.getElementById("volumeContainer");
+        this.gameplayBackButton = document.getElementById("Gameplay-backButton-container");
+        this.gameplayMenuButton = document.getElementById("Gameplay-Menu-container");
+
         this.stirNumber = 0;
         this.changeStirNum = true;
 
@@ -297,6 +303,8 @@ export class GameplayScene extends Scene {
 
     updateSinkItemInteraction = () => {
         if (!canMove && this.collisionCollider === "sink") {
+            this.sinkItem.style.width = this.sinkItemOGWidth;
+            this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.input.keys.includes("ArrowUp")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.sink_new_transform;
                 const timerValueSec = (this.mini_game_timer_value * 0.001).toFixed(0)
@@ -333,6 +341,8 @@ export class GameplayScene extends Scene {
 
     updateKnifeItemInteraction = () => {
         if (!canMove && this.collisionCollider === "knife") {
+            this.sinkItem.style.width = this.sinkItemOGWidth;
+            this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.input.keys.includes("ArrowUp")) {
                 this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                 this.canCut = true;
@@ -423,6 +433,8 @@ export class GameplayScene extends Scene {
 
     updateFryItemInteraction = () => {
         if (!canMove && this.collisionCollider === "fry") {
+            this.sinkItem.style.width = this.sinkItemOGWidth;
+            this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.input.keys.includes("ArrowUp")) {
                 this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_new_transform;
                 setTimeout(() => {
@@ -461,7 +473,8 @@ export class GameplayScene extends Scene {
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
                         if (this.collisionCollider === "sink") {
-                            if (!["tortilla.png", "red-meat.png", "noodles.png", "ic_slot.png"].includes(extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (!["tortilla.png", "redMeat.png", "noodles.png", "ic_slot.png", "redMead_Cooked.png, fish_Cooked.png"].
+                            includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showSinkMiniGame = !this.showSinkMiniGame;
                                 canMove = !canMove;
                                 if (!canMove) {
@@ -472,6 +485,8 @@ export class GameplayScene extends Scene {
                                     this.slot.style.display = "none";
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.style.display = "flex";
+                                    this.com.style.display = "none";
+                                    this.chatContainer.style.display = "none";
                                 } else {
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
@@ -479,6 +494,9 @@ export class GameplayScene extends Scene {
                                     this.slot.style.display = "flex";
                                     this.slotItem.style.display = "flex";
                                     this.sinkItem.style.display = "none";
+                                    this.com.style.display = "flex";
+                                    this.chatContainer.style.display = "flex";
+
                                 }
                             } else {
                                 if (!this.showSinkMiniGame) {
@@ -498,15 +516,30 @@ export class GameplayScene extends Scene {
                             if (this.cuttableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showKnifeMiniGame = !this.showKnifeMiniGame;
                                 canMove = !canMove;
-                                this.controls.style.display = "block";
-                                this.options.style.display = "none";
-                                this.recipe.style.display = "none";
-                                this.chat.disabled = true;
-                                this.slot.style.display = "none";
-                                this.slotItem.style.display = "none";
-                                this.knifeImage.style.display = "flex";
-                                this.sinkItem.style.bottom = sceneData.Gameplay.knife_original_transform;
-                                this.sinkItem.style.display = "flex";
+                                if (!canMove) {
+                                    this.controls.style.display = "block";
+                                    this.options.style.display = "none";
+                                    this.recipe.style.display = "none";
+                                    this.chat.disabled = true;
+                                    this.slot.style.display = "none";
+                                    this.slotItem.style.display = "none";
+                                    this.knifeImage.style.display = "flex";
+                                    this.sinkItem.style.bottom = sceneData.Gameplay.knife_original_transform;
+                                    this.sinkItem.style.display = "flex";
+                                    this.chatContainer.style.display = "none";
+                                    this.com.style.display = "none";
+                                } else {
+                                    this.controls.style.display = "none";
+                                    this.options.style.display = "flex";
+                                    this.recipe.style.display = "flex";
+                                    this.slot.style.display = "flex";
+                                    this.slotItem.style.display = "flex";
+                                    this.knifeImage.style.display = "none";
+                                    this.sinkItem.style.display = "none";
+                                    this.chatContainer.style.display = "flex";
+                                    this.com.style.display = "flex";
+                                    this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
+                                }
                             } else {
                                 if (!this.showKnifeMiniGame) {
                                     setTimeout(() => {
@@ -529,6 +562,8 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "flex";
                                     this.knifeImage.style.display = "none";
                                     this.sinkItem.style.display = "none";
+                                    this.chatContainer.style.display = "flex";
+                                    this.com.style.display = "flex";
                                     this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                                 }
                             }
@@ -546,6 +581,8 @@ export class GameplayScene extends Scene {
                                     this.sinkItem.style.display = "flex";
                                     this.stirGridInterface.style.display = "grid";
                                     this.stirText.style.display = "flex";
+                                    this.com.style.display = "none";
+                                    this.chatContainer.style.display = "none";
                                 } else {
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
@@ -559,6 +596,8 @@ export class GameplayScene extends Scene {
                                     this.stirText.style.display = "none";
                                     this.stirNumberElement.innerHTML = this.stirNumber;
                                     this.slotItem.style.display = "none";
+                                    this.com.style.display = "flex";
+                                    this.chatContainer.style.display = "flex";
                                     this.sinkItem.src = "";
                                 }
                             } else {
@@ -588,6 +627,8 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "none";
                                     this.sinkItem.style.bottom = sceneData.Gameplay.fry_item_original_transform;
                                     this.sinkItem.style.display = "flex";
+                                    this.com.style.display = "none";
+                                    this.chatContainer.style.display = "none";
                                 } else {
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
@@ -596,6 +637,8 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "flex";
                                     this.knifeImage.style.display = "none";
                                     this.sinkItem.style.display = "none";
+                                    this.com.style.display = "flex";
+                                    this.chatContainer.style.display = "flex";
                                     this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                                 }
                             } else {
@@ -620,6 +663,8 @@ export class GameplayScene extends Scene {
                                     this.slotItem.style.display = "flex";
                                     this.knifeImage.style.display = "none";
                                     this.sinkItem.style.display = "none";
+                                    this.com.style.display = "flex";
+                                    this.chatContainer.style.display = "flex";
                                     this.knifeImage.style.bottom = sceneData.Gameplay.knife_new_transform;
                                 }
                             }
@@ -634,6 +679,8 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "none";
                                 this.slotItem.style.display = "none";
                                 this.inventoryTiles.style.display = "grid";
+                                this.com.style.display = "none";
+                                this.chatContainer.style.display = "none";
                             } else {
                                 this.controls.style.display = "none";
                                 this.options.style.display = "flex";
@@ -641,6 +688,8 @@ export class GameplayScene extends Scene {
                                 this.slot.style.display = "flex";
                                 this.slotItem.style.display = "flex";
                                 this.inventoryTiles.style.display = "none";
+                                this.com.style.display = "flex";
+                                this.chatContainer.style.display = "flex";
                             }
                         }
                     }
@@ -840,6 +889,13 @@ export class GameplayScene extends Scene {
         this.recipe.style.display = "none";
         this.com.style.display = "none";
         this.chatContainer.style.display = "none";
+        this.showOptions = false;
+        this.showRecipe = false;
+        this.recipeText.style.display = "none";
+        this.volumeIcon.style.display = "none";
+        this.volumeContainer.style.display = "none";
+        this.gameplayBackButton.style.display = "none";
+        this.gameplayMenuButton.style.display = "none";
     }
 
     updatePlatform = () => {
@@ -1063,6 +1119,8 @@ export class GameplayScene extends Scene {
         this.slot.style.display = "flex";
         this.slotItem.style.display = "flex";
         this.inventoryTiles.style.display = "none";
+        this.com.style.display = "flex";
+        this.chatContainer.style.display = "flex";
     }
 
     updateSinkItemSrc = (newPng) => {
@@ -1089,12 +1147,13 @@ export class GameplayScene extends Scene {
             }
         }
         this.stirNumber = 0;
+        this.stirNumberElement.innerHTML = this.stirNumber;
         // Reset all grid-item_text elements to "x0"
         const gridItemTextElements = document.querySelectorAll(".grid-item_text");
         gridItemTextElements.forEach((element) => {
             element.innerHTML = "x0";
         });
-
+        this.timer.style.color = "#ffffff";
     }
 }
 

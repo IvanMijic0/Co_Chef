@@ -388,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
         slotItem.src = fishTile.querySelector("#fish").src;
         scenes[activeScene].changeItemFromSlot(10);
         scenes[activeScene].closeInventory();
+
     });
 
     avocadoTile.addEventListener("click", () => {
