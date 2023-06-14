@@ -94,8 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
             url: "../Co-Chef-Backend/rest/user",
             method: "POST",
             data: {
-                gameOpponent: "Richmond",
-                gameId: 4,
                 userName: userName,
                 userEmail: userEmail,
                 userPassword: userPassword
