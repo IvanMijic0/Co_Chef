@@ -602,8 +602,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].closeInventory();
         }
     });
-})
-;
+});
 
 const updateImageSource = (element, src) => {
     element.src = src;
