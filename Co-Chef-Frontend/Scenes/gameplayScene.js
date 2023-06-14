@@ -1071,11 +1071,30 @@ export class GameplayScene extends Scene {
 
     resetTimer = () => {
         this.timerValue = sceneData.Gameplay.timerValue;
-        console.log(this.timerValue)
     }
 
     resetCollider = () => {
         this.gamePlayText.style.display = "none";
+    }
+
+    resetWinLose = () => {
+        this.showWinScreen = false;
+        this.showLoseScreen = false;
+    }
+
+    resetRecipe = (recipe) => {
+        for (let key in recipe) {
+            if (key.endsWith("_num")) {
+                recipe[key] = 0;
+            }
+        }
+        this.stirNumber = 0;
+        // Reset all grid-item_text elements to "x0"
+        const gridItemTextElements = document.querySelectorAll(".grid-item_text");
+        gridItemTextElements.forEach((element) => {
+            element.innerHTML = "x0";
+        });
+
     }
 }
 

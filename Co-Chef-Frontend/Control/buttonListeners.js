@@ -194,21 +194,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
                     recipeItem.innerHTML = NOODLE_RECIPE.recipeArr[i];
                 }
+                scenes[activeScene].resetRecipe(NOODLE_RECIPE);
             } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
                 for (let i = 0; i < recipeListItems.length; i++) {
                     let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
                     recipeItem.innerHTML = CURRY_RECIPE.recipeArr[i];
                 }
+                scenes[activeScene].resetRecipe(CURRY_RECIPE);
             } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
                 for (let i = 0; i < recipeListItems.length; i++) {
                     let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
                     recipeItem.innerHTML = FISH_TACO_RECIPE.recipeArr[i];
                 }
+                scenes[activeScene].resetRecipe(FISH_TACO_RECIPE);
             }
             // ...
             audio.switchAudio("gameplayAudio", audio.audio.volume);
             scenes[activeScene].setPlayerImage();
             scenes[activeScene].resetTimer();
+            scenes[activeScene].allowInteract(true);
             ic_options.style.display = "flex";
             ic_recipes.style.display = "flex";
             ic_slot.style.display = "flex";
@@ -297,6 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chat_container.style.display = "none";
         audio.switchAudio("startMenuAudio", audio.audio.volume);
         scenes[activeScene].resetCollider();
+        scenes[activeScene].resetWinLose();
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
@@ -315,6 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chat_container.style.display = "none";
         audio.switchAudio("startMenuAudio", audio.audio.volume);
         plateItem.style.display = "none";
+        scenes[activeScene].resetWinLose();
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
