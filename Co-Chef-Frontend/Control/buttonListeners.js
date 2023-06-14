@@ -59,10 +59,64 @@ document.addEventListener("DOMContentLoaded", () => {
     const endMenuButton = document.getElementById("End-Menu-container")
 
     loginButton.addEventListener("click", (e) => {
-        // TODO Add login functionality
         e.preventDefault();
-        switchToScene(sceneData.INTRO.sceneId);
-        intro()
+        const userEmail = $("#username").val();
+        const userPassword = $("#password").val();
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
+            method: "GET",
+            success: (response) => {
+                console.log(response)
+                if (response) {
+                    toastr.success("Login successful!");
+                    setTimeout(() => {
+                        switchToScene(sceneData.INTRO.sceneId);
+                        intro();
+                    }, 1500)
+                } else {
+                    // User credentials are invalid
+                    toastr.warning("User does not exist!");
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                toastr.error("An error occurred: " + error);
+            }
+        });
+    });
+
+    signupButton0.addEventListener("click", (e) => {
+        e.preventDefault();
+        const userName = $("#name").val();
+        const userEmail = $("#username0").val();
+        const userPassword = $("#password0").val();
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/user",
+            method: "POST",
+            data: {
+                gameOpponent: "Richmond",
+                gameId: 4,
+                userName: userName,
+                userEmail: userEmail,
+                userPassword: userPassword
+            },
+            success: function(response, status, xhr) {
+                if (xhr.status === 201) {
+                    toastr.success("Signup successful!");
+                    setTimeout(() => {
+                        switchToScene(sceneData.INTRO.sceneId);
+                        intro();
+                    }, 1000);
+                }
+            },
+            error: function(xhr, status, error) {
+                if (xhr.status === 409) {
+                    toastr.warning("User already exists");
+                } else {
+                    toastr.error("An error occurred: " + error);
+                }
+            }
+        });
     });
 
     loginButton0.addEventListener("click", () => {
@@ -71,13 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     signupButton.addEventListener("click", () => {
         switchToScene(sceneData.SIGNUP.sceneId);
-    });
-
-    signupButton0.addEventListener("click", (e) => {
-        // TODO Add signup functionality
-        e.preventDefault();
-        switchToScene(sceneData.INTRO.sceneId);
-        intro();
     });
 
     tutorialButton.addEventListener("click", () => {
@@ -105,8 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     restartButton.addEventListener("click", () => {
-        switchToScene(sceneData.INTRO.sceneId);
-        intro();
+        switchToScene(sceneData.SIGNUP.sceneId);
+        // intro();
     });
 
     tutorialBackButton.addEventListener("click", () => {
