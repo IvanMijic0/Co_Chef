@@ -1,12 +1,12 @@
 <?php
 
 require "../vendor/autoload.php";
-require "dao/StudentsDao.class.php";
-require "services/StudentService.php";
+require "dao/UsersDao.class.php";
+require "services/UserService.php";
 
-Flight::register("student_service", StudentService::class);
+Flight::register("user_service", UserService::class);
 
-require_once "routes/studentRoutes.php";
+require_once "routes/UserRoutes.php";
 
 Flight::start();
 
