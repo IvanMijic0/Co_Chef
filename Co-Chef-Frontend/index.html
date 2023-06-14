@@ -23,6 +23,7 @@
 <canvas id="characterSelect-canvas"></canvas>
 <canvas id="dishSelect-canvas"></canvas>
 <canvas id="gameplay-canvas"></canvas>
+<canvas id="connect-canvas"></canvas>
 
 <!-- Images -->
 <img id="startMenu" src="Assets/Sprites/Backgrounds/startMenuImage.png" alt="Start Menu Image">
@@ -52,6 +53,13 @@
 <img id="plate-item" src="Assets/Sprites/GameplayUI/fish-tortilla_Combo.png" alt="Final Dish">
 <img id="win-screen" src="Assets/Sprites/GameplayUI/winScreen.png" alt="Win Screen Image">
 <img id="lose-screen" src="Assets/Sprites/GameplayUI/loseScreen.png" alt="Lose Screen Image">
+<img id="user-background" src="Assets/Sprites/Backgrounds/signupContainerBackground.png" alt="User Background">
+
+<!-- Users -->
+<h1 id="userHeader">Welcome Chef!</h1>
+<div id="userListContainer">
+    <div id="userContainer"></div>
+</div>
 
 <!-- Stir interface -->
 <div class="grid-container">
@@ -100,8 +108,8 @@
         <p class="grid-item_text" id="garlic_num">x0</p>
     </div>
     <div class="grid-item">
-    <img id="noodles-grid-image" src="Assets/Sprites/GameplayUI/noodles_Cooked.png" alt="Cooked Noodles">
-    <p class="grid-item_text" id="noodles_num">x0</p>
+        <img id="noodles-grid-image" src="Assets/Sprites/GameplayUI/noodles_Cooked.png" alt="Cooked Noodles">
+        <p class="grid-item_text" id="noodles_num">x0</p>
     </div>
 </div>
 
@@ -324,6 +332,12 @@
     </div>
 </div>
 
+<div id="Connect-Back-button" class="Back-Button">
+    <div class="Button-container" id="connect-backButton-container">
+        <button class="Button" id="connectBackButton">Back</button>
+    </div>
+</div>
+
 <div id="Options-Back-button">
     <div id="options-backButton-container">
         <button class="Button" id="optionsBackButton">Back</button>
@@ -386,7 +400,8 @@
     <h1 id="RecipeHeader">Recipe</h1>
     <ul class="recipe-list">
         <li id="rec-item_1" class="recipe-item"><span>Wash the vegetables</span></li>
-        <li id="rec-item_2" class="recipe-item"><span>Slice 1 onion, 2 garlic cloves, 3 tomatoes and 1 red meat</span></li>
+        <li id="rec-item_2" class="recipe-item"><span>Slice 1 onion, 2 garlic cloves, 3 tomatoes and 1 red meat</span>
+        </li>
         <li id="rec-item_3" class="recipe-item"><span>Mix vegetables 20 times</span></li>
         <li id="rec-item_4" class="recipe-item"><span>Brown the meat for 10 seconds</span></li>
     </ul>
@@ -479,7 +494,7 @@
 >
 
 <!-- Scripts -->
-<!--<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script type="module" src="Control/controller.js"></script>

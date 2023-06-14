@@ -1,3 +1,5 @@
 Done with user register and login
 Let us see what we need next...
 
+Save User credentials
+Available players page

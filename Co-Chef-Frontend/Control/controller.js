@@ -10,6 +10,7 @@ import {GameplayScene} from "../Scenes/gameplayScene.js";
 import {sceneData} from "../data-utils/scene-data.js";
 import {LazyAudio} from "../utils/audio.js";
 import {VolumeBar} from "../utils/volume-bar.js";
+import {ConnectScene} from "../Scenes/connectScene.js";
 
 // Check if the Screen Orientation API is supported
 if (screen.orientation && screen.orientation.lock) {
@@ -31,6 +32,7 @@ export const scenes = [
     new LoginScene(sceneData.LOGIN.canvasId, sceneData.LOGIN.image, false),
     new IntroScene(sceneData.INTRO.canvasId, sceneData.INTRO.logo, sceneData.INTRO.background, false),
     new StartMenuScene(sceneData.START_MENU.canvasId, sceneData.START_MENU.background, true),
+    new ConnectScene(sceneData.CONNECT.canvasId, sceneData.CONNECT.image,false),
     new TutorialScene(sceneData.TUTORIAL.canvasId, sceneData.TUTORIAL.image, false),
     new OptionsScene(sceneData.OPTIONS.canvasId, sceneData.OPTIONS.image, false),
     new CharacterSelectScene(sceneData.CHARACTER_SELECT.canvasId, false),
@@ -41,7 +43,7 @@ export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
 let introText = document.getElementById("introHeader");
-export let activeScene = 0;
+export let activeScene = 3;
 let previousScene = 0;
 let lastTime = 0;
 
@@ -49,7 +51,6 @@ scenes[activeScene].show();
 export const intro = () => {
     scenes[activeScene].show();
     audio.stop();
-
     setTimeout(() => {
         introText.style.display = "flex";
         document.addEventListener("click", () => {
@@ -77,10 +78,8 @@ drawActiveScene(0);
 export const switchToScene = (sceneId) => {
     const currentScene = scenes[activeScene];
     const nextScene = scenes[sceneId];
-
     currentScene.hide();
     nextScene.show();
-
     previousScene = activeScene;
     activeScene = sceneId;
 };

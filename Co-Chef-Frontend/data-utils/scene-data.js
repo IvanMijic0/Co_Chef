@@ -20,15 +20,20 @@ export const sceneData = {
         background: {source: document.getElementById("startMenu"), width: 1920, height: 1080},
         sceneId: 3
     },
+    CONNECT: {
+        canvasId: "connect-canvas",
+        image: document.getElementById("background"),
+        sceneId: 4
+    },
     TUTORIAL: {
         canvasId: "tutorial-canvas",
         image: {source: document.getElementById("tutorial"), width: 1920, height: 1080},
-        sceneId: 4
+        sceneId: 5
     },
     OPTIONS: {
         canvasId: "options-canvas",
         image: {source: document.getElementById("background"), width: 1920, height: 1080},
-        sceneId: 5
+        sceneId: 6
     },
     CHARACTER_SELECT: {
         canvasId: "characterSelect-canvas",
@@ -43,7 +48,7 @@ export const sceneData = {
         amuName: "Petit Amu",
         chatonName: "Chaton Chanceux",
         // characterDim: {width: 820, height: 820},
-        sceneId: 6,
+        sceneId: 7,
     },
     DISH_SELECT: {
         canvasId: "dishSelect-canvas",
@@ -52,7 +57,7 @@ export const sceneData = {
         noodlesName: "noodles",
         curryName: "curry",
         fishTacoName: "fishTaco",
-        sceneId: 7,
+        sceneId: 8,
     },
     Gameplay: {
         canvasId: "gameplay-canvas",
@@ -115,6 +120,6 @@ export const sceneData = {
         fry_item_original_transform: "14vh",
         fry_item_new_transform: "44vh",
         timerValue: 180000.2,
-        sceneId: 8,
+        sceneId: 9,
     },
 }

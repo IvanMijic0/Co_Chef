@@ -57,6 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const plateItem = document.getElementById("plate-item");
     const recipeListItems = document.getElementsByClassName("recipe-item");
     const endMenuButton = document.getElementById("End-Menu-container")
+    const userHeader = document.getElementById("userHeader");
+    const userContainer = document.getElementById("userContainer");
+    const userBackground = document.getElementById("user-background");
+    const connectBackButton = document.getElementById("connect-backButton-container");
 
     loginButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -68,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             success: (response) => {
                 console.log(response)
                 if (response) {
-                    toastr.success("Login successful!");
+                    toastr.success("Welcome successful!");
                     setTimeout(() => {
                         switchToScene(sceneData.INTRO.sceneId);
                         intro();
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 userEmail: userEmail,
                 userPassword: userPassword
             },
-            success: function(response, status, xhr) {
+            success: (response, status, xhr) => {
                 if (xhr.status === 201) {
                     toastr.success("Signup successful!");
                     setTimeout(() => {
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }, 1000);
                 }
             },
-            error: function(xhr, status, error) {
+            error: (xhr, status, error) => {
                 if (xhr.status === 409) {
                     toastr.warning("User already exists");
                 } else {
@@ -131,13 +135,68 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     connectButton.addEventListener("click", () => {
-        switchToScene(sceneData.CHARACTER_SELECT.sceneId);
-        scenes[activeScene].restartClick();
-        scenes[activeScene].changeText();
-        SelectBackButton.style.display = "flex";
-        characterName.style.display = "flex";
-        speechText.style.display = "flex";
-        characterContainer.style.display = "flex";
+        switchToScene(sceneData.CONNECT.sceneId);
+        userBackground.style.display = "flex";
+        userHeader.style.display = "block";
+        userContainer.style.display = "block";
+        connectBackButton.style.display = "flex";
+
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/users",
+            method: "GET",
+            success: (response) => {
+                if (response.users) {
+                    const users = response.users;
+                    const userContainer = $("#userContainer");
+
+                    users.forEach((user) => {
+                        const username = user.userName;
+                        const gameId = user.gameId;
+
+                        // Create a <div> element for the username
+                        const div = $("<div></div>").css("display", "block");
+
+                        // Create a <span> element for the "is available" or "is not available" text
+                        const availabilitySpan = $("<span></span>").addClass("availability-text");
+
+                        // Apply CSS classes and text based on availability (gameId)
+                        if (gameId === 0) {
+                            availabilitySpan.addClass("green-text").text(" is available");
+                        } else {
+                            availabilitySpan.addClass("grey-text").text(" is not available");
+                        }
+
+                        // Create a <span> element for the username text
+                        const usernameSpan = $("<span></span>").text(username).addClass("white-text");
+
+                        // Append the <span> elements to the <div> element
+                        div.append(usernameSpan, availabilitySpan);
+
+                        // Append the <div> element to the userContainer
+                        userContainer.append(div);
+                    });
+                }
+            },
+            error: (xhr, status, error) => {
+                toastr.error("An error occurred: " + error);
+            }
+        });
+
+        // scenes[activeScene].restartClick();
+        // scenes[activeScene].changeText();
+        // SelectBackButton.style.display = "flex";
+        // characterName.style.display = "flex";
+        // speechText.style.display = "flex";
+        // characterContainer.style.display = "flex";
+    });
+
+    connectBackButton.addEventListener("click", () => {
+        userBackground.style.display = "none";
+        userHeader.style.display = "none";
+        userContainer.style.display = "none";
+        connectBackButton.style.display = "none";
+        userContainer.innerHTML = "";
+        switchToScene(sceneData.START_MENU.sceneId);
     });
 
     optionsButton.addEventListener("click", () => {
@@ -543,7 +602,8 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].closeInventory();
         }
     });
-});
+})
+;
 
 const updateImageSource = (element, src) => {
     element.src = src;

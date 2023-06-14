@@ -141,7 +141,7 @@ canvas {
 }
 
 #options-backButton-container, #CharSelect-backButton-container, #CharSelect-confirmButton-container,
-#Gameplay-backButton-container, #Gameplay-Menu-container, #End-Menu-container {
+#Gameplay-backButton-container, #Gameplay-Menu-container, #End-Menu-container, #connect-backButton-container {
     position: fixed;
     display: none;
     bottom: 5vw;
@@ -154,6 +154,12 @@ canvas {
     outline: .2vw solid black;
     justify-content: center;
     align-items: center;
+}
+
+#connect-backButton-container {
+    z-index: 2;
+    bottom: 2vw;
+    left: 85%;
 }
 
 #CharSelect-backButton-container {
@@ -194,13 +200,13 @@ canvas {
 }
 
 #options-backButton-container:hover, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:hover,
-#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover, #End-Menu-container:hover {
+#Gameplay-Menu-container:hover, #Gameplay-backButton-container:hover, #End-Menu-container:hover, #connect-backButton-container:hover {
     background-color: #FF7F3F;
     box-shadow: 0 .4vw .8vw rgba(0, 0, 0, 0.3);
 }
 
 #options-backButton-container:active, #CharSelect-confirmButton-container:hover, #CharSelect-backButton-container:active,
-#Gameplay-Menu-container:active, #Gameplay-backButton-container:active, #End-Menu-container:active {
+#Gameplay-Menu-container:active, #Gameplay-backButton-container:active, #End-Menu-container:active, #connect-backButton-container:active {
     background-color: #95CD41;
     box-shadow: 0 .4vw 1vw rgba(0, 0, 0, 0.3);
 }
@@ -945,6 +951,87 @@ canvas {
 
 #rightArrow {
     right: -15vw;
+}
+
+.green-text {
+    color: #1e8522;
+}
+
+.red-text {
+    color: red;
+}
+
+.white-text {
+    color: #933C10;
+}
+
+.grey-text {
+    color: darkgray;
+}
+
+#user-background {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 95vh;
+}
+
+#userListContainer {
+    position: absolute;
+    display: flex;
+    /*border: 1px solid black;*/
+    height: 70vh;
+    width: 26vw;
+    overflow: auto;
+    left: 38%;
+    top: 20vh;
+
+    /* Scrollbar styling */
+    scrollbar-width: auto; /* For Firefox */
+    scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+#userListContainer::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+}
+
+#userListContainer::-webkit-scrollbar-track {
+    background: #95CD41;
+    border-radius: 5px;
+    border: .01vw solid black;
+}
+
+#userListContainer::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 5px;
+    border: .01vw solid black;
+}
+
+#userListContainer::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+#userContainer, #userHeader {
+    left: .2vw;
+    display: none;
+    position: absolute;
+    font-family: Handlee, sans-serif;
+    font-size: 2vw;
+    font-weight: bold;
+    /*-webkit-text-stroke: .07vw black;*/
+}
+
+#userHeader {
+    font-family: CoffeCake, sans-serif;
+    left: 38%;
+    top: 3vw;
+    color: #EA5C2B;
+    font-size: 3vw;
+    -webkit-text-stroke: .01vw black;
 }
 
 @media only screen and (max-width: 653px) and (max-height: 280px)  {

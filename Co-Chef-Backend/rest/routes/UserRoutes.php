@@ -47,11 +47,12 @@ Flight::route("PUT /user/@id", function ($id){
 });
 
 Flight::route("GET /users", function () {
-    Flight::json
-    (
-        Flight::user_service()->get_all()
-    );
+    $users = Flight::user_service()->get_all();
+    Flight::json([
+        "users" => $users
+    ]);
 });
+
 
 Flight::route("GET /user_by_id", function (){
     Flight::json
