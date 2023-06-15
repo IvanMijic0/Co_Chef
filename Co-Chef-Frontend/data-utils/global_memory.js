@@ -1,6 +1,7 @@
 let REMEMBER_CHARACTER = "";
 let REMEMBER_DISH = "";
 
+let USER_NAME = "";
 let USER_EMAIL = "";
 let USER_PASSWORD = "";
 

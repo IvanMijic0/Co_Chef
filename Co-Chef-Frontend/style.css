@@ -979,6 +979,11 @@ canvas {
     color: darkgray;
 }
 
+.clickable {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 #user-background {
     display: none;
     position: absolute;

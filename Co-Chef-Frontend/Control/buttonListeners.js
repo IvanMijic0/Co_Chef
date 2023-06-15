@@ -2,6 +2,8 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./controller.js";
 import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
 
+let willPlayIntervalId;
+
 document.addEventListener("DOMContentLoaded", () => {
     // Caching everything
     const tutorialButton = document.getElementById("tutorialButton-container");
@@ -71,12 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
             url: "../Co-Chef-Backend/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
             method: "GET",
             success: (response) => {
-                console.log(response)
                 if (response) {
-                    toastr.success("Login successful!");
-                    updateAvailability(true, userEmail, userPassword);
+                    toastr.success();
                     USER_EMAIL = userEmail;
                     USER_PASSWORD = userPassword;
+                    getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
+                        if (userName) {
+                            USER_NAME = userName;
+                        } else {
+                            // Error occurred or user not found
+                            console.log("Failed to retrieve user name");
+                        }
+                    });
                     setTimeout(() => {
                         switchToScene(sceneData.INTRO.sceneId);
                         intro();
@@ -86,9 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     toastr.warning("User does not exist!");
                 }
             },
-            error: (xhr, status, error) => {
+            error: () => {
                 // Handle error if the request fails
-                toastr.error("An error occurred: " + error);
+                toastr.error();
             }
         });
     });
@@ -108,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             success: (response, status, xhr) => {
                 if (xhr.status === 201) {
-                    toastr.success("Signup successful!");
-                    updateAvailability(true, userEmail, userPassword);
+                    toastr.success();
+                    USER_NAME = userName;
                     USER_EMAIL = userEmail;
                     USER_PASSWORD = userPassword;
                     setTimeout(() => {
@@ -118,16 +126,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     }, 1000);
                 }
             },
-            error: (xhr, status, error) => {
+            error: (xhr) => {
                 if (xhr.status === 409) {
                     toastr.warning("User already exists");
                 } else {
-                    toastr.error("An error occurred: " + error);
+                    toastr.error();
                 }
             }
         });
     });
-
 
     loginButton0.addEventListener("click", () => {
         switchToScene(sceneData.LOGIN.sceneId);
@@ -149,7 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
         userContainer.style.display = "block";
         connectBackButton.style.display = "flex";
         connectRefreshButton.style.display = "flex";
+        updateAvailability(true, USER_EMAIL, USER_PASSWORD);
         ListUsers();
+        if (activeScene === sceneData.CONNECT.sceneId) {
+            checkUserWillPlayPeriodically();
+        }
 
         // scenes[activeScene].restartClick();
         // scenes[activeScene].changeText();
@@ -184,8 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     restartButton.addEventListener("click", () => {
-        switchToScene(sceneData.SIGNUP.sceneId);
-        // intro();
+        location.reload(); // Reload the page
     });
 
     tutorialBackButton.addEventListener("click", () => {
@@ -603,6 +613,20 @@ const updateAvailability = (isAvailable, userEmail, password) => {
         }
     });
 };
+const updateWillPlay = (isWillPlay, userEmail, userPassword) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
+        method: "PUT",
+        success: (response) => {
+            // Handle success response if needed
+            console.log(response.message);
+        },
+        error: (xhr, status, error) => {
+            // Handle error if the request fails
+            console.log("An error occurred: " + error);
+        }
+    });
+};
 
 const isUserAvailable = (userEmail, userPassword, callback) => {
     $.ajax({
@@ -626,6 +650,28 @@ const isUserAvailable = (userEmail, userPassword, callback) => {
         },
     });
 };
+const isUserWillPlay = (userEmail, userPassword, callback) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
+        method: "GET",
+        success: (response) => {
+            if (response.willPlay) {
+                // User is available
+                console.log(userEmail + " will play");
+                callback(true);
+            } else {
+                // User is not available
+                console.log("No opponent selected");
+                callback(false);
+            }
+        },
+        error: (xhr, status, error) => {
+            // Handle error if the request fails
+            console.log("WillPlay: " + error);
+            callback(false);
+        },
+    });
+};
 
 const ListUsers = () => {
     $.ajax({
@@ -642,34 +688,187 @@ const ListUsers = () => {
                     const userPassword = user.userPassword;
                     const gameId = user.gameId;
 
-                    // Create a <div> element for the username
-                    const div = $("<div></div>").css("display", "block");
+                    // Check if the user being iterated over is the current user
+                    if (userEmail === USER_EMAIL && userPassword === USER_PASSWORD) {
+                        return; // Skip the current user
+                    }
 
-                    // Create a <span> element for the "is available" or "is not available" text
+                    const div = $("<div></div>").css("display", "block");
                     const availabilitySpan = $("<span></span>").addClass("availability-text");
 
                     isUserAvailable(userEmail, userPassword, (isAvailable) => {
-                        // Apply CSS classes and text based on availability (gameId)
                         if (gameId === 0 && isAvailable) {
                             availabilitySpan.addClass("green-text").text(" is available");
+
+                            const usernameSpan = $("<span></span>")
+                                .text(username)
+                                .addClass("white-text")
+                                .addClass("clickable") // Add clickable class for styling
+                                .on("click", () => {
+                                    // console.log("Clicked user email: " + userEmail)
+                                    // console.log("Clicked user password: " + userPassword)
+                                    // console.log("Current user email: " + USER_EMAIL)
+                                    // console.log("Current user password: " + USER_PASSWORD)
+                                    saveGameOpponent(username);
+                                    updateWillPlay(true, userEmail, userPassword);
+                                });
+                            div.append(usernameSpan, availabilitySpan);
                         } else {
+                            // User is not available
                             availabilitySpan.addClass("grey-text").text(" is not available");
+                            const usernameSpan = $("<span></span>").text(username).addClass("white-text");
+                            div.append(usernameSpan, availabilitySpan);
                         }
-
-                        // Create a <span> element for the username text
-                        const usernameSpan = $("<span></span>").text(username).addClass("white-text");
-
-                        // Append the <span> elements to the <div> element
-                        div.append(usernameSpan, availabilitySpan);
-
-                        // Append the <div> element to the userContainer
                         userContainer.append(div);
                     });
                 });
             }
         },
+        error: () => {
+            toastr.error();
+        },
+    });
+};
+
+const getUserNameByEmailAndPassword = (email, password, callback) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
+        method: "GET",
+        success: (response) => {
+            // Handle success response
+            const userName = response.userName;
+            console.log("Username: " + userName);
+            callback(userName);
+        },
         error: (xhr, status, error) => {
-            toastr.error("An error occurred: " + error);
+            // Handle error response
+            console.log("Error: " + error);
+            callback(null);
+        }
+    });
+};
+
+const saveGameOpponent = (opponentUsername) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
+        method: "PUT",
+        success: () => {
+            // Handle success response if needed
+            console.log("Game opponent saved successfully");
+        },
+        error: (xhr, status, error) => {
+            // Handle error if the request fails
+            console.log("An error occurred: " + error);
+        }
+    });
+};
+
+const getUserNameByGameOpponent = (gameOpponent, callback) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/getUserByGameOpponent/" + gameOpponent,
+        method: "GET",
+        success: (response) => {
+            // Handle success response
+            const userName = response.userName;
+            console.log("Username: " + userName);
+            callback(userName);
+        },
+        error: (xhr, status, error) => {
+            // Handle error response
+            console.log("Error: " + error);
+            callback(null);
+        }
+    });
+};
+
+// Neka malo odmori
+// const getGameOpponentByUserName = (username, callback) => {
+//     $.ajax({
+//         url: "../Co-Chef-Backend/rest/getGameOpponentByUser/" + username,
+//         method: "GET",
+//         success: (response) => {
+//             if (response.gameOpponent) {
+//                 const gameOpponent = response.gameOpponent;
+//                 // Pass the game opponent to the callback function
+//                 callback(gameOpponent);
+//             } else {
+//                 // No game opponent found
+//                 callback(null);
+//             }
+//         },
+//         error: (xhr, status, error) => {
+//             // Handle error if the request fails
+//             console.log("Error: " + error);
+//             callback(null);
+//         },
+//     });
+// };
+
+const updateGameOpponent = (userEmail, gameOpponent) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
+        method: "PUT",
+        success: () => {
+            console.log("Game opponent updated successfully");
+            // Handle success response
+        },
+        error: () => {
+            console.log("Failed to update game opponent");
+            // Handle error response
+        }
+    });
+};
+
+const updateUserGameId = (userName, gameId) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/updateGameId/" + userName + "/" + gameId,
+        type: "PUT",
+        success: function() {
+            console.log("Game ID updated successfully");
+            // Handle success response
+        },
+        error: function() {
+            console.log("Failed to update game ID");
+            // Handle error response
+        }
+    });
+};
+
+// Function to show the dialogue
+const showDialogue = () => {
+    let randomGameId = Math.floor(Math.random() * 1000) + 1;
+    const confirmDialog = confirm("Do you want to play a game with?");
+    if (confirmDialog) {
+        updateUserGameId(USER_NAME, randomGameId);
+        setOpponentsGameOpponent(USER_NAME, randomGameId);
+    } else {
+        alert("Rejected your game invitation.");
+    }
+};
+
+// Function to periodically check if a user is willing to play
+const checkUserWillPlayPeriodically = () => {
+    willPlayIntervalId = setInterval(() => {
+        isUserWillPlay(USER_EMAIL, USER_PASSWORD, (willPlay) => {
+            if (willPlay) {
+                showDialogue();
+                updateWillPlay(false, USER_EMAIL, USER_PASSWORD);
+            } else {
+                clearInterval(willPlayIntervalId); // Stop the interval
+            }
+        });
+    }, 5000);
+};
+
+const setOpponentsGameOpponent = (userName, randomGameId) => {
+    getUserNameByGameOpponent(userName, (userName) => {
+        if (userName) {
+            console.log("UserName in getUserNameByOpponent: " + userName)
+            updateUserGameId(userName, randomGameId);
+            updateGameOpponent(USER_EMAIL, userName);
+        } else {
+            console.log("No username found");
         }
     });
 }
+

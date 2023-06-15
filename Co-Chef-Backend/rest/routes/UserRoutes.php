@@ -9,7 +9,7 @@ Flight::route("POST /user", function () {
     $userService = Flight::user_service();
 
     // Check if the user already exists
-    $userExists = $userService->checkUserByEmailAndPassword($data['userEmail'], $data['userPassword']);
+    $userExists = $userService->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
 
     if ($userExists) {
         Flight::halt(409); // Set response code to indicate conflict (e.g., 409 Conflict)
@@ -35,7 +35,6 @@ Flight::route("POST /user", function () {
     }
 });
 
-
 Flight::route("PUT /user/@id", function ($id) {
     Flight::json
     (
@@ -52,7 +51,6 @@ Flight::route("GET /users", function () {
         "users" => $users
     ]);
 });
-
 
 Flight::route("GET /user_by_id", function () {
     Flight::json
@@ -101,7 +99,6 @@ Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable
     }
 });
 
-
 Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($userEmail, $userPassword) {
     // Check user availability
     $isAvailable = Flight::user_service()->isUserAvailable($userEmail, $userPassword);
@@ -109,4 +106,99 @@ Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($
     // Return the availability status
     Flight::json(["isAvailable" => $isAvailable]);
 });
+
+Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent',
+    function ($userEmail, $userPassword, $gameOpponent) {
+    // Save the game opponent for the user
+    $result = Flight::user_service()->saveGameOpponent($userEmail, $userPassword, $gameOpponent);
+
+    if ($result) {
+        // Return success response
+        Flight::json(['message' => 'Game opponent saved successfully']);
+    } else {
+        // Return error response if failed to save game opponent
+        Flight::halt(500, 'Failed to save game opponent');
+    }
+});
+
+Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isWillPlay) {
+    $isWillPlay = filter_var($isWillPlay, FILTER_VALIDATE_BOOLEAN);
+
+    // Update user availability
+    $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
+
+    if ($result !== false) {
+        Flight::json(["message" => "User willPlay updated successfully"]);
+    } else {
+        Flight::halt(500, "Failed to update user willPlay");
+    }
+});
+
+Flight::route("GET /checkUserWillPlay/@userEmail/@userPassword", function ($userEmail, $userPassword) {
+    // Check user availability
+    $willPlay = Flight::user_service()->isWillPlay($userEmail, $userPassword);
+
+    // Return the availability status
+    Flight::json(["willPlay" => $willPlay]);
+});
+
+Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponent) {
+    $userName = Flight::user_service()->getUserNameByGameOpponent($gameOpponent);
+
+    if ($userName) {
+        Flight::json(["userName" => $userName]);
+    } else {
+        Flight::json(["error" => "User not found"], 404);
+    }
+});
+
+Flight::route("GET /getGameOpponentByUser/@username", function ($username) {
+    // Get the game opponent for the given username
+    $gameOpponent = Flight::user_service()->getGameOpponentByUsername($username);
+
+    // Return the game opponent
+    Flight::json(["gameOpponent" => $gameOpponent]);
+});
+
+Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($userEmail, $gameOpponent) {
+    // Update the game opponent for the user with the given username
+    $success = Flight::user_service()->updateGameOpponent($userEmail, $gameOpponent);
+
+    if ($success) {
+        // Game opponent updated successfully
+        Flight::json(["message" => "Game opponent updated"]);
+    } else {
+        // Failed to update game opponent
+        Flight::json(["error" => "Failed to update game opponent"], 400);
+    }
+});
+
+Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($email, $password) {
+    // Get the userName for the given email and password
+    $userName =  Flight::user_service()->getUserNameByEmailAndPassword($email, $password);
+
+    if ($userName) {
+        // User found, return the userName
+        Flight::json(["userName" => $userName]);
+    } else {
+        // User not found or invalid credentials
+        Flight::json(["error" => "User not found or invalid credentials"], 404);
+    }
+});
+
+Flight::route("PUT /updateGameId/@userName/@gameId", function ($userName, $gameId) {
+    // Update the gameId for the user with the given email
+    $success = Flight::user_service()->updateGameId($userName, $gameId);
+
+    if ($success) {
+        // Game ID updated successfully
+        Flight::json(["message" => "Game ID updated"]);
+    } else {
+        // Failed to update game ID
+        Flight::json(["error" => "Failed to update game ID"], 400);
+    }
+});
+
+
+
 

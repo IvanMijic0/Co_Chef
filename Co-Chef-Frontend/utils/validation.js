@@ -45,7 +45,7 @@ signupForm.addEventListener("input", function (event) {
     if (inputElement.id === "name") {
         if (!isValidUsername(inputValue)) {
             inputElement.style.color = "red";
-            showError(inputElement, "Invalid username. Username must be at least 3 characters long.");
+            showError(inputElement, "Invalid username. Username must be between 3 and 16 characters long.");
         } else {
             inputElement.style.color = "#95CD41";
             clearError(inputElement);
@@ -169,8 +169,6 @@ function isValidPassword(password) {
     return passwordRegex.test(password);
 }
 
-// Username validation function (optional)
 function isValidUsername(username) {
-    // Add your own validation rules for the username if needed
-    return username.length >= 3;
+    return username.length >= 3 && username.length <= 16;
 }
