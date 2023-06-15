@@ -13,8 +13,8 @@ export class Scene {
                     this.playerY = this.canvas.height * 0.3;
                 }
             })
-            .catch(error => {
-                console.error("Cannot access GameplayScene before it is instantiated.", error);
+            .catch(() => {
+                console.error();
             });
         this.initialize();
     }
