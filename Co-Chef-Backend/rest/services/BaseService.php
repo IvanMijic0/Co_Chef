@@ -1,7 +1,7 @@
 <?php
 
 class BaseService{
-    private $dao;
+    private BaseDao $dao;
 
     public function __construct($dao)
     {

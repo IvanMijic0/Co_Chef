@@ -43,7 +43,7 @@ export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
 let introText = document.getElementById("introHeader");
-export let activeScene = 3;
+export let activeScene = 0;
 let previousScene = 0;
 let lastTime = 0;
 

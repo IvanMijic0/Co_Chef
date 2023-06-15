@@ -1,6 +1,9 @@
 let REMEMBER_CHARACTER = "";
 let REMEMBER_DISH = "";
 
+let USER_EMAIL = "";
+let USER_PASSWORD = "";
+
 const NOODLE_RECIPE = {
     name: "noodle",
     recipeArr: [

@@ -86,6 +86,18 @@ class BaseDao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    protected function query_single($query, $params = [])
+    {
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute($params);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result === false) {
+            return false; // Query execution failed
+        }
+
+        return $result;
+    }
 
     /**
      * @param $entity

@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userContainer = document.getElementById("userContainer");
     const userBackground = document.getElementById("user-background");
     const connectBackButton = document.getElementById("connect-backButton-container");
+    const connectRefreshButton = document.getElementById("connect-refreshButton-container");
 
     loginButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -72,7 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
             success: (response) => {
                 console.log(response)
                 if (response) {
-                    toastr.success("Welcome successful!");
+                    toastr.success("Login successful!");
+                    updateAvailability(true, userEmail, userPassword);
+                    USER_EMAIL = userEmail;
+                    USER_PASSWORD = userPassword;
                     setTimeout(() => {
                         switchToScene(sceneData.INTRO.sceneId);
                         intro();
@@ -105,6 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
             success: (response, status, xhr) => {
                 if (xhr.status === 201) {
                     toastr.success("Signup successful!");
+                    updateAvailability(true, userEmail, userPassword);
+                    USER_EMAIL = userEmail;
+                    USER_PASSWORD = userPassword;
                     setTimeout(() => {
                         switchToScene(sceneData.INTRO.sceneId);
                         intro();
@@ -120,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
 
     loginButton0.addEventListener("click", () => {
         switchToScene(sceneData.LOGIN.sceneId);
@@ -140,47 +148,8 @@ document.addEventListener("DOMContentLoaded", () => {
         userHeader.style.display = "block";
         userContainer.style.display = "block";
         connectBackButton.style.display = "flex";
-
-        $.ajax({
-            url: "../Co-Chef-Backend/rest/users",
-            method: "GET",
-            success: (response) => {
-                if (response.users) {
-                    const users = response.users;
-                    const userContainer = $("#userContainer");
-
-                    users.forEach((user) => {
-                        const username = user.userName;
-                        const gameId = user.gameId;
-
-                        // Create a <div> element for the username
-                        const div = $("<div></div>").css("display", "block");
-
-                        // Create a <span> element for the "is available" or "is not available" text
-                        const availabilitySpan = $("<span></span>").addClass("availability-text");
-
-                        // Apply CSS classes and text based on availability (gameId)
-                        if (gameId === 0) {
-                            availabilitySpan.addClass("green-text").text(" is available");
-                        } else {
-                            availabilitySpan.addClass("grey-text").text(" is not available");
-                        }
-
-                        // Create a <span> element for the username text
-                        const usernameSpan = $("<span></span>").text(username).addClass("white-text");
-
-                        // Append the <span> elements to the <div> element
-                        div.append(usernameSpan, availabilitySpan);
-
-                        // Append the <div> element to the userContainer
-                        userContainer.append(div);
-                    });
-                }
-            },
-            error: (xhr, status, error) => {
-                toastr.error("An error occurred: " + error);
-            }
-        });
+        connectRefreshButton.style.display = "flex";
+        ListUsers();
 
         // scenes[activeScene].restartClick();
         // scenes[activeScene].changeText();
@@ -195,8 +164,14 @@ document.addEventListener("DOMContentLoaded", () => {
         userHeader.style.display = "none";
         userContainer.style.display = "none";
         connectBackButton.style.display = "none";
+        connectRefreshButton.style.display = "none";
         userContainer.innerHTML = "";
         switchToScene(sceneData.START_MENU.sceneId);
+    });
+
+    connectRefreshButton.addEventListener("click", () => {
+        userContainer.innerHTML = "";
+        ListUsers();
     });
 
     optionsButton.addEventListener("click", () => {
@@ -604,6 +579,97 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Add event listener for beforeunload event
+window.addEventListener("beforeunload", () => {
+    // Set user availability to false before leaving the site
+    updateAvailability(false, USER_EMAIL, USER_PASSWORD);
+});
+
 const updateImageSource = (element, src) => {
     element.src = src;
+}
+
+const updateAvailability = (isAvailable, userEmail, password) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
+        method: "PUT",
+        success: (response) => {
+            // Handle success response if needed
+            console.log(response.message);
+        },
+        error: (xhr, status, error) => {
+            // Handle error if the request fails
+            console.log("An error occurred: " + error);
+        }
+    });
+};
+
+const isUserAvailable = (userEmail, userPassword, callback) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
+        method: "GET",
+        success: (response) => {
+            if (response.isAvailable) {
+                // User is available
+                console.log(userEmail + " is available");
+                callback(true);
+            } else {
+                // User is not available
+                console.log("User is not available");
+                callback(false);
+            }
+        },
+        error: (xhr, status, error) => {
+            // Handle error if the request fails
+            console.log("Availability: " + error);
+            callback(false);
+        },
+    });
+};
+
+const ListUsers = () => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/users",
+        method: "GET",
+        success: (response) => {
+            if (response.users) {
+                const users = response.users;
+                const userContainer = $("#userContainer");
+
+                users.forEach((user) => {
+                    const username = user.userName;
+                    const userEmail = user.userEmail;
+                    const userPassword = user.userPassword;
+                    const gameId = user.gameId;
+
+                    // Create a <div> element for the username
+                    const div = $("<div></div>").css("display", "block");
+
+                    // Create a <span> element for the "is available" or "is not available" text
+                    const availabilitySpan = $("<span></span>").addClass("availability-text");
+
+                    isUserAvailable(userEmail, userPassword, (isAvailable) => {
+                        // Apply CSS classes and text based on availability (gameId)
+                        if (gameId === 0 && isAvailable) {
+                            availabilitySpan.addClass("green-text").text(" is available");
+                        } else {
+                            availabilitySpan.addClass("grey-text").text(" is not available");
+                        }
+
+                        // Create a <span> element for the username text
+                        const usernameSpan = $("<span></span>").text(username).addClass("white-text");
+
+                        // Append the <span> elements to the <div> element
+                        div.append(usernameSpan, availabilitySpan);
+
+                        // Append the <div> element to the userContainer
+                        userContainer.append(div);
+                    });
+                });
+            }
+        },
+        error: (xhr, status, error) => {
+            toastr.error("An error occurred: " + error);
+        }
+    });
 }

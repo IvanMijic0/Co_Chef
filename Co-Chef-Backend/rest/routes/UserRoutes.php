@@ -1,6 +1,6 @@
 <?php /** @noinspection ALL */
 
-Flight::route("/", function (){
+Flight::route("/", function () {
     echo "Hello from / route";
 });
 
@@ -36,7 +36,7 @@ Flight::route("POST /user", function () {
 });
 
 
-Flight::route("PUT /user/@id", function ($id){
+Flight::route("PUT /user/@id", function ($id) {
     Flight::json
     (
         [
@@ -54,7 +54,7 @@ Flight::route("GET /users", function () {
 });
 
 
-Flight::route("GET /user_by_id", function (){
+Flight::route("GET /user_by_id", function () {
     Flight::json
     (
         Flight::user_service()->get_by_id(Flight::request()->query["id"])
@@ -68,7 +68,7 @@ Flight::route("GET /users/@id", function ($id) {
     );
 });
 
-Flight::route("DELETE /user/@id", function ($id){
+Flight::route("DELETE /user/@id", function ($id) {
     Flight::user_service()->delete($id);
     Flight::json
     (
@@ -77,9 +77,9 @@ Flight::route("DELETE /user/@id", function ($id){
 });
 
 Flight::route("/update/@first_name/@last_name/@id",
-    function ($first_name, $last_name, $id){
-    Flight::user_service()->update($first_name, $last_name, $id);
-});
+    function ($first_name, $last_name, $id) {
+        Flight::user_service()->update($first_name, $last_name, $id);
+    });
 
 Flight::route("GET /checkUserByEmailAndPassword/@email/@password",
     function ($email, $password) {
@@ -87,3 +87,26 @@ Flight::route("GET /checkUserByEmailAndPassword/@email/@password",
         Flight::json($authenticated);
     }
 );
+
+Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isAvailable) {
+    $isAvailable = filter_var($isAvailable, FILTER_VALIDATE_BOOLEAN);
+
+    // Update user availability
+    $result = Flight::user_service()->updateUserAvailability($userEmail, $userPassword, $isAvailable);
+
+    if ($result !== false) {
+        Flight::json(["message" => "User availability updated successfully"]);
+    } else {
+        Flight::halt(500, "Failed to update user availability");
+    }
+});
+
+
+Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($userEmail, $userPassword) {
+    // Check user availability
+    $isAvailable = Flight::user_service()->isUserAvailable($userEmail, $userPassword);
+
+    // Return the availability status
+    Flight::json(["isAvailable" => $isAvailable]);
+});
+
