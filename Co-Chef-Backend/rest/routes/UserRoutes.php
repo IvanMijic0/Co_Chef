@@ -152,6 +152,16 @@ Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponen
     }
 });
 
+Flight::route("GET /getRecipeByUserName/@userName", function ($userName) {
+    $recipe = Flight::user_service()->getRecipeByUserName($userName);
+
+    if ($recipe) {
+        Flight::json(["recipe" => $recipe]);
+    } else {
+        Flight::json(["error" => "Recipe not found"], 404);
+    }
+});
+
 Flight::route("GET /getGameOpponentByUser/@username", function ($username) {
     // Get the game opponent for the given username
     $gameOpponent = Flight::user_service()->getGameOpponentByUsername($username);
@@ -172,6 +182,7 @@ Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($use
         Flight::json(["error" => "Failed to update game opponent"], 400);
     }
 });
+
 
 Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($email, $password) {
     // Get the userName for the given email and password
@@ -196,6 +207,133 @@ Flight::route("PUT /updateGameId/@userName/@gameId", function ($userName, $gameI
     } else {
         // Failed to update game ID
         Flight::json(["error" => "Failed to update game ID"], 400);
+    }
+});
+
+Flight::route("PUT /updateTasksCompleted/@userName/@tasksCompleted", function ($userName, $tasksCompleted) {
+    // Update the gameId for the user with the given email
+    $success = Flight::user_service()->updateTasksCompleted($userName, $tasksCompleted);
+
+    if ($success) {
+        // Game ID updated successfully
+        Flight::json(["message" => "Taks completed updated"]);
+    } else {
+        // Failed to update game ID
+        Flight::json(["error" => "Failed to update taskCompleted"], 400);
+    }
+});
+
+Flight::route("PUT /updateUserIsRejected/@userName/@isRejected", function ($userName, $isRejected) {
+    // Update the isRejected column for the user with the given email and password
+    $success = Flight::user_service()->updateUserIsRejected($userName, $isRejected);
+
+    if ($success) {
+        // User isRejected column updated successfully
+        Flight::json(["message" => "User isRejected updated"]);
+    } else {
+        // Failed to update user isRejected column
+        Flight::json(["error" => "Failed to update user isRejected"], 400);
+    }
+});
+
+Flight::route("GET /isRejected/@userName", function ($userName) {
+    // Check if the user is rejected
+    $isRejected = Flight::user_service()->isRejected($userName);
+
+    // Return the result
+    Flight::json(["isRejected" => $isRejected]);
+});
+
+Flight::route("GET /isWaitingToPlay/@userName", function ($userName) {
+    // Check if the user is rejected
+    $isWaitingToPlay = Flight::user_service()->isWaitingToPlay($userName);
+
+    // Return the result
+    Flight::json(["isWaitingToPlay" => $isWaitingToPlay]);
+});
+
+Flight::route("PUT /resetGameOpponent/@userEmail", function ($userEmail) {
+    // Reset the game opponent for the user with the given email and password
+    $success = Flight::user_service()->resetGameOpponent($userEmail);
+
+    if ($success) {
+        // Game opponent reset successfully
+        Flight::json(["message" => "Game opponent reset"]);
+    } else {
+        // Failed to reset game opponent
+        Flight::json(["error" => "Failed to reset game opponent"], 400);
+    }
+});
+
+Flight::route("PUT /resetRecipe/@userEmail", function ($userEmail) {
+    // Reset the game opponent for the user with the given email and password
+    $success = Flight::user_service()->resetRecipe($userEmail);
+
+    if ($success) {
+        // Game opponent reset successfully
+        Flight::json(["message" => "Recipe reset"]);
+    } else {
+        // Failed to reset game opponent
+        Flight::json(["error" => "Failed to reset recipe"], 400);
+    }
+});
+
+Flight::route("GET /checkUsersHaveSameGameId/@userName1/@userName2", function ($userName1, $userName2) {
+    // Check if the users with the given usernames have the same gameId
+    $haveSameGameId = Flight::user_service()->checkUsersHaveSameGameId($userName1, $userName2);
+
+    if ($haveSameGameId) {
+        Flight::json(["Same id" => $haveSameGameId]);
+    } else {
+        Flight::json(["Same id" => $haveSameGameId]);
+    }
+});
+
+Flight::route("GET /checkUsersHaveSameTaskCompleted/@userName1/@userName2", function ($userName1, $userName2) {
+    // Check if the users with the given usernames have the same gameId
+    $haveSametasksCompleted = Flight::user_service()->checkUsersHaveSameTaskCompleted($userName1, $userName2);
+
+    if ($haveSametasksCompleted) {
+        Flight::json(["Same tasksCompleted" => $haveSametasksCompleted]);
+    } else {
+        Flight::json(["Same tasksCompleted" => $haveSametasksCompleted]);
+    }
+});
+
+Flight::route("PUT /updateWaitingToPlay/@userName/@isRejected", function ($userName, $isWaitingToPlay) {
+    // Update the isRejected column for the user with the given email and password
+    $success = Flight::user_service()->updateWaitingToPlay($userName, $isWaitingToPlay);
+
+    if ($success) {
+        // User isRejected column updated successfully
+        Flight::json(["message" => "User isWaitingToPlay updated"]);
+    } else {
+        // Failed to update user isRejected column
+        Flight::json(["error" => "Failed to update user isWaitingToPlay"], 400);
+    }
+});
+
+Flight::route("PUT /updateRecipe/@userName/@recipe", function ($userName, $recipe) {
+    // Update the isRejected column for the user with the given email and password
+    $success = Flight::user_service()->updateRecipe($userName, $recipe);
+
+    if ($success) {
+        // User isRejected column updated successfully
+        Flight::json(["message" => "User recipe updated"]);
+    } else {
+        // Failed to update user isRejected column
+        Flight::json(["error" => "Failed to update user recipe"], 400);
+    }
+});
+
+Flight::route("GET /checkUsersHaveWaitingToPlay/@userName1/@userName2", function ($userName1, $userName2) {
+    // Check if the users with the given usernames have the same gameId
+    $haveSameGameId = Flight::user_service()->checkUsersHaveWaitingToPlay($userName1, $userName2);
+
+    if ($haveSameGameId) {
+        Flight::json(["waitingToPlay" => $haveSameGameId]);
+    } else {
+        Flight::json(["waitingToPlay" => $haveSameGameId]);
     }
 });
 

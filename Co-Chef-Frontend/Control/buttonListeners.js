@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const recipeListItems = document.getElementsByClassName("recipe-item");
     const endMenuButton = document.getElementById("End-Menu-container")
     const userHeader = document.getElementById("userHeader");
+    const userListContainer = document.getElementById("userListContainer");
     const userContainer = document.getElementById("userContainer");
     const userBackground = document.getElementById("user-background");
     const connectBackButton = document.getElementById("connect-backButton-container");
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
             method: "GET",
             success: (response) => {
                 if (response) {
-                    toastr.success();
+                    toastr.success("Login Successful!");
                     USER_EMAIL = userEmail;
                     USER_PASSWORD = userPassword;
                     getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
@@ -116,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             success: (response, status, xhr) => {
                 if (xhr.status === 201) {
-                    toastr.success();
+                    toastr.success("Signup Successful!");
                     USER_NAME = userName;
                     USER_EMAIL = userEmail;
                     USER_PASSWORD = userPassword;
@@ -153,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
         switchToScene(sceneData.CONNECT.sceneId);
         userBackground.style.display = "flex";
         userHeader.style.display = "block";
+        userListContainer.style.display = "block";
         userContainer.style.display = "block";
         connectBackButton.style.display = "flex";
         connectRefreshButton.style.display = "flex";
@@ -161,22 +163,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (activeScene === sceneData.CONNECT.sceneId) {
             checkUserWillPlayPeriodically();
         }
-
-        // scenes[activeScene].restartClick();
-        // scenes[activeScene].changeText();
-        // SelectBackButton.style.display = "flex";
-        // characterName.style.display = "flex";
-        // speechText.style.display = "flex";
-        // characterContainer.style.display = "flex";
     });
 
     connectBackButton.addEventListener("click", () => {
         userBackground.style.display = "none";
         userHeader.style.display = "none";
-        userContainer.style.display = "none";
+        userListContainer.style.display = "none";
         connectBackButton.style.display = "none";
         connectRefreshButton.style.display = "none";
         userContainer.innerHTML = "";
+        if (willPlayIntervalId) {
+            clearInterval(willPlayIntervalId);
+        }
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
@@ -249,7 +247,13 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].restartClick();
             scenes[activeScene].changeText();
         } else {
-            switchToScene(sceneData.START_MENU.sceneId);
+            switchToScene(sceneData.CONNECT.sceneId);
+            userHeader.style.display = "block";
+            userListContainer.style.display = "block";
+            connectBackButton.style.display = "flex";
+            connectRefreshButton.style.display = "flex";
+            userBackground.style.display = "flex";
+            updateAvailability(true, USER_EMAIL, USER_PASSWORD);
             speechText.style.display = "none";
             SelectBackButton.style.display = "none";
             SelectConfirmButton.style.display = "none";
@@ -270,48 +274,120 @@ document.addEventListener("DOMContentLoaded", () => {
             dishName.style.display = "flex";
             scenes[activeScene].changeText();
         } else {
-            dishName.style.display = "none";
-            SelectBackButton.style.display = "none";
-            SelectConfirmButton.style.display = "none";
-            characterContainer.style.display = "none";
-            speechText.style.display = "none";
-            scenes[activeScene].rememberPick();
-            switchToScene(sceneData.Gameplay.sceneId);
-            // Handle Recipe Text
-            if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
-                for (let i = 0; i < recipeListItems.length; i++) {
-                    let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
-                    recipeItem.innerHTML = NOODLE_RECIPE.recipeArr[i];
+            updateWaitingToPlay(USER_NAME, 1);
+            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                if (gameOpponent) {
+                    checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
+                        if (isWaitingToPlay) {
+                            dishName.style.display = "none";
+                            SelectBackButton.style.display = "none";
+                            SelectConfirmButton.style.display = "none";
+                            characterContainer.style.display = "none";
+                            speechText.style.display = "none";
+                            scenes[activeScene].rememberPick();
+                            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                if (gameOpponent) {
+                                    updateRecipe(gameOpponent, REMEMBER_DISH);
+                                }
+                            });
+                            switchToScene(sceneData.Gameplay.sceneId);
+                            toastr.info("Wait for connection");
+                            scenes[activeScene].setPlayerImage();
+                            setTimeout(() => {
+                                getUserNameByGameOpponent(USER_NAME, (gameOpponent) => {
+                                    if (gameOpponent) {
+                                        checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
+                                            if (isWaitingToPlay) {
+                                                alert("Successfully connected!");
+                                                scenes[activeScene].resetTimer();
+                                                updateWaitingToPlay(USER_NAME, 0);
+                                            } else {
+                                                alert("Opponent did not choose on time.")
+                                                updateWaitingToPlay(USER_NAME, 0);
+                                                resetGameOpponent(USER_EMAIL);
+                                                updateUserGameId(USER_NAME, 0);
+                                                resetRecipe(USER_EMAIL);
+                                                updateUserGameId(USER_NAME, 0);
+                                                volumeContainer.classList.remove("newVolumeContainer");
+                                                volumeBar.show();
+                                                volumeBar.setup();
+                                                volumeIcon.classList.remove("newVolumeIcon");
+                                                volumeIcon.style.display = "none";
+                                                volumeContainer.style.display = "none";
+                                                gameplayBackButton.style.display = "none";
+                                                gameplayMenuButton.style.display = "none";
+                                                ic_timer.style.display = "none";
+                                                timer.style.display = "none";
+                                                ic_recipes.style.display = "none";
+                                                slotItem.style.display = "none";
+                                                ic_slot.style.display = "none";
+                                                ic_options.style.display = "none";
+                                                ic_com.style.display = "none";
+                                                chat_container.style.display = "none";
+                                                audio.switchAudio("startMenuAudio", audio.audio.volume);
+                                                scenes[activeScene].resetCollider();
+                                                scenes[activeScene].resetWinLose();
+                                                switchToScene(sceneData.START_MENU.sceneId);
+                                            }
+                                        });
+                                    }
+                                });
+                                getRecipeByUserName(USER_NAME, (recipe) => {
+                                    if (recipe) {
+                                        console.log(USER_NAME + " " + recipe)
+                                        if (recipe === sceneData.DISH_SELECT.noodlesName) {
+                                            for (let i = 0; i < recipeListItems.length; i++) {
+                                                let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
+                                                recipeItem.innerHTML = NOODLE_RECIPE.recipeArr[i];
+                                            }
+                                            scenes[activeScene].resetRecipe(NOODLE_RECIPE);
+                                            scenes[activeScene].resetWinLose();
+                                        }
+                                    } else if (recipe === sceneData.DISH_SELECT.curryName) {
+                                        for (let i = 0; i < recipeListItems.length; i++) {
+                                            let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
+                                            recipeItem.innerHTML = CURRY_RECIPE.recipeArr[i];
+                                        }
+                                        scenes[activeScene].resetRecipe(CURRY_RECIPE);
+                                        scenes[activeScene].resetWinLose();
+                                    } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
+                                        for (let i = 0; i < recipeListItems.length; i++) {
+                                            let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
+                                            recipeItem.innerHTML = FISH_TACO_RECIPE.recipeArr[i];
+                                        }
+                                        scenes[activeScene].resetRecipe(FISH_TACO_RECIPE);
+                                        scenes[activeScene].resetWinLose();
+                                    }
+                                });
+
+                                audio.switchAudio("gameplayAudio", audio.audio.volume);
+                                scenes[activeScene].allowInteract(true);
+                                ic_options.style.display = "flex";
+                                ic_recipes.style.display = "flex";
+                                ic_slot.style.display = "flex";
+                                ic_com.style.display = "flex";
+                                ic_timer.style.display = "flex";
+                                timer.style.display = "flex";
+                                chat_container.style.display = "block";
+                            }, 5000);
+
+                        } else {
+                            alert("Wait for the other user to confirm")
+                            // updateWaitingToPlay(USER_NAME, 0);
+                            // resetGameOpponent(USER_EMAIL);
+                            // resetRecipe(USER_EMAIL);
+                            // updateUserGameId(USER_NAME, 0);
+                            // speechText.style.display = "none";
+                            // SelectBackButton.style.display = "none";
+                            // SelectConfirmButton.style.display = "none";
+                            // characterName.style.display = "none";
+                            // characterContainer.style.display = "none";
+                            // dishName.style.display = "none";
+                            // switchToScene(sceneData.START_MENU.sceneId);
+                        }
+                    });
                 }
-                scenes[activeScene].resetRecipe(NOODLE_RECIPE);
-                scenes[activeScene].resetWinLose();
-            } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
-                for (let i = 0; i < recipeListItems.length; i++) {
-                    let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
-                    recipeItem.innerHTML = CURRY_RECIPE.recipeArr[i];
-                }
-                scenes[activeScene].resetRecipe(CURRY_RECIPE);
-                scenes[activeScene].resetWinLose();
-            } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
-                for (let i = 0; i < recipeListItems.length; i++) {
-                    let recipeItem = recipeItems[i].getElementsByTagName("span")[0];
-                    recipeItem.innerHTML = FISH_TACO_RECIPE.recipeArr[i];
-                }
-                scenes[activeScene].resetRecipe(FISH_TACO_RECIPE);
-                scenes[activeScene].resetWinLose();
-            }
-            // ...
-            audio.switchAudio("gameplayAudio", audio.audio.volume);
-            scenes[activeScene].setPlayerImage();
-            scenes[activeScene].resetTimer();
-            scenes[activeScene].allowInteract(true);
-            ic_options.style.display = "flex";
-            ic_recipes.style.display = "flex";
-            ic_slot.style.display = "flex";
-            ic_com.style.display = "flex";
-            ic_timer.style.display = "flex";
-            timer.style.display = "flex";
-            chat_container.style.display = "block";
+            });
         }
     })
 
@@ -374,6 +450,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     gameplayMenuButton.addEventListener("click", () => {
+        updateWaitingToPlay(USER_NAME, 0);
+        updateAvailability(0, USER_EMAIL, USER_PASSWORD);
+        updateUserTaskCompleted(USER_NAME, 0);
+        resetGameOpponent(USER_EMAIL);
+        updateUserGameId(USER_NAME, 0);
+        resetRecipe(USER_EMAIL);
+        updateUserGameId(USER_NAME, 0);
         scenes[activeScene].toggleOptions()
         volumeContainer.classList.remove("newVolumeContainer");
         volumeBar.show();
@@ -587,288 +670,531 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].closeInventory();
         }
     });
-});
 
-// Add event listener for beforeunload event
-window.addEventListener("beforeunload", () => {
-    // Set user availability to false before leaving the site
-    updateAvailability(false, USER_EMAIL, USER_PASSWORD);
-});
-
-const updateImageSource = (element, src) => {
-    element.src = src;
-}
-
-const updateAvailability = (isAvailable, userEmail, password) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
-        method: "PUT",
-        success: (response) => {
-            // Handle success response if needed
-            console.log(response.message);
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
+    // Add event listener for beforeunload event
+    window.addEventListener("beforeunload", () => {
+        // Set user availability to false before leaving the site
+        if (USER_NAME !== "" || USER_EMAIL !== "" || USER_PASSWORD !== "") {
+            resetGameOpponent(USER_EMAIL);
+            updateAvailability(false, USER_EMAIL, USER_PASSWORD);
+            updateUserTaskCompleted(USER_NAME, 0);
+            updateWillPlay(false, USER_EMAIL, USER_PASSWORD);
+            updateUserGameId(USER_NAME, 0);
+            resetRecipe(USER_EMAIL);
+            updateWaitingToPlay(USER_NAME, 0);
         }
     });
-};
-const updateWillPlay = (isWillPlay, userEmail, userPassword) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
-        method: "PUT",
-        success: (response) => {
-            // Handle success response if needed
-            console.log(response.message);
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
-        }
-    });
-};
 
-const isUserAvailable = (userEmail, userPassword, callback) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
-        method: "GET",
-        success: (response) => {
-            if (response.isAvailable) {
-                // User is available
-                console.log(userEmail + " is available");
-                callback(true);
-            } else {
-                // User is not available
-                console.log("User is not available");
-                callback(false);
-            }
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("Availability: " + error);
-            callback(false);
-        },
-    });
-};
-const isUserWillPlay = (userEmail, userPassword, callback) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
-        method: "GET",
-        success: (response) => {
-            if (response.willPlay) {
-                // User is available
-                console.log(userEmail + " will play");
-                callback(true);
-            } else {
-                // User is not available
-                console.log("No opponent selected");
-                callback(false);
-            }
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("WillPlay: " + error);
-            callback(false);
-        },
-    });
-};
-
-const ListUsers = () => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/users",
-        method: "GET",
-        success: (response) => {
-            if (response.users) {
-                const users = response.users;
-                const userContainer = $("#userContainer");
-
-                users.forEach((user) => {
-                    const username = user.userName;
-                    const userEmail = user.userEmail;
-                    const userPassword = user.userPassword;
-                    const gameId = user.gameId;
-
-                    // Check if the user being iterated over is the current user
-                    if (userEmail === USER_EMAIL && userPassword === USER_PASSWORD) {
-                        return; // Skip the current user
-                    }
-
-                    const div = $("<div></div>").css("display", "block");
-                    const availabilitySpan = $("<span></span>").addClass("availability-text");
-
-                    isUserAvailable(userEmail, userPassword, (isAvailable) => {
-                        if (gameId === 0 && isAvailable) {
-                            availabilitySpan.addClass("green-text").text(" is available");
-
-                            const usernameSpan = $("<span></span>")
-                                .text(username)
-                                .addClass("white-text")
-                                .addClass("clickable") // Add clickable class for styling
-                                .on("click", () => {
-                                    // console.log("Clicked user email: " + userEmail)
-                                    // console.log("Clicked user password: " + userPassword)
-                                    // console.log("Current user email: " + USER_EMAIL)
-                                    // console.log("Current user password: " + USER_PASSWORD)
-                                    saveGameOpponent(username);
-                                    updateWillPlay(true, userEmail, userPassword);
-                                });
-                            div.append(usernameSpan, availabilitySpan);
-                        } else {
-                            // User is not available
-                            availabilitySpan.addClass("grey-text").text(" is not available");
-                            const usernameSpan = $("<span></span>").text(username).addClass("white-text");
-                            div.append(usernameSpan, availabilitySpan);
-                        }
-                        userContainer.append(div);
-                    });
-                });
-            }
-        },
-        error: () => {
-            toastr.error();
-        },
-    });
-};
-
-const getUserNameByEmailAndPassword = (email, password, callback) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
-        method: "GET",
-        success: (response) => {
-            // Handle success response
-            const userName = response.userName;
-            console.log("Username: " + userName);
-            callback(userName);
-        },
-        error: (xhr, status, error) => {
-            // Handle error response
-            console.log("Error: " + error);
-            callback(null);
-        }
-    });
-};
-
-const saveGameOpponent = (opponentUsername) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
-        method: "PUT",
-        success: () => {
-            // Handle success response if needed
-            console.log("Game opponent saved successfully");
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
-        }
-    });
-};
-
-const getUserNameByGameOpponent = (gameOpponent, callback) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/getUserByGameOpponent/" + gameOpponent,
-        method: "GET",
-        success: (response) => {
-            // Handle success response
-            const userName = response.userName;
-            console.log("Username: " + userName);
-            callback(userName);
-        },
-        error: (xhr, status, error) => {
-            // Handle error response
-            console.log("Error: " + error);
-            callback(null);
-        }
-    });
-};
-
-// Neka malo odmori
-// const getGameOpponentByUserName = (username, callback) => {
-//     $.ajax({
-//         url: "../Co-Chef-Backend/rest/getGameOpponentByUser/" + username,
-//         method: "GET",
-//         success: (response) => {
-//             if (response.gameOpponent) {
-//                 const gameOpponent = response.gameOpponent;
-//                 // Pass the game opponent to the callback function
-//                 callback(gameOpponent);
-//             } else {
-//                 // No game opponent found
-//                 callback(null);
-//             }
-//         },
-//         error: (xhr, status, error) => {
-//             // Handle error if the request fails
-//             console.log("Error: " + error);
-//             callback(null);
-//         },
-//     });
-// };
-
-const updateGameOpponent = (userEmail, gameOpponent) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
-        method: "PUT",
-        success: () => {
-            console.log("Game opponent updated successfully");
-            // Handle success response
-        },
-        error: () => {
-            console.log("Failed to update game opponent");
-            // Handle error response
-        }
-    });
-};
-
-const updateUserGameId = (userName, gameId) => {
-    $.ajax({
-        url: "../Co-Chef-Backend/rest/updateGameId/" + userName + "/" + gameId,
-        type: "PUT",
-        success: function() {
-            console.log("Game ID updated successfully");
-            // Handle success response
-        },
-        error: function() {
-            console.log("Failed to update game ID");
-            // Handle error response
-        }
-    });
-};
-
-// Function to show the dialogue
-const showDialogue = () => {
-    let randomGameId = Math.floor(Math.random() * 1000) + 1;
-    const confirmDialog = confirm("Do you want to play a game with?");
-    if (confirmDialog) {
-        updateUserGameId(USER_NAME, randomGameId);
-        setOpponentsGameOpponent(USER_NAME, randomGameId);
-    } else {
-        alert("Rejected your game invitation.");
+    const updateImageSource = (element, src) => {
+        element.src = src;
     }
-};
 
-// Function to periodically check if a user is willing to play
-const checkUserWillPlayPeriodically = () => {
-    willPlayIntervalId = setInterval(() => {
-        isUserWillPlay(USER_EMAIL, USER_PASSWORD, (willPlay) => {
-            if (willPlay) {
-                showDialogue();
-                updateWillPlay(false, USER_EMAIL, USER_PASSWORD);
-            } else {
-                clearInterval(willPlayIntervalId); // Stop the interval
+    const updateAvailability = (isAvailable, userEmail, password) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
+            method: "PUT",
+            success: (response) => {
+                // Handle success response if needed
+                console.log(response.message);
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
             }
         });
-    }, 5000);
-};
+    };
 
-const setOpponentsGameOpponent = (userName, randomGameId) => {
-    getUserNameByGameOpponent(userName, (userName) => {
-        if (userName) {
-            console.log("UserName in getUserNameByOpponent: " + userName)
-            updateUserGameId(userName, randomGameId);
-            updateGameOpponent(USER_EMAIL, userName);
-        } else {
-            console.log("No username found");
+    const resetGameOpponent = (userEmail) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/resetGameOpponent/" + userEmail,
+            method: 'PUT',
+            success: () => {
+                console.log("Game opponent reset successfully");
+                // Handle success response
+            },
+            error: () => {
+                console.log("Failed to reset game opponent");
+                // Handle error response
+            }
+        });
+    };
+
+    const updateWillPlay = (isWillPlay, userEmail, userPassword) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
+            method: "PUT",
+            success: (response) => {
+                // Handle success response if needed
+                console.log(response.message);
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
+            }
+        });
+    };
+    const updateIsRejected = (isRejected, userName) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/updateUserIsRejected/" + userName + "/" + isRejected,
+            method: "PUT",
+            success: (response) => {
+                // Handle success response if needed
+                console.log(response.message);
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
+            }
+        });
+    };
+
+    const isUserAvailable = (userEmail, userPassword, callback) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
+            method: "GET",
+            success: (response) => {
+                if (response.isAvailable) {
+                    // User is available
+                    console.log(userEmail + " is available");
+                    callback(true);
+                } else {
+                    // User is not available
+                    console.log("User is not available");
+                    callback(false);
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("Availability: " + error);
+                callback(false);
+            },
+        });
+    };
+
+    const isUserWillPlay = (userEmail, userPassword, callback) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
+            method: "GET",
+            success: (response) => {
+                if (response.willPlay) {
+                    // User is available
+                    console.log(userEmail + " will play");
+                    callback(true);
+                } else {
+                    // User is not available
+                    console.log("No opponent selected");
+                    callback(false);
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("WillPlay: " + error);
+                callback(false);
+            },
+        });
+    };
+
+    const isUserRejected = (userName, callback) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/isRejected/" + userName,
+            method: "GET",
+            success: (response) => {
+                if (response.isRejected) {
+                    // User is available
+                    console.log(userName + " is rejected");
+                    callback(true);
+                } else {
+                    // User is not available
+                    console.log(userName + " is not rejected");
+                    callback(false);
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("WillPlay: " + error);
+                callback(false);
+            },
+        });
+    };
+
+    const ListUsers = () => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/users",
+            method: "GET",
+            success: (response) => {
+                if (response.users) {
+                    const users = response.users;
+                    const userContainer = $("#userContainer");
+
+                    users.forEach((user) => {
+                        const username = user.userName;
+                        const userEmail = user.userEmail;
+                        const userPassword = user.userPassword;
+                        const gameId = user.gameId;
+
+                        // Check if the user being iterated over is the current user
+                        if (userEmail === USER_EMAIL || userPassword === USER_PASSWORD) {
+                            return; // Skip the current user
+                        }
+
+                        const div = $("<div></div>").css("display", "block");
+                        const availabilitySpan = $("<span></span>").addClass("availability-text");
+
+                        isUserAvailable(userEmail, userPassword, (isAvailable) => {
+                            if (gameId === 0 && isAvailable) {
+                                availabilitySpan.addClass("green-text").text(" is available");
+
+                                const usernameSpan = $("<span></span>")
+                                    .text(username)
+                                    .addClass("white-text")
+                                    .addClass("clickable")
+                                    .on("click", () => {
+                                        // console.log("Clicked user email: " + userEmail)
+                                        // console.log("Clicked user password: " + userPassword)
+                                        // console.log("Current user email: " + USER_EMAIL)
+                                        // console.log("Current user password: " + USER_PASSWORD)
+                                        saveGameOpponent(username);
+                                        updateWillPlay(true, userEmail, userPassword);
+
+                                    });
+                                div.append(usernameSpan, availabilitySpan);
+                            } else {
+                                // User is not available
+                                availabilitySpan.addClass("grey-text").text(" is not available");
+                                const usernameSpan = $("<span></span>").text(username).addClass("white-text");
+                                div.append(usernameSpan, availabilitySpan);
+                            }
+                            userContainer.append(div);
+                        });
+                    });
+                }
+            },
+            error: () => {
+                toastr.error();
+            },
+        });
+    };
+
+    const getUserNameByEmailAndPassword = (email, password, callback) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
+            method: "GET",
+            success: (response) => {
+                // Handle success response
+                const userName = response.userName;
+                console.log("Username: " + userName);
+                callback(userName);
+            },
+            error: (xhr, status, error) => {
+                // Handle error response
+                console.log("Error: " + error);
+                callback(null);
+            }
+        });
+    };
+
+    const saveGameOpponent = (opponentUsername) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
+            method: "PUT",
+            success: () => {
+                // Handle success response if needed
+                console.log("Game opponent saved successfully");
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
+            }
+        });
+    };
+
+    const getUserNameByGameOpponent = (gameOpponent, callback) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/getUserByGameOpponent/" + gameOpponent,
+            method: "GET",
+            success: (response) => {
+                // Handle success response
+                const userName = response.userName;
+                callback(userName);
+            },
+            error: (xhr, status, error) => {
+                // Handle error response
+                console.log("Error: " + error);
+                callback(null);
+            }
+        });
+    };
+
+    const updateGameOpponent = (userEmail, gameOpponent) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
+            method: "PUT",
+            success: () => {
+                console.log("Game opponent updated successfully");
+                // Handle success response
+            },
+            error: () => {
+                console.log("Failed to update game opponent");
+                // Handle error response
+            }
+        });
+    };
+
+    const checkUsersHaveSameGameId = (userName1, userName2, callback) => {
+        $.ajax({
+            method: "GET",
+            url: "../Co-Chef-Backend/rest/checkUsersHaveSameGameId/" + userName1 + "/" + userName2,
+            success: (response) => {
+                const haveSameGameId = response["Same id"];
+                callback(haveSameGameId);
+            },
+            error: () => {
+                callback(false);
+            }
+        });
+    };
+
+    const checkUsersHaveWaitingToPlay = (userName1, userName2, callback) => {
+        $.ajax({
+            method: "GET",
+            url: "../Co-Chef-Backend/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
+            success: (response) => {
+                const sameWaitingToPlay = response["waitingToPlay"];
+                callback(sameWaitingToPlay);
+            },
+            error: (xhr, status, error) => {
+                console.error("Failed to check users have same waitingToPlay:", error);
+                callback(false);
+            }
+        });
+    };
+
+    // const isWaitingToPlay = (userName, callback) => {
+    //     $.ajax({
+    //         method: "GET",
+    //         url: "../Co-Chef-Backend/rest/isWaitingToPlay/" + userName,
+    //         success: (response) => {
+    //             const isWaitingToPlay = response["isWaitingToPlay"];
+    //             callback(isWaitingToPlay);
+    //         },
+    //         error: () => {
+    //             callback(false);
+    //         }
+    //     });
+    // };
+
+    const updateWaitingToPlay = (userName, isWaitingToPlay) => {
+        $.ajax({
+            method: "PUT",
+            url: "../Co-Chef-Backend/rest/updateWaitingToPlay/" + userName + "/" + isWaitingToPlay,
+            success: () => {
+                console.log("User isWaitingToPlay updated");
+            },
+            error: (xhr, status, error) => {
+                console.error("Failed to update user isWaitingToPlay:", error);
+            }
+        });
+    };
+
+    const updateUserGameId = (userName, gameId) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/updateGameId/" + userName + "/" + gameId,
+            type: "PUT",
+            success: function () {
+                console.log("Game ID updated successfully");
+                // Handle success response
+            },
+            error: function () {
+                console.log("Failed to update game ID");
+                // Handle error response
+            }
+        });
+    };
+
+    const updateRecipe = (userName, recipe) => {
+        $.ajax({
+            method: "PUT",
+            url: "../Co-Chef-Backend/rest/updateRecipe/" + userName + "/" + recipe,
+            success: (response) => {
+                console.log("User recipe updated:", response.message);
+            },
+            error: (xhr, status, error) => {
+                console.error("Failed to update user recipe:", error);
+            }
+        });
+    };
+
+    const resetRecipe = (userEmail) => {
+        $.ajax({
+            method: "PUT",
+            url: "../Co-Chef-Backend/rest/resetRecipe/" + userEmail,
+            success: (response) => {
+                console.log("Recipe reset:", response.message);
+            },
+            error: (xhr, status, error) => {
+                console.error("Failed to reset recipe:", error);
+            }
+        });
+    };
+
+    // Function to show the dialogue
+    const showDialogue = () => {
+        let randomGameId = Math.floor(Math.random() * 1000) + 1;
+        let confirmDialog = null;
+        getUserNameByGameOpponent(USER_NAME, (userName) => {
+            if (userName) {
+                confirmDialog = confirm("Do you want to play a game with " + userName + "?");
+                if (confirmDialog) {
+                    updateUserGameId(USER_NAME, randomGameId);
+                    setOpponentsGameOpponent(USER_NAME, randomGameId);
+                    SelectBackButton.style.display = "flex";
+                    characterName.style.display = "flex";
+                    speechText.style.display = "flex";
+                    characterContainer.style.display = "flex";
+                    userHeader.style.display = "none";
+                    userListContainer.style.display = "none";
+                    userBackground.style.display = "none";
+                    connectRefreshButton.style.display = "none";
+                    connectBackButton.style.display = "none";
+                    if (willPlayIntervalId) {
+                        clearInterval(willPlayIntervalId);
+                    }
+                    switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+                    scenes[activeScene].restartClick();
+                    scenes[activeScene].changeText();
+                } else {
+                    console.log(userName)
+                    updateIsRejected(1, userName)
+                    alert("Rejected an invitation from " + userName);
+                }
+            }
+        });
+    };
+
+    // Function to periodically check if a user is willing to play
+    const checkUserWillPlayPeriodically = () => {
+        willPlayIntervalId = setInterval(() => {
+            isUserWillPlay(USER_EMAIL, USER_PASSWORD, (willPlay) => {
+                if (willPlay) {
+                    showDialogue();
+                    updateWillPlay(false, USER_EMAIL, USER_PASSWORD);
+                }
+            });
+            isUserRejected(USER_NAME, (isRejected) => {
+                if (isRejected) {
+                    getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                        if (gameOpponent) {
+                            alert("You have been rejected by " + gameOpponent);
+                            resetGameOpponent(USER_EMAIL);
+                            updateIsRejected(false, USER_NAME);
+                        }
+                    });
+                }
+            });
+            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                if (gameOpponent) {
+                    checkUsersHaveSameGameId(USER_NAME, gameOpponent, (haveSameGameId) => {
+                        if (haveSameGameId) {
+                            alert("Your game has been accepted");
+                            SelectBackButton.style.display = "flex";
+                            characterName.style.display = "flex";
+                            speechText.style.display = "flex";
+                            characterContainer.style.display = "flex";
+                            userHeader.style.display = "none";
+                            userListContainer.style.display = "none";
+                            userBackground.style.display = "none";
+                            connectRefreshButton.style.display = "none";
+                            connectBackButton.style.display = "none";
+                            if (willPlayIntervalId) {
+                                clearInterval(willPlayIntervalId);
+                            }
+                            switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+                            scenes[activeScene].restartClick();
+                            scenes[activeScene].changeText();
+                        }
+                    });
+                }
+            })
+        }, 5000);
+    };
+
+    const setOpponentsGameOpponent = (userName, randomGameId) => {
+        getUserNameByGameOpponent(userName, (userName) => {
+            if (userName) {
+                console.log("UserName in getUserNameByOpponent: " + userName)
+                updateUserGameId(userName, randomGameId);
+                updateGameOpponent(USER_EMAIL, userName);
+            } else {
+                console.log("No username found");
+            }
+        });
+    }
+});
+
+export const updateUserTaskCompleted = (userName, taskCompleted) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
+        type: "PUT",
+        success: function () {
+            console.log("taskCompleted updated successfully");
+            // Handle success response
+        },
+        error: function () {
+            console.log("Failed to update taskCompleted");
+            // Handle error response
         }
     });
-}
+};
 
+export const checkUsersHaveSameTaskCompleted = (userName1, userName2, callback) => {
+    $.ajax({
+        method: "GET",
+        url: "../Co-Chef-Backend/rest/checkUsersHaveSameTaskCompleted/" + userName1 + "/" + userName2,
+        success: (response) => {
+            const haveSameTasksCompleted = response["Same tasksCompleted"];
+            callback(haveSameTasksCompleted);
+        },
+        error: () => {
+            callback(false);
+        }
+    });
+};
+
+export const getGameOpponentByUserName = (username, callback) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/getGameOpponentByUser/" + username,
+        method: "GET",
+        success: (response) => {
+            if (response.gameOpponent) {
+                const gameOpponent = response.gameOpponent;
+                // Pass the game opponent to the callback function
+                callback(gameOpponent);
+            } else {
+                // No game opponent found
+                callback(null);
+            }
+        },
+        error: (xhr, status, error) => {
+            // Handle error if the request fails
+            console.log("Error: " + error);
+            callback(null);
+        },
+    });
+};
+
+export const getRecipeByUserName = (username, callback) => {
+    $.ajax({
+        url: "../Co-Chef-Backend/rest/getRecipeByUserName/" + username,
+        method: "GET",
+        success: (response) => {
+            // Handle success response
+            const recipe = response.recipe;
+            callback(recipe);
+        },
+        error: (xhr, status, error) => {
+            // Handle error response
+            console.log("Error: " + error);
+            callback(null);
+        }
+    });
+};

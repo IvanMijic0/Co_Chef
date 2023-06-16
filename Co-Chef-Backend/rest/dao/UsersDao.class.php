@@ -98,6 +98,34 @@ class UsersDao extends BaseDao
         }
     }
 
+    public function isRejected($userName): bool
+    {
+        $query = "SELECT isRejected FROM " . $this->table_name . " WHERE userName = ?";
+        $params = [$userName];
+
+        $result = $this->query_single($query, $params);
+
+        if ($result && $result["isRejected"] == 1) {
+            return true; // User is rejected
+        } else {
+            return false; // User is not rejected or doesn't exist
+        }
+    }
+
+    public function isWaitingToPlay($userName): bool
+    {
+        $query = "SELECT waitingToPlay FROM " . $this->table_name . " WHERE userName = ?";
+        $params = [$userName];
+
+        $result = $this->query_single($query, $params);
+
+        if ($result && $result["waitingToPlay"] == 1) {
+            return true; // User is rejected
+        } else {
+            return false; // User is not rejected or doesn't exist
+        }
+    }
+
     public function getUserNameByGameOpponent($gameOpponent)
     {
         $query = "SELECT userName FROM " . $this->table_name . " WHERE gameOpponent = ?";
@@ -107,6 +135,20 @@ class UsersDao extends BaseDao
 
         if ($result && isset($result["userName"])) {
             return $result["userName"]; // Return the username
+        } else {
+            return null; // No matching record found
+        }
+    }
+
+    public function getRecipeByUserName($userName)
+    {
+        $query = "SELECT recipe FROM " . $this->table_name . " WHERE userName = ?";
+        $params = [$userName];
+
+        $result = $this->query_single($query, $params);
+
+        if ($result && isset($result["recipe"])) {
+            return $result["recipe"]; // Return the recipe
         } else {
             return null; // No matching record found
         }
@@ -159,4 +201,115 @@ class UsersDao extends BaseDao
 
         return $affectedRows !== false;
     }
+
+    public function updateUserIsRejected($userName, $isRejected): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET isRejected = ? WHERE userName = ?";
+        $params = [$isRejected, $userName];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+    public function updateWaitingToPlay($userName, $waitingToPlay): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET waitingToPlay = ? WHERE userName = ?";
+        $params = [$waitingToPlay, $userName];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
+    public function updateRecipe($userName, $recipe): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET recipe = ? WHERE userName = ?";
+        $params = [$recipe, $userName];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
+    public function updateTasksCompleted($userName, $tasksCompleted): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET tasksCompleted = ? WHERE userName = ?";
+        $params = [$tasksCompleted, $userName];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
+    public function resetGameOpponent($userEmail): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET gameOpponent = '' WHERE userEmail = ?";
+        $params = [$userEmail];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
+    public function resetRecipe($recipe): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET recipe = '' WHERE userEmail = ?";
+        $params = [$recipe];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
+    public function checkUsersHaveSameGameId($userName1, $userName2): bool
+    {
+        $query = "SELECT gameId FROM " . $this->table_name . " WHERE userName IN (?, ?) LIMIT 2"; // Was giving me 3 Rows, don't know why...
+        $params = [$userName1, $userName2];
+
+        $result = $this->query($query, $params);
+
+        // If it returns exactly two rows, we are golden
+        if ($result && count($result) === 2) {
+            $gameId1 = $result[0]["gameId"];
+            $gameId2 = $result[1]["gameId"];
+
+            return $gameId1 === $gameId2 && $gameId1 !== 0; // Has to be non-zero, because 0 is default
+        }
+        return false;
+    }
+
+    public function checkUsersHaveSameTaskCompleted($userName1, $userName2): bool
+    {
+        $query = "SELECT tasksCompleted FROM " . $this->table_name . " WHERE userName IN (?, ?) LIMIT 2"; // Was giving me 3 Rows, don't know why...
+        $params = [$userName1, $userName2];
+
+        $result = $this->query($query, $params);
+
+        // If it returns exactly two rows, we are golden
+        if ($result && count($result) === 2) {
+            $tasksCompleted1 = $result[0]["tasksCompleted"];
+            $tasksCompleted2 = $result[1]["tasksCompleted"];
+
+            return $tasksCompleted1 === $tasksCompleted2 && $tasksCompleted1 !== 0; // Has to be non-zero, because 0 is default
+        }
+        return false;
+    }
+
+    public function checkUsersHaveWaitingToPlay($userName1, $userName2): bool
+    {
+        $query = "SELECT waitingToPlay FROM " . $this->table_name . " WHERE userName IN (?, ?) LIMIT 2"; // Was giving me 3 Rows, don't know why...
+        $params = [$userName1, $userName2];
+
+        $result = $this->query($query, $params);
+
+        // If it returns exactly two rows, we are golden
+        if ($result && count($result) === 2) {
+            $waitingToPlay1 = $result[0]["waitingToPlay"];
+            $waitingToPlay2 = $result[1]["waitingToPlay"];
+
+            return $waitingToPlay1 === $waitingToPlay2 && $waitingToPlay1 !== 0;
+        }
+        return false;
+    }
 }
+

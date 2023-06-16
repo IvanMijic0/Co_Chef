@@ -3,6 +3,12 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {InputHandler} from "../Control/input-handler.js";
 import {extractFileNameWithExtension, extractFileNameWithoutExtension} from "../utils/string-manipulation.js";
 import {checkAllPropertiesEqualMax} from "../utils/object-manipulation.js";
+import {
+    updateUserTaskCompleted,
+    checkUsersHaveSameTaskCompleted,
+    getRecipeByUserName,
+    getGameOpponentByUserName
+} from "../Control/buttonListeners.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
@@ -203,53 +209,83 @@ export class GameplayScene extends Scene {
             this.timer.style.color = "#e10000";
             timerValueSec = 0;
             if (this.checkOnce) {
-                if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
-                    if (checkAllPropertiesEqualMax(NOODLE_RECIPE)) {
-                        console.log("Congrats, you won!")
-                        this.showWinScreen = true;
-                        this.endGameMenuButton.style.display = "flex";
-                        this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
-                        this.plateItem.style.bottom = "2vw";
-                        this.plateItem.style.display = "flex";
-                        canMove = false;
-                    } else {
-                        console.log("UnCograts, you lost!")
-                        this.showLoseScreen = true;
-                        this.endGameMenuButton.style.display = "flex";
-                        console.log(this.showLoseScreen )
-                        canMove = false;
+                getRecipeByUserName(USER_NAME, (recipe) => {
+                    if (recipe) {
+                        if (recipe === sceneData.DISH_SELECT.noodlesName) {
+                            if (checkAllPropertiesEqualMax(NOODLE_RECIPE)) {
+                                updateUserTaskCompleted(USER_NAME, 1);
+                                setTimeout(() => {
+                                    getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                        if (gameOpponent) {
+                                            checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                                if (areCompleted) {
+                                                    this.showWinScreen = true;
+                                                    this.endGameMenuButton.style.display = "flex";
+                                                    this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
+                                                    this.plateItem.style.bottom = "2vw";
+                                                    this.plateItem.style.display = "flex";
+                                                    canMove = false;
+                                                } else {
+                                                    console.log("fail");
+                                                    this.showLoseScreen = true;
+                                                    this.endGameMenuButton.style.display = "flex";
+                                                    console.log(this.showLoseScreen)
+                                                    canMove = false;
+                                                }
+                                            });
+                                        }
+                                    });
+                                }, 1000)
+                            }
+                        } else if (recipe === sceneData.DISH_SELECT.curryName) {
+                            updateUserTaskCompleted(USER_NAME, 1);
+                            setTimeout(() => {
+                                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                    if (gameOpponent) {
+                                        checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                            if (areCompleted) {
+                                                this.showWinScreen = true;
+                                                this.endGameMenuButton.style.display = "flex";
+                                                this.plateItem.src = "Assets/Sprites/Dishes/curry.png";
+                                                this.plateItem.style.bottom = "2vw";
+                                                this.plateItem.style.display = "flex";
+                                                canMove = false;
+                                            } else {
+                                                this.showLoseScreen = true;
+                                                this.endGameMenuButton.style.display = "flex";
+                                                console.log(this.showLoseScreen)
+                                                canMove = false;
+                                            }
+                                        });
+                                    }
+                                });
+                            }, 1000)
+                        } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
+                            updateUserTaskCompleted(USER_NAME, 1);
+                            setTimeout(() => {
+                                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                    if (gameOpponent) {
+                                        checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                            if (areCompleted) {
+                                                this.showWinScreen = true;
+                                                this.endGameMenuButton.style.display = "flex";
+                                                this.plateItem.src = "Assets/Sprites/Dishes/fishTaco.png";
+                                                this.plateItem.style.bottom = "2vw";
+                                                this.plateItem.style.display = "flex";
+                                                canMove = false;
+                                            } else {
+                                                this.showLoseScreen = true;
+                                                this.endGameMenuButton.style.display = "flex";
+                                                console.log(this.showLoseScreen)
+                                                canMove = false;
+                                            }
+                                        });
+                                    }
+                                });
+                            }, 1000)
+                        }
                     }
-                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
-                    if (checkAllPropertiesEqualMax(CURRY_RECIPE)) {
-                        console.log("Congrats, you won!")
-                        this.showWinScreen = true;
-                        this.endGameMenuButton.style.display = "flex";
-                        this.plateItem.src = "Assets/Sprites/Dishes/curry.png";
-                        this.plateItem.style.bottom = "2vw";
-                        this.plateItem.style.display = "flex";
-                        canMove = false;
-                    } else {
-                        console.log("UnCograts, you lost!")
-                        this.showLoseScreen = true;
-                        this.endGameMenuButton.style.display = "flex";
-                        canMove = false;
-                    }
-                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
-                    if (checkAllPropertiesEqualMax(FISH_TACO_RECIPE)) {
-                        console.log("Congrats, you won!")
-                        this.showWinScreen = true;
-                        this.endGameMenuButton.style.display = "flex";
-                        this.plateItem.src = "Assets/Sprites/Dishes/fishTaco.png";
-                        this.plateItem.style.bottom = "2vw";
-                        this.plateItem.style.display = "flex";
-                        canMove = false;
-                    } else {
-                        console.log("UnCograts, you lost!")
-                        this.showLoseScreen = true;
-                        this.endGameMenuButton.style.display = "flex";
-                        canMove = false;
-                    }
-                }
+                });
                 this.checkOnce = false;
             }
         }
@@ -474,8 +510,7 @@ export class GameplayScene extends Scene {
                 if (this.canInteract) {
                     if (this.input.lastKey === "e") {
                         if (this.collisionCollider === "sink") {
-                            if (!["tortilla.png", "redMeat.png", "noodles.png", "ic_slot.png", "redMead_Cooked.png, fish_Cooked.png"].
-                            includes(extractFileNameWithExtension(this.sinkItem.src))) {
+                            if (!["tortilla.png", "redMeat.png", "noodles.png", "ic_slot.png", "redMead_Cooked.png, fish_Cooked.png"].includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showSinkMiniGame = !this.showSinkMiniGame;
                                 canMove = !canMove;
                                 if (!canMove) {
@@ -885,7 +920,7 @@ export class GameplayScene extends Scene {
         }
     }
 
-    updateWinLoseScreen = () =>  {
+    updateWinLoseScreen = () => {
         this.options.style.display = "none";
         this.recipe.style.display = "none";
         this.com.style.display = "none";
