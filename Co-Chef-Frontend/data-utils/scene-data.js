@@ -119,7 +119,7 @@ export const sceneData = {
         stir_item_new_transform: "33vh",
         fry_item_original_transform: "14vh",
         fry_item_new_transform: "44vh",
-        timerValue: 700000.2,
+        timerValue: 400000.2,
         sceneId: 9,
     },
 }
