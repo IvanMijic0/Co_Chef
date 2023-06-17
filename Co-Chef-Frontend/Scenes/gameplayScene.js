@@ -9,6 +9,7 @@ import {
     getRecipeByUserName,
     getGameOpponentByUserName
 } from "../Control/buttonListeners.js";
+import {canMove} from "../Control/chatting.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
@@ -165,7 +166,6 @@ export class GameplayScene extends Scene {
     }
 
     update = (deltaTime) => {
-        this.updateTimer(deltaTime);
         if (this.mini_game_started) {
             this.updateMiniGameTimer(deltaTime);
         }
@@ -177,8 +177,9 @@ export class GameplayScene extends Scene {
         this.updateMenuScale();
         this.updateSinkItemInteraction();
         this.updateKnifeItemInteraction();
-        this.updateStirItemInteraction();
+        this.updateStirItemInteraction(deltaTime);
         this.updateFryItemInteraction();
+        this.updateTimer(deltaTime)
         this.showMiniGameTimer();
         if (this.showWinScreen || this.showLoseScreen) {
             this.updateWinLoseScreen();
@@ -213,35 +214,33 @@ export class GameplayScene extends Scene {
                     if (recipe) {
                         if (recipe === sceneData.DISH_SELECT.noodlesName) {
                             if (checkAllPropertiesEqualMax(NOODLE_RECIPE)) {
-                                updateUserTaskCompleted(USER_NAME, 1);
-                                setTimeout(() => {
-                                    getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
-                                        if (gameOpponent) {
-                                            checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
-                                                if (areCompleted) {
-                                                    this.showWinScreen = true;
-                                                    this.endGameMenuButton.style.display = "flex";
-                                                    this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
-                                                    this.plateItem.style.bottom = "2vw";
-                                                    this.plateItem.style.display = "flex";
-                                                    canMove = false;
-                                                } else {
-                                                    console.log("fail");
-                                                    this.showLoseScreen = true;
-                                                    this.endGameMenuButton.style.display = "flex";
-                                                    console.log(this.showLoseScreen)
-                                                    canMove = false;
-                                                }
-                                            });
-                                        }
-                                    });
-                                }, 1000)
-                            }
-                        } else if (recipe === sceneData.DISH_SELECT.curryName) {
-                            updateUserTaskCompleted(USER_NAME, 1);
-                            setTimeout(() => {
                                 getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                     if (gameOpponent) {
+                                        updateUserTaskCompleted(USER_NAME, 1);
+                                        checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                            if (areCompleted) {
+                                                this.showWinScreen = true;
+                                                this.endGameMenuButton.style.display = "flex";
+                                                this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
+                                                this.plateItem.style.bottom = "2vw";
+                                                this.plateItem.style.display = "flex";
+                                                canMove = false;
+                                            }
+                                        });
+                                    }
+                                });
+                            } else {
+                                console.log("fail");
+                                this.showLoseScreen = true;
+                                this.endGameMenuButton.style.display = "flex";
+                                console.log(this.showLoseScreen)
+                                canMove = false;
+                            }
+                        } else if (recipe === sceneData.DISH_SELECT.curryName) {
+                            if (checkAllPropertiesEqualMax(CURRY_RECIPE)) {
+                                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                    if (gameOpponent) {
+                                        updateUserTaskCompleted(USER_NAME, 1);
                                         checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
                                             if (areCompleted) {
                                                 this.showWinScreen = true;
@@ -250,21 +249,21 @@ export class GameplayScene extends Scene {
                                                 this.plateItem.style.bottom = "2vw";
                                                 this.plateItem.style.display = "flex";
                                                 canMove = false;
-                                            } else {
-                                                this.showLoseScreen = true;
-                                                this.endGameMenuButton.style.display = "flex";
-                                                console.log(this.showLoseScreen)
-                                                canMove = false;
                                             }
                                         });
                                     }
                                 });
-                            }, 1000)
+                            } else {
+                                console.log("fail");
+                                this.showLoseScreen = true;
+                                this.endGameMenuButton.style.display = "flex";
+                                canMove = false;
+                            }
                         } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
-                            updateUserTaskCompleted(USER_NAME, 1);
-                            setTimeout(() => {
+                            if (checkAllPropertiesEqualMax(FISH_TACO_RECIPE)) {
                                 getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                     if (gameOpponent) {
+                                        updateUserTaskCompleted(USER_NAME, 1);
                                         checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
                                             if (areCompleted) {
                                                 this.showWinScreen = true;
@@ -273,20 +272,23 @@ export class GameplayScene extends Scene {
                                                 this.plateItem.style.bottom = "2vw";
                                                 this.plateItem.style.display = "flex";
                                                 canMove = false;
-                                            } else {
-                                                this.showLoseScreen = true;
-                                                this.endGameMenuButton.style.display = "flex";
-                                                console.log(this.showLoseScreen)
-                                                canMove = false;
                                             }
                                         });
                                     }
                                 });
-                            }, 1000)
+                            } else {
+                                console.log("fail");
+                                this.showLoseScreen = true;
+                                this.endGameMenuButton.style.display = "flex";
+                                console.log(this.showLoseScreen)
+                                canMove = false;
+                            }
                         }
                     }
                 });
-                this.checkOnce = false;
+                if (this.timerValue <= .001 && this.timerValue >= 0) {
+                    this.checkOnce = false;
+                }
             }
         }
         this.timer.innerText = Math.max(timerValueSec, 0);
@@ -405,12 +407,12 @@ export class GameplayScene extends Scene {
         }
     };
 
-    updateStirItemInteraction = () => {
+    updateStirItemInteraction = (deltaTime) => {
         if (!canMove && this.collisionCollider === "stir") {
             this.sinkItem.style.width = this.sinkItemOGWidth;
             this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.sinkItem.style.display === "flex") {
-                this.currentBottom += 0.1;
+                this.currentBottom += deltaTime * 0.1;
                 this.sinkItem.style.bottom = this.currentBottom + "vw";
             }
             if (this.currentBottom >= 33) {
@@ -420,13 +422,23 @@ export class GameplayScene extends Scene {
                 let propertyName = extractFileNameWithoutExtension(this.sinkItem.src) + "_num";
                 let pileNum = parseInt(pileNumElement.innerHTML[1]) + 1;
                 pileNumElement.innerHTML = "x" + pileNum;
-                if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
-                    NOODLE_RECIPE[propertyName]++;
-                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
-                    CURRY_RECIPE[propertyName]++;
-                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
-                    FISH_TACO_RECIPE[propertyName]++;
-                }
+                getRecipeByUserName(USER_NAME, (recipe) => {
+                    if (recipe) {
+                        if (recipe === sceneData.DISH_SELECT.noodlesName) {
+                            NOODLE_RECIPE[propertyName]++;
+                            console.log(NOODLE_RECIPE[propertyName])
+                            console.log(propertyName)
+                        } else if (recipe === sceneData.DISH_SELECT.curryName) {
+                            CURRY_RECIPE[propertyName]++;
+                            console.log(CURRY_RECIPE[propertyName])
+                            console.log(propertyName)
+                        } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
+                            FISH_TACO_RECIPE[propertyName]++;
+                            console.log(FISH_TACO_RECIPE[propertyName])
+                            console.log(propertyName)
+                        }
+                    }
+                });
                 this.currentBottom = 8;
             }
             if (this.sinkItem.style.bottom === sceneData.Gameplay.stir_item_new_transform) {
@@ -441,13 +453,23 @@ export class GameplayScene extends Scene {
                             if (this.changeStirNum) {
                                 this.stirNumber++;
                                 this.stirNumberElement.innerHTML = this.stirNumber;
-                                if (REMEMBER_DISH === sceneData.DISH_SELECT.noodlesName) {
-                                    NOODLE_RECIPE.stir_num++;
-                                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.curryName) {
-                                    CURRY_RECIPE.stir_num++;
-                                } else if (REMEMBER_DISH === sceneData.DISH_SELECT.fishTacoName) {
-                                    FISH_TACO_RECIPE.stir_num++;
-                                }
+                                getRecipeByUserName(USER_NAME, (recipe) => {
+                                    if (recipe) {
+                                        if (recipe === sceneData.DISH_SELECT.noodlesName) {
+                                            NOODLE_RECIPE.stir_num++;
+                                            console.log("Noodles stir")
+                                            console.log(NOODLE_RECIPE.stir_num)
+                                        } else if (recipe === sceneData.DISH_SELECT.curryName) {
+                                            CURRY_RECIPE.stir_num++;
+                                            console.log("Curry stir")
+                                            console.log(CURRY_RECIPE.stir_num)
+                                        } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
+                                            FISH_TACO_RECIPE.stir_num++;
+                                            console.log("Fish Taco stir")
+                                            console.log(FISH_TACO_RECIPE.stir_num)
+                                        }
+                                    }
+                                });
                                 this.changeStirNum = false;
                             }
                         }, 200);

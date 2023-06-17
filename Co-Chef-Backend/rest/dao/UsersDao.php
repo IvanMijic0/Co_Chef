@@ -1,6 +1,6 @@
 <?php
 
-require_once "BaseDao.class.php";
+require_once "BaseDao.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -163,6 +163,20 @@ class UsersDao extends BaseDao
 
         if ($result) {
             return $result["gameOpponent"];
+        } else {
+            return null; // User not found or no game opponent assigned
+        }
+    }
+
+    public function getGameIdByUsername($username)
+    {
+        $query = "SELECT gameId FROM " . $this->table_name . " WHERE userName = ?";
+        $params = [$username];
+
+        $result = $this->query_single($query, $params);
+
+        if ($result) {
+            return $result["gameId"];
         } else {
             return null; // User not found or no game opponent assigned
         }

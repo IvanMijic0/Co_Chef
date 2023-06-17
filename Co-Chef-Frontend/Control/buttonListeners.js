@@ -248,6 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].changeText();
         } else {
             switchToScene(sceneData.CONNECT.sceneId);
+            deleteUsersWithSameNonZeroGameId(USER_NAME);
             userHeader.style.display = "block";
             userListContainer.style.display = "block";
             connectBackButton.style.display = "flex";
@@ -291,6 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 }
                             });
                             switchToScene(sceneData.Gameplay.sceneId);
+                            updateAvailability(false, USER_EMAIL, USER_PASSWORD);
                             toastr.info("Wait for connection");
                             scenes[activeScene].setPlayerImage();
                             setTimeout(() => {
@@ -300,6 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                             if (isWaitingToPlay) {
                                                 alert("Successfully connected!");
                                                 scenes[activeScene].resetTimer();
+                                                scenes[activeScene].allowInteract(true);
                                                 updateWaitingToPlay(USER_NAME, 0);
                                             } else {
                                                 alert("Opponent did not choose on time.")
@@ -361,7 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 });
 
                                 audio.switchAudio("gameplayAudio", audio.audio.volume);
-                                scenes[activeScene].allowInteract(true);
                                 ic_options.style.display = "flex";
                                 ic_recipes.style.display = "flex";
                                 ic_slot.style.display = "flex";
@@ -453,6 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateWaitingToPlay(USER_NAME, 0);
         updateAvailability(0, USER_EMAIL, USER_PASSWORD);
         updateUserTaskCompleted(USER_NAME, 0);
+        deleteUsersWithSameNonZeroGameId(USER_NAME);
         resetGameOpponent(USER_EMAIL);
         updateUserGameId(USER_NAME, 0);
         resetRecipe(USER_EMAIL);
@@ -481,6 +484,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     endMenuButton.addEventListener("click", () => {
+        updateWaitingToPlay(USER_NAME, 0);
+        updateAvailability(0, USER_EMAIL, USER_PASSWORD);
+        updateUserTaskCompleted(USER_NAME, 0);
+        resetGameOpponent(USER_EMAIL);
+        updateUserGameId(USER_NAME, 0);
+        resetRecipe(USER_EMAIL);
+        updateUserGameId(USER_NAME, 0);
         scenes[activeScene].toggleWinLose();
         scenes[activeScene].resetCollider();
         endMenuButton.style.display = "none";
@@ -682,6 +692,12 @@ document.addEventListener("DOMContentLoaded", () => {
             updateUserGameId(USER_NAME, 0);
             resetRecipe(USER_EMAIL);
             updateWaitingToPlay(USER_NAME, 0);
+            deleteUsersWithSameNonZeroGameId(USER_NAME);
+            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                if (gameOpponent) {
+                    deleteUsersWithSameNonZeroGameId(USER_NAME, gameOpponent);
+                }
+            });
         }
     });
 
@@ -1037,7 +1053,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // Function to show the dialogue
     const showDialogue = () => {
         let randomGameId = Math.floor(Math.random() * 1000) + 1;
         let confirmDialog = null;
@@ -1047,6 +1062,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (confirmDialog) {
                     updateUserGameId(USER_NAME, randomGameId);
                     setOpponentsGameOpponent(USER_NAME, randomGameId);
+                    initializeChats(randomGameId, USER_NAME);
                     SelectBackButton.style.display = "flex";
                     characterName.style.display = "flex";
                     speechText.style.display = "flex";
@@ -1096,6 +1112,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     checkUsersHaveSameGameId(USER_NAME, gameOpponent, (haveSameGameId) => {
                         if (haveSameGameId) {
                             alert("Your game has been accepted");
+                            getGameIdByUsername(USER_NAME, (gameId) => {
+                                if (gameId) {
+                                    console.log("In game Id: " + USER_NAME)
+                                    console.log(gameId)
+                                    initializeChats(gameId, USER_NAME);
+                                }
+                            })
                             SelectBackButton.style.display = "flex";
                             characterName.style.display = "flex";
                             speechText.style.display = "flex";
@@ -1129,6 +1152,55 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    const initializeChats = (gameId, userName) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/initializeChats",
+            method: "POST",
+            data: {
+                gameId: gameId,
+                userName: userName,
+                chatText: ""
+            },
+            success: () => {
+                console.log("Chats initialized");
+            },
+            error: () => {
+                console.log("Initialization failed")
+            }
+        });
+    }
+
+    const getGameIdByUsername = (userName, callback) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/getGameIdByUsername/" + userName,
+            method: "GET",
+            success: (response) => {
+                const gameId = response.gameId;
+                callback(gameId);
+                console.log(gameId);
+            },
+            error: (xhr, status, error) => {
+                console.error("Failed to retrieve Game ID:", error);
+                callback(null);
+            }
+        });
+    };
+
+    const deleteUsersWithSameNonZeroGameId = (userName) => {
+        $.ajax({
+            url: "../Co-Chef-Backend/rest/deleteUsersWithSameNonZeroGameId/" + userName,
+            type: "DELETE",
+            success: () => {
+                console.log('Users chat deleted successfully');
+                // Handle success response here
+            },
+            error: (xhr, status, error) => {
+                console.error('Failed to delete users chat:', error);
+                // Handle error response here
+            }
+        });
+    };
 });
 
 export const updateUserTaskCompleted = (userName, taskCompleted) => {
@@ -1136,7 +1208,6 @@ export const updateUserTaskCompleted = (userName, taskCompleted) => {
         url: "../Co-Chef-Backend/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
         type: "PUT",
         success: function () {
-            console.log("taskCompleted updated successfully");
             // Handle success response
         },
         error: function () {
@@ -1198,3 +1269,4 @@ export const getRecipeByUserName = (username, callback) => {
         }
     });
 };
+

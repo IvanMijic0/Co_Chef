@@ -6,10 +6,9 @@ Flight::route("/", function () {
 
 Flight::route("POST /user", function () {
     $data = Flight::request()->data->getData();
-    $userService = Flight::user_service();
 
     // Check if the user already exists
-    $userExists = $userService->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
+    $userExists =  Flight::user_service()->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
 
     if ($userExists) {
         Flight::halt(409); // Set response code to indicate conflict (e.g., 409 Conflict)
@@ -140,6 +139,16 @@ Flight::route("GET /checkUserWillPlay/@userEmail/@userPassword", function ($user
 
     // Return the availability status
     Flight::json(["willPlay" => $willPlay]);
+});
+
+Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
+    $gameId = Flight::user_service()->getGameIdByUsername($userName);
+
+    if ($gameId) {
+        Flight::json(["gameId" => $gameId]);
+    } else {
+        Flight::json(["error" => "gameId not found"], 404);
+    }
 });
 
 Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponent) {

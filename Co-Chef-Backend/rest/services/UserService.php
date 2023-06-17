@@ -1,7 +1,7 @@
 <?php
 
 require_once "BaseService.php";
-require_once __DIR__ . "/../dao/UsersDao.class.php";
+require_once __DIR__ . "/../dao/UsersDao.php";
 
 class UserService extends BaseService
 {
@@ -131,5 +131,10 @@ class UserService extends BaseService
     public function checkUsersHaveSameTaskCompleted($userName1, $userName2): bool
     {
         return $this->userDao->checkUsersHaveSameTaskCompleted($userName1, $userName2);
+    }
+
+    public function getGameIdByUsername($username)
+    {
+        return $this->userDao->getGameIdByUsername($username);
     }
 }

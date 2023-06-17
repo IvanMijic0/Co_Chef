@@ -5,6 +5,8 @@ let USER_NAME = "";
 let USER_EMAIL = "";
 let USER_PASSWORD = "";
 
+let CHAT_TEXT = "";
+
 const NOODLE_RECIPE = {
     name: "noodle",
     recipeArr: [
@@ -16,13 +18,13 @@ const NOODLE_RECIPE = {
     onion_num_max: 3,
     greenOnion_num_max: 1,
     carrot_num_max: 3,
-    potato_num_max: 1,
+    mushroom1_num_max: 1,
     noodles_num_max: 1,
     stir_num_max: 7,
     onion_num: 0,
     greenOnion_num: 0,
     carrot_num: 0,
-    potato_num: 0,
+    mushroom1_num: 0,
     noodles_num: 0,
     stir_num: 0
 }

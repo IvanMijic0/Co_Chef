@@ -12,11 +12,11 @@ class BaseDao
     public function __construct($table_name)
     {
         $this->table_name = $table_name;
-        $host = Config::$host;
-        $username = Config::$username;
-        $password = Config::$password;
-        $schema = Config::$database;
-        $port = Config::$port;
+        $host = Config::DB_HOST();
+        $username = Config::DB_USERNAME();
+        $password = Config::DB_PASSWORD();
+        $schema = Config::DB_SCHEMA();
+        $port = Config::DB_PORT();
 
         try
         {
