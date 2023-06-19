@@ -979,7 +979,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 callback(sameWaitingToPlay);
             },
             error: (xhr, status, error) => {
-                console.error("Failed to check users have same waitingToPlay:", error);
+                console.error(error);
                 callback(false);
             }
         });
@@ -993,7 +993,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("User isWaitingToPlay updated");
             },
             error: (xhr, status, error) => {
-                console.error("Failed to update user isWaitingToPlay:", error);
+                console.error(error);
             }
         });
     };
@@ -1021,7 +1021,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("User recipe updated:", response.message);
             },
             error: (xhr, status, error) => {
-                console.error("Failed to update user recipe:", error);
+                console.error(error);
             }
         });
     };
@@ -1034,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("Recipe reset:", response.message);
             },
             error: (xhr, status, error) => {
-                console.error("Failed to reset recipe:", error);
+                console.error(error);
             }
         });
     };
@@ -1167,7 +1167,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(gameId);
             },
             error: (xhr, status, error) => {
-                console.error("Failed to retrieve Game ID:", error);
+                console.error(error);
                 callback(null);
             }
         });
@@ -1182,7 +1182,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Handle success response here
             },
             error: (xhr, status, error) => {
-                console.error('Failed to delete users chat:', error);
+                console.error(error);
                 // Handle error response here
             }
         });
@@ -1248,9 +1248,8 @@ export const getRecipeByUserName = (username, callback) => {
             const recipe = response.recipe;
             callback(recipe);
         },
-        error: (xhr, status, error) => {
+        error: () => {
             // Handle error response
-            console.log("Error: " + error);
             callback(null);
         }
     });
