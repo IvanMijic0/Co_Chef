@@ -1,6 +1,8 @@
 # Co-Chef
-online multiplayer co-op mini-game.
+Online multiplayer co-op mini-game.
 In development...
+
+Will be continued after finals 'U+1F602'.
 
 ![Co-Chef_Choice](https://github.com/IvanMijic0/Co_Chef/blob/master/Co-Chef-Frontend/Assets/GithHubVisuals/Co-Chef_Choice.png)
 
