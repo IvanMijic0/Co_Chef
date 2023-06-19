@@ -119,7 +119,7 @@ const displayChatMessages = () => {
 
 const updateChatTextByUserName = (userName, chatText) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/updateChatTextByUserName/" + userName + "/" + chatText,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
         type: "PUT",
         success: function () {
             // Handle success response
@@ -134,7 +134,7 @@ const updateChatTextByUserName = (userName, chatText) => {
 const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
     $.ajax({
         method: "GET",
-        url: "../Co-Chef-Backend/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
         success: (response) => {
             const haveSameGameId = response["Same id"];
             callback(haveSameGameId);
@@ -147,7 +147,7 @@ const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
 
 const getChatTextByUsername = (userName, callback) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/getChatTextByUsername/" + userName,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getChatTextByUsername/" + userName,
         method: "GET",
         success: (response) => {
             const chatText = response.chatText;

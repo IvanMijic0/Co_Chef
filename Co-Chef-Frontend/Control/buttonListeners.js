@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userEmail = $("#username0").val();
         const userPassword = $("#password0").val();
         $.ajax({
-            url: "../Co-Chef-Backend/rest/user",
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/user",
             method: "POST",
             data: {
                 userName: userName,
@@ -707,7 +707,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateAvailability = (isAvailable, userEmail, password) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
             method: "PUT",
             success: (response) => {
                 // Handle success response if needed
@@ -722,7 +722,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const resetGameOpponent = (userEmail) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/resetGameOpponent/" + userEmail,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/resetGameOpponent/" + userEmail,
             method: 'PUT',
             success: () => {
                 console.log("Game opponent reset successfully");
@@ -737,7 +737,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateWillPlay = (isWillPlay, userEmail, userPassword) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
             method: "PUT",
             success: (response) => {
                 // Handle success response if needed
@@ -751,7 +751,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const updateIsRejected = (isRejected, userName) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/updateUserIsRejected/" + userName + "/" + isRejected,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateUserIsRejected/" + userName + "/" + isRejected,
             method: "PUT",
             success: (response) => {
                 // Handle success response if needed
@@ -766,7 +766,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isUserAvailable = (userEmail, userPassword, callback) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
             method: "GET",
             success: (response) => {
                 if (response.isAvailable) {
@@ -789,7 +789,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isUserWillPlay = (userEmail, userPassword, callback) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
             method: "GET",
             success: (response) => {
                 if (response.willPlay) {
@@ -812,7 +812,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isUserRejected = (userName, callback) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/isRejected/" + userName,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/isRejected/" + userName,
             method: "GET",
             success: (response) => {
                 if (response.isRejected) {
@@ -835,7 +835,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const ListUsers = () => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/users",
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/users",
             method: "GET",
             success: (response) => {
                 if (response.users) {
@@ -893,7 +893,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const getUserNameByEmailAndPassword = (email, password, callback) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
             method: "GET",
             success: (response) => {
                 // Handle success response
@@ -911,7 +911,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const saveGameOpponent = (opponentUsername) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
             method: "PUT",
             success: () => {
                 // Handle success response if needed
@@ -926,7 +926,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const getUserNameByGameOpponent = (gameOpponent, callback) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/getUserByGameOpponent/" + gameOpponent,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getUserByGameOpponent/" + gameOpponent,
             method: "GET",
             success: (response) => {
                 // Handle success response
@@ -943,7 +943,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateGameOpponent = (userEmail, gameOpponent) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
             method: "PUT",
             success: () => {
                 console.log("Game opponent updated successfully");
@@ -959,7 +959,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkUsersHaveSameGameId = (userName1, userName2, callback) => {
         $.ajax({
             method: "GET",
-            url: "../Co-Chef-Backend/rest/checkUsersHaveSameGameId/" + userName1 + "/" + userName2,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveSameGameId/" + userName1 + "/" + userName2,
             success: (response) => {
                 const haveSameGameId = response["Same id"];
                 callback(haveSameGameId);
@@ -973,7 +973,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkUsersHaveWaitingToPlay = (userName1, userName2, callback) => {
         $.ajax({
             method: "GET",
-            url: "../Co-Chef-Backend/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
             success: (response) => {
                 const sameWaitingToPlay = response["waitingToPlay"];
                 callback(sameWaitingToPlay);
@@ -988,7 +988,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // const isWaitingToPlay = (userName, callback) => {
     //     $.ajax({
     //         method: "GET",
-    //         url: "../Co-Chef-Backend/rest/isWaitingToPlay/" + userName,
+    //         url: "https://walrus-app-iqnww.ondigitalocean.app/rest/isWaitingToPlay/" + userName,
     //         success: (response) => {
     //             const isWaitingToPlay = response["isWaitingToPlay"];
     //             callback(isWaitingToPlay);
@@ -1002,7 +1002,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateWaitingToPlay = (userName, isWaitingToPlay) => {
         $.ajax({
             method: "PUT",
-            url: "../Co-Chef-Backend/rest/updateWaitingToPlay/" + userName + "/" + isWaitingToPlay,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateWaitingToPlay/" + userName + "/" + isWaitingToPlay,
             success: () => {
                 console.log("User isWaitingToPlay updated");
             },
@@ -1014,7 +1014,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateUserGameId = (userName, gameId) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/updateGameId/" + userName + "/" + gameId,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateGameId/" + userName + "/" + gameId,
             type: "PUT",
             success: function () {
                 console.log("Game ID updated successfully");
@@ -1030,7 +1030,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateRecipe = (userName, recipe) => {
         $.ajax({
             method: "PUT",
-            url: "../Co-Chef-Backend/rest/updateRecipe/" + userName + "/" + recipe,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateRecipe/" + userName + "/" + recipe,
             success: (response) => {
                 console.log("User recipe updated:", response.message);
             },
@@ -1043,7 +1043,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const resetRecipe = (userEmail) => {
         $.ajax({
             method: "PUT",
-            url: "../Co-Chef-Backend/rest/resetRecipe/" + userEmail,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/resetRecipe/" + userEmail,
             success: (response) => {
                 console.log("Recipe reset:", response.message);
             },
@@ -1155,7 +1155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const initializeChats = (gameId, userName) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/initializeChats",
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/initializeChats",
             method: "POST",
             data: {
                 gameId: gameId,
@@ -1173,7 +1173,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const getGameIdByUsername = (userName, callback) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/getGameIdByUsername/" + userName,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getGameIdByUsername/" + userName,
             method: "GET",
             success: (response) => {
                 const gameId = response.gameId;
@@ -1189,7 +1189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const deleteUsersWithSameNonZeroGameId = (userName) => {
         $.ajax({
-            url: "../Co-Chef-Backend/rest/deleteUsersWithSameNonZeroGameId/" + userName,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/deleteUsersWithSameNonZeroGameId/" + userName,
             type: "DELETE",
             success: () => {
                 console.log('Users chat deleted successfully');
@@ -1205,7 +1205,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 export const updateUserTaskCompleted = (userName, taskCompleted) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
         type: "PUT",
         success: function () {
             // Handle success response
@@ -1220,7 +1220,7 @@ export const updateUserTaskCompleted = (userName, taskCompleted) => {
 export const checkUsersHaveSameTaskCompleted = (userName1, userName2, callback) => {
     $.ajax({
         method: "GET",
-        url: "../Co-Chef-Backend/rest/checkUsersHaveSameTaskCompleted/" + userName1 + "/" + userName2,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveSameTaskCompleted/" + userName1 + "/" + userName2,
         success: (response) => {
             const haveSameTasksCompleted = response["Same tasksCompleted"];
             callback(haveSameTasksCompleted);
@@ -1233,7 +1233,7 @@ export const checkUsersHaveSameTaskCompleted = (userName1, userName2, callback) 
 
 export const getGameOpponentByUserName = (username, callback) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/getGameOpponentByUser/" + username,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
         method: "GET",
         success: (response) => {
             if (response.gameOpponent) {
@@ -1255,7 +1255,7 @@ export const getGameOpponentByUserName = (username, callback) => {
 
 export const getRecipeByUserName = (username, callback) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/getRecipeByUserName/" + username,
+        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getRecipeByUserName/" + username,
         method: "GET",
         success: (response) => {
             // Handle success response
