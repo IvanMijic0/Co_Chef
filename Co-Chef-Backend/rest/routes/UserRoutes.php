@@ -92,11 +92,17 @@ Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable
     $result = Flight::user_service()->updateUserAvailability($userEmail, $userPassword, $isAvailable);
 
     if ($result !== false) {
+        // Set CORS headers
+        header("Access-Control-Allow-Origin: https://monkfish-app-zvwdu.ondigitalocean.app");
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Content-Type");
+
         Flight::json(["message" => "User availability updated successfully"]);
     } else {
         Flight::halt(500, "Failed to update user availability");
     }
 });
+
 
 Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($userEmail, $userPassword) {
     // Check user availability
