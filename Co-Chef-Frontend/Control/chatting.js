@@ -8,7 +8,7 @@ const inputField = document.querySelector(".chat-input");
 const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
 
 
-let chatMessages = [];
+// let chatMessages = [];
 
 chatField.addEventListener("click", () => {
     document.getElementById("ic_options").style.display = "none";
@@ -131,19 +131,19 @@ const updateChatTextByUserName = (userName, chatText) => {
     });
 };
 
-const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
-    $.ajax({
-        method: "GET",
-        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
-        success: (response) => {
-            const haveSameGameId = response["Same id"];
-            callback(haveSameGameId);
-        },
-        error: () => {
-            callback(false);
-        }
-    });
-};
+// const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
+//     $.ajax({
+//         method: "GET",
+//         url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
+//         success: (response) => {
+//             const haveSameGameId = response["Same id"];
+//             callback(haveSameGameId);
+//         },
+//         error: () => {
+//             callback(false);
+//         }
+//     });
+// };
 
 const getChatTextByUsername = (userName, callback) => {
     $.ajax({
