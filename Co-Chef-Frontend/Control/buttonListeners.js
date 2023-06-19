@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
         volumeBar.show();
         volumeBar.setup();
         volumeIcon.classList.toggle("newVolumeIcon");
-        if (!canMove) {
+        if (!CAN_MOVE) {
             scenes[activeScene].allowInteract(false);
             volumeIcon.style.display = "flex";
             volumeContainer.style.display = "flex";
@@ -510,7 +510,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     ic_recipes.addEventListener("click", () => {
-        if (canMove) {
+        if (CAN_MOVE) {
             scenes[activeScene].toggleRecipe()
             ic_options.style.display = "none";
             recipeText.style.display = "flex";

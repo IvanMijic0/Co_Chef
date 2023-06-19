@@ -9,7 +9,6 @@ import {
     getRecipeByUserName,
     getGameOpponentByUserName
 } from "../Control/buttonListeners.js";
-import {canMove} from "../Control/chatting.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
@@ -169,7 +168,7 @@ export class GameplayScene extends Scene {
         if (this.mini_game_started) {
             this.updateMiniGameTimer(deltaTime);
         }
-        if (canMove) {
+        if (CAN_MOVE) {
             this.updatePlayerMovement(deltaTime);
         }
         this.updateScale();
@@ -224,7 +223,7 @@ export class GameplayScene extends Scene {
                                                 this.plateItem.src = "Assets/Sprites/Dishes/noodles.png";
                                                 this.plateItem.style.bottom = "2vw";
                                                 this.plateItem.style.display = "flex";
-                                                canMove = false;
+                                                CAN_MOVE = false;
                                             }
                                         });
                                     }
@@ -234,7 +233,7 @@ export class GameplayScene extends Scene {
                                 this.showLoseScreen = true;
                                 this.endGameMenuButton.style.display = "flex";
                                 console.log(this.showLoseScreen)
-                                canMove = false;
+                                CAN_MOVE = false;
                             }
                         } else if (recipe === sceneData.DISH_SELECT.curryName) {
                             if (checkAllPropertiesEqualMax(CURRY_RECIPE)) {
@@ -248,7 +247,7 @@ export class GameplayScene extends Scene {
                                                 this.plateItem.src = "Assets/Sprites/Dishes/curry.png";
                                                 this.plateItem.style.bottom = "2vw";
                                                 this.plateItem.style.display = "flex";
-                                                canMove = false;
+                                                CAN_MOVE = false;
                                             }
                                         });
                                     }
@@ -257,7 +256,7 @@ export class GameplayScene extends Scene {
                                 console.log("fail");
                                 this.showLoseScreen = true;
                                 this.endGameMenuButton.style.display = "flex";
-                                canMove = false;
+                                CAN_MOVE = false;
                             }
                         } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
                             if (checkAllPropertiesEqualMax(FISH_TACO_RECIPE)) {
@@ -271,7 +270,7 @@ export class GameplayScene extends Scene {
                                                 this.plateItem.src = "Assets/Sprites/Dishes/fishTaco.png";
                                                 this.plateItem.style.bottom = "2vw";
                                                 this.plateItem.style.display = "flex";
-                                                canMove = false;
+                                                CAN_MOVE = false;
                                             }
                                         });
                                     }
@@ -281,7 +280,7 @@ export class GameplayScene extends Scene {
                                 this.showLoseScreen = true;
                                 this.endGameMenuButton.style.display = "flex";
                                 console.log(this.showLoseScreen)
-                                canMove = false;
+                                CAN_MOVE = false;
                             }
                         }
                     }
@@ -341,7 +340,7 @@ export class GameplayScene extends Scene {
     };
 
     updateSinkItemInteraction = () => {
-        if (!canMove && this.collisionCollider === "sink") {
+        if (!CAN_MOVE && this.collisionCollider === "sink") {
             this.sinkItem.style.width = this.sinkItemOGWidth;
             this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.input.keys.includes("ArrowUp")) {
@@ -379,7 +378,7 @@ export class GameplayScene extends Scene {
     };
 
     updateKnifeItemInteraction = () => {
-        if (!canMove && this.collisionCollider === "knife") {
+        if (!CAN_MOVE && this.collisionCollider === "knife") {
             this.sinkItem.style.width = this.sinkItemOGWidth;
             this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.input.keys.includes("ArrowUp")) {
@@ -408,7 +407,7 @@ export class GameplayScene extends Scene {
     };
 
     updateStirItemInteraction = (deltaTime) => {
-        if (!canMove && this.collisionCollider === "stir") {
+        if (!CAN_MOVE && this.collisionCollider === "stir") {
             this.sinkItem.style.width = this.sinkItemOGWidth;
             this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.sinkItem.style.display === "flex") {
@@ -491,7 +490,7 @@ export class GameplayScene extends Scene {
     };
 
     updateFryItemInteraction = () => {
-        if (!canMove && this.collisionCollider === "fry") {
+        if (!CAN_MOVE && this.collisionCollider === "fry") {
             this.sinkItem.style.width = this.sinkItemOGWidth;
             this.sinkItem.style.height = this.sinkItemOGHeight;
             if (this.input.keys.includes("ArrowUp")) {
@@ -534,8 +533,8 @@ export class GameplayScene extends Scene {
                         if (this.collisionCollider === "sink") {
                             if (!["tortilla.png", "redMeat.png", "noodles.png", "ic_slot.png", "redMead_Cooked.png, fish_Cooked.png"].includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showSinkMiniGame = !this.showSinkMiniGame;
-                                canMove = !canMove;
-                                if (!canMove) {
+                                CAN_MOVE = !CAN_MOVE;
+                                if (!CAN_MOVE) {
                                     this.controls.style.display = "block";
                                     this.options.style.display = "none";
                                     this.recipe.style.display = "none";
@@ -573,8 +572,8 @@ export class GameplayScene extends Scene {
                         } else if (this.collisionCollider === "knife") {
                             if (this.cuttableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showKnifeMiniGame = !this.showKnifeMiniGame;
-                                canMove = !canMove;
-                                if (!canMove) {
+                                CAN_MOVE = !CAN_MOVE;
+                                if (!CAN_MOVE) {
                                     this.controls.style.display = "block";
                                     this.options.style.display = "none";
                                     this.recipe.style.display = "none";
@@ -612,7 +611,7 @@ export class GameplayScene extends Scene {
                                     }
                                 } else {
                                     this.showKnifeMiniGame = !this.showKnifeMiniGame;
-                                    canMove = !canMove;
+                                    CAN_MOVE = !CAN_MOVE;
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
                                     this.recipe.style.display = "flex";
@@ -628,8 +627,8 @@ export class GameplayScene extends Scene {
                         } else if (this.collisionCollider === "stir") {
                             if (this.stirrableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showStirrMiniGame = !this.showStirrMiniGame;
-                                canMove = !canMove;
-                                if (!canMove) {
+                                CAN_MOVE = !CAN_MOVE;
+                                if (!CAN_MOVE) {
                                     this.controls.style.display = "block";
                                     this.options.style.display = "none";
                                     this.recipe.style.display = "none";
@@ -675,8 +674,8 @@ export class GameplayScene extends Scene {
                         } else if (this.collisionCollider === "fry") {
                             if (this.fryableItems.includes(extractFileNameWithExtension(this.sinkItem.src))) {
                                 this.showFryMiniGame = !this.showFryMiniGame;
-                                canMove = !canMove;
-                                if (!canMove) {
+                                CAN_MOVE = !CAN_MOVE;
+                                if (!CAN_MOVE) {
                                     this.controls.style.display = "block";
                                     this.options.style.display = "none";
                                     this.recipe.style.display = "none";
@@ -713,7 +712,7 @@ export class GameplayScene extends Scene {
                                     }
                                 } else {
                                     this.showFryMiniGame = !this.showFryMiniGame;
-                                    canMove = !canMove;
+                                    CAN_MOVE = !CAN_MOVE;
                                     this.controls.style.display = "none";
                                     this.options.style.display = "flex";
                                     this.recipe.style.display = "flex";
@@ -728,8 +727,8 @@ export class GameplayScene extends Scene {
                             }
                         } else if (this.collisionCollider === "inventory") {
                             this.showInventoryMiniGame = !this.showInventoryMiniGame;
-                            canMove = !canMove;
-                            if (!canMove) {
+                            CAN_MOVE = !CAN_MOVE;
+                            if (!CAN_MOVE) {
                                 this.controls.style.display = "block";
                                 this.options.style.display = "none";
                                 this.recipe.style.display = "none";
@@ -1135,18 +1134,18 @@ export class GameplayScene extends Scene {
 
     toggleOptions = () => {
         this.showOptions = !this.showOptions;
-        canMove = !canMove;
+        CAN_MOVE = !CAN_MOVE;
     }
 
     toggleRecipe = () => {
         this.showRecipe = !this.showRecipe;
-        canMove = !canMove;
+        CAN_MOVE = !CAN_MOVE;
     }
 
     toggleWinLose = () => {
         this.showLoseScreen = false;
         this.showWinScreen = false;
-        canMove = true;
+        CAN_MOVE = true;
     }
 
     allowInteract = (yes) => {
@@ -1170,7 +1169,7 @@ export class GameplayScene extends Scene {
 
     closeInventory = () => {
         this.showInventoryMiniGame = false;
-        canMove = true;
+        CAN_MOVE = true;
         this.controls.style.display = "none";
         this.options.style.display = "flex";
         this.recipe.style.display = "flex";

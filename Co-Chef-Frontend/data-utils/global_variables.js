@@ -5,7 +5,7 @@ let USER_NAME = "";
 let USER_EMAIL = "";
 let USER_PASSWORD = "";
 
-let CHAT_TEXT = "";
+let CAN_MOVE = true; // Global variable, I will think of something more clever if I have time
 
 const NOODLE_RECIPE = {
     name: "noodle",

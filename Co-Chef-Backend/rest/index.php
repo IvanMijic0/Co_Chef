@@ -13,4 +13,3 @@ require_once "routes/UserRoutes.php";
 require_once "routes/ChatsRoutes.php";
 
 Flight::start();
-

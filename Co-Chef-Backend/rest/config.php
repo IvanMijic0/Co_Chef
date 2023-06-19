@@ -9,7 +9,7 @@ class Config
 
     public static function DB_USERNAME()
     {
-        return Config::get_env("DB_USERNAME", "root");
+        return Config::get_env("DB_USERNAME", "ivan");
     }
 
     public static function DB_PASSWORD()
