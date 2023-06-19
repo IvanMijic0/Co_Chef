@@ -1,3 +1,9 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "https://monkfish-app-zvwdu.ondigitalocean.app"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
