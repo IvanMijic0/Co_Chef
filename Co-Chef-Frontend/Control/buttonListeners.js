@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userEmail = $("#username").val();
         const userPassword = $("#password").val();
         $.ajax({
-            url: "https://walrus-app-iqnww.ondigitalocean.app//rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
+            url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
             method: "GET",
             success: (response) => {
                 if (response) {
