@@ -1,5 +1,5 @@
 # Co-Chef
-Online multiplayer co-op mini-game.
+Multiplayer web mini-game.
 In development...
 
 Will be continued after finals 😅.
