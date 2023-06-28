@@ -6,8 +6,6 @@ require "dao/ChatsDao.php";
 require "services/UserService.php";
 require "services/ChatServices.php";
 
-
-
 Flight::register("user_service", UserService::class);
 Flight::register("chat_service", ChatServices::class);
 

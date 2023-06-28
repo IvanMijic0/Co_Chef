@@ -3,7 +3,6 @@ import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./con
 import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
 
 let willPlayIntervalId;
-
 document.addEventListener("DOMContentLoaded", () => {
     // Caching everything
     const tutorialButton = document.getElementById("tutorialButton-container");
