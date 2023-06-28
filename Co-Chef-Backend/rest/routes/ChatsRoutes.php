@@ -66,3 +66,9 @@ Flight::route("GET /getChatTextByUsername/@userName", function ($userName) {
         Flight::json(["error" => "chatText not found"], 404);
     }
 });
+
+Flight::before("json", function () {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET,PUT,POST,DELETE");
+    header("Access-Control-Allow-Headers: Content-Type");
+});
