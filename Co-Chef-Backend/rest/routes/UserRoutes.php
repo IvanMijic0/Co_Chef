@@ -1,14 +1,60 @@
 <?php /** @noinspection ALL */
 
+// Allow requests from a specific origin
+header('Access-Control-Allow-Origin: https://monkfish-app-zvwdu.ondigitalocean.app');
+
+// Allow specific HTTP methods
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+
+// Allow specific headers (if needed)
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+// Allow credentials (if needed)
+header('Access-Control-Allow-Credentials: true');
+
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    // Set additional headers for preflight requests
+    header('Access-Control-Max-Age: 86400');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+    header('Content-Length: 0');
+    header('Content-Type: text/plain');
+    exit;
+}
+
 Flight::route("/", function () {
     echo "Hello from / route";
 });
 
 Flight::route("POST /user", function () {
+    // Allow requests from a specific origin
+    header('Access-Control-Allow-Origin: https://monkfish-app-zvwdu.ondigitalocean.app');
+
+// Allow specific HTTP methods
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+
+// Allow specific headers (if needed)
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+// Allow credentials (if needed)
+    header('Access-Control-Allow-Credentials: true');
+
+// Handle preflight requests
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        // Set additional headers for preflight requests
+        header('Access-Control-Max-Age: 86400');
+        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+        header('Content-Length: 0');
+        header('Content-Type: text/plain');
+        exit;
+    }
+
     $data = Flight::request()->data->getData();
 
     // Check if the user already exists
-    $userExists =  Flight::user_service()->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
+    $userExists = Flight::user_service()->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
 
     if ($userExists) {
         Flight::halt(409); // Set response code to indicate conflict (e.g., 409 Conflict)
@@ -110,17 +156,17 @@ Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($
 
 Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent',
     function ($userEmail, $userPassword, $gameOpponent) {
-    // Save the game opponent for the user
-    $result = Flight::user_service()->saveGameOpponent($userEmail, $userPassword, $gameOpponent);
+        // Save the game opponent for the user
+        $result = Flight::user_service()->saveGameOpponent($userEmail, $userPassword, $gameOpponent);
 
-    if ($result) {
-        // Return success response
-        Flight::json(['message' => 'Game opponent saved successfully']);
-    } else {
-        // Return error response if failed to save game opponent
-        Flight::halt(500, 'Failed to save game opponent');
-    }
-});
+        if ($result) {
+            // Return success response
+            Flight::json(['message' => 'Game opponent saved successfully']);
+        } else {
+            // Return error response if failed to save game opponent
+            Flight::halt(500, 'Failed to save game opponent');
+        }
+    });
 
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isWillPlay) {
     $isWillPlay = filter_var($isWillPlay, FILTER_VALIDATE_BOOLEAN);
@@ -197,7 +243,7 @@ Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($use
 
 Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($email, $password) {
     // Get the userName for the given email and password
-    $userName =  Flight::user_service()->getUserNameByEmailAndPassword($email, $password);
+    $userName = Flight::user_service()->getUserNameByEmailAndPassword($email, $password);
 
     if ($userName) {
         // User found, return the userName
