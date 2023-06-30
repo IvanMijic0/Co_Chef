@@ -169,10 +169,8 @@ Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent',
     });
 
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isWillPlay) {
-    $isWillPlay = filter_var($isWillPlay, FILTER_VALIDATE_BOOLEAN);
-
     // Update user availability
-    $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, 0);
+    $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
 
     if ($result !== false) {
         Flight::json(["message" => "User willPlay updated successfully"]);
