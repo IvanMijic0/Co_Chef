@@ -132,8 +132,6 @@ Flight::route("GET /checkUserByEmailAndPassword/@email/@password",
 );
 
 Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isAvailable) {
-    $isAvailable = filter_var($isAvailable, FILTER_VALIDATE_BOOLEAN);
-
     // Update user availability
     $result = Flight::user_service()->updateUserAvailability($userEmail, $userPassword, $isAvailable);
 
