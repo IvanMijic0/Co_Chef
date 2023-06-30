@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         userContainer.style.display = "block";
         connectBackButton.style.display = "flex";
         connectRefreshButton.style.display = "flex";
-        updateAvailability(true, USER_EMAIL, USER_PASSWORD);
+        updateAvailability(1, USER_EMAIL, USER_PASSWORD);
         ListUsers();
         if (activeScene === sceneData.CONNECT.sceneId) {
             checkUserWillPlayPeriodically();
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
             connectBackButton.style.display = "flex";
             connectRefreshButton.style.display = "flex";
             userBackground.style.display = "flex";
-            updateAvailability(true, USER_EMAIL, USER_PASSWORD);
+            updateAvailability(1, USER_EMAIL, USER_PASSWORD);
             speechText.style.display = "none";
             SelectBackButton.style.display = "none";
             SelectConfirmButton.style.display = "none";
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 }
                             });
                             switchToScene(sceneData.Gameplay.sceneId);
-                            updateAvailability(false, USER_EMAIL, USER_PASSWORD);
+                            updateAvailability(0, USER_EMAIL, USER_PASSWORD);
                             toastr.info("Wait for connection");
                             scenes[activeScene].setPlayerImage();
                             setTimeout(() => {
@@ -685,7 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Set user availability to false before leaving the site
         if (USER_NAME !== "" || USER_EMAIL !== "" || USER_PASSWORD !== "") {
             resetGameOpponent(USER_EMAIL);
-            updateAvailability(false, USER_EMAIL, USER_PASSWORD);
+            updateAvailability(0, USER_EMAIL, USER_PASSWORD);
             updateUserTaskCompleted(USER_NAME, 0);
             updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
             updateUserGameId(USER_NAME, 0);
