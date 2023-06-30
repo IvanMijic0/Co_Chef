@@ -687,7 +687,7 @@ document.addEventListener("DOMContentLoaded", () => {
             resetGameOpponent(USER_EMAIL);
             updateAvailability(false, USER_EMAIL, USER_PASSWORD);
             updateUserTaskCompleted(USER_NAME, 0);
-            updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
+            updateWillPlay(false, USER_EMAIL, USER_PASSWORD);
             updateUserGameId(USER_NAME, 0);
             resetRecipe(USER_EMAIL);
             updateWaitingToPlay(USER_NAME, 0);
@@ -869,7 +869,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         // console.log("Current user email: " + USER_EMAIL)
                                         // console.log("Current user password: " + USER_PASSWORD)
                                         saveGameOpponent(username);
-                                        updateWillPlay(1, userEmail, userPassword);
+                                        updateWillPlay(true, userEmail, userPassword);
 
                                     });
                                 div.append(usernameSpan, availabilitySpan);
@@ -1092,7 +1092,7 @@ document.addEventListener("DOMContentLoaded", () => {
             isUserWillPlay(USER_EMAIL, USER_PASSWORD, (willPlay) => {
                 if (willPlay) {
                     showDialogue();
-                    updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
+                    updateWillPlay(false, USER_EMAIL, USER_PASSWORD);
                 }
             });
             isUserRejected(USER_NAME, (isRejected) => {
