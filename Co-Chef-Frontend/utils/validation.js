@@ -5,6 +5,8 @@ const signUpButton0 = document.getElementById("signUpButton0");
 loginButton.disabled = true;
 signUpButton0.disabled =  true;
 
+// Com
+
 
 // Login form validation
 const loginForm = document.getElementById("login-form");
