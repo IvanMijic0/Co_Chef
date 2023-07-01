@@ -119,7 +119,7 @@ const displayChatMessages = () => {
 
 const updateChatTextByUserName = (userName, chatText) => {
     $.ajax({
-        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
         type: "PUT",
         success: function () {
             // Handle success response
@@ -147,7 +147,7 @@ const updateChatTextByUserName = (userName, chatText) => {
 
 const getChatTextByUsername = (userName, callback) => {
     $.ajax({
-        url: "https://walrus-app-iqnww.ondigitalocean.app/rest/getChatTextByUsername/" + userName,
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getChatTextByUsername/" + userName,
         method: "GET",
         success: (response) => {
             const chatText = response.chatText;
