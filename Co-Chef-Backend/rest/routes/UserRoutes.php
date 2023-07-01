@@ -169,10 +169,6 @@ Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent',
     });
 
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isWillPlay) {
-    $isWillPlay = intval($isWillPlay);
-
-    var_dump($isWillPlay);
-
     // Update user availability
     $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
 
