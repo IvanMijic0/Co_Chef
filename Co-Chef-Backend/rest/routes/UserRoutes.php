@@ -1,7 +1,7 @@
 <?php /** @noinspection ALL */
 
 // Allow requests from a specific origin
-header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app/');
+header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app');
 
 // Allow specific HTTP methods
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -29,7 +29,7 @@ Flight::route("/", function () {
 
 Flight::route("POST /user", function () {
     // Allow requests from a specific origin
-    header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app/');
+    header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app');
 
 // Allow specific HTTP methods
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
