@@ -6,20 +6,20 @@ const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
 const inputField = document.querySelector(".chat-input");
 const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
-
+export let canMove = true; // Global variable, I will think of something more clever if I have time
 
 // let chatMessages = [];
 
 chatField.addEventListener("click", () => {
     document.getElementById("ic_options").style.display = "none";
     document.getElementById("ic_recipe").style.display = "none";
-    CAN_MOVE = false;
+    canMove = false;
     inputField.disabled = false;
 });
 
 chatField.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        CAN_MOVE = true;
+        canMove = true;
         document.getElementById("ic_options").style.display = "flex";
         document.getElementById("ic_recipe").style.display = "flex";
         inputField.disabled = !inputField.disabled;
@@ -35,7 +35,7 @@ chatField.addEventListener("keydown", (e) => {
 
 chatField.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-        CAN_MOVE = true;
+        canMove = true;
         inputField.disabled = true;
         document.getElementById("ic_options").style.display = "flex";
         document.getElementById("ic_recipe").style.display = "flex";
@@ -119,7 +119,7 @@ const displayChatMessages = () => {
 
 const updateChatTextByUserName = (userName, chatText) => {
     $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
+        url: "../Co-Chef-Backend/rest/updateChatTextByUserName/" + userName + "/" + chatText,
         type: "PUT",
         success: function () {
             // Handle success response
@@ -131,30 +131,30 @@ const updateChatTextByUserName = (userName, chatText) => {
     });
 };
 
-// const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
-//     $.ajax({
-//         method: "GET",
-//         url: "https://walrus-app-iqnww.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
-//         success: (response) => {
-//             const haveSameGameId = response["Same id"];
-//             callback(haveSameGameId);
-//         },
-//         error: () => {
-//             callback(false);
-//         }
-//     });
-// };
+const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
+    $.ajax({
+        method: "GET",
+        url: "../Co-Chef-Backend/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
+        success: (response) => {
+            const haveSameGameId = response["Same id"];
+            callback(haveSameGameId);
+        },
+        error: () => {
+            callback(false);
+        }
+    });
+};
 
 const getChatTextByUsername = (userName, callback) => {
     $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getChatTextByUsername/" + userName,
+        url: "../Co-Chef-Backend/rest/getChatTextByUsername/" + userName,
         method: "GET",
         success: (response) => {
             const chatText = response.chatText;
             callback(chatText);
         },
         error: (xhr, status, error) => {
-            console.error("Failed to retrieve chatText:", error);
+            console.error(error);
             callback(null);
         }
     });

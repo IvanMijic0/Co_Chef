@@ -493,7 +493,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateUserGameId(USER_NAME, 0);
         scenes[activeScene].toggleWinLose();
         scenes[activeScene].resetCollider();
-        endMenuButton.style.display = "none";
         ic_timer.style.display = "none";
         ic_timer.style.display = "none";
         timer.style.display = "none";
@@ -506,6 +505,7 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.switchAudio("startMenuAudio", audio.audio.volume);
         plateItem.style.display = "none";
         scenes[activeScene].resetWinLose();
+        endMenuButton.style.display = "none";
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
