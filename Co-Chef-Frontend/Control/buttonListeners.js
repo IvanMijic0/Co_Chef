@@ -174,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (willPlayIntervalId) {
             clearInterval(willPlayIntervalId);
         }
+        updateAvailability(0, USER_EMAIL, USER_PASSWORD);
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
