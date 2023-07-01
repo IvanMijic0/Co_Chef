@@ -67,6 +67,6 @@ const FISH_TACO_RECIPE = {
     tomato_num: 0,
     avocado_num: 0,
     greenPepper_num: 0,
-    fishCombined: true,
+    fishCombined: false,
     stir_num: 0
 }
