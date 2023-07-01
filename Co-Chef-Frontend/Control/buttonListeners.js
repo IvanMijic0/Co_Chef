@@ -984,20 +984,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // const isWaitingToPlay = (userName, callback) => {
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/isWaitingToPlay/" + userName,
-    //         success: (response) => {
-    //             const isWaitingToPlay = response["isWaitingToPlay"];
-    //             callback(isWaitingToPlay);
-    //         },
-    //         error: () => {
-    //             callback(false);
-    //         }
-    //     });
-    // };
-
     const updateWaitingToPlay = (userName, isWaitingToPlay) => {
         $.ajax({
             method: "PUT",

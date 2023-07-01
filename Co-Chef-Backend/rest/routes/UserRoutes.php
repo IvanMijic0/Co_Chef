@@ -1,7 +1,7 @@
 <?php /** @noinspection ALL */
 
 // Allow requests from a specific origin
-header('Access-Control-Allow-Origin: https://shark-app-7dvmx.ondigitalocean.app');
+header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app/');
 
 // Allow specific HTTP methods
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -29,7 +29,7 @@ Flight::route("/", function () {
 
 Flight::route("POST /user", function () {
     // Allow requests from a specific origin
-    header('Access-Control-Allow-Origin: https://shark-app-7dvmx.ondigitalocean.app');
+    header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app/');
 
 // Allow specific HTTP methods
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
@@ -132,6 +132,8 @@ Flight::route("GET /checkUserByEmailAndPassword/@email/@password",
 );
 
 Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isAvailable) {
+    $isAvailable = intval($isAvailable);
+
     // Update user availability
     $result = Flight::user_service()->updateUserAvailability($userEmail, $userPassword, $isAvailable);
 
@@ -167,6 +169,8 @@ Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent',
     });
 
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isWillPlay) {
+    $isWillPlay = intval($isWillPlay);
+
     // Update user availability
     $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
 

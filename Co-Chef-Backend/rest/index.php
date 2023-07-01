@@ -7,7 +7,7 @@ require "services/UserService.php";
 require "services/ChatServices.php";
 
 // Allow requests from a specific origin
-header('Access-Control-Allow-Origin: https://shark-app-7dvmx.ondigitalocean.app');
+header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app/');
 
 // Allow specific HTTP methods
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
