@@ -1,6 +1,7 @@
 {
   "require": {
     "mikecao/flight": "^2.0",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "zircote/swagger-php": "3.*"
   }
 }
