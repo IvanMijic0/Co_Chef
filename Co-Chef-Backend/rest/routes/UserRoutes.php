@@ -366,7 +366,41 @@ Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent', fu
     }
 });
 
-
+/**
+ * @OA\Put(
+ *     path="/updateUserWillPlay/{userEmail}/{userPassword}/{isWillPlay}",
+ *     tags={"user"},
+ *     summary="Update user willPlay status",
+ *     @OA\Parameter(
+ *         name="userEmail",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="userPassword",
+ *         in="path",
+ *         required=true,
+ *         description="User password",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="isWillPlay",
+ *         in="path",
+ *         required=true,
+ *         description="User willPlay status (0 or 1)",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User willPlay updated successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isWillPlay", function ($userEmail, $userPassword, $isWillPlay) {
     $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
 
@@ -377,14 +411,69 @@ Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isWillPlay", fu
     }
 });
 
-
+/**
+ * @OA\Get(
+ *     path="/checkUserWillPlay/{userEmail* @OA\Get(
+ *     path="/checkUserWillPlay/{userEmail}/{userPassword}",
+ *     tags={"user"},
+ *     summary="Check user's willPlay status",
+ *     @OA\Parameter(
+ *         name="userEmail",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="userPassword",
+ *         in="path",
+ *         required=true,
+ *         description="User password",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns the user's willPlay status",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="willPlay", type="boolean")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("GET /checkUserWillPlay/@userEmail/@userPassword", function ($userEmail, $userPassword) {
     $willPlay = Flight::user_service()->isWillPlay($userEmail, $userPassword);
 
     Flight::json(["willPlay" => $willPlay]);
 });
 
-
+/**
+ * @OA\Get(
+ *     path="/getGameIdByUsername/{userName}",
+ *     tags={"user"},
+ *     summary="Get game ID by username",
+ *     @OA\Parameter(
+ *         name="userName",
+ *         in="path",
+ *         required=true,
+ *         description="Username",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns the game ID",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="gameId", type="integer")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Game ID not found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
     $gameId = Flight::user_service()->getGameIdByUsername($userName);
 
@@ -395,7 +484,34 @@ Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
     }
 });
 
-
+/**
+ * @OA\Get(
+ *     path="/getUserByGameOpponent/{gameOpponent}",
+ *     tags={"user"},
+ *     summary="Get user by game opponent",
+ *     @OA\Parameter(
+ *         name="gameOpponent",
+ *         in="path",
+ *         required=true,
+ *         description="Game opponent",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Returns the user name",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="userName", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="User not found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponent) {
     $userName = Flight::user_service()->getUserNameByGameOpponent($gameOpponent);
 
