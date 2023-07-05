@@ -90,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
-      <workItem from="1688585461287" duration="9983000" />
+      <workItem from="1688585461287" duration="10280000" />
     </task>
     <task id="LOCAL-00001" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -340,7 +340,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688595730590</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Setting up swagger for routes">
+      <option name="closed" value="true" />
+      <created>1688595912314</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1688595912314</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Setting up swagger for routes">
+      <option name="closed" value="true" />
+      <created>1688596131214</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1688596131214</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

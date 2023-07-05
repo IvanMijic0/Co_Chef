@@ -1,6 +1,6 @@
 <?php
 
-use function OpenApi\scan;
+use OpenApi\Analysis;
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -36,7 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 
 /* REST API documentation endpoint */
 Flight::route("GET /docs.json", function () {
-    $openapi = scan("routes");
+    $openapi = \OpenApi\Generator::scan(
+        [__DIR__ . "/routes"],
+        [
+            'analysis' => new Analysis(),
+            'analysisOptions' => ['ignoreNotExists' => false,]
+        ]
+    );
     header("Content-Type: application/json");
     echo $openapi->toJson();
 });
