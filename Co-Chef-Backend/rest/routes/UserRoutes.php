@@ -1147,13 +1147,13 @@ Flight::route("PUT /updateRecipe/@userName/@recipe", function ($userName, $recip
  * )
  */
 Flight::route("GET /checkUsersHaveWaitingToPlay/@userName1/@userName2", function ($userName1, $userName2) {
-    // Check if the users with the given usernames have the same gameId
-    $haveSameGameId = Flight::user_service()->checkUsersHaveWaitingToPlay($userName1, $userName2);
+    // Check if the users with the given usernames have the same waitingToPlay status
+    $haveSameWaitingToPlay = Flight::user_service()->checkUsersHaveWaitingToPlay($userName1, $userName2);
 
-    if ($haveSameGameId) {
-        Flight::json(["waitingToPlay" => $haveSameGameId]);
+    if ($haveSameWaitingToPlay) {
+        Flight::json(["haveSameWaitingToPlay" => $haveSameWaitingToPlay]);
     } else {
-        Flight::json(["waitingToPlay" => $haveSameGameId]);
+        Flight::json(["haveSameWaitingToPlay" => $haveSameWaitingToPlay]);
     }
 });
 
