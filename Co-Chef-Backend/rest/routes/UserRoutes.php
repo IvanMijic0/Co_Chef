@@ -1,56 +1,12 @@
 <?php /** @noinspection ALL */
 
-// Allow requests from a specific origin
-header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app');
-
-// Allow specific HTTP methods
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-
-// Allow specific headers (if needed)
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
-
-// Allow credentials (if needed)
-header('Access-Control-Allow-Credentials: true');
-
-// Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    // Set additional headers for preflight requests
-    header('Access-Control-Max-Age: 86400');
-    header('Access-Control-Allow-Headers: Content-Type, Authorization');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-    header('Content-Length: 0');
-    header('Content-Type: text/plain');
-    exit;
-}
+use OpenApi\Annotations as OA;
 
 Flight::route("/", function () {
     echo "Hello from / route";
 });
 
 Flight::route("POST /user", function () {
-    // Allow requests from a specific origin
-    header('Access-Control-Allow-Origin: https://lionfish-app-zkpvm.ondigitalocean.app');
-
-// Allow specific HTTP methods
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-
-// Allow specific headers (if needed)
-    header('Access-Control-Allow-Headers: Content-Type, Authorization');
-
-// Allow credentials (if needed)
-    header('Access-Control-Allow-Credentials: true');
-
-// Handle preflight requests
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        // Set additional headers for preflight requests
-        header('Access-Control-Max-Age: 86400');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-        header('Content-Length: 0');
-        header('Content-Type: text/plain');
-        exit;
-    }
-
     $data = Flight::request()->data->getData();
 
     // Check if the user already exists

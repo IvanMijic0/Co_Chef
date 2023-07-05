@@ -357,7 +357,6 @@ export class GameplayScene extends Scene {
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
                         this.slotItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png";
                     }
-
                 }, 200);
                 this.mini_game_started = true;
             } else {
@@ -371,7 +370,6 @@ export class GameplayScene extends Scene {
                     if (extractFileNameWithExtension(this.sinkItem.src) !== extractFileNameWithoutExtension(this.sinkItem.src) + "_Clean.png") {
                         this.sinkItem.src = "Assets/Sprites/GameplayUI/" + extractFileNameWithoutExtension(this.sinkItem.src) + "_Dirty1.png";
                     }
-
                 }, 200);
             }
         }
@@ -553,7 +551,6 @@ export class GameplayScene extends Scene {
                                     this.sinkItem.style.display = "none";
                                     this.com.style.display = "flex";
                                     this.chatContainer.style.display = "flex";
-
                                 }
                             } else {
                                 if (!this.showSinkMiniGame) {
@@ -759,7 +756,6 @@ export class GameplayScene extends Scene {
 
     draw = () => {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
         // Draw the background image
         this.ctx.drawImage(
             this.backgroundImage,
