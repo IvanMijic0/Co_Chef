@@ -8,7 +8,7 @@ import {
     checkUsersHaveSameTaskCompleted,
     getRecipeByUserName,
     getGameOpponentByUserName
-} from "../Control/buttonListeners.js";
+} from "../Services/user-service.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
