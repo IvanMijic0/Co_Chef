@@ -301,7 +301,7 @@ export class GameplayScene extends Scene {
         } else if (miniGameTimerValueSec <= 5) {
             this.mini_game_timer.style.color = "#e10000";
         }
-        this.mini_game_timer.innerText = Math.max(miniGameTimerValueSec, 0);
+        this.mini_game_timer.innerText = Math.max(miniGameTimerValueSec, 0).toString();
     };
 
     updatePlayerMovement = (deltaTime) => {
