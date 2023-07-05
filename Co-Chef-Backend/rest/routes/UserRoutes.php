@@ -276,7 +276,6 @@ Flight::route("GET /checkUserByEmailAndPassword/@email/@password", function ($em
 Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isAvailable) {
     $isAvailable = intval($isAvailable);
 
-    // Update user availability
     $result = Flight::user_service()->updateUserAvailability($userEmail, $userPassword, $isAvailable);
 
     if ($result !== false) {
@@ -315,10 +314,8 @@ Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable
  * )
  */
 Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($userEmail, $userPassword) {
-    //Check user availability
     $isAvailable = Flight::user_service()->isUserAvailable($userEmail, $userPassword);
 
-    // Return the availability status
     Flight::json(["isAvailable" => $isAvailable]);
 });
 
@@ -358,14 +355,11 @@ Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($
  * )
  */
 Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent', function ($userEmail, $userPassword, $gameOpponent) {
-    // Save the game opponent for the user
     $result = Flight::user_service()->saveGameOpponent($userEmail, $userPassword, $gameOpponent);
 
     if ($result) {
-        // Return success response
         Flight::json(['message' => 'Game opponent saved successfully']);
     } else {
-        // Return error response if failed to save game opponent
         Flight::halt(500, 'Failed to save game opponent');
     }
 });
@@ -406,7 +400,6 @@ Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent', fu
  * )
  */
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isWillPlay", function ($userEmail, $userPassword, $isWillPlay) {
-    // Update user availability
     $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
 
     if ($result !== false) {
@@ -446,10 +439,8 @@ Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isWillPlay", fu
  * )
  */
 Flight::route("GET /checkUserWillPlay/@userEmail/@userPassword", function ($userEmail, $userPassword) {
-    // Check user willPlay status
     $willPlay = Flight::user_service()->isWillPlay($userEmail, $userPassword);
 
-    // Return the willPlay status
     Flight::json(["willPlay" => $willPlay]);
 });
 
@@ -596,10 +587,8 @@ Flight::route("GET /getRecipeByUserName/@userName", function ($userName) {
  * )
  */
 Flight::route("GET /getGameOpponentByUser/@username", function ($username) {
-    // Get the game opponent for the given username
     $gameOpponent = Flight::user_service()->getGameOpponentByUsername($username);
 
-    // Return the game opponent
     Flight::json(["gameOpponent" => $gameOpponent]);
 });
 
@@ -639,14 +628,11 @@ Flight::route("GET /getGameOpponentByUser/@username", function ($username) {
  * )
  */
 Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($userEmail, $gameOpponent) {
-    // Update the game opponent for the user with the given username
     $success = Flight::user_service()->updateGameOpponent($userEmail, $gameOpponent);
 
     if ($success) {
-        // Game opponent updated successfully
         Flight::json(["message" => "Game opponent updated"]);
     } else {
-        // Failed to update game opponent
         Flight::json(["error" => "Failed to update game opponent"], 400);
     }
 });
@@ -687,14 +673,11 @@ Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($use
  * )
  */
 Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($email, $password) {
-    // Get the userName for the given email and password
     $userName = Flight::user_service()->getUserNameByEmailAndPassword($email, $password);
 
     if ($userName) {
-        // User found, return the userName
         Flight::json(["userName" => $userName]);
     } else {
-        // User not found or invalid credentials
         Flight::json(["error" => "User not found or invalid credentials"], 404);
     }
 });
@@ -735,14 +718,11 @@ Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($
  * )
  */
 Flight::route("PUT /updateGameId/@userName/@gameId", function ($userName, $gameId) {
-    // Update the gameId for the user with the given email
     $success = Flight::user_service()->updateGameId($userName, $gameId);
 
     if ($success) {
-        // Game ID updated successfully
         Flight::json(["message" => "Game ID updated"]);
     } else {
-        // Failed to update game ID
         Flight::json(["error" => "Failed to update game ID"], 400);
     }
 });
@@ -783,14 +763,11 @@ Flight::route("PUT /updateGameId/@userName/@gameId", function ($userName, $gameI
  * )
  */
 Flight::route("PUT /updateTasksCompleted/@userName/@tasksCompleted", function ($userName, $tasksCompleted) {
-    // Update the gameId for the user with the given email
     $success = Flight::user_service()->updateTasksCompleted($userName, $tasksCompleted);
 
     if ($success) {
-        // Game ID updated successfully
         Flight::json(["message" => "Taks completed updated"]);
     } else {
-        // Failed to update game ID
         Flight::json(["error" => "Failed to update taskCompleted"], 400);
     }
 });
@@ -831,14 +808,11 @@ Flight::route("PUT /updateTasksCompleted/@userName/@tasksCompleted", function ($
  * )
  */
 Flight::route("PUT /updateUserIsRejected/@userName/@isRejected", function ($userName, $isRejected) {
-    // Update the isRejected column for the user with the given email and password
     $success = Flight::user_service()->updateUserIsRejected($userName, $isRejected);
 
     if ($success) {
-        // User isRejected column updated successfully
         Flight::json(["message" => "User isRejected updated"]);
     } else {
-        // Failed to update user isRejected column
         Flight::json(["error" => "Failed to update user isRejected"], 400);
     }
 });
@@ -865,10 +839,8 @@ Flight::route("PUT /updateUserIsRejected/@userName/@isRejected", function ($user
  * )
  */
 Flight::route("GET /isRejected/@userName", function ($userName) {
-    // Check if the user is rejected
     $isRejected = Flight::user_service()->isRejected($userName);
 
-    // Return the result
     Flight::json(["isRejected" => $isRejected]);
 });
 
@@ -894,10 +866,8 @@ Flight::route("GET /isRejected/@userName", function ($userName) {
  * )
  */
 Flight::route("GET /isWaitingToPlay/@userName", function ($userName) {
-    // Check if the user is rejected
     $isWaitingToPlay = Flight::user_service()->isWaitingToPlay($userName);
 
-    // Return the result
     Flight::json(["isWaitingToPlay" => $isWaitingToPlay]);
 });
 
@@ -930,14 +900,11 @@ Flight::route("GET /isWaitingToPlay/@userName", function ($userName) {
  * )
  */
 Flight::route("PUT /resetGameOpponent/@userEmail", function ($userEmail) {
-    // Reset the game opponent for the user with the given email and password
     $success = Flight::user_service()->resetGameOpponent($userEmail);
 
     if ($success) {
-        // Game opponent reset successfully
         Flight::json(["message" => "Game opponent reset"]);
     } else {
-        // Failed to reset game opponent
         Flight::json(["error" => "Failed to reset game opponent"], 400);
     }
 });
@@ -971,14 +938,11 @@ Flight::route("PUT /resetGameOpponent/@userEmail", function ($userEmail) {
  * )
  */
 Flight::route("PUT /resetRecipe/@userEmail", function ($userEmail) {
-    // Reset the game opponent for the user with the given email and password
     $success = Flight::user_service()->resetRecipe($userEmail);
 
     if ($success) {
-        // Game opponent reset successfully
         Flight::json(["message" => "Recipe reset"]);
     } else {
-        // Failed to reset game opponent
         Flight::json(["error" => "Failed to reset recipe"], 400);
     }
 });
