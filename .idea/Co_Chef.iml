@@ -4,6 +4,16 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/mikecao/flight" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/Co-Chef-Backend/vendor/zircote/swagger-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
