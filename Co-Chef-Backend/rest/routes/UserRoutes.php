@@ -2,9 +2,6 @@
 
 use OpenApi\Annotations as OA;
 
-Flight::route("/", function () {
-    echo "Hello from / route";
-});
 
 Flight::route("POST /user", function () {
     $data = Flight::request()->data->getData();
@@ -45,6 +42,13 @@ Flight::route("PUT /user/@id", function ($id) {
         ]
     );
 });
+
+/**
+ * @OA\Get(path="/users", tag={"users"}, security={{"ApiKeyAuth": {}}},
+ *     summary ="Return all users from the API. ",
+ *     @OA\Response( response=200, description="List of users.")
+ * )
+ */
 
 Flight::route("GET /users", function () {
     $users = Flight::user_service()->get_all();
