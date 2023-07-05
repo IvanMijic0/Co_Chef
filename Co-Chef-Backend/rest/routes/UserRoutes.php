@@ -117,14 +117,48 @@ Flight::route("GET /users", function () {
     ]);
 });
 
-
+/**
+ * @OA\Get(
+ *     path="/users/{id}",
+ *     tags={"users"},
+ *     summary="Get user by ID",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="User ID",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User found",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="user", type="object")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("GET /users/@id", function ($id) {
     Flight::json([
         "user" => Flight::user_service()->get_by_id($id)
     ]);
 });
 
-
+/**
+ * @OA\Delete(
+ *     path="/user/{id}",
+ *     tags={"user"},
+ *     summary="Delete user",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="User ID",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(response=200, description="User deleted successfully")
+ * )
+ */
 Flight::route("DELETE /user/@id", function ($id) {
     Flight::user_service()->delete($id);
     Flight::json([
@@ -324,34 +358,6 @@ Flight::route("PUT /resetRecipe/@userEmail", function ($userEmail) {
     }
 });
 
-/**
- * @OA\Get(
- *     path="/checkUsersHaveSameGameId/{userName1}/{userName2}",
- *     tags={"user"},
- *     summary="Check if users have the same game ID",
- *     @OA\Parameter(
- *         name="userName1",
- *         in="path",
- *         required=true,
- *         description="User name 1",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userName2",
- *         in="path",
- *         required=true,
- *         description="User name 2",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Same ID status",
- *         @OA\JsonContent(
- *             @OA\Property(property="Same id", type="boolean")
- *         )
- *     )
- * )
- */
 Flight::route("GET /checkUsersHaveSameGameId/@userName1/@userName2", function ($userName1, $userName2) {
     // Check if the users with the given usernames have the same gameId
     $haveSameGameId = Flight::user_service()->checkUsersHaveSameGameId($userName1, $userName2);
@@ -363,34 +369,7 @@ Flight::route("GET /checkUsersHaveSameGameId/@userName1/@userName2", function ($
     }
 });
 
-/**
- * @OA\Get(
- *     path="/checkUsersHaveSameTaskCompleted/{userName1}/{userName2}",
- *     tags={"user"},
- *     summary="Check if users have the same task completed",
- *     @OA\Parameter(
- *         name="userName1",
- *         in="path",
- *         required=true,
- *         description="User name 1",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userName2",
- *         in="path",
- *         required=true,
- *         description="User name 2",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Same task completed status",
- *         @OA\JsonContent(
- *             @OA\Property(property="Same tasksCompleted", type="boolean")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /checkUsersHaveSameTaskCompleted/@userName1/@userName2", function ($userName1, $userName2) {
     // Check if the users with the given usernames have the same gameId
     $haveSametasksCompleted = Flight::user_service()->checkUsersHaveSameTaskCompleted($userName1, $userName2);
@@ -402,41 +381,7 @@ Flight::route("GET /checkUsersHaveSameTaskCompleted/@userName1/@userName2", func
     }
 });
 
-/**
- * @OA\Put(
- *     path="/updateWaitingToPlay/{userName}/{isWaitingToPlay}",
- *     tags={"user"},
- *     summary="Update user's waiting to play status",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="isWaitingToPlay",
- *         in="path",
- *         required=true,
- *         description="Is waiting to play",
- *         @OA\Schema(type="boolean")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User waiting to play status updated",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to update user waiting to play status",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateWaitingToPlay/@userName/@isWaitingToPlay", function ($userName, $isWaitingToPlay) {
     // Update the isWaitingToPlay column for the user with the given userName
     $success = Flight::user_service()->updateWaitingToPlay($userName, $isWaitingToPlay);
@@ -450,41 +395,7 @@ Flight::route("PUT /updateWaitingToPlay/@userName/@isWaitingToPlay", function ($
     }
 });
 
-/**
- * @OA\Put(
- *     path="/updateRecipe/{userName}/{recipe}",
- *     tags={"user"},
- *     summary="Update user's recipe",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="recipe",
- *         in="path",
- *         required=true,
- *         description="Recipe",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User recipe updated",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to update user recipe",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateRecipe/@userName/@recipe", function ($userName, $recipe) {
     $success = Flight::user_service()->updateRecipe($userName, $recipe);
 
@@ -495,34 +406,7 @@ Flight::route("PUT /updateRecipe/@userName/@recipe", function ($userName, $recip
     }
 });
 
-/**
- * @OA\Get(
- *     path="/checkUsersHaveWaitingToPlay/{userName1}/{userName2}",
- *     tags={"user"},
- *     summary="Check if users have waiting to play status",
- *     @OA\Parameter(
- *         name="userName1",
- *         in="path",
- *         required=true,
- *         description="User name 1",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userName2",
- *         in="path",
- *         required=true,
- *         description="User name 2",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Waiting to play status",
- *         @OA\JsonContent(
- *             @OA\Property(property="waitingToPlay", type="boolean")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /checkUsersHaveWaitingToPlay/@userName1/@userName2", function ($userName1, $userName2) {
     // Check if the users with the given usernames have the same waitingToPlay status
     $haveSameWaitingToPlay = Flight::user_service()->checkUsersHaveWaitingToPlay($userName1, $userName2);
