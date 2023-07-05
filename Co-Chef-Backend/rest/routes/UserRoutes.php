@@ -115,13 +115,6 @@ Flight::route("GET /users", function () {
     ]);
 });
 
-
-Flight::route("GET /user_by_id", function () {
-    Flight::json([
-        "user" => Flight::user_service()->get_by_id(Flight::request()->query["id"])
-    ]);
-});
-
 /**
  * @OA\Get(
  *     path="/users/{id}",
