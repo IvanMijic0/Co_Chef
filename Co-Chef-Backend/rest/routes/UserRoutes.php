@@ -117,48 +117,14 @@ Flight::route("GET /users", function () {
     ]);
 });
 
-/**
- * @OA\Get(
- *     path="/users/{id}",
- *     tags={"users"},
- *     summary="Get user by ID",
- *     @OA\Parameter(
- *         name="id",
- *         in="path",
- *         required=true,
- *         description="User ID",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User found",
- *         @OA\JsonContent(
- *             @OA\Property(property="user", type="object")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /users/@id", function ($id) {
     Flight::json([
         "user" => Flight::user_service()->get_by_id($id)
     ]);
 });
 
-/**
- * @OA\Delete(
- *     path="/user/{id}",
- *     tags={"user"},
- *     summary="Delete user",
- *     @OA\Parameter(
- *         name="id",
- *         in="path",
- *         required=true,
- *         description="User ID",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(response=200, description="User deleted successfully")
- * )
- */
+
 Flight::route("DELETE /user/@id", function ($id) {
     Flight::user_service()->delete($id);
     Flight::json([
@@ -166,115 +132,20 @@ Flight::route("DELETE /user/@id", function ($id) {
     ]);
 });
 
-/**
- * @OA\Route(
- *     path="/update/{first_name}/{last_name}/{id}",
- *     method="PUT",
- *     tags={"user"},
- *     summary="Update user",
- *     @OA\Parameter(
- *         name="first_name",
- *         in="path",
- *         required=true,
- *         description="First name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="last_name",
- *         in="path",
- *         required=true,
- *         description="Last name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="id",
- *         in="path",
- *         required=true,
- *         description="User ID",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User updated successfully",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string"),
- *             @OA\Property(property="data", type="object")
- *         )
- *     )
- * )
- */
+
 Flight::route("/update/@first_name/@last_name/@id",
     function ($first_name, $last_name, $id) {
         Flight::user_service()->update($first_name, $last_name, $id);
     }
 );
 
-/**
- * @OA\Get(
- *     path="/checkUserByEmailAndPassword/{email}/{password}",
- *     tags={"user"},
- *     summary="Check user by email and password",
- *     @OA\Parameter(
- *         name="email",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="password",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User authenticated",
- *         @OA\JsonContent(type="boolean")
- *     )
- * )
- */
+
 Flight::route("GET /checkUserByEmailAndPassword/@email/@password", function ($email, $password) {
     $authenticated = Flight::user_service()->checkUserByEmailAndPassword($email, $password);
     Flight::json($authenticated);
 });
 
-/**
- * @OA\Put(
- *     path="/updateUserAvailability/{userEmail}/{userPassword}/{isAvailable}",
- *     tags={"user"},
- *     summary="Update user availability",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userPassword",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="isAvailable",
- *         in="path",
- *         required=true,
- *         description="User availability (0 or 1)",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User availability updated successfully",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isAvailable) {
     $isAvailable = intval($isAvailable);
 
@@ -287,75 +158,14 @@ Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable
     }
 });
 
-/**
- * @OA\Get(
- *     path="/checkUserAvailability/{userEmail}/{userPassword}",
- *     tags={"user"},
- *     summary="Check user availability",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userPassword",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User availability status",
- *         @OA\JsonContent(
- *             @OA\Property(property="isAvailable", type="boolean")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($userEmail, $userPassword) {
     $isAvailable = Flight::user_service()->isUserAvailable($userEmail, $userPassword);
 
     Flight::json(["isAvailable" => $isAvailable]);
 });
 
-/**
- * @OA\Put(
- *     path="/saveGameOpponent/{userEmail}/{userPassword}/{gameOpponent}",
- *     tags={"user"},
- *     summary="Save game opponent for user",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userPassword",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="gameOpponent",
- *         in="path",
- *         required=true,
- *         description="Game opponent",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Game opponent saved successfully",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent', function ($userEmail, $userPassword, $gameOpponent) {
     $result = Flight::user_service()->saveGameOpponent($userEmail, $userPassword, $gameOpponent);
 
@@ -366,41 +176,7 @@ Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent', fu
     }
 });
 
-/**
- * @OA\Put(
- *     path="/updateUserWillPlay/{userEmail}/{userPassword}/{isWillPlay}",
- *     tags={"user"},
- *     summary="Update user willPlay status",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userPassword",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="isWillPlay",
- *         in="path",
- *         required=true,
- *         description="User willPlay status (0 or 1)",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User willPlay updated successfully",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isWillPlay", function ($userEmail, $userPassword, $isWillPlay) {
     $result = Flight::user_service()->updateUserWillPlay($userEmail, $userPassword, $isWillPlay);
 
@@ -411,69 +187,14 @@ Flight::route("PUT /updateUserWillPlay/@userEmail/@userPassword/@isWillPlay", fu
     }
 });
 
-/**
- * @OA\Get(
- *     path="/checkUserWillPlay/{userEmail* @OA\Get(
- *     path="/checkUserWillPlay/{userEmail}/{userPassword}",
- *     tags={"user"},
- *     summary="Check user's willPlay status",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="userPassword",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the user's willPlay status",
- *         @OA\JsonContent(
- *             @OA\Property(property="willPlay", type="boolean")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /checkUserWillPlay/@userEmail/@userPassword", function ($userEmail, $userPassword) {
     $willPlay = Flight::user_service()->isWillPlay($userEmail, $userPassword);
 
     Flight::json(["willPlay" => $willPlay]);
 });
 
-/**
- * @OA\Get(
- *     path="/getGameIdByUsername/{userName}",
- *     tags={"user"},
- *     summary="Get game ID by username",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="Username",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the game ID",
- *         @OA\JsonContent(
- *             @OA\Property(property="gameId", type="integer")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="Game ID not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
     $gameId = Flight::user_service()->getGameIdByUsername($userName);
 
@@ -484,34 +205,7 @@ Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
     }
 });
 
-/**
- * @OA\Get(
- *     path="/getUserByGameOpponent/{gameOpponent}",
- *     tags={"user"},
- *     summary="Get user by game opponent",
- *     @OA\Parameter(
- *         name="gameOpponent",
- *         in="path",
- *         required=true,
- *         description="Game opponent",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the user name",
- *         @OA\JsonContent(
- *             @OA\Property(property="userName", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="User not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponent) {
     $userName = Flight::user_service()->getUserNameByGameOpponent($gameOpponent);
 
@@ -522,34 +216,6 @@ Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponen
     }
 });
 
-/**
- * @OA\Get(
- *     path="/getRecipeByUserName/{userName}",
- *     tags={"user"},
- *     summary="Get recipe by user name",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the user's recipe",
- *         @OA\JsonContent(
- *             @OA\Property(property="recipe", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="Recipe not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
 Flight::route("GET /getRecipeByUserName/@userName", function ($userName) {
     $recipe = Flight::user_service()->getRecipeByUserName($userName);
 
@@ -560,75 +226,14 @@ Flight::route("GET /getRecipeByUserName/@userName", function ($userName) {
     }
 });
 
-/**
- * @OA\Get(
- *     path="/getGameOpponentByUser/{username}",
- *     tags={"user"},
- *     summary="Get game opponent by username",
- *     @OA\Parameter(
- *         name="username",
- *         in="path",
- *         required=true,
- *         description="Username",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the game opponent",
- *         @OA\JsonContent(
- *             @OA\Property(property="gameOpponent", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="User not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /getGameOpponentByUser/@username", function ($username) {
     $gameOpponent = Flight::user_service()->getGameOpponentByUsername($username);
 
     Flight::json(["gameOpponent" => $gameOpponent]);
 });
 
-/**
- * @OA\Put(
- *     path="/updateGameOpponent/{userEmail}/{gameOpponent}",
- *     tags={"user"},
- *     summary="Update game opponent",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="gameOpponent",
- *         in="path",
- *         required=true,
- *         description="Game opponent",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Game opponent updated",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to update game opponent",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($userEmail, $gameOpponent) {
     $success = Flight::user_service()->updateGameOpponent($userEmail, $gameOpponent);
 
@@ -639,41 +244,7 @@ Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($use
     }
 });
 
-/**
- * @OA\Get(
- *     path="/getUserNameByEmailAndPassword/{email}/{password}",
- *     tags={"user"},
- *     summary="Get user name by email and password",
- *     @OA\Parameter(
- *         name="email",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="password",
- *         in="path",
- *         required=true,
- *         description="User password",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the user name",
- *         @OA\JsonContent(
- *             @OA\Property(property="userName", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="User not found or invalid credentials",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($email, $password) {
     $userName = Flight::user_service()->getUserNameByEmailAndPassword($email, $password);
 
@@ -684,41 +255,7 @@ Flight::route("GET /getUserNameByEmailAndPassword/@email/@password", function ($
     }
 });
 
-/**
- * @OA\Put(
- *     path="/updateGameId/{userName}/{gameId}",
- *     tags={"user"},
- *     summary="Update game ID",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="gameId",
- *         in="path",
- *         required=true,
- *         description="Game ID",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Game ID updated",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to update game ID",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateGameId/@userName/@gameId", function ($userName, $gameId) {
     $success = Flight::user_service()->updateGameId($userName, $gameId);
 
@@ -729,41 +266,7 @@ Flight::route("PUT /updateGameId/@userName/@gameId", function ($userName, $gameI
     }
 });
 
-/**
- * @OA\Put(
- *     path="/updateTasksCompleted/{userName}/{tasksCompleted}",
- *     tags={"user"},
- *     summary="Update tasks completed",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="tasksCompleted",
- *         in="path",
- *         required=true,
- *         description="Tasks completed",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Tasks completed updated",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to update tasks completed",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateTasksCompleted/@userName/@tasksCompleted", function ($userName, $tasksCompleted) {
     $success = Flight::user_service()->updateTasksCompleted($userName, $tasksCompleted);
 
@@ -774,41 +277,7 @@ Flight::route("PUT /updateTasksCompleted/@userName/@tasksCompleted", function ($
     }
 });
 
-/**
- * @OA\Put(
- *     path="/updateUserIsRejected/{userName}/{isRejected}",
- *     tags={"user"},
- *     summary="Update user isRejected",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Parameter(
- *         name="isRejected",
- *         in="path",
- *         required=true,
- *         description="Is rejected flag (0 or 1)",
- *         @OA\Schema(type="integer", enum={0, 1})
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User isRejected updated",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to update user isRejected",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /updateUserIsRejected/@userName/@isRejected", function ($userName, $isRejected) {
     $success = Flight::user_service()->updateUserIsRejected($userName, $isRejected);
 
@@ -819,88 +288,21 @@ Flight::route("PUT /updateUserIsRejected/@userName/@isRejected", function ($user
     }
 });
 
-/**
- * @OA\Get(
- *     path="/isRejected/{userName}",
- *     tags={"user"},
- *     summary="Check if user is rejected",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="IsRejected status",
- *         @OA\JsonContent(
- *             @OA\Property(property="isRejected", type="boolean")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /isRejected/@userName", function ($userName) {
     $isRejected = Flight::user_service()->isRejected($userName);
 
     Flight::json(["isRejected" => $isRejected]);
 });
 
-/**
- * @OA\Get(
- *     path="/isWaitingToPlay/{userName}",
- *     tags={"user"},
- *     summary="Check if user is waiting to play",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="User name",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="IsWaitingToPlay status",
- *         @OA\JsonContent(
- *             @OA\Property(property="isWaitingToPlay", type="boolean")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /isWaitingToPlay/@userName", function ($userName) {
     $isWaitingToPlay = Flight::user_service()->isWaitingToPlay($userName);
 
     Flight::json(["isWaitingToPlay" => $isWaitingToPlay]);
 });
 
-/**
- * @OA\Put(
- *     path="/resetGameOpponent/{userEmail}",
- *     tags={"user"},
- *     summary="Reset game opponent",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Game opponent reset",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to reset game opponent",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /resetGameOpponent/@userEmail", function ($userEmail) {
     $success = Flight::user_service()->resetGameOpponent($userEmail);
 
@@ -911,34 +313,7 @@ Flight::route("PUT /resetGameOpponent/@userEmail", function ($userEmail) {
     }
 });
 
-/**
- * @OA\Put(
- *     path="/resetRecipe/{userEmail}",
- *     tags={"user"},
- *     summary="Reset user's recipe",
- *     @OA\Parameter(
- *         name="userEmail",
- *         in="path",
- *         required=true,
- *         description="User email",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Recipe reset",
- *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=400,
- *         description="Failed to reset recipe",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("PUT /resetRecipe/@userEmail", function ($userEmail) {
     $success = Flight::user_service()->resetRecipe($userEmail);
 
