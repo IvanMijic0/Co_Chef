@@ -1,4 +1,4 @@
-import {getGameOpponentByUserName} from "./buttonListeners.js";
+import {getGameOpponentByUserName} from "../Services/user-service.js";
 
 // Does not work!
 
@@ -131,19 +131,19 @@ const updateChatTextByUserName = (userName, chatText) => {
     });
 };
 
-const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
-    $.ajax({
-        method: "GET",
-        url: "../Co-Chef-Backend/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
-        success: (response) => {
-            const haveSameGameId = response["Same id"];
-            callback(haveSameGameId);
-        },
-        error: () => {
-            callback(false);
-        }
-    });
-};
+// const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
+//     $.ajax({
+//         method: "GET",
+//         url: "../Co-Chef-Backend/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
+//         success: (response) => {
+//             const haveSameGameId = response["Same id"];
+//             callback(haveSameGameId);
+//         },
+//         error: () => {
+//             callback(false);
+//         }
+//     });
+// };
 
 const getChatTextByUsername = (userName, callback) => {
     $.ajax({
