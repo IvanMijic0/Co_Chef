@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
-      <workItem from="1688585461287" duration="5442000" />
+      <workItem from="1688585461287" duration="6687000" />
     </task>
     <task id="LOCAL-00001" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -238,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688591042826</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Setting up swagger">
+      <option name="closed" value="true" />
+      <created>1688591423971</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1688591423971</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
