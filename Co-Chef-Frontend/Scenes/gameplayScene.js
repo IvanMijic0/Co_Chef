@@ -290,7 +290,7 @@ export class GameplayScene extends Scene {
                 }
             }
         }
-        this.timer.innerText = Math.max(timerValueSec, 0);
+        this.timer.innerText = Math.max(timerValueSec, 0).toString();
     };
 
     updateMiniGameTimer = (deltaTime) => {
