@@ -1,6 +1,5 @@
 import {activeScene, scenes, switchToScene} from "../Control/controller.js";
 import {sceneData} from "../data-utils/scene-data.js";
-import {willPlayIntervalId} from "../Control/buttonListeners.js";
 import {
     characterContainer,
     characterName, connectBackButton, connectRefreshButton,

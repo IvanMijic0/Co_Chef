@@ -17,7 +17,6 @@ import {
     updateWillPlay
 } from "../Services/user-service.js";
 
-export let willPlayIntervalId;
 export const userHeader = document.getElementById("userHeader");
 export const userListContainer = document.getElementById("userListContainer");
 export const userContainer = document.getElementById("userContainer");

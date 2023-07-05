@@ -7,6 +7,8 @@ let USER_PASSWORD = "";
 
 let CAN_MOVE = true; // Global variable, I will think of something more clever if I have time
 
+let willPlayIntervalId;
+
 const NOODLE_RECIPE = {
     name: "noodle",
     recipeArr: [
