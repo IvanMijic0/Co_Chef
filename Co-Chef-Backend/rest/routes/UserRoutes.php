@@ -44,7 +44,7 @@ Flight::route("PUT /user/@id", function ($id) {
 });
 
 /**
- * @OA\Get(path="/users", tag={"users"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/users", tags={"users"}, security={{"ApiKeyAuth": {}}},
  *     summary ="Return all users from the API. ",
  *     @OA\Response( response=200, description="List of users.")
  * )
