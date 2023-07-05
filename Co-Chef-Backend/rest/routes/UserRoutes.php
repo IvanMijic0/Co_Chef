@@ -86,7 +86,7 @@ Flight::route("POST /user", function () {
  *     )
  * )
  */
-Flight::route("PUT /user/@id", function ($id) {
+Flight::route("PUT /user/{id}", function ($id) {
     Flight::json([
         "message" => "User updated successfully",
         "data" => Flight::user_service()->update(Flight::request()->data->getData(), $id)
