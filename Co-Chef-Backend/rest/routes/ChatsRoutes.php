@@ -1,5 +1,7 @@
 <?php /** @noinspection ALL */
 
+use OpenApi\Annotations\OpenApi;
+
 /**
  * @OA\Post(
  *     path="/initializeChats",
