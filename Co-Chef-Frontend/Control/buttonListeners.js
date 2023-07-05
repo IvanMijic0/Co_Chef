@@ -16,16 +16,16 @@ import {
     updateWillPlay
 } from "../Services/user-service.js";
 
-export const userHeader = document.getElementById("userHeader");
-export const userListContainer = document.getElementById("userListContainer");
-export const userContainer = document.getElementById("userContainer");
-export const userBackground = document.getElementById("user-background");
-export const connectBackButton = document.getElementById("connect-backButton-container");
+export const userHeader           = document.getElementById("userHeader");
+export const userListContainer    = document.getElementById("userListContainer");
+export const userContainer        = document.getElementById("userContainer");
+export const userBackground       = document.getElementById("user-background");
+export const connectBackButton    = document.getElementById("connect-backButton-container");
 export const connectRefreshButton = document.getElementById("connect-refreshButton-container");
-export const speechText = document.getElementById("speechText");
-export const SelectBackButton = document.getElementById("CharSelect-backButton-container");
-export const characterName = document.getElementById("character-name");
-export const characterContainer = document.getElementById("character-container");
+export const speechText           = document.getElementById("speechText");
+export const SelectBackButton     = document.getElementById("CharSelect-backButton-container");
+export const characterName        = document.getElementById("character-name");
+export const characterContainer   = document.getElementById("character-container");
 
 document.addEventListener("DOMContentLoaded", () => {
     // Caching everything
