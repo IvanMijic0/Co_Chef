@@ -15,7 +15,7 @@ import {
     updateUserGameId, updateUserTaskCompleted,
     updateWaitingToPlay,
     updateWillPlay
-} from "../Services/user-service";
+} from "../Services/user-service.js";
 
 export let willPlayIntervalId;
 export const userHeader = document.getElementById("userHeader");
