@@ -518,7 +518,7 @@ Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponen
     if ($userName) {
         Flight::json(["userName" => $userName]);
     } else {
-        Flight::json(["error" => "Usernot found"], 404);
+        Flight::json(["error" => "User not found"], 404);
     }
 });
 
