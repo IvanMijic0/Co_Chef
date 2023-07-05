@@ -86,7 +86,7 @@ Flight::route("POST /user", function () {
  *     )
  * )
  */
-Flight::route("PUT /user/{id}", function ($id) {
+Flight::route("PUT /user/@id", function ($id) {
     Flight::json([
         "message" => "User updated successfully",
         "data" => Flight::user_service()->update(Flight::request()->data->getData(), $id)
@@ -115,27 +115,7 @@ Flight::route("GET /users", function () {
     ]);
 });
 
-/**
- * @OA\Get(
- *     path="/user_by_id",
- *     tags={"user"},
- *     summary="Get user by ID",
- *     @OA\Parameter(
- *         name="id",
- *         in="query",
- *         required=true,
- *         description="User ID",
- *         @OA\Schema(type="integer")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="User found",
- *         @OA\JsonContent(
- *             @OA\Property(property="user", type="object")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /user_by_id", function () {
     Flight::json([
         "user" => Flight::user_service()->get_by_id(Flight::request()->query["id"])
