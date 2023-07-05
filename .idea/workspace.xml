@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger">
-      <change beforePath="$PROJECT_DIR$/.idea/Co_Chef.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Co_Chef.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
-      <workItem from="1688585461287" duration="4732000" />
+      <workItem from="1688585461287" duration="5067000" />
     </task>
     <task id="LOCAL-00001" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -199,7 +196,31 @@
       <option name="project" value="LOCAL" />
       <updated>1688590473216</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Setting up swagger">
+      <option name="closed" value="true" />
+      <created>1688590605956</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1688590605956</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Setting up swagger">
+      <option name="closed" value="true" />
+      <created>1688590622251</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688590622251</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Setting up swagger">
+      <option name="closed" value="true" />
+      <created>1688590855073</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1688590855073</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
