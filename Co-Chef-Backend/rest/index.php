@@ -48,7 +48,7 @@ require_once "routes/UserRoutes.php";
 require_once "routes/ChatsRoutes.php";
 
 
-Flight::before('error', function () {
+Flight::before("error", function () {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET,PUT,POST,DELETE");
     header("Access-Control-Allow-Headers: Content-Type");

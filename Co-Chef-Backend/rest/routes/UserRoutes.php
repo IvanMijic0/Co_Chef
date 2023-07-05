@@ -1061,11 +1061,14 @@ Flight::route("GET /checkUsersHaveSameTaskCompleted/@userName1/@userName2", func
  * )
  */
 Flight::route("PUT /updateWaitingToPlay/@userName/@isWaitingToPlay", function ($userName, $isWaitingToPlay) {
+    // Update the isWaitingToPlay column for the user with the given userName
     $success = Flight::user_service()->updateWaitingToPlay($userName, $isWaitingToPlay);
 
     if ($success) {
+        // User isWaitingToPlay column updated successfully
         Flight::json(["message" => "User isWaitingToPlay updated"]);
     } else {
+        // Failed to update user isWaitingToPlay column
         Flight::json(["error" => "Failed to update user isWaitingToPlay"], 400);
     }
 });
