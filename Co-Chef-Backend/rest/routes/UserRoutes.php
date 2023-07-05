@@ -166,14 +166,75 @@ Flight::route("DELETE /user/@id", function ($id) {
     ]);
 });
 
-
+/**
+ * @OA\Route(
+ *     path="/update/{first_name}/{last_name}/{id}",
+ *     method="PUT",
+ *     tags={"user"},
+ *     summary="Update user",
+ *     @OA\Parameter(
+ *         name="first_name",
+ *         in="path",
+ *         required=true,
+ *         description="First name",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="last_name",
+ *         in="path",
+ *         required=true,
+ *         description="Last name",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="User ID",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User updated successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string"),
+ *             @OA\Property(property="data", type="object")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("/update/@first_name/@last_name/@id",
     function ($first_name, $last_name, $id) {
         Flight::user_service()->update($first_name, $last_name, $id);
     }
 );
 
-
+/**
+ * @OA\Get(
+ *     path="/checkUserByEmailAndPassword/{email}/{password}",
+ *     tags={"user"},
+ *     summary="Check user by email and password",
+ *     @OA\Parameter(
+ *         name="email",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="password",
+ *         in="path",
+ *         required=true,
+ *         description="User password",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User authenticated",
+ *         @OA\JsonContent(type="boolean")
+ *     )
+ * )
+ */
 Flight::route("GET /checkUserByEmailAndPassword/@email/@password", function ($email, $password) {
     $authenticated = Flight::user_service()->checkUserByEmailAndPassword($email, $password);
     Flight::json($authenticated);
