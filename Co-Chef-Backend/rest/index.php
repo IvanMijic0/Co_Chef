@@ -34,15 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit;
 }
 
-Flight::register("user_service", UserService::class);
-Flight::register("chat_service", ChatServices::class);
-
 /* REST API documentation endpoint */
 Flight::route("GET /docs.json", function () {
     $openapi = scan("routes");
     header("Content-Type: application/json");
     echo $openapi->toJson();
 });
+
+Flight::register("user_service", UserService::class);
+Flight::register("chat_service", ChatServices::class);
 
 require_once "routes/UserRoutes.php";
 require_once "routes/ChatsRoutes.php";
