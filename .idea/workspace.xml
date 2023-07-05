@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger">
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger for routes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/ChatsRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/ChatsRoutes.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
-      <workItem from="1688585461287" duration="6687000" />
+      <workItem from="1688585461287" duration="7324000" />
     </task>
     <task id="LOCAL-00001" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -247,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688591423971</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Setting up swagger for routes">
+      <option name="closed" value="true" />
+      <created>1688592677425</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1688592677425</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +266,7 @@
     <MESSAGE value="Slight Refactor" />
     <MESSAGE value="Adding swagger" />
     <MESSAGE value="Setting up swagger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting up swagger" />
+    <MESSAGE value="Setting up swagger for routes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setting up swagger for routes" />
   </component>
 </project>

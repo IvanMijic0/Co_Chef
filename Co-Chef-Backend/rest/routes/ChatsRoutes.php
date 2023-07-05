@@ -14,7 +14,7 @@
  *         )
  *     ),
  *     @OA\Response(
- *         response=200,
+ *         response=400,
  *         description="Failed to add chats",
  *         @OA\JsonContent(
  *             @OA\Property(property="message", type="string")
