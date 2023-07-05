@@ -1,4 +1,7 @@
 <?php
+
+use function OpenApi\scan;
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
@@ -36,7 +39,7 @@ Flight::register("chat_service", ChatServices::class);
 
 /* REST API documentation endpoint */
 Flight::route("GET /docs.json", function () {
-    $openapi = \OpenApi\scan("routes");
+    $openapi = scan("routes");
     header("Content-Type: application/json");
     echo $openapi->toJson();
 });
