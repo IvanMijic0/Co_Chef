@@ -1,15 +1,14 @@
 import {sceneData} from "../data-utils/scene-data.js";
-import {switchToScene, volumeBar, audio, intro, activeScene, scenes} from "./controller.js";
+import {switchToScene, volumeBar, audio, activeScene, scenes} from "./controller.js";
 import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
 import {
     checkUsersHaveWaitingToPlay,
     checkUserWillPlayPeriodically,
     deleteUsersWithSameNonZeroGameId, getGameOpponentByUserName, getRecipeByUserName,
-    getUserNameByEmailAndPassword,
     getUserNameByGameOpponent,
-    ListUsers,
+    ListUsers, loginUser,
     resetGameOpponent,
-    resetRecipe,
+    resetRecipe, signUpUser,
     updateAvailability,
     updateRecipe,
     updateUserGameId, updateUserTaskCompleted,
@@ -85,36 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const userEmail = $("#username").val();
         const userPassword = $("#password").val();
-        $.ajax({
-            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
-            method: "GET",
-            success: (response) => {
-                if (response) {
-                    toastr.success("Login Successful!");
-                    USER_EMAIL = userEmail;
-                    USER_PASSWORD = userPassword;
-                    getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
-                        if (userName) {
-                            USER_NAME = userName;
-                        } else {
-                            // Error occurred or user not found
-                            console.log("Failed to retrieve user name");
-                        }
-                    });
-                    setTimeout(() => {
-                        switchToScene(sceneData.INTRO.sceneId);
-                        intro();
-                    }, 1500)
-                } else {
-                    // User credentials are invalid
-                    toastr.warning("User does not exist!");
-                }
-            },
-            error: () => {
-                // Handle error if the request fails
-                toastr.error();
-            }
-        });
+        loginUser(userEmail, userPassword);
     });
 
     signupButton0.addEventListener("click", (e) => {
@@ -122,34 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userName = $("#name").val();
         const userEmail = $("#username0").val();
         const userPassword = $("#password0").val();
-        $.ajax({
-            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/user",
-            method: "POST",
-            data: {
-                userName: userName,
-                userEmail: userEmail,
-                userPassword: userPassword
-            },
-            success: (response, status, xhr) => {
-                if (xhr.status === 201) {
-                    toastr.success("Signup Successful!");
-                    USER_NAME = userName;
-                    USER_EMAIL = userEmail;
-                    USER_PASSWORD = userPassword;
-                    setTimeout(() => {
-                        switchToScene(sceneData.INTRO.sceneId);
-                        intro();
-                    }, 1000);
-                }
-            },
-            error: (xhr) => {
-                if (xhr.status === 409) {
-                    toastr.warning("User already exists");
-                } else {
-                    toastr.error();
-                }
-            }
-        });
+        signUpUser(userName, userEmail, userPassword);
     });
 
     loginButton0.addEventListener("click", () => {
