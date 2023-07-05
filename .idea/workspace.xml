@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger" />
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger">
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
-      <workItem from="1688585461287" duration="5067000" />
+      <workItem from="1688585461287" duration="5442000" />
     </task>
     <task id="LOCAL-00001" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -220,7 +222,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688590855073</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Setting up swagger">
+      <option name="closed" value="true" />
+      <created>1688590896193</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1688590896193</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Setting up swagger">
+      <option name="closed" value="true" />
+      <created>1688591042826</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1688591042826</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

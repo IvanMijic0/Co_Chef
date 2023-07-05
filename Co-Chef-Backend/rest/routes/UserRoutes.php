@@ -1,8 +1,27 @@
 <?php /** @noinspection ALL */
 
-use OpenApi\Annotations as OA;
-
-
+/**
+ * @OA\Post(
+ *     path="/user",
+ *     tags={"user"},
+ *     summary="Create a new user",
+ *     @OA\RequestBody(
+ *         description="User data",
+ *         required=true,
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(property="userName", type="string"),
+ *                 @OA\Property(property="userEmail", type="string"),
+ *                 @OA\Property(property="userPassword", type="string")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response=201, description="User added successfully"),
+ *     @OA\Response(response=409, description="User already exists"),
+ *     @OA\Response(response=500, description="Failed to add user")
+ * )
+ */
 Flight::route("POST /user", function () {
     $data = Flight::request()->data->getData();
 
@@ -10,7 +29,7 @@ Flight::route("POST /user", function () {
     $userExists = Flight::user_service()->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
 
     if ($userExists) {
-        Flight::halt(409); // Set response code to indicate conflict (e.g., 409 Conflict)
+        Flight::halt(409);
         Flight::json([
             "message" => "User already exists"
         ]);
@@ -19,13 +38,13 @@ Flight::route("POST /user", function () {
         $addedUser = $userService->add($data);
 
         if ($addedUser) {
-            Flight::halt(201); // Set response code to indicate success (e.g., 201 Created)
+            Flight::halt(201);
             Flight::json([
                 "message" => "User added successfully",
                 "data" => $addedUser
             ]);
         } else {
-            Flight::halt(500); // Set response code to indicate an error occurred (e.g., 500 Internal Server Error)
+            Flight::halt(500);
             Flight::json([
                 "message" => "Failed to add user"
             ]);
@@ -33,23 +52,62 @@ Flight::route("POST /user", function () {
     }
 });
 
+/**
+ * @OA\Put(
+ *     path="/user/{id}",
+ *     tags={"user"},
+ *     summary="Update a user",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="User ID",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         description="Updated user data",
+ *         required=true,
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(property="userName", type="string"),
+ *                 @OA\Property(property="userEmail", type="string"),
+ *                 @OA\Property(property="userPassword", type="string")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User updated successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string"),
+ *             @OA\Property(property="data", type="object")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("PUT /user/@id", function ($id) {
-    Flight::json
-    (
-        [
-            "message" => "User updated successfully",
-            "data" => Flight::user_service()->update(Flight::request()->data->getData(), $id)
-        ]
-    );
+    Flight::json([
+        "message" => "User updated successfully",
+        "data" => Flight::user_service()->update(Flight::request()->data->getData(), $id)
+    ]);
 });
 
 /**
- * @OA\Get(path="/users", tags={"users"}, security={{"ApiKeyAuth": {}}},
- *     summary ="Return all users from the API. ",
- *     @OA\Response( response=200, description="List of users.")
+ * @OA\Get(
+ *     path="/users",
+ *     tags={"users"},
+ *     security={{"ApiKeyAuth": {}}},
+ *     summary="Get all users",
+ *     @OA\Response(
+ *         response=200,
+ *         description="List of users",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="users", type="array", @OA\Items(type="object"))
+ *         )
+ *     )
  * )
  */
-
 Flight::route("GET /users", function () {
     $users = Flight::user_service()->get_all();
     Flight::json([
