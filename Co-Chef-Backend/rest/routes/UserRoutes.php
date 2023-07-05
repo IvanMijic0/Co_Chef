@@ -651,7 +651,6 @@ Flight::route("PUT /updateGameOpponent/@userEmail/@gameOpponent", function ($use
     }
 });
 
-
 /**
  * @OA\Get(
  *     path="/getUserNameByEmailAndPassword/{email}/{password}",
@@ -1097,15 +1096,12 @@ Flight::route("GET /checkUsersHaveSameTaskCompleted/@userName1/@userName2", func
  *     )
  * )
  */
-Flight::route("PUT /updateWaitingToPlay/@userName/@isRejected", function ($userName, $isWaitingToPlay) {
-    // Update the isRejected column for the user with the given email and password
+Flight::route("PUT /updateWaitingToPlay/@userName/@isWaitingToPlay", function ($userName, $isWaitingToPlay) {
     $success = Flight::user_service()->updateWaitingToPlay($userName, $isWaitingToPlay);
 
     if ($success) {
-        // User isRejected column updated successfully
         Flight::json(["message" => "User isWaitingToPlay updated"]);
     } else {
-        // Failed to update user isRejected column
         Flight::json(["error" => "Failed to update user isWaitingToPlay"], 400);
     }
 });
@@ -1146,14 +1142,11 @@ Flight::route("PUT /updateWaitingToPlay/@userName/@isRejected", function ($userN
  * )
  */
 Flight::route("PUT /updateRecipe/@userName/@recipe", function ($userName, $recipe) {
-    // Update the isRejected column for the user with the given email and password
     $success = Flight::user_service()->updateRecipe($userName, $recipe);
 
     if ($success) {
-        // User isRejected column updated successfully
         Flight::json(["message" => "User recipe updated"]);
     } else {
-        // Failed to update user isRejected column
         Flight::json(["error" => "Failed to update user recipe"], 400);
     }
 });
