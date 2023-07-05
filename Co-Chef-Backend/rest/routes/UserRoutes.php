@@ -446,34 +446,7 @@ Flight::route("GET /checkUserWillPlay/@userEmail/@userPassword", function ($user
     Flight::json(["willPlay" => $willPlay]);
 });
 
-/**
- * @OA\Get(
- *     path="/getGameIdByUsername/{userName}",
- *     tags={"user"},
- *     summary="Get game ID by username",
- *     @OA\Parameter(
- *         name="userName",
- *         in="path",
- *         required=true,
- *         description="Username",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the game ID",
- *         @OA\JsonContent(
- *             @OA\Property(property="gameId", type="integer")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="Game ID not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
     $gameId = Flight::user_service()->getGameIdByUsername($userName);
 
@@ -484,34 +457,7 @@ Flight::route("GET /getGameIdByUsername/@userName", function ($userName) {
     }
 });
 
-/**
- * @OA\Get(
- *     path="/getUserByGameOpponent/{gameOpponent}",
- *     tags={"user"},
- *     summary="Get user by game opponent",
- *     @OA\Parameter(
- *         name="gameOpponent",
- *         in="path",
- *         required=true,
- *         description="Game opponent",
- *         @OA\Schema(type="string")
- *     ),
- *     @OA\Response(
- *         response=200,
- *         description="Returns the user name",
- *         @OA\JsonContent(
- *             @OA\Property(property="userName", type="string")
- *         )
- *     ),
- *     @OA\Response(
- *         response=404,
- *         description="User not found",
- *         @OA\JsonContent(
- *             @OA\Property(property="error", type="string")
- *         )
- *     )
- * )
- */
+
 Flight::route("GET /getUserByGameOpponent/@gameOpponent", function ($gameOpponent) {
     $userName = Flight::user_service()->getUserNameByGameOpponent($gameOpponent);
 
