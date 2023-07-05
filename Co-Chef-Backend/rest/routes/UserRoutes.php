@@ -240,7 +240,41 @@ Flight::route("GET /checkUserByEmailAndPassword/@email/@password", function ($em
     Flight::json($authenticated);
 });
 
-
+/**
+ * @OA\Put(
+ *     path="/updateUserAvailability/{userEmail}/{userPassword}/{isAvailable}",
+ *     tags={"user"},
+ *     summary="Update user availability",
+ *     @OA\Parameter(
+ *         name="userEmail",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="userPassword",
+ *         in="path",
+ *         required=true,
+ *         description="User password",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="isAvailable",
+ *         in="path",
+ *         required=true,
+ *         description="User availability (0 or 1)",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User availability updated successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable", function ($userEmail, $userPassword, $isAvailable) {
     $isAvailable = intval($isAvailable);
 
@@ -253,14 +287,75 @@ Flight::route("PUT /updateUserAvailability/@userEmail/@userPassword/@isAvailable
     }
 });
 
-
+/**
+ * @OA\Get(
+ *     path="/checkUserAvailability/{userEmail}/{userPassword}",
+ *     tags={"user"},
+ *     summary="Check user availability",
+ *     @OA\Parameter(
+ *         name="userEmail",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="userPassword",
+ *         in="path",
+ *         required=true,
+ *         description="User password",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="User availability status",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="isAvailable", type="boolean")
+ *         )
+ *     )
+ * )
+ */
 Flight::route("GET /checkUserAvailability/@userEmail/@userPassword", function ($userEmail, $userPassword) {
     $isAvailable = Flight::user_service()->isUserAvailable($userEmail, $userPassword);
 
     Flight::json(["isAvailable" => $isAvailable]);
 });
 
-
+/**
+ * @OA\Put(
+ *     path="/saveGameOpponent/{userEmail}/{userPassword}/{gameOpponent}",
+ *     tags={"user"},
+ *     summary="Save game opponent for user",
+ *     @OA\Parameter(
+ *         name="userEmail",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="userPassword",
+ *         in="path",
+ *         required=true,
+ *         description="User password",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="gameOpponent",
+ *         in="path",
+ *         required=true,
+ *         description="Game opponent",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Game opponent saved successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     )
+ * )
+ */
 Flight::route('PUT /saveGameOpponent/@userEmail/@userPassword/@gameOpponent', function ($userEmail, $userPassword, $gameOpponent) {
     $result = Flight::user_service()->saveGameOpponent($userEmail, $userPassword, $gameOpponent);
 
