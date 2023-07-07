@@ -51,6 +51,38 @@ chatField.addEventListener("keydown", (e) => {
 
 export const displayChatMessages = () => {
     // chatLog.innerHTML = '';
+    getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+        if (gameOpponent) {
+            getChatTextByUsername(gameOpponent, (chatText) => {
+                if (chatText) {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('chat-message');
+
+                    // const userPrefix = document.createElement('span');
+                    // userPrefix.textContent = "User0: ";
+                    // userPrefix.style.color = "#F7931E";
+
+                    const messageText = document.createElement('span');
+                    messageText.textContent = chatText;
+                    messageText.style.color = "white";
+                    // messageElement.appendChild(userPrefix);
+                    messageElement.appendChild(messageText);
+
+                    messageElement.style.fontSize = "1vw";
+                    messageElement.style.paddingTop = ".5vw";
+                    messageElement.style.paddingLeft = "1vw";
+                    messageElement.style.fontFamily = "Handlee";
+
+                    chatLog.style.fontFamily = "Handlee"
+                    chatLog.style.borderLeft = ".2vw solid black";
+                    chatLog.style.borderTop = ".2vw solid black";
+                    chatLog.style.borderRight = ".2vw solid black";
+
+                    chatLog.appendChild(messageElement); // Append new message elements
+                }
+            });
+        }
+    });
 
     getChatTextByUsername(USER_NAME, (chatText) => {
         if (chatText) {
