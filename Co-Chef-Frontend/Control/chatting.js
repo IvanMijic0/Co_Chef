@@ -37,6 +37,7 @@ chatField.addEventListener("keydown", (e) => {
         });
 
         input.value = "";
+        updateChatTextByUserName(USER_NAME, "");
     }
 });
 
@@ -63,7 +64,7 @@ export const displayChatMessages = () => {
                     // userPrefix.style.color = "#F7931E";
 
                     const messageText = document.createElement('span');
-                    messageText.textContent = chatText;
+                    messageText.textContent = gameOpponent + ": " +  chatText;
                     messageText.style.color = "white";
                     // messageElement.appendChild(userPrefix);
                     messageElement.appendChild(messageText);
@@ -94,7 +95,7 @@ export const displayChatMessages = () => {
             // userPrefix.style.color = "#F7931E";
 
             const messageText = document.createElement('span');
-            messageText.textContent = chatText;
+            messageText.textContent = USER_NAME + ": " + chatText;
             messageText.style.color = "white";
             // messageElement.appendChild(userPrefix);
             messageElement.appendChild(messageText);
