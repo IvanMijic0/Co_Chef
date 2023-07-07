@@ -9,7 +9,7 @@ import {
 const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
 const inputField = document.querySelector(".chat-input");
-const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
+const MAX_CHAT_LOG_HEIGHT = 1000; // Adjust the maximum height as desired
 
 // let chatMessages = [];
 
@@ -17,7 +17,7 @@ chatField.addEventListener("click", () => {
     console.log("In interval")
     displayChatIntervalId = setInterval(() => {
         checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
-            if (isUpdateDisplay) {
+            if (isUpdateDisplay === 1) {
                 displayChatMessages();
                 updateDisplay(USER_NAME, 0);
             }
