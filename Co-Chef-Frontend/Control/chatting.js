@@ -1,4 +1,3 @@
-import {getGameOpponentByUserName} from "../Services/user-service.js";
 import {getChatTextByUsername, updateChatTextByUserName} from "../Services/chat-service.js";
 
 const chatField = document.querySelector(".chat-field");
@@ -43,68 +42,35 @@ chatField.addEventListener("keydown", (e) => {
 
 const displayChatMessages = () => {
     // chatLog.innerHTML = '';
-        getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
-            if (gameOpponent) {
-                getChatTextByUsername(USER_NAME, (chatText) => {
-                    if (chatText) {
-                        const messageElement = document.createElement('div');
-                        messageElement.classList.add('chat-message');
+    getChatTextByUsername(USER_NAME, (chatText) => {
+        if (chatText) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message');
 
-                        // const userPrefix = document.createElement('span');
-                        // userPrefix.textContent = "User0: ";
-                        // userPrefix.style.color = "#F7931E";
+            // const userPrefix = document.createElement('span');
+            // userPrefix.textContent = "User0: ";
+            // userPrefix.style.color = "#F7931E";
 
-                        const messageText = document.createElement('span');
-                        messageText.textContent = chatText;
-                        messageText.style.color = "white";
-                        console.log("Message text: " + messageText);
-                        // messageElement.appendChild(userPrefix);
-                        messageElement.appendChild(messageText);
+            const messageText = document.createElement('span');
+            messageText.textContent = chatText;
+            messageText.style.color = "white";
+            // messageElement.appendChild(userPrefix);
+            messageElement.appendChild(messageText);
 
-                        messageElement.style.fontSize = "1vw";
-                        messageElement.style.paddingTop = ".5vw";
-                        messageElement.style.paddingLeft = "1vw";
-                        messageElement.style.fontFamily = "Handlee";
+            messageElement.style.fontSize = "1vw";
+            messageElement.style.paddingTop = ".5vw";
+            messageElement.style.paddingLeft = "1vw";
+            messageElement.style.fontFamily = "Handlee";
 
-                        chatLog.style.fontFamily = "Handlee"
-                        chatLog.style.borderLeft = ".2vw solid black";
-                        chatLog.style.borderTop = ".2vw solid black";
-                        chatLog.style.borderRight = ".2vw solid black";
+            chatLog.style.fontFamily = "Handlee"
+            chatLog.style.borderLeft = ".2vw solid black";
+            chatLog.style.borderTop = ".2vw solid black";
+            chatLog.style.borderRight = ".2vw solid black";
 
-                        chatLog.appendChild(messageElement); // Append new message elements
-                    }
-                });
-                getChatTextByUsername(gameOpponent, (chatText) => {
-                    if (chatText) {
-                        const messageElement = document.createElement('div');
-                        messageElement.classList.add('chat-message');
+            chatLog.appendChild(messageElement); // Append new message elements
+        }
+    });
 
-                        // const userPrefix = document.createElement('span');
-                        // userPrefix.textContent = "User0: ";
-                        // userPrefix.style.color = "#F7931E";
-
-                        const messageText = document.createElement('span');
-                        messageText.textContent = chatText;
-                        messageText.style.color = "white";
-                        console.log("Message text: " + messageText);
-                        // messageElement.appendChild(userPrefix);
-                        messageElement.appendChild(messageText);
-
-                        messageElement.style.fontSize = "1vw";
-                        messageElement.style.paddingTop = ".5vw";
-                        messageElement.style.paddingLeft = "1vw";
-                        messageElement.style.fontFamily = "Handlee";
-
-                        chatLog.style.fontFamily = "Handlee"
-                        chatLog.style.borderLeft = ".2vw solid black";
-                        chatLog.style.borderTop = ".2vw solid black";
-                        chatLog.style.borderRight = ".2vw solid black";
-
-                        chatLog.appendChild(messageElement); // Append new message elements
-                    }
-                });
-            }
-        });
 
     if (chatLog.scrollHeight > MAX_CHAT_LOG_HEIGHT) {
         chatLog.style.height = MAX_CHAT_LOG_HEIGHT + 'px';

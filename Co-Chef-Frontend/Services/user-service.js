@@ -372,11 +372,9 @@ export const updateUserGameId = (userName, gameId) => {
         type: "PUT",
         success: function () {
             console.log("Game ID updated successfully");
-            // Handle success response
         },
         error: function () {
             console.log("Failed to update game ID");
-            // Handle error response
         }
     });
 };
@@ -492,7 +490,7 @@ export const checkUserWillPlayPeriodically = () => {
                 });
             }
         })
-    }, 5000);
+    }, 2000);
 };
 
 export const setOpponentsGameOpponent = (userName, randomGameId) => {
