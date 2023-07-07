@@ -152,6 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     restartButton.addEventListener("click", () => {
         location.reload(); // Reload the page
+        if (displayChatIntervalId) {
+            clearInterval(displayChatIntervalId);
+        }
     });
 
     tutorialBackButton.addEventListener("click", () => {
@@ -430,6 +433,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     endMenuButton.addEventListener("click", () => {
+        if (displayChatIntervalId) {
+            clearInterval(displayChatIntervalId);
+        }
         updateWaitingToPlay(USER_NAME, 0);
         updateAvailability(0, USER_EMAIL, USER_PASSWORD);
         updateUserTaskCompleted(USER_NAME, 0);
@@ -644,6 +650,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     deleteUsersWithSameNonZeroGameId(USER_NAME, gameOpponent);
                 }
             });
+            if (displayChatIntervalId) {
+                clearInterval(displayChatIntervalId);
+            }
         }
     });
 

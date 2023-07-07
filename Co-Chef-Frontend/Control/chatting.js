@@ -4,6 +4,8 @@ import {
     updateChatTextByUserName,
     updateDisplay
 } from "../Services/chat-service.js";
+import {activeScene} from "./controller.js";
+import {sceneData} from "../data-utils/scene-data.js";
 
 const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
@@ -12,16 +14,17 @@ const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
 export let canMove = true; // Global variable, I will think of something more clever if I have time
 
 // let chatMessages = [];
+if (activeScene === sceneData.Gameplay.sceneId) {
+    displayChatIntervalId = setInterval(() => {
+        checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
+            if (isUpdateDisplay) {
+                displayChatMessages();
+                updateDisplay(USER_NAME, 0);
+            }
+        });
 
-displayChatIntervalId = setInterval(() => {
-    checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
-        if (isUpdateDisplay) {
-            displayChatMessages();
-            updateDisplay(USER_NAME, 0);
-        }
-    });
-
-}, 1000);
+    }, 1000);
+}
 
 chatField.addEventListener("click", () => {
     document.getElementById("ic_options").style.display = "none";
