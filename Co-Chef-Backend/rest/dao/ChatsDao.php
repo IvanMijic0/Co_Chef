@@ -73,6 +73,16 @@ class ChatsDao extends BaseDao
         return $affectedRows !== false;
     }
 
+    public function clearChatText($userName): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET chatText = '' WHERE userName = ?";
+        $params = [$userName];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
     public function checkUpdateDisplay($userName): bool
     {
         $query = "SELECT updateDisplay FROM " . $this->table_name . " WHERE userName = ?";

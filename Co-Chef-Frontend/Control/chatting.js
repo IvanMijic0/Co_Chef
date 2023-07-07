@@ -35,7 +35,6 @@ chatField.addEventListener("keydown", (e) => {
                 updateDisplay(gameOpponent, 1);
             }
         });
-
         input.value = "";
     }
 });

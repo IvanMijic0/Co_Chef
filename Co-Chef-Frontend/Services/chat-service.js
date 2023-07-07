@@ -64,3 +64,17 @@ export const updateDisplay = (userName, isUpdateDisplay) => {
         }
     });
 }
+
+export const clearChatText = (userName) => {
+    $.ajax({
+        method: "PUT",
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/clearChatText/" + userName,
+        success: (response) => {
+            console.log(response.message);
+        },
+        error: (xhr, status, error) => {
+            console.error(error);
+        }
+    });
+};
+

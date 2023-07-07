@@ -42,4 +42,9 @@ class ChatServices extends BaseService
     {
        return $this->chatsDao->checkUpdateDisplay($userName);
     }
+
+    public function clearChatText($userName): bool
+    {
+        return $this->chatsDao->clearChatText($userName);
+    }
 }

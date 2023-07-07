@@ -273,6 +273,44 @@ Flight::route("PUT /updateDisplay/@userName/@isUpdateDisplay", function ($userNa
     }
 });
 
+/**
+ * @OA\Put(
+ *     path="/clearChatText/{userEmail}",
+ *     tags={"chat"},
+ *     summary="Clear chat text by user email",
+ *     @OA\Parameter(
+ *         name="userEmail",
+ *         in="path",
+ *         required=true,
+ *         description="User email",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success message",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Failed to clear chat text",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string")
+ *         )
+ *     )
+ * )
+ */
+Flight::route("PUT /clearChatText/@userName", function ($userName) {
+    $success = Flight::chat_service()->clearChatText($userName);
+
+    if ($success) {
+        Flight::json(["message" => "Chat text cleared"]);
+    } else {
+        Flight::json(["error" => "Failed to clear chat text"], 400);
+    }
+});
+
 Flight::before("json", function () {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET,PUT,POST,DELETE");
