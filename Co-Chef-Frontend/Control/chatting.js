@@ -4,6 +4,7 @@ import {
     updateChatTextByUserName,
     updateDisplay
 } from "../Services/chat-service.js";
+import {getGameOpponentByUserName} from "../Services/user-service.js";
 
 
 const chatField = document.querySelector(".chat-field");
@@ -19,7 +20,12 @@ chatField.addEventListener("click", () => {
         checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
             if (isUpdateDisplay) {
                 displayChatMessages();
-                updateDisplay(USER_NAME, 0);
+                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                   if (gameOpponent) {
+                       updateDisplay(USER_NAME, 0);
+                       updateDisplay(gameOpponent, 0);
+                   }
+                });
             }
         });
 
@@ -39,7 +45,13 @@ chatField.addEventListener("keydown", (e) => {
         const input = e.target;
         const message = input.value.trim();
         updateChatTextByUserName(USER_NAME, message);
-        updateDisplay(USER_NAME, 1);
+        getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+            if (gameOpponent) {
+                updateDisplay(USER_NAME, 1);
+                updateDisplay(gameOpponent, 1);
+            }
+        });
+
         input.value = "";
     }
 });
