@@ -1,4 +1,5 @@
 import {
+    clearChatText,
     getChatTextByUsername,
     updateChatTextByUserName,
     updateDisplay
@@ -36,6 +37,9 @@ chatField.addEventListener("keydown", (e) => {
             }
         });
         input.value = "";
+        setTimeout(() => {
+            clearChatText(USER_NAME);
+        }, 1500);
     }
 });
 

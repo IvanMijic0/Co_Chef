@@ -15,7 +15,7 @@ import {
     updateWaitingToPlay,
     updateWillPlay
 } from "../Services/user-service.js";
-import {checkUpdateDisplay, clearChatText, updateDisplay} from "../Services/chat-service.js";
+import {checkUpdateDisplay, updateDisplay} from "../Services/chat-service.js";
 import {displayChatMessages} from "./chatting.js";
 
 export const userHeader = document.getElementById("userHeader");
@@ -279,9 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                                                 if (gameOpponent) {
                                                                     updateDisplay(USER_NAME, 0);
                                                                     updateDisplay(gameOpponent, 0);
-                                                                    setTimeout(() => {
-                                                                        clearChatText(USER_NAME);
-                                                                    }, 1000);
                                                                 }
                                                             });
                                                         }
