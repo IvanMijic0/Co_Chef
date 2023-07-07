@@ -58,9 +58,32 @@ class ChatsDao extends BaseDao
 
         if ($result) {
             return $result["chatText"];
+        } else {
+            return "";
         }
-        else {
-            return ""; // User not found or no game opponent assigned
+    }
+
+    public function updateDisplay($userName, $isUpdateDisplay): bool
+    {
+        $query = "UPDATE " . $this->table_name . " SET updateDisplay = :isUpdateDisplay WHERE userName = :userName";
+        $params = [$userName, $isUpdateDisplay];
+
+        $affectedRows = $this->query($query, $params);
+
+        return $affectedRows !== false;
+    }
+
+    public function checkUpdateDisplay($userName): bool
+    {
+        $query = "SELECT updateDisplay FROM " . $this->table_name . " WHERE userName = :userName";
+        $params = [$userName];
+
+        $result = $this->query($query, $params);
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

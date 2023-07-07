@@ -1,4 +1,9 @@
-import {getChatTextByUsername, updateChatTextByUserName} from "../Services/chat-service.js";
+import {
+    checkUpdateDisplay,
+    getChatTextByUsername,
+    updateChatTextByUserName,
+    updateDisplay
+} from "../Services/chat-service.js";
 
 const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
@@ -7,6 +12,16 @@ const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
 export let canMove = true; // Global variable, I will think of something more clever if I have time
 
 // let chatMessages = [];
+
+displayChatIntervalId = setInterval(() => {
+    checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
+        if (isUpdateDisplay) {
+            displayChatMessages();
+            updateDisplay(USER_NAME, 0);
+        }
+    });
+
+}, 1000);
 
 chatField.addEventListener("click", () => {
     document.getElementById("ic_options").style.display = "none";
@@ -24,10 +39,7 @@ chatField.addEventListener("keydown", (e) => {
         const input = e.target;
         const message = input.value.trim();
         updateChatTextByUserName(USER_NAME, message);
-        if (message !== "") {
-            displayChatMessages();
-            input.value = "";
-        }
+        updateDisplay(USER_NAME, 1);
     }
 });
 
@@ -42,6 +54,7 @@ chatField.addEventListener("keydown", (e) => {
 
 const displayChatMessages = () => {
     // chatLog.innerHTML = '';
+
     getChatTextByUsername(USER_NAME, (chatText) => {
         if (chatText) {
             const messageElement = document.createElement('div');
@@ -70,7 +83,6 @@ const displayChatMessages = () => {
             chatLog.appendChild(messageElement); // Append new message elements
         }
     });
-
 
     if (chatLog.scrollHeight > MAX_CHAT_LOG_HEIGHT) {
         chatLog.style.height = MAX_CHAT_LOG_HEIGHT + 'px';

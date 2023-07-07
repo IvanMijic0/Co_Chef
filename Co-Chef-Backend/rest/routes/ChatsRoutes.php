@@ -201,6 +201,78 @@ Flight::route("GET /getChatTextByUsername/@userName", function ($userName) {
     }
 });
 
+/**
+ * @OA\Get(
+ *     path="/checkUpdateDisplay/{userName}",
+ *     tags={"chat"},
+ *     summary="Check if update display is enabled for a user",
+ *     @OA\Parameter(
+ *         name="userName",
+ *         in="path",
+ *         required=true,
+ *         description="User name",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Update display status",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="isUpdateDisplay", type="boolean")
+ *         )
+ *     )
+ * )
+ */
+Flight::route("GET /checkUpdateDisplay/@userName", function ($userName) {
+    $isUpdateDisplay = Flight::chat_service()->checkUpdateDisplay($userName);
+
+    Flight::json(["isUpdateDisplay" => $isUpdateDisplay]);
+});
+
+/**
+ * @OA\Put(
+ *     path="/updateDisplay/{userName}/{isUpdateDisplay}",
+ *     tags={"chat"},
+ *     summary="Update the display status for a user",
+ *     @OA\Parameter(
+ *         name="userName",
+ *         in="path",
+ *         required=true,
+ *         description="User name",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(
+ *         name="isUpdateDisplay",
+ *         in="path",
+ *         required=true,
+ *         description="Update display status",
+ *         @OA\Schema(type="string", enum={"true", "false"})
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Success message",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Failed to update display",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string")
+ *         )
+ *     )
+ * )
+ */
+Flight::route("PUT /updateDisplay/@userName/@isUpdateDisplay", function ($userName, $isUpdateDisplay) {
+    $success = Flight::chat_service()->updateDisplay($userName, $isUpdateDisplay);
+
+    if ($success) {
+        Flight::json(["message" => "Update display updated"]);
+    } else {
+        Flight::json(["error" => "Failed to update display"], 400);
+    }
+});
+
 Flight::before("json", function () {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET,PUT,POST,DELETE");

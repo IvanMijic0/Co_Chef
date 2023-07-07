@@ -20,7 +20,7 @@ export const signUpUser = (userName, userEmail, userPassword) => {
         },
         success: (response, status, xhr) => {
             if (xhr.status === 201) {
-                toastr.success("Signup Successful!");
+                toastr.success();
                 USER_NAME = userName;
                 USER_EMAIL = userEmail;
                 USER_PASSWORD = userPassword;
@@ -46,7 +46,7 @@ export const loginUser = (userEmail, userPassword) => {
         method: "GET",
         success: (response) => {
             if (response) {
-                toastr.success("Login Successful!");
+                toastr.success();
                 USER_EMAIL = userEmail;
                 USER_PASSWORD = userPassword;
                 getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {

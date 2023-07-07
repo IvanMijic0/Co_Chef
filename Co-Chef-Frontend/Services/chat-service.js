@@ -40,3 +40,29 @@ export const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => 
         }
     });
 };
+
+export const checkUpdateDisplay = (userName, callback) => {
+    $.ajax({
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUpdateDisplay/" + userName,
+        type: "GET",
+        success: (response) => {
+            callback(response.isUpdateDisplay);
+        },
+        error: () => {
+            callback(null);
+        }
+    });
+}
+
+export const updateDisplay = (userName, isUpdateDisplay) => {
+    $.ajax({
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateDisplay/" + userName + "/" + isUpdateDisplay,
+        type: "PUT",
+        success: () => {
+            console.log("Update display updated");
+        },
+        error: (xhr, status, error) => {
+            console.error("Failed to update display: " + error);
+        }
+    });
+}

@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Getting chat to work" />
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Getting chat to work">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/ChatsDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/ChatsDao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/ChatsRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/ChatsRoutes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/ChatServices.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/ChatServices.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/global_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/global_variables.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +70,6 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
@@ -72,6 +81,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -92,39 +106,8 @@
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
       <workItem from="1688585461287" duration="14622000" />
-      <workItem from="1688738694636" duration="2398000" />
-    </task>
-    <task id="LOCAL-00003" summary="Slight Refactor">
-      <option name="closed" value="true" />
-      <created>1688585576438</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1688585576438</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Slight Refactor">
-      <option name="closed" value="true" />
-      <created>1688585668668</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1688585668668</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Slight Refactor">
-      <option name="closed" value="true" />
-      <created>1688585796959</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1688585796959</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Slight Refactor">
-      <option name="closed" value="true" />
-      <created>1688586350762</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1688586350762</updated>
+      <workItem from="1688738694636" duration="4838000" />
+      <workItem from="1688746291556" duration="3910000" />
     </task>
     <task id="LOCAL-00007" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -486,7 +469,39 @@
       <option name="project" value="LOCAL" />
       <updated>1688741325816</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688741718571</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1688741718571</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688742144563</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1688742144563</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688746055248</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1688746055248</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688748367818</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1688748367819</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

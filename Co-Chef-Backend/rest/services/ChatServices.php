@@ -32,4 +32,14 @@ class ChatServices extends BaseService
     {
         return $this->chatsDao->getChatTextByUsername($username);
     }
+
+    public function updateDisplay($userName, $isUpdateDisplay): bool
+    {
+        return $this->chatsDao->updateDisplay($userName, $isUpdateDisplay);
+    }
+
+    public function checkUpdateDisplay($userName): bool
+    {
+       return $this->chatsDao->checkUpdateDisplay($userName);
+    }
 }
