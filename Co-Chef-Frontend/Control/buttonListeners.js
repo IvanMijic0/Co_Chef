@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             switchToScene(sceneData.Gameplay.sceneId);
                             updateAvailability(0, USER_EMAIL, USER_PASSWORD);
                             toastr.info("Wait for connection");
-                            canMove = false;
+                            CAN_MOVE = false;
                             scenes[activeScene].setPlayerImage();
                             setTimeout(() => {
                                 getUserNameByGameOpponent(USER_NAME, (gameOpponent) => {
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
                                             if (isWaitingToPlay) {
                                                 alert("Successfully connected!");
-                                                canMove = true;
+                                                CAN_MOVE = true;
                                                 scenes[activeScene].resetTimer();
                                                 scenes[activeScene].allowInteract(true);
                                                 updateWaitingToPlay(USER_NAME, 0);
