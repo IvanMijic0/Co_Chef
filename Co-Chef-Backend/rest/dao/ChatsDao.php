@@ -65,7 +65,7 @@ class ChatsDao extends BaseDao
 
     public function updateDisplay($userName, $isUpdateDisplay): bool
     {
-        $query = "UPDATE " . $this->table_name . " SET updateDisplay = :isUpdateDisplay WHERE userName = :userName";
+        $query = "UPDATE " . $this->table_name . " SET updateDisplay = ? WHERE userName = ?";
         $params = [$isUpdateDisplay, $userName];
 
         $affectedRows = $this->query($query, $params);
@@ -75,7 +75,7 @@ class ChatsDao extends BaseDao
 
     public function checkUpdateDisplay($userName): bool
     {
-        $query = "SELECT updateDisplay FROM " . $this->table_name . " WHERE userName = :userName";
+        $query = "SELECT updateDisplay FROM " . $this->table_name . " WHERE userName = ?";
         $params = [$userName];
 
         $result = $this->query($query, $params);
