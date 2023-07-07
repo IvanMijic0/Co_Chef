@@ -10,7 +10,6 @@ const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
 const inputField = document.querySelector(".chat-input");
 const MAX_CHAT_LOG_HEIGHT = 1300; // Adjust the maximum height as desired
-export let canMove = true; // Global variable, I will think of something more clever if I have time
 
 // let chatMessages = [];
 
@@ -27,13 +26,13 @@ chatField.addEventListener("click", () => {
     }, 1000);
     document.getElementById("ic_options").style.display = "none";
     document.getElementById("ic_recipe").style.display = "none";
-    canMove = false;
+    CAN_MOVE = false;
     inputField.disabled = false;
 });
 
 chatField.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        canMove = true;
+        CAN_MOVE = true;
         document.getElementById("ic_options").style.display = "flex";
         document.getElementById("ic_recipe").style.display = "flex";
         inputField.disabled = !inputField.disabled;
@@ -46,7 +45,7 @@ chatField.addEventListener("keydown", (e) => {
 
 chatField.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-        canMove = true;
+        CAN_MOVE = true;
         inputField.disabled = true;
         document.getElementById("ic_options").style.display = "flex";
         document.getElementById("ic_recipe").style.display = "flex";
