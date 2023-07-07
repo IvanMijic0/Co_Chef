@@ -15,6 +15,7 @@ export let canMove = true; // Global variable, I will think of something more cl
 
 // let chatMessages = [];
 if (activeScene === sceneData.Gameplay.sceneId) {
+    console.log("In interval")
     displayChatIntervalId = setInterval(() => {
         checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
             if (isUpdateDisplay) {
