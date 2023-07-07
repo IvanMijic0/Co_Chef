@@ -17,7 +17,7 @@ chatField.addEventListener("click", () => {
     console.log("In interval")
     displayChatIntervalId = setInterval(() => {
         checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
-            if (isUpdateDisplay === 1) {
+            if (isUpdateDisplay) {
                 displayChatMessages();
                 updateDisplay(USER_NAME, 0);
                 inputField.textContent = "";
