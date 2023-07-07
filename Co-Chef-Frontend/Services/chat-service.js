@@ -1,6 +1,6 @@
 export const updateChatTextByUserName = (userName, chatText) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/updateChatTextByUserName/" + userName + "/" + chatText,
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
         type: "PUT",
         success: function () {
             // Handle success response
@@ -14,7 +14,7 @@ export const updateChatTextByUserName = (userName, chatText) => {
 
 export const getChatTextByUsername = (userName, callback) => {
     $.ajax({
-        url: "../Co-Chef-Backend/rest/getChatTextByUsername/" + userName,
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getChatTextByUsername/" + userName,
         method: "GET",
         success: (response) => {
             const chatText = response.chatText;
@@ -30,7 +30,7 @@ export const getChatTextByUsername = (userName, callback) => {
 export const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
     $.ajax({
         method: "GET",
-        url: "../Co-Chef-Backend/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
+        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
         success: (response) => {
             const haveSameGameId = response["Same id"];
             callback(haveSameGameId);

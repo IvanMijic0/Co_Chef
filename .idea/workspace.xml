@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up swagger for routes">
-      <change beforePath="$PROJECT_DIR$/.idea/Co_Chef.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Co_Chef.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" afterDir="false" />
-    </list>
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Getting chat to work" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,15 +92,7 @@
       <updated>1688585034108</updated>
       <workItem from="1688585035929" duration="342000" />
       <workItem from="1688585461287" duration="14622000" />
-      <workItem from="1688738694636" duration="1537000" />
-    </task>
-    <task id="LOCAL-00002" summary="Slight Refactor">
-      <option name="closed" value="true" />
-      <created>1688585375860</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1688585375860</updated>
+      <workItem from="1688738694636" duration="2398000" />
     </task>
     <task id="LOCAL-00003" summary="Slight Refactor">
       <option name="closed" value="true" />
@@ -497,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688599164914</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688741325815</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1688741325816</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,6 +498,7 @@
     <MESSAGE value="Adding swagger" />
     <MESSAGE value="Setting up swagger" />
     <MESSAGE value="Setting up swagger for routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting up swagger for routes" />
+    <MESSAGE value="Getting chat to work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Getting chat to work" />
   </component>
 </project>
