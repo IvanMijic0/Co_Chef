@@ -343,8 +343,8 @@ export const checkUsersHaveWaitingToPlay = (userName1, userName2, callback) => {
         method: "GET",
         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
         success: (response) => {
-            const sameWaitingToPlay = response["waitingToPlay"];
-            callback(sameWaitingToPlay);
+            const haveSameWaitingToPlay = response["haveSameWaitingToPlay"];
+            callback(haveSameWaitingToPlay);
         },
         error: (xhr, status, error) => {
             console.error(error);
