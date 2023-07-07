@@ -15,6 +15,7 @@ import {
     updateWaitingToPlay,
     updateWillPlay
 } from "../Services/user-service.js";
+import {canMove} from "./chatting";
 
 export const userHeader           = document.getElementById("userHeader");
 export const userListContainer    = document.getElementById("userListContainer");
@@ -255,6 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             switchToScene(sceneData.Gameplay.sceneId);
                             updateAvailability(0, USER_EMAIL, USER_PASSWORD);
                             toastr.info("Wait for connection");
+                            canMove = false;
                             scenes[activeScene].setPlayerImage();
                             setTimeout(() => {
                                 getUserNameByGameOpponent(USER_NAME, (gameOpponent) => {
@@ -262,6 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
                                             if (isWaitingToPlay) {
                                                 alert("Successfully connected!");
+                                                canMove = true;
                                                 scenes[activeScene].resetTimer();
                                                 scenes[activeScene].allowInteract(true);
                                                 updateWaitingToPlay(USER_NAME, 0);
