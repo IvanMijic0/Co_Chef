@@ -37,7 +37,6 @@ chatField.addEventListener("keydown", (e) => {
         });
 
         input.value = "";
-        updateChatTextByUserName(USER_NAME, "");
     }
 });
 
