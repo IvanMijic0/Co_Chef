@@ -15,6 +15,8 @@ import {
     updateWaitingToPlay,
     updateWillPlay
 } from "../Services/user-service.js";
+import {checkUpdateDisplay, updateDisplay} from "../Services/chat-service.js";
+import {displayChatMessages} from "./chatting.js";
 
 export const userHeader = document.getElementById("userHeader");
 export const userListContainer = document.getElementById("userListContainer");
@@ -269,6 +271,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 setTimeout(() => {
                                                     updateWaitingToPlay(USER_NAME, 0)
                                                 }, 1000)
+                                                displayChatIntervalId = setInterval(() => {
+                                                    checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
+                                                        if (isUpdateDisplay) {
+                                                            displayChatMessages();
+                                                            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                                                if (gameOpponent) {
+                                                                    updateDisplay(USER_NAME, 0);
+                                                                    updateDisplay(gameOpponent, 0);
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }, 1000);
                                             } else {
                                                 alert("Opponent did not choose on time.")
                                                 updateWaitingToPlay(USER_NAME, 0);

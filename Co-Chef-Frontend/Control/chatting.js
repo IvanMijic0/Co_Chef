@@ -1,5 +1,4 @@
 import {
-    checkUpdateDisplay,
     getChatTextByUsername,
     updateChatTextByUserName,
     updateDisplay
@@ -15,21 +14,6 @@ const MAX_CHAT_LOG_HEIGHT = 1000; // Adjust the maximum height as desired
 // let chatMessages = [];
 
 chatField.addEventListener("click", () => {
-    console.log("In interval")
-    displayChatIntervalId = setInterval(() => {
-        checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
-            if (isUpdateDisplay) {
-                displayChatMessages();
-                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
-                   if (gameOpponent) {
-                       updateDisplay(USER_NAME, 0);
-                       updateDisplay(gameOpponent, 0);
-                   }
-                });
-            }
-        });
-
-    }, 1000);
     document.getElementById("ic_options").style.display = "none";
     document.getElementById("ic_recipe").style.display = "none";
     CAN_MOVE = false;
@@ -65,7 +49,7 @@ chatField.addEventListener("keydown", (e) => {
     }
 });
 
-const displayChatMessages = () => {
+export const displayChatMessages = () => {
     // chatLog.innerHTML = '';
 
     getChatTextByUsername(USER_NAME, (chatText) => {
