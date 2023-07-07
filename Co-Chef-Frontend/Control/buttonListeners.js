@@ -279,7 +279,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                                                 if (gameOpponent) {
                                                                     updateDisplay(USER_NAME, 0);
                                                                     updateDisplay(gameOpponent, 0);
-                                                                    clearChatText(USER_NAME);
+                                                                    setTimeout(() => {
+                                                                        clearChatText(USER_NAME);
+                                                                    }, 1000);
                                                                 }
                                                             });
                                                         }
