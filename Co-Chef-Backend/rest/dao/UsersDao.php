@@ -120,9 +120,9 @@ class UsersDao extends BaseDao
         $result = $this->query_single($query, $params);
 
         if ($result && $result["waitingToPlay"] == 1) {
-            return true; // User is rejected
+            return true;
         } else {
-            return false; // User is not rejected or doesn't exist
+            return false;
         }
     }
 

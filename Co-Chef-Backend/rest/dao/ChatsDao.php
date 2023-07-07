@@ -78,9 +78,9 @@ class ChatsDao extends BaseDao
         $query = "SELECT updateDisplay FROM " . $this->table_name . " WHERE userName = ?";
         $params = [$userName];
 
-        $result = $this->query($query, $params);
+        $result = $this->query_single($query, $params);
 
-        if ($result) {
+        if ($result && $result["updateDisplay"] == 1) {
             return true;
         } else {
             return false;

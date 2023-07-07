@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 ic_timer.style.display = "flex";
                                 timer.style.display = "flex";
                                 chat_container.style.display = "block";
-                            }, 10000);
+                            }, 5000);
 
                         } else {
                             alert("Wait for the other user to confirm")

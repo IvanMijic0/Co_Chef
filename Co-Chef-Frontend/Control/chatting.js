@@ -20,6 +20,7 @@ chatField.addEventListener("click", () => {
             if (isUpdateDisplay === 1) {
                 displayChatMessages();
                 updateDisplay(USER_NAME, 0);
+                inputField.textContent = "";
             }
         });
 
