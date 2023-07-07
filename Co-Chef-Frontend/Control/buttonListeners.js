@@ -15,7 +15,6 @@ import {
     updateWaitingToPlay,
     updateWillPlay
 } from "../Services/user-service.js";
-import {canMove} from "./chatting.js";
 
 export const userHeader           = document.getElementById("userHeader");
 export const userListContainer    = document.getElementById("userListContainer");
