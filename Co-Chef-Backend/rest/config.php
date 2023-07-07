@@ -2,6 +2,8 @@
 
 class Config
 {
+//    public static string JWT_SECRET = "hello";
+
     public static function DB_HOST()
     {
         return Config::get_env("DB_HOST", "127.0.0.1");
@@ -26,13 +28,6 @@ class Config
     {
         return Config::get_env("DB_PORT", "3306");
     }
-
-//    public static string $host = "127.0.0.1";
-//    public static string $database = "co_chef_db";
-//
-//    public static string $username = "ivan";
-//    public static string $password = "cookie";
-//    public static string $port = "3306";
 
     public static function get_env($name, $default)
     {

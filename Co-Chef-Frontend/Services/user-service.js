@@ -1,4 +1,4 @@
-import {activeScene, scenes, switchToScene} from "../Control/controller.js";
+import {activeScene, intro, scenes, switchToScene} from "../Control/controller.js";
 import {sceneData} from "../data-utils/scene-data.js";
 import {
     characterContainer,
