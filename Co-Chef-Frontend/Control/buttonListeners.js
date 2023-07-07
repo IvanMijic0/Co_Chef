@@ -16,68 +16,68 @@ import {
     updateWillPlay
 } from "../Services/user-service.js";
 
-export const userHeader           = document.getElementById("userHeader");
-export const userListContainer    = document.getElementById("userListContainer");
-export const userContainer        = document.getElementById("userContainer");
-export const userBackground       = document.getElementById("user-background");
-export const connectBackButton    = document.getElementById("connect-backButton-container");
+export const userHeader = document.getElementById("userHeader");
+export const userListContainer = document.getElementById("userListContainer");
+export const userContainer = document.getElementById("userContainer");
+export const userBackground = document.getElementById("user-background");
+export const connectBackButton = document.getElementById("connect-backButton-container");
 export const connectRefreshButton = document.getElementById("connect-refreshButton-container");
-export const speechText           = document.getElementById("speechText");
-export const SelectBackButton     = document.getElementById("CharSelect-backButton-container");
-export const characterName        = document.getElementById("character-name");
-export const characterContainer   = document.getElementById("character-container");
+export const speechText = document.getElementById("speechText");
+export const SelectBackButton = document.getElementById("CharSelect-backButton-container");
+export const characterName = document.getElementById("character-name");
+export const characterContainer = document.getElementById("character-container");
 
 document.addEventListener("DOMContentLoaded", () => {
     // Caching everything
-    const tutorialButton              = document.getElementById("tutorialButton-container");
-    const connectButton               = document.getElementById("connectButton-container");
-    const optionsButton               = document.getElementById("optionsButton-container");
-    const restartButton               = document.getElementById("restartButton-container");
-    const tutorialBackButton          = document.getElementById("tutorial-backButton-container");
-    const optionsBackButton           = document.getElementById("options-backButton-container");
-    const loginButton                 = document.getElementById("loginButton");
-    const loginButton0                = document.getElementById("loginButton0");
-    const signupButton                = document.getElementById("signUpButton");
-    const signupButton0               = document.getElementById("signUpButton0");
-    const volumeIcon                  = document.getElementById("volumeIcon");
-    const volumeContainer             = document.getElementById("volumeContainer");
-    const SelectConfirmButton         = document.getElementById("CharSelect-confirmButton-container");
-    const SelectRightArrowButton      = document.getElementById("rightArrow");
-    const SelectLeftArrowButton       = document.getElementById("leftArrow");
-    const dishName                    = document.getElementById("dish-name");
-    const ic_options                  = document.getElementById("ic_options");
-    const ic_recipes                  = document.getElementById("ic_recipe");
-    const ic_slot                     = document.getElementById("ic_slot");
-    const ic_com                      = document.getElementById("ic_com");
-    const ic_timer                    = document.getElementById("ic_timer");
-    const timer                       = document.getElementById("timer");
-    const chat_container              = document.getElementById("chat-container");
-    const gameplayBackButton          = document.getElementById("Gameplay-backButton-container")
-    const gameplayMenuButton          = document.getElementById("Gameplay-Menu-container");
-    const recipeText                  = document.getElementById("recipeContainer");
-    const leftArrow                   = document.getElementById("left");
-    const upArrow                     = document.getElementById("up");
-    const rightArrow                  = document.getElementById("right");
-    const downArrow                   = document.getElementById("down");
-    const slotItem                    = document.getElementById("item");
-    const fishTile                    = document.getElementById("fish-tile");
-    const avocadoTile                 = document.getElementById("avocado-tile");
-    const cabbageTile                 = document.getElementById("cabbage-tile");
-    const carrotTile                  = document.getElementById("carrot-tile");
-    const garlicTile                  = document.getElementById("garlic-tile");
-    const noodlesTile                 = document.getElementById("noodles-tile");
-    const onionTile                   = document.getElementById("onion-tile");
-    const potatoTile                  = document.getElementById("potato-tile");
-    const tomatoTile                  = document.getElementById("tomato-tile");
-    const redPepperTile               = document.getElementById("red-pepper-tile");
-    const greenPepperTile             = document.getElementById("green-pepper-tile");
-    const mushroom1Tile               = document.getElementById("mushroom1-tile");
-    const greenOnionTile              = document.getElementById("green-onion-tile");
-    const redMeatTile                 = document.getElementById("red-meat-tile");
-    const tortillaTile                = document.getElementById("tortilla-tile");
-    const plateItem                   = document.getElementById("plate-item");
-    const recipeListItems  = document.getElementsByClassName("recipe-item");
-    const endMenuButton               = document.getElementById("End-Menu-container")
+    const tutorialButton = document.getElementById("tutorialButton-container");
+    const connectButton = document.getElementById("connectButton-container");
+    const optionsButton = document.getElementById("optionsButton-container");
+    const restartButton = document.getElementById("restartButton-container");
+    const tutorialBackButton = document.getElementById("tutorial-backButton-container");
+    const optionsBackButton = document.getElementById("options-backButton-container");
+    const loginButton = document.getElementById("loginButton");
+    const loginButton0 = document.getElementById("loginButton0");
+    const signupButton = document.getElementById("signUpButton");
+    const signupButton0 = document.getElementById("signUpButton0");
+    const volumeIcon = document.getElementById("volumeIcon");
+    const volumeContainer = document.getElementById("volumeContainer");
+    const SelectConfirmButton = document.getElementById("CharSelect-confirmButton-container");
+    const SelectRightArrowButton = document.getElementById("rightArrow");
+    const SelectLeftArrowButton = document.getElementById("leftArrow");
+    const dishName = document.getElementById("dish-name");
+    const ic_options = document.getElementById("ic_options");
+    const ic_recipes = document.getElementById("ic_recipe");
+    const ic_slot = document.getElementById("ic_slot");
+    const ic_com = document.getElementById("ic_com");
+    const ic_timer = document.getElementById("ic_timer");
+    const timer = document.getElementById("timer");
+    const chat_container = document.getElementById("chat-container");
+    const gameplayBackButton = document.getElementById("Gameplay-backButton-container")
+    const gameplayMenuButton = document.getElementById("Gameplay-Menu-container");
+    const recipeText = document.getElementById("recipeContainer");
+    const leftArrow = document.getElementById("left");
+    const upArrow = document.getElementById("up");
+    const rightArrow = document.getElementById("right");
+    const downArrow = document.getElementById("down");
+    const slotItem = document.getElementById("item");
+    const fishTile = document.getElementById("fish-tile");
+    const avocadoTile = document.getElementById("avocado-tile");
+    const cabbageTile = document.getElementById("cabbage-tile");
+    const carrotTile = document.getElementById("carrot-tile");
+    const garlicTile = document.getElementById("garlic-tile");
+    const noodlesTile = document.getElementById("noodles-tile");
+    const onionTile = document.getElementById("onion-tile");
+    const potatoTile = document.getElementById("potato-tile");
+    const tomatoTile = document.getElementById("tomato-tile");
+    const redPepperTile = document.getElementById("red-pepper-tile");
+    const greenPepperTile = document.getElementById("green-pepper-tile");
+    const mushroom1Tile = document.getElementById("mushroom1-tile");
+    const greenOnionTile = document.getElementById("green-onion-tile");
+    const redMeatTile = document.getElementById("red-meat-tile");
+    const tortillaTile = document.getElementById("tortilla-tile");
+    const plateItem = document.getElementById("plate-item");
+    const recipeListItems = document.getElementsByClassName("recipe-item");
+    const endMenuButton = document.getElementById("End-Menu-container")
 
     loginButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -266,7 +266,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 CAN_MOVE = true;
                                                 scenes[activeScene].resetTimer();
                                                 scenes[activeScene].allowInteract(true);
-                                                updateWaitingToPlay(USER_NAME, 0);
+                                                setTimeout(() => {
+                                                    updateWaitingToPlay(USER_NAME, 0)
+                                                }, 1000)
                                             } else {
                                                 alert("Opponent did not choose on time.")
                                                 updateWaitingToPlay(USER_NAME, 0);

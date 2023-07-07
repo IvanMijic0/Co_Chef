@@ -3,11 +3,9 @@ export const updateChatTextByUserName = (userName, chatText) => {
         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
         type: "PUT",
         success: function () {
-            // Handle success response
         },
         error: function () {
             console.log("Failed to update chatText");
-            // Handle error response
         }
     });
 };

@@ -20,7 +20,6 @@ chatField.addEventListener("click", () => {
             if (isUpdateDisplay) {
                 displayChatMessages();
                 updateDisplay(USER_NAME, 0);
-                inputField.textContent = "";
             }
         });
 
@@ -41,6 +40,7 @@ chatField.addEventListener("keydown", (e) => {
         const message = input.value.trim();
         updateChatTextByUserName(USER_NAME, message);
         updateDisplay(USER_NAME, 1);
+        input.value = "";
     }
 });
 
