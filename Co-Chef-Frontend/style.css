@@ -32,7 +32,8 @@ canvas {
 #optionsBackground, #recipeBackground, #knife-mini-game,
 #stir-mini-game, #fry-mini-game, #inventory-mini-game,
 #ic_options, #ic_recipe, #ic_slot, #ic_com, #ic_timer,
-#timer, .chat-container, #win-screen, #lose-screen {
+#timer, .chat-container, #win-screen, #lose-screen,
+#logo1, #logo2, #logo3, #logo4, #logo5 {
     display: none;
 }
 
