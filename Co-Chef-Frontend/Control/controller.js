@@ -75,17 +75,12 @@ const updateLogoImage = () => {
     }
 }
 
-const changeLogoImage = () => {
-    updateLogoImage();
-}
-
 export const intro = () => {
     scenes[activeScene].show();
     audio.stop();
 
     // Logo animation
-    updateLogoImage();
-    changeLogoTimeout = setTimeout(changeLogoImage, 300);
+    changeLogoTimeout = setTimeout(updateLogoImage, 200);
 
     setTimeout(() => {
         introText.style.display = "flex";
