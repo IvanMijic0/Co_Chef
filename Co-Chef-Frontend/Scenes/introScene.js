@@ -32,6 +32,6 @@ export class IntroScene extends Scene {
     }
 
     updateLogoImage = (logoImage) => {
-        this.logo = logoImage;
+        this.logo.src = logoImage;
     }
 }

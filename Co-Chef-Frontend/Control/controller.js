@@ -41,6 +41,7 @@ export const scenes = [
 ];
 
 const maxIterations = 5;
+const logoImageElement = $("#logoImage");
 export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
@@ -63,16 +64,13 @@ const logoImages = [
     "Assets/Sprites/Icons/logo_anim5.png",
 ];
 
-const logoHTML = [
-    $("#logo1"),
-    $("#logo2"),
-    $("#logo3"),
-    $("#logo4"),
-    $("#logo5")
-]
-
 const updateLogoImage = () => {
-    const logoImage = logoHTML[currentImageIndex];
+    const logoImage = logoImages[currentImageIndex];
+    logoImageElement.style.opacity = "0";
+    setTimeout(() => {
+        logoImageElement.src = logoImage;
+        logoImageElement.style.opacity = "1";
+    }, 500);
     scenes[activeScene].updateLogoImage(logoImage);
     currentImageIndex = (currentImageIndex + 1) % logoImages.length;
     iterations++;
