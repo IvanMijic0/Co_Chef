@@ -41,7 +41,7 @@ export const scenes = [
 ];
 
 const maxIterations = 5;
-const logoImageElement = $("#logo");
+const logoImageElement = document.getElementById("logo");
 export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
