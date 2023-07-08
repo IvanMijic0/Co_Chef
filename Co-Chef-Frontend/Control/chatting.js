@@ -6,13 +6,10 @@ import {
 } from "../Services/chat-service.js";
 import {getGameOpponentByUserName} from "../Services/user-service.js";
 
-
 const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
 const inputField = document.querySelector(".chat-input");
 const MAX_CHAT_LOG_HEIGHT = 1000; // Adjust the maximum height as desired
-
-// let chatMessages = [];
 
 chatField.addEventListener("click", () => {
     document.getElementById("ic_options").style.display = "none";
@@ -61,14 +58,9 @@ export const displayChatMessages = () => {
                     const messageElement = document.createElement('div');
                     messageElement.classList.add('chat-message');
 
-                    // const userPrefix = document.createElement('span');
-                    // userPrefix.textContent = "User0: ";
-                    // userPrefix.style.color = "#F7931E";
-
                     const messageText = document.createElement('span');
                     messageText.textContent = gameOpponent + ": " +  chatText;
                     messageText.style.color = "white";
-                    // messageElement.appendChild(userPrefix);
                     messageElement.appendChild(messageText);
 
                     messageElement.style.fontSize = "1vw";

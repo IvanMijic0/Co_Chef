@@ -46,11 +46,37 @@ let introText = document.getElementById("introHeader");
 export let activeScene = 0;
 let previousScene = 0;
 let lastTime = 0;
+let currentImageIndex = 0;
 
 scenes[activeScene].show();
+
+const logoImages = [
+    "Assets/Sprites/Icons/logo_anim1.png",
+    "Assets/Sprites/Icons/logo_anim2.png",
+    "Assets/Sprites/Icons/logo_anim3.png",
+    "Assets/Sprites/Icons/logo_anim4.png",
+    "Assets/Sprites/Icons/logo_anim5.png",
+];
+
+const updateLogoImage = () => {
+    const logoImage = logoImages[currentImageIndex];
+    scenes[activeScene].updateLogoImage(logoImage);
+    currentImageIndex = (currentImageIndex + 1) % logoImages.length; // Move to the next image index
+}
+
+const changeLogoImage = () => {
+    updateLogoImage();
+    setTimeout(changeLogoImage, 300); // 300 seconds = 300,000 milliseconds
+}
+
 export const intro = () => {
     scenes[activeScene].show();
     audio.stop();
+
+    // Logo animation
+    updateLogoImage();
+    changeLogoImage();
+
     setTimeout(() => {
         introText.style.display = "flex";
         document.addEventListener("click", () => {

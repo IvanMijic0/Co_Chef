@@ -25,19 +25,19 @@ export const getChatTextByUsername = (userName, callback) => {
     });
 };
 
-export const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
-    $.ajax({
-        method: "GET",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
-        success: (response) => {
-            const haveSameGameId = response["Same id"];
-            callback(haveSameGameId);
-        },
-        error: () => {
-            callback(false);
-        }
-    });
-};
+// export const checkUsersHaveSameChatGameId = (userName1, userName2, callback) => {
+//     $.ajax({
+//         method: "GET",
+//         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameChatGameId/" + userName1 + "/" + userName2,
+//         success: (response) => {
+//             const haveSameGameId = response["Same id"];
+//             callback(haveSameGameId);
+//         },
+//         error: () => {
+//             callback(false);
+//         }
+//     });
+// };
 
 export const checkUpdateDisplay = (userName, callback) => {
     $.ajax({

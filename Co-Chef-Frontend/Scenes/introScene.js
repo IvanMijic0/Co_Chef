@@ -30,4 +30,8 @@ export class IntroScene extends Scene {
             this.scaledHeight + this.sizeModifier
         );
     }
+
+    updateLogoImage = (logoImage) => {
+        this.logo.src = logoImage;
+    }
 }
