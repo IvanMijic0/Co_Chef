@@ -41,7 +41,6 @@ export const scenes = [
 ];
 
 const maxIterations = 5;
-const logoImageElement = document.getElementById("logo");
 export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
 
@@ -66,11 +65,6 @@ const logoImages = [
 
 const updateLogoImage = () => {
     const logoImage = logoImages[currentImageIndex];
-    logoImageElement.style.opacity = "0";
-    setTimeout(() => {
-        logoImageElement.src = logoImage;
-        logoImageElement.style.opacity = "1";
-    }, 500);
     scenes[activeScene].updateLogoImage(logoImage);
     currentImageIndex = (currentImageIndex + 1) % logoImages.length;
     iterations++;
