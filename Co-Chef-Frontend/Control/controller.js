@@ -39,14 +39,19 @@ export const scenes = [
     new DishSelectScene(sceneData.DISH_SELECT.canvasId, false),
     new GameplayScene(sceneData.Gameplay.canvasId, sceneData.Gameplay.background, sceneData.Gameplay.playerImage, false)
 ];
+
+const maxIterations = 5;
 export const audio = new LazyAudio("startMenuAudio");
 export const volumeBar = new VolumeBar("volumeBar", "volumeContainer", audio);
+
 
 let introText = document.getElementById("introHeader");
 export let activeScene = 0;
 let previousScene = 0;
 let lastTime = 0;
 let currentImageIndex = 0;
+let iterations = 0;
+let changeLogoTimeout;
 
 scenes[activeScene].show();
 
@@ -61,12 +66,17 @@ const logoImages = [
 const updateLogoImage = () => {
     const logoImage = logoImages[currentImageIndex];
     scenes[activeScene].updateLogoImage(logoImage);
-    currentImageIndex = (currentImageIndex + 1) % logoImages.length; // Move to the next image index
+    currentImageIndex = (currentImageIndex + 1) % logoImages.length;
+    iterations++;
+
+    if (iterations >= maxIterations) {
+        // Stop the sequence after reaching the desired number of iterations
+        clearTimeout(changeLogoTimeout);
+    }
 }
 
 const changeLogoImage = () => {
     updateLogoImage();
-    setTimeout(changeLogoImage, 300); // 300 seconds = 300,000 milliseconds
 }
 
 export const intro = () => {
@@ -75,7 +85,7 @@ export const intro = () => {
 
     // Logo animation
     updateLogoImage();
-    changeLogoImage();
+    changeLogoTimeout = setTimeout(changeLogoImage, 300);
 
     setTimeout(() => {
         introText.style.display = "flex";

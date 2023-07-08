@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Getting chat to work">
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Logo Animation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,175 +99,9 @@
       <workItem from="1688585035929" duration="342000" />
       <workItem from="1688585461287" duration="14622000" />
       <workItem from="1688738694636" duration="4838000" />
-      <workItem from="1688746291556" duration="6385000" />
-    </task>
-    <task id="LOCAL-00013" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688590473216</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1688590473216</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688590605956</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1688590605956</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688590622251</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1688590622251</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688590855073</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1688590855073</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688590896193</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1688590896193</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688591042826</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1688591042826</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Setting up swagger">
-      <option name="closed" value="true" />
-      <created>1688591423971</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1688591423971</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688592677425</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1688592677425</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688593233473</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1688593233473</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688593393745</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1688593393745</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688593544518</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1688593544518</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688593577830</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1688593577830</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688593815500</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1688593815500</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688594077737</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1688594077737</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688594324883</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1688594324883</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688594387198</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1688594387198</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688595109534</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1688595109534</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688595280632</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1688595280632</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688595730590</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1688595730590</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688595912314</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1688595912314</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688596131214</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1688596131214</updated>
+      <workItem from="1688746291556" duration="11880000" />
+      <workItem from="1688760547419" duration="9000" />
+      <workItem from="1688850163252" duration="1445000" />
     </task>
     <task id="LOCAL-00034" summary="Setting up swagger for routes">
       <option name="closed" value="true" />
@@ -494,7 +327,175 @@
       <option name="project" value="LOCAL" />
       <updated>1688754700464</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755013062</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755013062</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755145318</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755145318</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755177273</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755177273</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755343185</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755343185</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755656301</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755656301</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755778824</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755778824</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688755971640</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1688755971640</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688756435551</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1688756435551</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688757123768</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1688757123768</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688757150052</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1688757150052</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688757540728</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1688757540728</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688757823656</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1688757823656</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688758243705</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1688758243705</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688758631302</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1688758631302</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688758880516</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1688758880516</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688759114389</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1688759114389</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688759851177</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1688759851177</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688760117660</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1688760117660</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Getting chat to work">
+      <option name="closed" value="true" />
+      <created>1688760380881</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1688760380881</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Logo Animation">
+      <option name="closed" value="true" />
+      <created>1688851176518</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1688851176518</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Logo Animation">
+      <option name="closed" value="true" />
+      <created>1688851233256</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1688851233256</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,6 +508,7 @@
     <MESSAGE value="Setting up swagger" />
     <MESSAGE value="Setting up swagger for routes" />
     <MESSAGE value="Getting chat to work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Getting chat to work" />
+    <MESSAGE value="Logo Animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Logo Animation" />
   </component>
 </project>
