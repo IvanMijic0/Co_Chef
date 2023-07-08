@@ -63,8 +63,16 @@ const logoImages = [
     "Assets/Sprites/Icons/logo_anim5.png",
 ];
 
+const logoHTML = [
+    $("#logo1"),
+    $("#logo2"),
+    $("#logo3"),
+    $("#logo4"),
+    $("#logo5")
+]
+
 const updateLogoImage = () => {
-    const logoImage = logoImages[currentImageIndex];
+    const logoImage = logoHTML[currentImageIndex];
     scenes[activeScene].updateLogoImage(logoImage);
     currentImageIndex = (currentImageIndex + 1) % logoImages.length;
     iterations++;
