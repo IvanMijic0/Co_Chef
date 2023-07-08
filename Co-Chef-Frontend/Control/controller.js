@@ -80,7 +80,7 @@ export const intro = () => {
     audio.stop();
 
     // Logo animation
-    changeLogoTimeout = setTimeout(updateLogoImage, 200);
+    changeLogoTimeout = setTimeout(updateLogoImage, 700);
 
     setTimeout(() => {
         introText.style.display = "flex";

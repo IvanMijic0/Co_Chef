@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Logo Animation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Logo Animation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,23 +99,7 @@
       <workItem from="1688738694636" duration="4838000" />
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
-      <workItem from="1688850163252" duration="1445000" />
-    </task>
-    <task id="LOCAL-00034" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688596468490</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1688596468490</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688596579024</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1688596579024</updated>
+      <workItem from="1688850163252" duration="1869000" />
     </task>
     <task id="LOCAL-00036" summary="Setting up swagger for routes">
       <option name="closed" value="true" />
@@ -495,7 +477,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688851233256</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="Logo Animation">
+      <option name="closed" value="true" />
+      <created>1688851813190</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1688851813190</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Logo Animation">
+      <option name="closed" value="true" />
+      <created>1688852030123</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1688852030123</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
