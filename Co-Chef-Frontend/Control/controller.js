@@ -71,7 +71,7 @@ const updateLogoImage = () => {
 
     if (iterations >= maxIterations) {
         // Stop the sequence after reaching the desired number of iterations
-        clearTimeout(changeLogoTimeout);
+        clearInterval(changeLogoTimeout);
     }
 }
 
@@ -80,7 +80,7 @@ export const intro = () => {
     audio.stop();
 
     // Logo animation
-    changeLogoTimeout = setTimeout(updateLogoImage, 700);
+    changeLogoTimeout = setInterval(updateLogoImage, 700);
 
     setTimeout(() => {
         introText.style.display = "flex";
