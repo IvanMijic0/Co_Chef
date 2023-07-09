@@ -75,7 +75,7 @@ use Firebase\JWT\Key;
 Flight::route("POST /user", function () {
     $data = Flight::request()->data->getData();
 
-    $data["userPassword"] = password_hash($data["userPassword"]);
+    $data["userPassword"] = password_hash($data["userPassword"], PASSWORD_DEFAULT);
 
     // Check if the user already exists
     $userExists = Flight::user_service()->checkUserByUserNameEmailAndPassword($data["userName"], $data["userEmail"], $data["userPassword"]);
@@ -86,7 +86,6 @@ Flight::route("POST /user", function () {
             "message" => "User already exists"
         ]);
     } else {
-        // Add the user
         $addedUser = $userService->add($data);
 
         if ($addedUser) {
