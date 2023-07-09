@@ -9,6 +9,44 @@ import {
     userListContainer
 } from "../Control/buttonListeners.js";
 
+// const UserService = {
+//     init: function () {
+//         const token = localStorage.getItem("user_token");
+//         if (token) {
+//             window.location.replace("index.html");
+//         }
+//         $("#login-form").validate({
+//             submitHandler: function (form) {
+//                 const entity = Object.fromEntries(new FormData(form).entries());
+//                 UserService.login(entity);
+//             },
+//         });
+//     },
+//     login: function (entity) {
+//         $.ajax({
+//             url: "rest/login",
+//             type: "POST",
+//             data: JSON.stringify(entity),
+//             contentType: "application/json",
+//             dataType: "json",
+//             success: function (result) {
+//                 console.log(result);
+//                 localStorage.setItem("user_token", result.token);
+//                 window.location.replace("index.html");
+//             },
+//             error: function (XMLHttpRequest) {
+//                 toastr.error(XMLHttpRequest.responseJSON.message);
+//             },
+//         });
+//     },
+//
+//     logout: function () {
+//         localStorage.clear();
+//         window.location.replace("login.html");
+//     },
+// };
+
+
 export const signUpUser = (userName, userEmail, userPassword) => {
     $.ajax({
         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/user",
