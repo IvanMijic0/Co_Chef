@@ -86,7 +86,7 @@ Flight::route("POST /user", function () {
             "message" => "User already exists"
         ]);
     } else {
-        $addedUser = $userService->add($data);
+        $addedUser = Flight::user_service()->add($data);
 
         if ($addedUser) {
             Flight::halt(201);
