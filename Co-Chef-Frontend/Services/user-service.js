@@ -45,7 +45,7 @@ export const UserService = {
 
     logout: () => {
         localStorage.clear();
-        switchToScene(sceneData.INTRO.sceneId);
+        switchToScene(sceneData.SIGNUP.sceneId);
     },
 
     signUpUser: (userName, userEmail, userPassword) => {

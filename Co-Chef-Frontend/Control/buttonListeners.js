@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     restartButton.addEventListener("click", () => {
+        UserService.logout();
         location.reload(); // Reload the page
         if (displayChatIntervalId) {
             clearInterval(displayChatIntervalId);
