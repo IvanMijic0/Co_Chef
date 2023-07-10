@@ -1,11 +1,8 @@
-import {DialogueService} from "../Services/dialogue-service.js";
 
 export const textData = {
-    pup: () => DialogueService.getDefaultTextByActor("pup", (text) => {
-        if (text) {
-            return text;
-        }
-    }),
+    pup: "Bonjour! I'm Jacques Le Pup, a French chef who loves to cook up a storm in the kitchen! " +
+        "With my sharp senses and keen eye for detail, I'm sure we'll create some mouth-watering dishes that will have everyone drooling. " +
+        "Ready to cook up a storm with me, chef?",
 
     pupSelected: "Mon dieu, I'm so honored to be chosen to cook with you, chef! " +
         "I know my way around the kitchen and I'm excited to show you my skills. " +

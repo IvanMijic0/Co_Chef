@@ -10,4 +10,13 @@ class DishesDao extends BaseDao
     {
         parent::__construct("dishes");
     }
+
+    public function dishByName($name)
+    {
+        $query = "SELECT text FROM " . $this->table_name . " WHERE name = :name;";
+        $stm = $this->conn->prepare($query);
+        $stm->execute(["name" => $name]);
+
+        return $stm->fetch(PDO::FETCH_ASSOC);
+    }
 }

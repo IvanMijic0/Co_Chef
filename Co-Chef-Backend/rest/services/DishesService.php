@@ -13,4 +13,8 @@ class DishesService extends BaseService
         $this->dishesDao = new DishesDao();
     }
 
+    public function dishByName($name) {
+        require_once $this->dishesDao->dishByName($name);
+    }
+
 }

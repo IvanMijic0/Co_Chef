@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Transferring to DB">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/DishesDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/DishesDao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/DishesRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/DishesRoutes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/DishesService.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/DishesService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/text-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/text-data.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,15 +111,7 @@
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
       <workItem from="1688950127411" duration="6579000" />
-      <workItem from="1688979195003" duration="12232000" />
-    </task>
-    <task id="LOCAL-00102" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688955121369</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1688955121369</updated>
+      <workItem from="1688979195003" duration="12744000" />
     </task>
     <task id="LOCAL-00103" summary="Setting up JWT">
       <option name="closed" value="true" />
@@ -499,7 +497,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688991144897</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688991463552</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1688991463552</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
