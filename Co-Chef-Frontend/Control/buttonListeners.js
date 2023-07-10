@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         userContainer.style.display = "block";
         connectBackButton.style.display = "flex";
         connectRefreshButton.style.display = "flex";
+        console.log(USER_EMAIL + " " + USER_NAME)
         UserService.updateAvailability(1, USER_EMAIL, USER_PASSWORD);
         UserService.ListUsers();
         if (activeScene === sceneData.CONNECT.sceneId) {
