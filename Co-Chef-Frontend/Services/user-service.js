@@ -127,15 +127,10 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
             method: "PUT",
-            beforeSend: (xhr) => {
-                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
-            },
             success: (response) => {
-                // Handle success response if needed
                 console.log(response.message);
             },
             error: (xhr, status, error) => {
-                // Handle error if the request fails
                 console.log("An error occurred: " + error);
             }
         });
