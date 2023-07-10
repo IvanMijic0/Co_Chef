@@ -24,7 +24,7 @@ export const UserService = {
     },
     login: (entity) => {
         $.ajax({
-            url: "rest/login",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/login",
             type: "POST",
             data: JSON.stringify(entity),
             contentType: "application/json",
@@ -32,7 +32,7 @@ export const UserService = {
             success: (result) => {
                 console.log(result);
                 localStorage.setItem("user_token", result.token);
-                window.location.replace("index.html");
+                switchToScene(sceneData.INTRO.sceneId);
             },
             error: (error) => {
                 toastr.error(error);
