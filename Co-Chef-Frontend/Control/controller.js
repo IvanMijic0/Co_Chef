@@ -54,7 +54,6 @@ let currentImageIndex = 0;
 let iterations = 0;
 let changeLogoTimeout;
 
-UserService.init();
 scenes[activeScene].show();
 
 const logoImages = [
