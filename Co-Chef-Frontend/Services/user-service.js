@@ -12,7 +12,6 @@ import {
 export const UserService = {
     init: () => {
         const token = localStorage.getItem("user-token");
-        console.log(token);
         if (token) {
             switchToScene(sceneData.INTRO.sceneId);
             intro();
@@ -38,6 +37,7 @@ export const UserService = {
             success: (result) => {
                 toastr.success("Successful Login");
                 localStorage.setItem("user-token", result.token);
+                console.log(result.token);
                 switchToScene(sceneData.INTRO.sceneId);
                 intro();
             },
