@@ -674,7 +674,7 @@ export const UserService = {
 
     getGameOpponentByUserName: (username, callback) => {
         $.ajax({
-            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/ivan",
             method: "GET",
             beforeSend: (xhr) => {
                 xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
