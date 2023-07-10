@@ -58,6 +58,7 @@ Flight::route('/*', function () {
             Flight::set('user', $decoded);
             return TRUE;
         } catch (Exception) {
+            Flight::json($path);
             Flight::json(["message" => "Authorization token is not valid"], 403);
             return FALSE;
         }
