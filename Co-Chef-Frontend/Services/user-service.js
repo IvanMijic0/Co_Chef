@@ -12,6 +12,7 @@ import {
 export const UserService = {
     init: () => {
         const token = localStorage.getItem("user-token");
+        console.log(token);
         if (token) {
             switchToScene(sceneData.INTRO.sceneId);
             intro();

@@ -36,14 +36,7 @@ Flight::route('POST /login', function () {
         if ($user['userPassword'] == $login['password']) {
             unset($user['userPassword']);
 
-            $expirationTime = time() + 3600; // Token will expire in 1 hour (adjust as needed)
-
-            $payload = [
-                'exp' => $expirationTime,
-                'user' => $user,
-            ];
-
-            $jwt = JWT::encode($payload, Config::JWT_SECRET(), 'HS256');
+            $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
             Flight::json(['user_token' => $jwt]);
         } else {
             Flight::json(["message" => "Wrong password"], 404);
