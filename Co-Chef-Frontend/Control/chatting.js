@@ -76,7 +76,7 @@ export const displayChatMessages = () => {
         }
     });
 
-    ChatService.getChatTextByUsername(USER_NAME, (chatText) => {
+    getChatTextByUsername(USER_NAME, (chatText) => {
         if (chatText) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message');

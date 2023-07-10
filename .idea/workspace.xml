@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up JWT">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Scenes/gameplayScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Scenes/gameplayScene.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,23 +107,7 @@
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
-      <workItem from="1688950127411" duration="2771000" />
-    </task>
-    <task id="LOCAL-00041" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688597618756</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1688597618756</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688597817896</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1688597817896</updated>
+      <workItem from="1688950127411" duration="3006000" />
     </task>
     <task id="LOCAL-00043" summary="Setting up swagger for routes">
       <option name="closed" value="true" />
@@ -499,7 +485,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688952830012</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688952925525</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1688952925525</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688953060999</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1688953060999</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

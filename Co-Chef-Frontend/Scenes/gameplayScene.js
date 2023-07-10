@@ -3,6 +3,9 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {InputHandler} from "../Control/input-handler.js";
 import {extractFileNameWithExtension, extractFileNameWithoutExtension} from "../utils/string-manipulation.js";
 import {checkAllPropertiesEqualMax} from "../utils/object-manipulation.js";
+import {
+    UserService
+} from "../Services/user-service.js";
 
 export class GameplayScene extends Scene {
     constructor(canvasId, backgroundImage, playerImage, showButtons) {
