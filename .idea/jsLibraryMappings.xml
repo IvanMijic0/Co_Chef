@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{adapter-latest, font-awesome, jquery-3.6.0, tailwindcss, timer.jquery}" />
+    <file url="PROJECT" libraries="{bootstrap, jquery, jquery-validate, toastr, toastr.js}" />
     <includedPredefinedLibrary name="HTTP Pre-Request and Response Handler" />
   </component>
 </project>

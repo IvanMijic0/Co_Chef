@@ -2,18 +2,7 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {switchToScene, volumeBar, audio, activeScene, scenes} from "./controller.js";
 import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
 import {
-    checkUsersHaveWaitingToPlay,
-    checkUserWillPlayPeriodically,
-    deleteUsersWithSameNonZeroGameId, getGameOpponentByUserName, getRecipeByUserName,
-    getUserNameByGameOpponent,
-    ListUsers, loginUser,
-    resetGameOpponent,
-    resetRecipe, signUpUser,
-    updateAvailability,
-    updateRecipe,
-    updateUserGameId, updateUserTaskCompleted,
-    updateWaitingToPlay,
-    updateWillPlay
+    UserService
 } from "../Services/user-service.js";
 import {checkUpdateDisplay, updateDisplay} from "../Services/chat-service.js";
 import {displayChatMessages} from "./chatting.js";
@@ -37,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const restartButton = document.getElementById("restartButton-container");
     const tutorialBackButton = document.getElementById("tutorial-backButton-container");
     const optionsBackButton = document.getElementById("options-backButton-container");
-    const loginButton = document.getElementById("loginButton");
+    // const loginButton = document.getElementById("loginButton");
     const loginButton0 = document.getElementById("loginButton0");
     const signupButton = document.getElementById("signUpButton");
     const signupButton0 = document.getElementById("signUpButton0");
@@ -81,19 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const recipeListItems = document.getElementsByClassName("recipe-item");
     const endMenuButton = document.getElementById("End-Menu-container")
 
-    loginButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        const userEmail = $("#username").val();
-        const userPassword = $("#password").val();
-        loginUser(userEmail, userPassword);
-    });
+    // loginButton.addEventListener("click", (e) => {
+    //     e.preventDefault();
+    //     const userEmail = $("#username").val();
+    //     const userPassword = $("#password").val();
+    //     loginUser(userEmail, userPassword);
+    // });
 
     signupButton0.addEventListener("click", (e) => {
         e.preventDefault();
         const userName = $("#name").val();
         const userEmail = $("#username0").val();
         const userPassword = $("#password0").val();
-        signUpUser(userName, userEmail, userPassword);
+        UserService.signUpUser(userName, userEmail, userPassword);
     });
 
     loginButton0.addEventListener("click", () => {
@@ -117,10 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
         userContainer.style.display = "block";
         connectBackButton.style.display = "flex";
         connectRefreshButton.style.display = "flex";
-        updateAvailability(1, USER_EMAIL, USER_PASSWORD);
-        ListUsers();
+        UserService.updateAvailability(1, USER_EMAIL, USER_PASSWORD);
+        UserService.ListUsers();
         if (activeScene === sceneData.CONNECT.sceneId) {
-            checkUserWillPlayPeriodically();
+            UserService.checkUserWillPlayPeriodically();
         }
     });
 
@@ -134,13 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (willPlayIntervalId) {
             clearInterval(willPlayIntervalId);
         }
-        updateAvailability(0, USER_EMAIL, USER_PASSWORD);
+        UserService.updateAvailability(0, USER_EMAIL, USER_PASSWORD);
         switchToScene(sceneData.START_MENU.sceneId);
     });
 
     connectRefreshButton.addEventListener("click", () => {
         userContainer.innerHTML = "";
-        ListUsers();
+        UserService.ListUsers();
     });
 
     optionsButton.addEventListener("click", () => {
@@ -211,13 +200,13 @@ document.addEventListener("DOMContentLoaded", () => {
             scenes[activeScene].changeText();
         } else {
             switchToScene(sceneData.CONNECT.sceneId);
-            deleteUsersWithSameNonZeroGameId(USER_NAME);
+            UserService.deleteUsersWithSameNonZeroGameId(USER_NAME);
             userHeader.style.display = "block";
             userListContainer.style.display = "block";
             connectBackButton.style.display = "flex";
             connectRefreshButton.style.display = "flex";
             userBackground.style.display = "flex";
-            updateAvailability(1, USER_EMAIL, USER_PASSWORD);
+            UserService.updateAvailability(1, USER_EMAIL, USER_PASSWORD);
             speechText.style.display = "none";
             SelectBackButton.style.display = "none";
             SelectConfirmButton.style.display = "none";
@@ -238,10 +227,10 @@ document.addEventListener("DOMContentLoaded", () => {
             dishName.style.display = "flex";
             scenes[activeScene].changeText();
         } else {
-            updateWaitingToPlay(USER_NAME, 1);
-            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+            UserService.updateWaitingToPlay(USER_NAME, 1);
+            UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                 if (gameOpponent) {
-                    checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
+                    UserService.checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
                         if (isWaitingToPlay) {
                             dishName.style.display = "none";
                             SelectBackButton.style.display = "none";
@@ -249,33 +238,33 @@ document.addEventListener("DOMContentLoaded", () => {
                             characterContainer.style.display = "none";
                             speechText.style.display = "none";
                             scenes[activeScene].rememberPick();
-                            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                            UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                 if (gameOpponent) {
-                                    updateRecipe(gameOpponent, REMEMBER_DISH);
+                                    UserService.updateRecipe(gameOpponent, REMEMBER_DISH);
                                 }
                             });
                             switchToScene(sceneData.Gameplay.sceneId);
-                            updateAvailability(0, USER_EMAIL, USER_PASSWORD);
+                            UserService.updateAvailability(0, USER_EMAIL, USER_PASSWORD);
                             toastr.info("Wait for connection");
                             CAN_MOVE = false;
                             scenes[activeScene].setPlayerImage();
                             setTimeout(() => {
-                                getUserNameByGameOpponent(USER_NAME, (gameOpponent) => {
+                                UserService.getUserNameByGameOpponent(USER_NAME, (gameOpponent) => {
                                     if (gameOpponent) {
-                                        checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
+                                        UserService.checkUsersHaveWaitingToPlay(USER_NAME, gameOpponent, (isWaitingToPlay) => {
                                             if (isWaitingToPlay) {
                                                 alert("Successfully connected!");
                                                 CAN_MOVE = true;
                                                 scenes[activeScene].resetTimer();
                                                 scenes[activeScene].allowInteract(true);
                                                 setTimeout(() => {
-                                                    updateWaitingToPlay(USER_NAME, 0)
+                                                    UserService.updateWaitingToPlay(USER_NAME, 0)
                                                 }, 1000)
                                                 displayChatIntervalId = setInterval(() => {
                                                     checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
                                                         if (isUpdateDisplay) {
                                                             displayChatMessages();
-                                                            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                                            UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                                                 if (gameOpponent) {
                                                                     updateDisplay(USER_NAME, 0);
                                                                     updateDisplay(gameOpponent, 0);
@@ -286,11 +275,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 }, 1000);
                                             } else {
                                                 alert("Opponent did not choose on time.")
-                                                updateWaitingToPlay(USER_NAME, 0);
-                                                resetGameOpponent(USER_EMAIL);
-                                                updateUserGameId(USER_NAME, 0);
-                                                resetRecipe(USER_EMAIL);
-                                                updateUserGameId(USER_NAME, 0);
+                                                UserService.updateWaitingToPlay(USER_NAME, 0);
+                                                UserService.resetGameOpponent(USER_EMAIL);
+                                                UserService.updateUserGameId(USER_NAME, 0);
+                                                UserService.resetRecipe(USER_EMAIL);
+                                                UserService.updateUserGameId(USER_NAME, 0);
                                                 volumeContainer.classList.remove("newVolumeContainer");
                                                 volumeBar.show();
                                                 volumeBar.setup();
@@ -315,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         });
                                     }
                                 });
-                                getRecipeByUserName(USER_NAME, (recipe) => {
+                                UserService.getRecipeByUserName(USER_NAME, (recipe) => {
                                     if (recipe) {
                                         console.log(USER_NAME + " " + recipe)
                                         if (recipe === sceneData.DISH_SELECT.noodlesName) {
@@ -420,14 +409,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     gameplayMenuButton.addEventListener("click", () => {
-        updateWaitingToPlay(USER_NAME, 0);
-        updateAvailability(0, USER_EMAIL, USER_PASSWORD);
-        updateUserTaskCompleted(USER_NAME, 0);
-        deleteUsersWithSameNonZeroGameId(USER_NAME);
-        resetGameOpponent(USER_EMAIL);
-        updateUserGameId(USER_NAME, 0);
-        resetRecipe(USER_EMAIL);
-        updateUserGameId(USER_NAME, 0);
+        UserService.updateWaitingToPlay(USER_NAME, 0);
+        UserService.updateAvailability(0, USER_EMAIL, USER_PASSWORD);
+        UserService.updateUserTaskCompleted(USER_NAME, 0);
+        UserService.deleteUsersWithSameNonZeroGameId(USER_NAME);
+        UserService.resetGameOpponent(USER_EMAIL);
+        UserService.updateUserGameId(USER_NAME, 0);
+        UserService.resetRecipe(USER_EMAIL);
+        UserService.updateUserGameId(USER_NAME, 0);
         scenes[activeScene].toggleOptions()
         volumeContainer.classList.remove("newVolumeContainer");
         volumeBar.show();
@@ -455,13 +444,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (displayChatIntervalId) {
             clearInterval(displayChatIntervalId);
         }
-        updateWaitingToPlay(USER_NAME, 0);
-        updateAvailability(0, USER_EMAIL, USER_PASSWORD);
-        updateUserTaskCompleted(USER_NAME, 0);
-        resetGameOpponent(USER_EMAIL);
-        updateUserGameId(USER_NAME, 0);
-        resetRecipe(USER_EMAIL);
-        updateUserGameId(USER_NAME, 0);
+        UserService.updateWaitingToPlay(USER_NAME, 0);
+        UserService.updateAvailability(0, USER_EMAIL, USER_PASSWORD);
+        UserService.updateUserTaskCompleted(USER_NAME, 0);
+        UserService.resetGameOpponent(USER_EMAIL);
+        UserService.updateUserGameId(USER_NAME, 0);
+        UserService.resetRecipe(USER_EMAIL);
+        UserService.updateUserGameId(USER_NAME, 0);
         scenes[activeScene].toggleWinLose();
         scenes[activeScene].resetCollider();
         ic_timer.style.display = "none";
@@ -656,17 +645,17 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("beforeunload", () => {
         // Set user availability to false before leaving the site
         if (USER_NAME !== "" || USER_EMAIL !== "" || USER_PASSWORD !== "") {
-            resetGameOpponent(USER_EMAIL);
-            updateAvailability(false, USER_EMAIL, USER_PASSWORD);
-            updateUserTaskCompleted(USER_NAME, 0);
-            updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
-            updateUserGameId(USER_NAME, 0);
-            resetRecipe(USER_EMAIL);
-            updateWaitingToPlay(USER_NAME, 0);
-            deleteUsersWithSameNonZeroGameId(USER_NAME);
-            getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+            UserService.resetGameOpponent(USER_EMAIL);
+            UserService.updateAvailability(false, USER_EMAIL, USER_PASSWORD);
+            UserService.updateUserTaskCompleted(USER_NAME, 0);
+            UserService.updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
+            UserService.updateUserGameId(USER_NAME, 0);
+            UserService.resetRecipe(USER_EMAIL);
+            UserService.updateWaitingToPlay(USER_NAME, 0);
+            UserService.deleteUsersWithSameNonZeroGameId(USER_NAME);
+            UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                 if (gameOpponent) {
-                    deleteUsersWithSameNonZeroGameId(USER_NAME, gameOpponent);
+                    UserService.deleteUsersWithSameNonZeroGameId(USER_NAME, gameOpponent);
                 }
             });
             if (displayChatIntervalId) {

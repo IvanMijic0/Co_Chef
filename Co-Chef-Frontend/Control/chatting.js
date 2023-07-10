@@ -4,7 +4,7 @@ import {
     updateChatTextByUserName,
     updateDisplay
 } from "../Services/chat-service.js";
-import {getGameOpponentByUserName} from "../Services/user-service.js";
+import {UserService} from "../Services/user-service.js";
 
 const chatField = document.querySelector(".chat-field");
 const chatLog = document.querySelector(".chat-log");
@@ -27,7 +27,7 @@ chatField.addEventListener("keydown", (e) => {
         const input = e.target;
         const message = input.value.trim();
         updateChatTextByUserName(USER_NAME, message);
-        getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+        UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
             if (gameOpponent) {
                 updateDisplay(USER_NAME, 1);
                 updateDisplay(gameOpponent, 1);
@@ -51,7 +51,7 @@ chatField.addEventListener("keydown", (e) => {
 
 export const displayChatMessages = () => {
     // chatLog.innerHTML = '';
-    getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+    UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
         if (gameOpponent) {
             getChatTextByUsername(gameOpponent, (chatText) => {
                 if (chatText) {

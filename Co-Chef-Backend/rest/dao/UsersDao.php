@@ -11,6 +11,15 @@ class UsersDao extends BaseDao
         parent::__construct("users");
     }
 
+    public function get_user_by_email($email)
+    {
+        $query = "SELECT * FROM " . $this->table_name . "WHERE email = :email";
+        $stm = $this->conn->prepare($query);
+        $stm->execute(["email" => $email]);
+
+        return $stm->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function checkUserByUserNameEmailAndPassword($userName, $email, $password): bool
     {
         $query = "SELECT * FROM " . $this->table_name . " WHERE userEmail = ? OR userName = ? OR (userEmail = ? AND userPassword = ?)";

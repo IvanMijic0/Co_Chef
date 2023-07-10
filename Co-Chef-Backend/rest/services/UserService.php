@@ -14,6 +14,11 @@ class UserService extends BaseService
         $this->userDao = new UsersDao();
     }
 
+    public function get_user_by_email($email)
+    {
+        return $this->userDao->get_user_by_email($email);
+    }
+
     public function checkUserByUserNameEmailAndPassword($userName, $email, $password): bool
     {
         return $this->userDao->checkUserByUserNameEmailAndPassword($userName, $email, $password);

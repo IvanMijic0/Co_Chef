@@ -9,652 +9,650 @@ import {
     userListContainer
 } from "../Control/buttonListeners.js";
 
-// const UserService = {
-//     init: function () {
-//         const token = localStorage.getItem("user_token");
-//         if (token) {
-//             window.location.replace("index.html");
-//         }
-//         $("#login-form").validate({
-//             submitHandler: function (form) {
-//                 const entity = Object.fromEntries(new FormData(form).entries());
-//                 UserService.login(entity);
-//             },
-//         });
-//     },
-//     login: function (entity) {
-//         $.ajax({
-//             url: "rest/login",
-//             type: "POST",
-//             data: JSON.stringify(entity),
-//             contentType: "application/json",
-//             dataType: "json",
-//             success: function (result) {
-//                 console.log(result);
-//                 localStorage.setItem("user_token", result.token);
-//                 window.location.replace("index.html");
-//             },
-//             error: function (XMLHttpRequest) {
-//                 toastr.error(XMLHttpRequest.responseJSON.message);
-//             },
-//         });
-//     },
-//
-//     logout: function () {
-//         localStorage.clear();
-//         window.location.replace("login.html");
-//     },
-// };
+export const UserService = {
+    init: () => {
+        const token = localStorage.getItem("user_token");
+        if (token) {
+            switchToScene(sceneData.INTRO.sceneId);
+        }
+        $("#login-form").validate({
+            submitHandler: (form) => {
+                const entity = Object.fromEntries(new FormData(form).entries());
+                UserService.login(entity);
+            },
+        });
+    },
+    login: (entity) => {
+        $.ajax({
+            url: "rest/login",
+            type: "POST",
+            data: JSON.stringify(entity),
+            contentType: "application/json",
+            dataType: "json",
+            success: (result) => {
+                console.log(result);
+                localStorage.setItem("user_token", result.token);
+                window.location.replace("index.html");
+            },
+            error: (error) => {
+                toastr.error(error);
+            },
+        });
+    },
 
+    logout: () => {
+        localStorage.clear();
+        switchToScene(sceneData.INTRO.sceneId);
+    },
 
-export const signUpUser = (userName, userEmail, userPassword) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/user",
-        method: "POST",
-        data: {
-            userName: userName,
-            userEmail: userEmail,
-            userPassword: userPassword
-        },
-        success: (response, status, xhr) => {
-            if (xhr.status === 201) {
-                toastr.success("Successful Sign up");
-                USER_NAME = userName;
-                USER_EMAIL = userEmail;
-                USER_PASSWORD = userPassword;
-                setTimeout(() => {
-                    switchToScene(sceneData.INTRO.sceneId);
-                    intro();
-                }, 1000);
+    signUpUser: (userName, userEmail, userPassword) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/user",
+            method: "POST",
+            data: {
+                userName: userName,
+                userEmail: userEmail,
+                userPassword: userPassword
+            },
+            success: (response, status, xhr) => {
+                if (xhr.status === 201) {
+                    toastr.success("Successful Sign up");
+                    USER_NAME = userName;
+                    USER_EMAIL = userEmail;
+                    USER_PASSWORD = userPassword;
+                    setTimeout(() => {
+                        switchToScene(sceneData.LOGIN.sceneId);
+                        intro();
+                    }, 1000);
+                }
+            },
+            error: (xhr) => {
+                if (xhr.status === 409) {
+                    toastr.warning("User already exists");
+                } else {
+                    toastr.error();
+                }
             }
-        },
-        error: (xhr) => {
-            if (xhr.status === 409) {
-                toastr.warning("User already exists");
-            } else {
+        });
+    },
+
+    loginUser: (userEmail, userPassword) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
+            method: "GET",
+            data: JSON.stringify(),
+            contentType: "application/json",
+            success: (response) => {
+                if (response) {
+                    toastr.success("Successful Log in");
+                    USER_EMAIL = userEmail;
+                    USER_PASSWORD = userPassword;
+                    UserService.getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
+                        if (userName) {
+                            USER_NAME = userName;
+                        } else {
+                            // Error occurred or user not found
+                            console.log("Failed to retrieve user name");
+                        }
+                    });
+                    setTimeout(() => {
+                        switchToScene(sceneData.INTRO.sceneId);
+                        intro();
+                    }, 1500)
+                } else {
+                    // User credentials are invalid
+                    toastr.warning("User does not exist!");
+                }
+            },
+            error: () => {
+                // Handle error if the request fails
                 toastr.error();
             }
-        }
-    });
-};
+        });
+    },
 
-export const loginUser = (userEmail, userPassword) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
-        method: "GET",
-        success: (response) => {
-            if (response) {
-                toastr.success("Successful Log in");
-                USER_EMAIL = userEmail;
-                USER_PASSWORD = userPassword;
-                getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
-                    if (userName) {
-                        USER_NAME = userName;
-                    } else {
-                        // Error occurred or user not found
-                        console.log("Failed to retrieve user name");
-                    }
-                });
-                setTimeout(() => {
-                    switchToScene(sceneData.INTRO.sceneId);
-                    intro();
-                }, 1500)
-            } else {
-                // User credentials are invalid
-                toastr.warning("User does not exist!");
+    updateAvailability: (isAvailable, userEmail, password) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
+            method: "PUT",
+            success: (response) => {
+                // Handle success response if needed
+                console.log(response.message);
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
             }
-        },
-        error: () => {
-            // Handle error if the request fails
-            toastr.error();
-        }
-    });
-};
+        });
+    },
 
-export const updateAvailability = (isAvailable, userEmail, password) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
-        method: "PUT",
-        success: (response) => {
-            // Handle success response if needed
-            console.log(response.message);
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
-        }
-    });
-};
-
-export const resetGameOpponent = (userEmail) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/resetGameOpponent/" + userEmail,
-        method: 'PUT',
-        success: () => {
-            console.log("Game opponent reset successfully");
-            // Handle success response
-        },
-        error: () => {
-            console.log("Failed to reset game opponent");
-            // Handle error response
-        }
-    });
-};
-
-export const updateWillPlay = (isWillPlay, userEmail, userPassword) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
-        method: "PUT",
-        success: (response) => {
-            // Handle success response if needed
-            console.log(response.message);
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
-        }
-    });
-};
-export const updateIsRejected = (isRejected, userName) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserIsRejected/" + userName + "/" + isRejected,
-        method: "PUT",
-        success: (response) => {
-            // Handle success response if needed
-            console.log(response.message);
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
-        }
-    });
-};
-
-export const isUserAvailable = (userEmail, userPassword, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
-        method: "GET",
-        success: (response) => {
-            if (response.isAvailable) {
-                // User is available
-                console.log(userEmail + " is available");
-                callback(true);
-            } else {
-                // User is not available
-                console.log("User is not available");
-                callback(false);
+    resetGameOpponent: (userEmail) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/resetGameOpponent/" + userEmail,
+            method: 'PUT',
+            success: () => {
+                console.log("Game opponent reset successfully");
+                // Handle success response
+            },
+            error: () => {
+                console.log("Failed to reset game opponent");
+                // Handle error response
             }
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("Availability: " + error);
-            callback(false);
-        },
-    });
-};
+        });
+    },
 
-export const isUserWillPlay = (userEmail, userPassword, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
-        method: "GET",
-        success: (response) => {
-            if (response.willPlay) {
-                // User is available
-                console.log(userEmail + " will play");
-                callback(true);
-            } else {
-                // User is not available
-                console.log("No opponent selected");
-                callback(false);
+    updateWillPlay: (isWillPlay, userEmail, userPassword) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
+            method: "PUT",
+            success: (response) => {
+                // Handle success response if needed
+                console.log(response.message);
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
             }
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("WillPlay: " + error);
-            callback(false);
-        },
-    });
-};
+        });
+    },
 
-export const isUserRejected = (userName, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/isRejected/" + userName,
-        method: "GET",
-        success: (response) => {
-            if (response.isRejected) {
-                // User is available
-                console.log(userName + " is rejected");
-                callback(true);
-            } else {
-                // User is not available
-                console.log(userName + " is not rejected");
-                callback(false);
+    updateIsRejected: (isRejected, userName) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserIsRejected/" + userName + "/" + isRejected,
+            method: "PUT",
+            success: (response) => {
+                // Handle success response if needed
+                console.log(response.message);
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
             }
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("WillPlay: " + error);
-            callback(false);
-        },
-    });
-};
+        });
+    },
 
-export const ListUsers = () => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/users",
-        method: "GET",
-        success: (response) => {
-            if (response.users) {
-                const users = response.users;
-                const userContainer = $("#userContainer");
-
-                users.forEach((user) => {
-                    const username = user.userName;
-                    const userEmail = user.userEmail;
-                    const userPassword = user.userPassword;
-                    const gameId = user.gameId;
-
-                    // Check if the user being iterated over is the current user
-                    if (userEmail === USER_EMAIL || userPassword === USER_PASSWORD) {
-                        return; // Skip the current user
-                    }
-
-                    const div = $("<div></div>").css("display", "block");
-                    const availabilitySpan = $("<span></span>").addClass("availability-text");
-
-                    isUserAvailable(userEmail, userPassword, (isAvailable) => {
-                        if (gameId === 0 && isAvailable) {
-                            availabilitySpan.addClass("green-text").text(" is available");
-
-                            const usernameSpan = $("<span></span>")
-                                .text(username)
-                                .addClass("white-text")
-                                .addClass("clickable")
-                                .on("click", () => {
-                                    // console.log("Clicked user email: " + userEmail)
-                                    // console.log("Clicked user password: " + userPassword)
-                                    // console.log("Current user email: " + USER_EMAIL)
-                                    // console.log("Current user password: " + USER_PASSWORD)
-                                    saveGameOpponent(username);
-                                    updateWillPlay(1, userEmail, userPassword);
-
-                                });
-                            div.append(usernameSpan, availabilitySpan);
-                        } else {
-                            // User is not available
-                            availabilitySpan.addClass("grey-text").text(" is not available");
-                            const usernameSpan = $("<span></span>").text(username).addClass("white-text");
-                            div.append(usernameSpan, availabilitySpan);
-                        }
-                        userContainer.append(div);
-                    });
-                });
-            }
-        },
-        error: () => {
-            toastr.error();
-        },
-    });
-};
-
-export const getUserNameByEmailAndPassword = (email, password, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
-        method: "GET",
-        success: (response) => {
-            // Handle success response
-            const userName = response.userName;
-            console.log("Username: " + userName);
-            callback(userName);
-        },
-        error: (xhr, status, error) => {
-            // Handle error response
-            console.log("Error: " + error);
-            callback(null);
-        }
-    });
-};
-
-export const saveGameOpponent = (opponentUsername) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
-        method: "PUT",
-        success: () => {
-            // Handle success response if needed
-            console.log("Game opponent saved successfully");
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("An error occurred: " + error);
-        }
-    });
-};
-
-export const getUserNameByGameOpponent = (gameOpponent, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserByGameOpponent/" + gameOpponent,
-        method: "GET",
-        success: (response) => {
-            // Handle success response
-            const userName = response.userName;
-            callback(userName);
-        },
-        error: (xhr, status, error) => {
-            // Handle error response
-            console.log("Error: " + error);
-            callback(null);
-        }
-    });
-};
-
-export const updateGameOpponent = (userEmail, gameOpponent) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
-        method: "PUT",
-        success: () => {
-            console.log("Game opponent updated successfully");
-            // Handle success response
-        },
-        error: () => {
-            console.log("Failed to update game opponent");
-            // Handle error response
-        }
-    });
-};
-
-export const checkUsersHaveSameGameId = (userName1, userName2, callback) => {
-    $.ajax({
-        method: "GET",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameGameId/" + userName1 + "/" + userName2,
-        success: (response) => {
-            const haveSameGameId = response["Same id"];
-            callback(haveSameGameId);
-        },
-        error: () => {
-            callback(false);
-        }
-    });
-};
-
-export const checkUsersHaveWaitingToPlay = (userName1, userName2, callback) => {
-    $.ajax({
-        method: "GET",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
-        success: (response) => {
-            const haveSameWaitingToPlay = response["haveSameWaitingToPlay"];
-            callback(haveSameWaitingToPlay);
-        },
-        error: (xhr, status, error) => {
-            console.error(error);
-            callback(false);
-        }
-    });
-};
-
-export const updateWaitingToPlay = (userName, isWaitingToPlay) => {
-    $.ajax({
-        method: "PUT",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateWaitingToPlay/" + userName + "/" + isWaitingToPlay,
-        success: () => {
-            console.log("User isWaitingToPlay updated");
-        },
-        error: (xhr, status, error) => {
-            console.error(error);
-        }
-    });
-};
-
-export const updateUserGameId = (userName, gameId) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateGameId/" + userName + "/" + gameId,
-        type: "PUT",
-        success: function () {
-            console.log("Game ID updated successfully");
-        },
-        error: function () {
-            console.log("Failed to update game ID");
-        }
-    });
-};
-
-export const updateRecipe = (userName, recipe) => {
-    $.ajax({
-        method: "PUT",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateRecipe/" + userName + "/" + recipe,
-        success: (response) => {
-            console.log("User recipe updated:", response.message);
-        },
-        error: (xhr, status, error) => {
-            console.error(error);
-        }
-    });
-};
-
-export const resetRecipe = (userEmail) => {
-    $.ajax({
-        method: "PUT",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/resetRecipe/" + userEmail,
-        success: (response) => {
-            console.log("Recipe reset:", response.message);
-        },
-        error: (xhr, status, error) => {
-            console.error(error);
-        }
-    });
-};
-
-export const showDialogue = () => {
-    let randomGameId = Math.floor(Math.random() * 1000) + 1;
-    let confirmDialog = null;
-    getUserNameByGameOpponent(USER_NAME, (userName) => {
-        if (userName) {
-            confirmDialog = confirm("Do you want to play a game with " + userName + "?");
-            if (confirmDialog) {
-                updateUserGameId(USER_NAME, randomGameId);
-                setOpponentsGameOpponent(USER_NAME, randomGameId);
-                initializeChats(randomGameId, USER_NAME);
-                SelectBackButton.style.display = "flex";
-                characterName.style.display = "flex";
-                speechText.style.display = "flex";
-                characterContainer.style.display = "flex";
-                userHeader.style.display = "none";
-                userListContainer.style.display = "none";
-                userBackground.style.display = "none";
-                connectRefreshButton.style.display = "none";
-                connectBackButton.style.display = "none";
-                if (willPlayIntervalId) {
-                    clearInterval(willPlayIntervalId);
+    isUserAvailable: (userEmail, userPassword, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
+            method: "GET",
+            success: (response) => {
+                if (response.isAvailable) {
+                    // User is available
+                    console.log(userEmail + " is available");
+                    callback(true);
+                } else {
+                    // User is not available
+                    console.log("User is not available");
+                    callback(false);
                 }
-                switchToScene(sceneData.CHARACTER_SELECT.sceneId);
-                scenes[activeScene].restartClick();
-                scenes[activeScene].changeText();
-            } else {
-                console.log(userName)
-                updateIsRejected(1, userName)
-                alert("Rejected an invitation from " + userName);
-            }
-        }
-    });
-};
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("Availability: " + error);
+                callback(false);
+            },
+        });
+    },
 
-// Function to periodically check if a user is willing to play
-export const checkUserWillPlayPeriodically = () => {
-    willPlayIntervalId = setInterval(() => {
-        isUserWillPlay(USER_EMAIL, USER_PASSWORD, (willPlay) => {
-            if (willPlay) {
-                showDialogue();
-                updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
-            }
+    isUserWillPlay: (userEmail, userPassword, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
+            method: "GET",
+            success: (response) => {
+                if (response.willPlay) {
+                    // User is available
+                    console.log(userEmail + " will play");
+                    callback(true);
+                } else {
+                    // User is not available
+                    console.log("No opponent selected");
+                    callback(false);
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("WillPlay: " + error);
+                callback(false);
+            },
         });
-        isUserRejected(USER_NAME, (isRejected) => {
-            if (isRejected) {
-                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
-                    if (gameOpponent) {
-                        alert("You have been rejected by " + gameOpponent);
-                        resetGameOpponent(USER_EMAIL);
-                        updateIsRejected(0, USER_NAME);
-                    }
-                });
-            }
+    },
+
+    isUserRejected: (userName, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/isRejected/" + userName,
+            method: "GET",
+            success: (response) => {
+                if (response.isRejected) {
+                    // User is available
+                    console.log(userName + " is rejected");
+                    callback(true);
+                } else {
+                    // User is not available
+                    console.log(userName + " is not rejected");
+                    callback(false);
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("WillPlay: " + error);
+                callback(false);
+            },
         });
-        getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
-            if (gameOpponent) {
-                checkUsersHaveSameGameId(USER_NAME, gameOpponent, (haveSameGameId) => {
-                    if (haveSameGameId) {
-                        alert("Your game has been accepted");
-                        getGameIdByUsername(USER_NAME, (gameId) => {
-                            if (gameId) {
-                                console.log("In game Id: " + USER_NAME)
-                                console.log(gameId)
-                                initializeChats(gameId, USER_NAME);
-                            }
-                        })
-                        SelectBackButton.style.display = "flex";
-                        characterName.style.display = "flex";
-                        speechText.style.display = "flex";
-                        characterContainer.style.display = "flex";
-                        userHeader.style.display = "none";
-                        userListContainer.style.display = "none";
-                        userBackground.style.display = "none";
-                        connectRefreshButton.style.display = "none";
-                        connectBackButton.style.display = "none";
-                        if (willPlayIntervalId) {
-                            clearInterval(willPlayIntervalId);
+    },
+
+    ListUsers:  () => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/users",
+            method: "GET",
+            success: (response) => {
+                if (response.users) {
+                    const users = response.users;
+                    const userContainer = $("#userContainer");
+
+                    users.forEach((user) => {
+                        const username = user.userName;
+                        const userEmail = user.userEmail;
+                        const userPassword = user.userPassword;
+                        const gameId = user.gameId;
+
+                        // Check if the user being iterated over is the current user
+                        if (userEmail === USER_EMAIL || userPassword === USER_PASSWORD) {
+                            return; // Skip the current user
                         }
-                        switchToScene(sceneData.CHARACTER_SELECT.sceneId);
-                        scenes[activeScene].restartClick();
-                        scenes[activeScene].changeText();
-                    }
-                });
-            }
-        })
-    }, 2000);
-};
 
-export const setOpponentsGameOpponent = (userName, randomGameId) => {
-    getUserNameByGameOpponent(userName, (userName) => {
-        if (userName) {
-            console.log("UserName in getUserNameByOpponent: " + userName)
-            updateUserGameId(userName, randomGameId);
-            updateGameOpponent(USER_EMAIL, userName);
-        } else {
-            console.log("No username found");
-        }
-    });
-}
+                        const div = $("<div></div>").css("display", "block");
+                        const availabilitySpan = $("<span></span>").addClass("availability-text");
 
-export const initializeChats = (gameId, userName) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/initializeChats",
-        method: "POST",
-        data: {
-            gameId: gameId,
-            userName: userName,
-            chatText: ""
-        },
-        success: () => {
-            console.log("Chats initialized");
-        },
-        error: () => {
-            console.log("Initialization failed")
-        }
-    });
-}
+                        UserService.isUserAvailable(userEmail, userPassword, (isAvailable) => {
+                            if (gameId === 0 && isAvailable) {
+                                availabilitySpan.addClass("green-text").text(" is available");
 
-export const getGameIdByUsername = (userName, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameIdByUsername/" + userName,
-        method: "GET",
-        success: (response) => {
-            const gameId = response.gameId;
-            callback(gameId);
-            console.log(gameId);
-        },
-        error: (xhr, status, error) => {
-            console.error(error);
-            callback(null);
-        }
-    });
-};
+                                const usernameSpan = $("<span></span>")
+                                    .text(username)
+                                    .addClass("white-text")
+                                    .addClass("clickable")
+                                    .on("click", () => {
+                                        UserService.saveGameOpponent(username);
+                                        UserService.updateWillPlay(1, userEmail, userPassword);
 
-export const deleteUsersWithSameNonZeroGameId = (userName) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/deleteUsersWithSameNonZeroGameId/" + userName,
-        type: "DELETE",
-        success: () => {
-            console.log('Users chat deleted successfully');
-            // Handle success response here
-        },
-        error: (xhr, status, error) => {
-            console.error(error);
-            // Handle error response here
-        }
-    });
-};
+                                    });
+                                div.append(usernameSpan, availabilitySpan);
+                            } else {
+                                // User is not available
+                                availabilitySpan.addClass("grey-text").text(" is not available");
+                                const usernameSpan = $("<span></span>").text(username).addClass("white-text");
+                                div.append(usernameSpan, availabilitySpan);
+                            }
+                            userContainer.append(div);
+                        });
+                    });
+                }
+            },
+            error: () => {
+                toastr.error();
+            },
+        });
+    },
 
-export const updateUserTaskCompleted = (userName, taskCompleted) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
-        type: "PUT",
-        success: function () {
-            // Handle success response
-        },
-        error: function () {
-            console.log("Failed to update taskCompleted");
-            // Handle error response
-        }
-    });
-};
-
-export const checkUsersHaveSameTaskCompleted = (userName1, userName2, callback) => {
-    $.ajax({
-        method: "GET",
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameTaskCompleted/" + userName1 + "/" + userName2,
-        success: (response) => {
-            const haveSameTasksCompleted = response["Same tasksCompleted"];
-            callback(haveSameTasksCompleted);
-        },
-        error: () => {
-            callback(false);
-        }
-    });
-};
-
-export const getGameOpponentByUserName = (username, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
-        method: "GET",
-        success: (response) => {
-            if (response.gameOpponent) {
-                const gameOpponent = response.gameOpponent;
-                // Pass the game opponent to the callback function
-                callback(gameOpponent);
-            } else {
-                // No game opponent found
+    getUserNameByEmailAndPassword: (email, password, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
+            method: "GET",
+            success: (response) => {
+                // Handle success response
+                const userName = response.userName;
+                console.log("Username: " + userName);
+                callback(userName);
+            },
+            error: (xhr, status, error) => {
+                // Handle error response
+                console.log("Error: " + error);
                 callback(null);
             }
-        },
-        error: (xhr, status, error) => {
-            // Handle error if the request fails
-            console.log("Error: " + error);
-            callback(null);
-        },
-    });
+        });
+    },
+
+    saveGameOpponent: (opponentUsername) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
+            method: "PUT",
+            success: () => {
+                // Handle success response if needed
+                console.log("Game opponent saved successfully");
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("An error occurred: " + error);
+            }
+        });
+    },
+
+    getUserNameByGameOpponent: (gameOpponent, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserByGameOpponent/" + gameOpponent,
+            method: "GET",
+            success: (response) => {
+                // Handle success response
+                const userName = response.userName;
+                callback(userName);
+            },
+            error: (xhr, status, error) => {
+                // Handle error response
+                console.log("Error: " + error);
+                callback(null);
+            }
+        });
+    },
+
+    updateGameOpponent: (userEmail, gameOpponent) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
+            method: "PUT",
+            success: () => {
+                console.log("Game opponent updated successfully");
+                // Handle success response
+            },
+            error: () => {
+                console.log("Failed to update game opponent");
+                // Handle error response
+            }
+        });
+    },
+
+    checkUsersHaveSameGameId: (userName1, userName2, callback) => {
+        $.ajax({
+            method: "GET",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameGameId/" + userName1 + "/" + userName2,
+            success: (response) => {
+                const haveSameGameId = response["Same id"];
+                callback(haveSameGameId);
+            },
+            error: () => {
+                callback(false);
+            }
+        });
+    },
+
+    checkUsersHaveWaitingToPlay: (userName1, userName2, callback) => {
+        $.ajax({
+            method: "GET",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
+            success: (response) => {
+                const haveSameWaitingToPlay = response["haveSameWaitingToPlay"];
+                callback(haveSameWaitingToPlay);
+            },
+            error: (xhr, status, error) => {
+                console.error(error);
+                callback(false);
+            }
+        });
+    },
+
+    updateWaitingToPlay: (userName, isWaitingToPlay) => {
+        $.ajax({
+            method: "PUT",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateWaitingToPlay/" + userName + "/" + isWaitingToPlay,
+            success: () => {
+                console.log("User isWaitingToPlay updated");
+            },
+            error: (xhr, status, error) => {
+                console.error(error);
+            }
+        });
+    },
+
+    updateUserGameId: (userName, gameId) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateGameId/" + userName + "/" + gameId,
+            type: "PUT",
+            success: function () {
+                console.log("Game ID updated successfully");
+            },
+            error: function () {
+                console.log("Failed to update game ID");
+            }
+        });
+    },
+
+    updateRecipe: (userName, recipe) => {
+        $.ajax({
+            method: "PUT",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateRecipe/" + userName + "/" + recipe,
+            success: (response) => {
+                console.log("User recipe updated:", response.message);
+            },
+            error: (xhr, status, error) => {
+                console.error(error);
+            }
+        });
+    },
+
+    resetRecipe: (userEmail) => {
+        $.ajax({
+            method: "PUT",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/resetRecipe/" + userEmail,
+            success: (response) => {
+                console.log("Recipe reset:", response.message);
+            },
+            error: (xhr, status, error) => {
+                console.error(error);
+            }
+        });
+    },
+
+    showDialogue: () => {
+        let randomGameId = Math.floor(Math.random() * 1000) + 1;
+        let confirmDialog = null;
+        UserService.getUserNameByGameOpponent(USER_NAME, (userName) => {
+            if (userName) {
+                confirmDialog = confirm("Do you want to play a game with " + userName + "?");
+                if (confirmDialog) {
+                    UserService.updateUserGameId(USER_NAME, randomGameId);
+                    UserService.setOpponentsGameOpponent(USER_NAME, randomGameId);
+                    UserService.initializeChats(randomGameId, USER_NAME);
+                    SelectBackButton.style.display = "flex";
+                    characterName.style.display = "flex";
+                    speechText.style.display = "flex";
+                    characterContainer.style.display = "flex";
+                    userHeader.style.display = "none";
+                    userListContainer.style.display = "none";
+                    userBackground.style.display = "none";
+                    connectRefreshButton.style.display = "none";
+                    connectBackButton.style.display = "none";
+                    if (willPlayIntervalId) {
+                        clearInterval(willPlayIntervalId);
+                    }
+                    switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+                    scenes[activeScene].restartClick();
+                    scenes[activeScene].changeText();
+                } else {
+                    console.log(userName)
+                    UserService.updateIsRejected(1, userName)
+                    alert("Rejected an invitation from " + userName);
+                }
+            }
+        });
+    },
+
+    checkUserWillPlayPeriodically: () => {
+        willPlayIntervalId = setInterval(() => {
+            UserService.isUserWillPlay(USER_EMAIL, USER_PASSWORD, (willPlay) => {
+                if (willPlay) {
+                    UserService.showDialogue();
+                    UserService.updateWillPlay(0, USER_EMAIL, USER_PASSWORD);
+                }
+            });
+            UserService.isUserRejected(USER_NAME, (isRejected) => {
+                if (isRejected) {
+                    UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                        if (gameOpponent) {
+                            alert("You have been rejected by " + gameOpponent);
+                            UserService.resetGameOpponent(USER_EMAIL);
+                            UserService.updateIsRejected(0, USER_NAME);
+                        }
+                    });
+                }
+            });
+            UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                if (gameOpponent) {
+                    UserService.checkUsersHaveSameGameId(USER_NAME, gameOpponent, (haveSameGameId) => {
+                        if (haveSameGameId) {
+                            alert("Your game has been accepted");
+                            UserService.getGameIdByUsername(USER_NAME, (gameId) => {
+                                if (gameId) {
+                                    console.log("In game Id: " + USER_NAME)
+                                    console.log(gameId)
+                                    UserService.initializeChats(gameId, USER_NAME);
+                                }
+                            })
+                            SelectBackButton.style.display = "flex";
+                            characterName.style.display = "flex";
+                            speechText.style.display = "flex";
+                            characterContainer.style.display = "flex";
+                            userHeader.style.display = "none";
+                            userListContainer.style.display = "none";
+                            userBackground.style.display = "none";
+                            connectRefreshButton.style.display = "none";
+                            connectBackButton.style.display = "none";
+                            if (willPlayIntervalId) {
+                                clearInterval(willPlayIntervalId);
+                            }
+                            switchToScene(sceneData.CHARACTER_SELECT.sceneId);
+                            scenes[activeScene].restartClick();
+                            scenes[activeScene].changeText();
+                        }
+                    });
+                }
+            })
+        }, 2000);
+    },
+
+    setOpponentsGameOpponent: (userName, randomGameId) => {
+        UserService.getUserNameByGameOpponent(userName, (userName) => {
+            if (userName) {
+                console.log("UserName in getUserNameByOpponent: " + userName)
+                UserService.updateUserGameId(userName, randomGameId);
+                UserService.updateGameOpponent(USER_EMAIL, userName);
+            } else {
+                console.log("No username found");
+            }
+        });
+    },
+
+    initializeChats: (gameId, userName) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/initializeChats",
+            method: "POST",
+            data: {
+                gameId: gameId,
+                userName: userName,
+                chatText: ""
+            },
+            success: () => {
+                console.log("Chats initialized");
+            },
+            error: () => {
+                console.log("Initialization failed")
+            }
+        });
+    },
+
+    getGameIdByUsername: (userName, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameIdByUsername/" + userName,
+            method: "GET",
+            success: (response) => {
+                const gameId = response.gameId;
+                callback(gameId);
+                console.log(gameId);
+            },
+            error: (xhr, status, error) => {
+                console.error(error);
+                callback(null);
+            }
+        });
+    },
+
+    deleteUsersWithSameNonZeroGameId: (userName) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/deleteUsersWithSameNonZeroGameId/" + userName,
+            type: "DELETE",
+            success: () => {
+                console.log('Users chat deleted successfully');
+                // Handle success response here
+            },
+            error: (xhr, status, error) => {
+                console.error(error);
+                // Handle error response here
+            }
+        });
+    },
+
+    updateUserTaskCompleted: (userName, taskCompleted) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
+            type: "PUT",
+            success: function () {
+                // Handle success response
+            },
+            error: function () {
+                console.log("Failed to update taskCompleted");
+                // Handle error response
+            }
+        });
+    },
+
+    checkUsersHaveSameTaskCompleted: (userName1, userName2, callback) => {
+        $.ajax({
+            method: "GET",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameTaskCompleted/" + userName1 + "/" + userName2,
+            success: (response) => {
+                const haveSameTasksCompleted = response["Same tasksCompleted"];
+                callback(haveSameTasksCompleted);
+            },
+            error: () => {
+                callback(false);
+            }
+        });
+    },
+
+    getGameOpponentByUserName: (username, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
+            method: "GET",
+            success: (response) => {
+                if (response.gameOpponent) {
+                    const gameOpponent = response.gameOpponent;
+                    // Pass the game opponent to the callback function
+                    callback(gameOpponent);
+                } else {
+                    // No game opponent found
+                    callback(null);
+                }
+            },
+            error: (xhr, status, error) => {
+                // Handle error if the request fails
+                console.log("Error: " + error);
+                callback(null);
+            },
+        });
+    },
+
+    getRecipeByUserName: (username, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getRecipeByUserName/" + username,
+            method: "GET",
+            success: (response) => {
+                // Handle success response
+                const recipe = response.recipe;
+                callback(recipe);
+            },
+            error: () => {
+                // Handle error response
+                callback(null);
+            }
+        });
+    },
 };
 
-export const getRecipeByUserName = (username, callback) => {
-    $.ajax({
-        url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getRecipeByUserName/" + username,
-        method: "GET",
-        success: (response) => {
-            // Handle success response
-            const recipe = response.recipe;
-            callback(recipe);
-        },
-        error: () => {
-            // Handle error response
-            callback(null);
-        }
-    });
-};
 
