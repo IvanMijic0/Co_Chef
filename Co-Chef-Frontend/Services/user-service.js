@@ -677,15 +677,13 @@ export const UserService = {
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
             method: "GET",
             beforeSend: (xhr) => {
-                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+                xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user-token"))
             },
             success: (response) => {
                 if (response.gameOpponent) {
                     const gameOpponent = response.gameOpponent;
-                    // Pass the game opponent to the callback function
                     callback(gameOpponent);
                 } else {
-                    // No game opponent found
                     callback(null);
                 }
             },
