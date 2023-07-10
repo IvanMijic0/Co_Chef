@@ -644,7 +644,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add event listener for beforeunload event
     window.addEventListener("beforeunload", () => {
-        // Set user availability to false before leaving the site
+
+        UserService.logout();
+
         if (USER_NAME !== "" || USER_EMAIL !== "" || USER_PASSWORD !== "") {
             UserService.resetGameOpponent(USER_EMAIL);
             UserService.updateAvailability(false, USER_EMAIL, USER_PASSWORD);
