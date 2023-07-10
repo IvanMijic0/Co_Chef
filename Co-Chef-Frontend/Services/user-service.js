@@ -47,7 +47,7 @@ export const UserService = {
                 console.log(entity["email"].toString())
             },
             error: () => {
-                // toastr.error("Invalid credentials");
+                toastr.error("Invalid credentials");
             },
         });
     },
@@ -126,7 +126,7 @@ export const UserService = {
             type: "GET",
             dataType: "json",
             success: function (response) {
-                callback(response);
+                callback(response["userName"]);
             },
             error: function (xhr, status, error) {
                 callback(error);
