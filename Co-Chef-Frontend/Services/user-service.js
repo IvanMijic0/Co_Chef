@@ -113,8 +113,7 @@ export const UserService = {
                 }
             },
             error: () => {
-                // Handle error if the request fails
-                toastr.error();
+                toastr.error("Invalid Credentials");
             }
         });
     },

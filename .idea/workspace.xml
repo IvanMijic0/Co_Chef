@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Transferring to DB">
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,31 +105,7 @@
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
       <workItem from="1688950127411" duration="6579000" />
-      <workItem from="1688979195003" duration="11626000" />
-    </task>
-    <task id="LOCAL-00097" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688953904057</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1688953904058</updated>
-    </task>
-    <task id="LOCAL-00098" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688954071924</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1688954071924</updated>
-    </task>
-    <task id="LOCAL-00099" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688954805929</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1688954805929</updated>
+      <workItem from="1688979195003" duration="11883000" />
     </task>
     <task id="LOCAL-00100" summary="Setting up JWT">
       <option name="closed" value="true" />
@@ -500,7 +475,31 @@
       <option name="project" value="LOCAL" />
       <updated>1688990759094</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688990848108</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1688990848108</updated>
+    </task>
+    <task id="LOCAL-00147" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688991043311</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1688991043312</updated>
+    </task>
+    <task id="LOCAL-00148" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688991086327</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1688991086327</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
