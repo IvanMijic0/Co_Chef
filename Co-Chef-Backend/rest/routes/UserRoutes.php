@@ -33,8 +33,8 @@ Flight::route('POST /login', function () {
     $user = Flight::user_service()->get_user_by_email($login["email"]);
 
     if (isset($user['id'])) {
-        if ($user['password'] == $login['password']) {
-            unset($user['password']);
+        if ($user['userPassword'] == $login['password']) {
+            unset($user['userPassword']);
             $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
             Flight::json(['user_token' => $jwt]);
         } else {
