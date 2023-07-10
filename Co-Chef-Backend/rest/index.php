@@ -42,8 +42,8 @@ Flight::route('/*', function () {
     //perform JWT decode
     $path = Flight::request()->url;
     if (
-        $path == 'https://shark-app-7dvmx.ondigitalocean.app/rest/login' ||
-        $path == 'https://shark-app-7dvmx.ondigitalocean.app/rest/user'
+        $path == 'shark-app-7dvmx.ondigitalocean.app/rest/login' ||
+        $path == 'shark-app-7dvmx.ondigitalocean.app/rest/user'
     ) {
         return TRUE; // exclude login route from middleware
     }
