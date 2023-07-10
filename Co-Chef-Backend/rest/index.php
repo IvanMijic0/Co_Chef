@@ -44,7 +44,8 @@ Flight::route('/*', function () {
     if (
         $path == '/login' ||
         $path == '/user' ||
-        $path == "/docs.js"
+        $path == "/docs.js" ||
+        $path = "/checkUserByEmailAndPassword"
     ) {
         return TRUE; // exclude login route from middleware
     }
