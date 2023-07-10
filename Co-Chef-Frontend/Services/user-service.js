@@ -39,6 +39,7 @@ export const UserService = {
                     localStorage.setItem("user-token", result["user_token"]);
                     switchToScene(sceneData.INTRO.sceneId);
                     intro();
+                    console.log(entity);
                     const userEmail = $("#username").val();
                     const userPassword = $("#password").val();
                     UserService.updateCredentials(userEmail, userPassword);
