@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 Flight::route('/*', function () {
     //perform JWT decode
     $path = Flight::request()->url;
-    if ($path == '/login') return TRUE; // exclude login route from middleware
+    if ($path == 'rest/login' || $path == 'rest/user') return TRUE; // exclude login route from middleware
 
     $headers = getallheaders();
     if (!$headers['Authorization']) {

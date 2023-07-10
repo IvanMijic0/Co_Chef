@@ -3,6 +3,9 @@ export const ChatService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateChatTextByUserName/" + userName + "/" + chatText,
             type: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: function () {
             },
             error: function () {
@@ -15,6 +18,9 @@ export const ChatService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getChatTextByUsername/" + userName,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 const chatText = response.chatText;
                 callback(chatText);
@@ -30,6 +36,9 @@ export const ChatService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUpdateDisplay/" + userName,
             type: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 callback(response.isUpdateDisplay);
             },
@@ -43,6 +52,9 @@ export const ChatService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateDisplay/" + userName + "/" + isUpdateDisplay,
             type: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: () => {
                 console.log("Update display updated");
             },
@@ -55,6 +67,9 @@ export const ChatService = {
     clearChatText : (userName) => {
         $.ajax({
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/clearChatText/" + userName,
             success: (response) => {
                 console.log(response.message);

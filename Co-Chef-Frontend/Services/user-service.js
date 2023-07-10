@@ -11,7 +11,7 @@ import {
 
 export const UserService = {
     init: () => {
-        const token = localStorage.getItem("user_token");
+        const token = localStorage.getItem("user-token");
         if (token) {
             switchToScene(sceneData.INTRO.sceneId);
             intro();
@@ -28,12 +28,15 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/login",
             type: "POST",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             data: JSON.stringify(entity),
             contentType: "application/json",
             dataType: "json",
             success: (result) => {
                 console.log(result);
-                localStorage.setItem("user_token", result.token);
+                localStorage.setItem("user_user-token", result.token);
                 switchToScene(sceneData.INTRO.sceneId);
                 intro();
             },
@@ -52,6 +55,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/user",
             method: "POST",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             data: {
                 userName: userName,
                 userEmail: userEmail,
@@ -79,45 +85,51 @@ export const UserService = {
         });
     },
 
-    loginUser: (userEmail, userPassword) => {
-        $.ajax({
-            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
-            method: "GET",
-            data: JSON.stringify(),
-            contentType: "application/json",
-            success: (response) => {
-                if (response) {
-                    toastr.success("Successful Log in");
-                    USER_EMAIL = userEmail;
-                    USER_PASSWORD = userPassword;
-                    UserService.getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
-                        if (userName) {
-                            USER_NAME = userName;
-                        } else {
-                            // Error occurred or user not found
-                            console.log("Failed to retrieve user name");
-                        }
-                    });
-                    setTimeout(() => {
-                        switchToScene(sceneData.INTRO.sceneId);
-                        intro();
-                    }, 1500)
-                } else {
-                    // User credentials are invalid
-                    toastr.warning("User does not exist!");
-                }
-            },
-            error: () => {
-                // Handle error if the request fails
-                toastr.error();
-            }
-        });
-    },
+    // loginUser: (userEmail, userPassword) => {
+    //     $.ajax({
+    //         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
+    //         method: "GET",
+    //         data: JSON.stringify(),
+    //         beforeSend: (xhr) => {
+    //             xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+    //         },
+    //         contentType: "application/json",
+    //         success: (response) => {
+    //             if (response) {
+    //                 toastr.success("Successful Log in");
+    //                 USER_EMAIL = userEmail;
+    //                 USER_PASSWORD = userPassword;
+    //                 UserService.getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
+    //                     if (userName) {
+    //                         USER_NAME = userName;
+    //                     } else {
+    //                         // Error occurred or user not found
+    //                         console.log("Failed to retrieve user name");
+    //                     }
+    //                 });
+    //                 setTimeout(() => {
+    //                     switchToScene(sceneData.INTRO.sceneId);
+    //                     intro();
+    //                 }, 1500)
+    //             } else {
+    //                 // User credentials are invalid
+    //                 toastr.warning("User does not exist!");
+    //             }
+    //         },
+    //         error: () => {
+    //             // Handle error if the request fails
+    //             toastr.error();
+    //         }
+    //     });
+    // },
 
     updateAvailability: (isAvailable, userEmail, password) => {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserAvailability/" + userEmail + "/" + password + "/" + isAvailable,
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 // Handle success response if needed
                 console.log(response.message);
@@ -133,6 +145,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/resetGameOpponent/" + userEmail,
             method: 'PUT',
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: () => {
                 console.log("Game opponent reset successfully");
                 // Handle success response
@@ -148,6 +163,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserWillPlay/" + userEmail + "/" + userPassword + "/" + isWillPlay,
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 // Handle success response if needed
                 console.log(response.message);
@@ -163,6 +181,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateUserIsRejected/" + userName + "/" + isRejected,
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 // Handle success response if needed
                 console.log(response.message);
@@ -178,6 +199,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserAvailability/" + userEmail + "/" + userPassword,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 if (response.isAvailable) {
                     // User is available
@@ -201,6 +225,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserWillPlay/" + userEmail + "/" + userPassword,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 if (response.willPlay) {
                     // User is available
@@ -223,7 +250,9 @@ export const UserService = {
     isUserRejected: (userName, callback) => {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/isRejected/" + userName,
-            method: "GET",
+            method: "GET", beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 if (response.isRejected) {
                     // User is available
@@ -247,6 +276,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/users",
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 if (response.users) {
                     const users = response.users;
@@ -297,28 +329,13 @@ export const UserService = {
         });
     },
 
-    getUserNameByEmailAndPassword: (email, password, callback) => {
-        $.ajax({
-            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
-            method: "GET",
-            success: (response) => {
-                // Handle success response
-                const userName = response.userName;
-                console.log("Username: " + userName);
-                callback(userName);
-            },
-            error: (xhr, status, error) => {
-                // Handle error response
-                console.log("Error: " + error);
-                callback(null);
-            }
-        });
-    },
-
     saveGameOpponent: (opponentUsername) => {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/saveGameOpponent/" + USER_EMAIL + "/" + USER_PASSWORD + "/" + opponentUsername,
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: () => {
                 // Handle success response if needed
                 console.log("Game opponent saved successfully");
@@ -334,6 +351,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserByGameOpponent/" + gameOpponent,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 // Handle success response
                 const userName = response.userName;
@@ -351,13 +371,14 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateGameOpponent/" + userEmail + "/" + gameOpponent,
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: () => {
                 console.log("Game opponent updated successfully");
-                // Handle success response
             },
             error: () => {
                 console.log("Failed to update game opponent");
-                // Handle error response
             }
         });
     },
@@ -365,6 +386,9 @@ export const UserService = {
     checkUsersHaveSameGameId: (userName1, userName2, callback) => {
         $.ajax({
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameGameId/" + userName1 + "/" + userName2,
             success: (response) => {
                 const haveSameGameId = response["Same id"];
@@ -379,6 +403,9 @@ export const UserService = {
     checkUsersHaveWaitingToPlay: (userName1, userName2, callback) => {
         $.ajax({
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveWaitingToPlay/" + userName1 + "/" + userName2,
             success: (response) => {
                 const haveSameWaitingToPlay = response["haveSameWaitingToPlay"];
@@ -394,6 +421,9 @@ export const UserService = {
     updateWaitingToPlay: (userName, isWaitingToPlay) => {
         $.ajax({
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateWaitingToPlay/" + userName + "/" + isWaitingToPlay,
             success: () => {
                 console.log("User isWaitingToPlay updated");
@@ -408,6 +438,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateGameId/" + userName + "/" + gameId,
             type: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: function () {
                 console.log("Game ID updated successfully");
             },
@@ -420,6 +453,9 @@ export const UserService = {
     updateRecipe: (userName, recipe) => {
         $.ajax({
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateRecipe/" + userName + "/" + recipe,
             success: (response) => {
                 console.log("User recipe updated:", response.message);
@@ -433,6 +469,9 @@ export const UserService = {
     resetRecipe: (userEmail) => {
         $.ajax({
             method: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/resetRecipe/" + userEmail,
             success: (response) => {
                 console.log("Recipe reset:", response.message);
@@ -546,6 +585,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/initializeChats",
             method: "POST",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             data: {
                 gameId: gameId,
                 userName: userName,
@@ -564,6 +606,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameIdByUsername/" + userName,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 const gameId = response.gameId;
                 callback(gameId);
@@ -580,6 +625,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/deleteUsersWithSameNonZeroGameId/" + userName,
             type: "DELETE",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: () => {
                 console.log('Users chat deleted successfully');
                 // Handle success response here
@@ -595,6 +643,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/updateTasksCompleted/" + userName + "/" + taskCompleted,
             type: "PUT",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: function () {
                 // Handle success response
             },
@@ -608,6 +659,9 @@ export const UserService = {
     checkUsersHaveSameTaskCompleted: (userName1, userName2, callback) => {
         $.ajax({
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUsersHaveSameTaskCompleted/" + userName1 + "/" + userName2,
             success: (response) => {
                 const haveSameTasksCompleted = response["Same tasksCompleted"];
@@ -623,6 +677,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 if (response.gameOpponent) {
                     const gameOpponent = response.gameOpponent;
@@ -645,6 +702,9 @@ export const UserService = {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getRecipeByUserName/" + username,
             method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
             success: (response) => {
                 // Handle success response
                 const recipe = response.recipe;

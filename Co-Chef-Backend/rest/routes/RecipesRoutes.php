@@ -15,7 +15,7 @@ Flight::route("GET /recipes", function () {
     }
 });
 
-Flight::route("GET /recipeByName", function ($name) {
+Flight::route("GET /recipeByName/@name", function ($name) {
     $recipe = Flight::recipe_routes()->getRecipeByName($name);
 
     if ($recipe) {
