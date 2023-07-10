@@ -91,9 +91,6 @@ export const intro = () => {
         }, {once: true});
     }, 3500);
 }
-if (activeScene === 2) {
-    intro();
-}
 
 const drawActiveScene = (timestamp) => {
     const deltaTime = timestamp - lastTime;
