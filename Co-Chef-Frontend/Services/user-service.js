@@ -36,10 +36,12 @@ export const UserService = {
             dataType: "json",
             success: (result) => {
                 setTimeout(() => {
-                    toastr.success("Successful Login");
                     localStorage.setItem("user-token", result["user_token"]);
                     switchToScene(sceneData.INTRO.sceneId);
                     intro();
+                    const userEmail = $("#username").val();
+                    const userPassword = $("#password").val();
+                    UserService.updateCredentials(userEmail, userPassword);
                 }, 500)
             },
             error: () => {
@@ -86,43 +88,50 @@ export const UserService = {
         });
     },
 
-    // loginUser: (userEmail, userPassword) => {
-    //     $.ajax({
-    //         url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
-    //         method: "GET",
-    //         data: JSON.stringify(),
-    //         beforeSend: (xhr) => {
-    //             xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
-    //         },
-    //         contentType: "application/json",
-    //         success: (response) => {
-    //             if (response) {
-    //                 toastr.success("Successful Log in");
-    //                 USER_EMAIL = userEmail;
-    //                 USER_PASSWORD = userPassword;
-    //                 UserService.getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
-    //                     if (userName) {
-    //                         USER_NAME = userName;
-    //                     } else {
-    //                         // Error occurred or user not found
-    //                         console.log("Failed to retrieve user name");
-    //                     }
-    //                 });
-    //                 setTimeout(() => {
-    //                     switchToScene(sceneData.INTRO.sceneId);
-    //                     intro();
-    //                 }, 1500)
-    //             } else {
-    //                 // User credentials are invalid
-    //                 toastr.warning("User does not exist!");
-    //             }
-    //         },
-    //         error: () => {
-    //             // Handle error if the request fails
-    //             toastr.error();
-    //         }
-    //     });
-    // },
+    updateCredentials: (userEmail, userPassword) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/checkUserByEmailAndPassword/" + userEmail + "/" + userPassword,
+            method: "GET",
+            beforeSend: (xhr) => {
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
+            },
+            contentType: "application/json",
+            success: (response) => {
+                if (response) {
+                    toastr.success("Successful Log in");
+                    USER_EMAIL = userEmail;
+                    USER_PASSWORD = userPassword;
+                    UserService.getUserNameByEmailAndPassword(userEmail, userPassword, (userName) => {
+                        if (userName) {
+                            USER_NAME = userName;
+                        } else {
+                            console.log("Failed to retrieve user name");
+                        }
+                    });
+                } else {
+                    toastr.warning("User does not exist!");
+                }
+            },
+            error: () => {
+                // Handle error if the request fails
+                toastr.error();
+            }
+        });
+    },
+
+    getUserNameByEmailAndPassword: (email, password, callback) => {
+        $.ajax({
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getUserNameByEmailAndPassword/" + email + "/" + password,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                callback(response);
+            },
+            error: function (xhr, status, error) {
+                callback(error);
+            }
+        });
+    },
 
     updateAvailability: (isAvailable, userEmail, password) => {
         $.ajax({
@@ -271,7 +280,7 @@ export const UserService = {
         });
     },
 
-    ListUsers:  () => {
+    ListUsers: () => {
         $.ajax({
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/users",
             method: "GET",

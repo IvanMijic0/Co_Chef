@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up JWT">
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/DialoguesDao.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/DishesDao.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/DialoguesRoutes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/DishesRoutes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/DialoguesService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/DishesService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/dialogue-service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/dish-service.js" afterDir="false" />
+    <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Transferring to DB">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/recipe-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/recipe-service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/text-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/text-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,199 +107,7 @@
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
       <workItem from="1688950127411" duration="6579000" />
-      <workItem from="1688979195003" duration="6133000" />
-    </task>
-    <task id="LOCAL-00070" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688757123768</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1688757123768</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688757150052</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1688757150052</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688757540728</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1688757540728</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688757823656</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1688757823656</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688758243705</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1688758243705</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688758631302</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1688758631302</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688758880516</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1688758880516</updated>
-    </task>
-    <task id="LOCAL-00077" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688759114389</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1688759114389</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688759851177</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1688759851177</updated>
-    </task>
-    <task id="LOCAL-00079" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688760117660</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1688760117660</updated>
-    </task>
-    <task id="LOCAL-00080" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688760380881</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1688760380881</updated>
-    </task>
-    <task id="LOCAL-00081" summary="Logo Animation">
-      <option name="closed" value="true" />
-      <created>1688851176518</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1688851176518</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Logo Animation">
-      <option name="closed" value="true" />
-      <created>1688851233256</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1688851233256</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Logo Animation">
-      <option name="closed" value="true" />
-      <created>1688851813190</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1688851813190</updated>
-    </task>
-    <task id="LOCAL-00084" summary="Logo Animation">
-      <option name="closed" value="true" />
-      <created>1688852030123</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1688852030123</updated>
-    </task>
-    <task id="LOCAL-00085" summary="Logo Animation">
-      <option name="closed" value="true" />
-      <created>1688952075756</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1688952075756</updated>
-    </task>
-    <task id="LOCAL-00086" summary="Logo Animation">
-      <option name="closed" value="true" />
-      <created>1688952320337</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1688952320337</updated>
-    </task>
-    <task id="LOCAL-00087" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688952440044</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1688952440044</updated>
-    </task>
-    <task id="LOCAL-00088" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688952691544</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1688952691544</updated>
-    </task>
-    <task id="LOCAL-00089" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688952830012</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1688952830012</updated>
-    </task>
-    <task id="LOCAL-00090" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688952925525</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1688952925525</updated>
-    </task>
-    <task id="LOCAL-00091" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688953060999</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1688953060999</updated>
-    </task>
-    <task id="LOCAL-00092" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688953163778</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1688953163778</updated>
-    </task>
-    <task id="LOCAL-00093" summary="Setting up JWT">
-      <option name="closed" value="true" />
-      <created>1688953250173</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1688953250173</updated>
+      <workItem from="1688979195003" duration="11033000" />
     </task>
     <task id="LOCAL-00094" summary="Setting up JWT">
       <option name="closed" value="true" />
@@ -512,7 +309,199 @@
       <option name="project" value="LOCAL" />
       <updated>1688981821843</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688985372336</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1688985372336</updated>
+    </task>
+    <task id="LOCAL-00120" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688985760838</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1688985760838</updated>
+    </task>
+    <task id="LOCAL-00121" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688985945724</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1688985945724</updated>
+    </task>
+    <task id="LOCAL-00122" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688986187035</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1688986187035</updated>
+    </task>
+    <task id="LOCAL-00123" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688986376134</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1688986376135</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688986651514</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1688986651514</updated>
+    </task>
+    <task id="LOCAL-00125" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688986905331</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1688986905331</updated>
+    </task>
+    <task id="LOCAL-00126" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688987051206</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987051206</updated>
+    </task>
+    <task id="LOCAL-00127" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688987083091</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987083091</updated>
+    </task>
+    <task id="LOCAL-00128" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688987092781</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987092782</updated>
+    </task>
+    <task id="LOCAL-00129" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688987253795</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987253795</updated>
+    </task>
+    <task id="LOCAL-00130" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688987300674</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987300674</updated>
+    </task>
+    <task id="LOCAL-00131" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688987871513</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1688987871513</updated>
+    </task>
+    <task id="LOCAL-00132" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688988119958</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1688988119958</updated>
+    </task>
+    <task id="LOCAL-00133" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688988173844</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1688988173844</updated>
+    </task>
+    <task id="LOCAL-00134" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688988514667</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1688988514667</updated>
+    </task>
+    <task id="LOCAL-00135" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688988558160</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1688988558160</updated>
+    </task>
+    <task id="LOCAL-00136" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688988859244</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1688988859244</updated>
+    </task>
+    <task id="LOCAL-00137" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688989129301</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1688989129301</updated>
+    </task>
+    <task id="LOCAL-00138" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688989443186</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1688989443186</updated>
+    </task>
+    <task id="LOCAL-00139" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688989612287</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1688989612287</updated>
+    </task>
+    <task id="LOCAL-00140" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688989841358</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1688989841358</updated>
+    </task>
+    <task id="LOCAL-00141" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688989940897</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1688989940897</updated>
+    </task>
+    <task id="LOCAL-00142" summary="Transferring to DB">
+      <option name="closed" value="true" />
+      <created>1688990026838</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1688990026838</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +516,8 @@
     <MESSAGE value="Getting chat to work" />
     <MESSAGE value="Logo Animation" />
     <MESSAGE value="Setting up JWT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Setting up JWT" />
+    <MESSAGE value="Transferring to DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="Transferring to DB" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
