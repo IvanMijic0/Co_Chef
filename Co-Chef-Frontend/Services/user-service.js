@@ -35,10 +35,12 @@ export const UserService = {
             contentType: "application/json",
             dataType: "json",
             success: (result) => {
-                toastr.success("Successful Login");
-                localStorage.setItem("user-token", result["user_token"]);
-                switchToScene(sceneData.INTRO.sceneId);
-                intro();
+                setTimeout(() => {
+                    toastr.success("Successful Login");
+                    localStorage.setItem("user-token", result["user_token"]);
+                    switchToScene(sceneData.INTRO.sceneId);
+                    intro();
+                }, 500)
             },
             error: (error) => {
                 toastr.error(error);
@@ -71,7 +73,7 @@ export const UserService = {
                     USER_PASSWORD = userPassword;
                     setTimeout(() => {
                         switchToScene(sceneData.LOGIN.sceneId);
-                    }, 1000);
+                    }, 500);
                 }
             },
             error: (xhr) => {
