@@ -14,12 +14,12 @@ export const UserService = {
         const token = localStorage.getItem("user_token");
         if (token) {
             switchToScene(sceneData.INTRO.sceneId);
+            intro();
         }
         $("#login-form").validate({
             submitHandler: (form) => {
                 const entity = Object.fromEntries(new FormData(form).entries());
                 UserService.login(entity);
-                intro();
             },
         });
     },

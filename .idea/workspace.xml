@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up JWT">
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,23 +104,7 @@
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
-      <workItem from="1688950127411" duration="6029000" />
-    </task>
-    <task id="LOCAL-00062" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688755013062</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1688755013062</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688755145318</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1688755145318</updated>
+      <workItem from="1688950127411" duration="6264000" />
     </task>
     <task id="LOCAL-00064" summary="Getting chat to work">
       <option name="closed" value="true" />
@@ -498,7 +482,23 @@
       <option name="project" value="LOCAL" />
       <updated>1688956218443</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688956276976</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1688956276976</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688956408565</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1688956408565</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
