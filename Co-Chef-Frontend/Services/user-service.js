@@ -13,6 +13,7 @@ export const UserService = {
     init: () => {
         const token = localStorage.getItem("user_token");
         if (token) {
+            console.log(token)
             switchToScene(sceneData.INTRO.sceneId);
         }
         $("#login-form").validate({
