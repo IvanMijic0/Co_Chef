@@ -226,7 +226,6 @@ export class GameplayScene extends Scene {
                                     }
                                 });
                             } else {
-                                console.log("fail");
                                 this.showLoseScreen = true;
                                 this.endGameMenuButton.style.display = "flex";
                                 console.log(this.showLoseScreen)
@@ -250,7 +249,6 @@ export class GameplayScene extends Scene {
                                     }
                                 });
                             } else {
-                                console.log("fail");
                                 this.showLoseScreen = true;
                                 this.endGameMenuButton.style.display = "flex";
                                 CAN_MOVE = false;
@@ -273,7 +271,6 @@ export class GameplayScene extends Scene {
                                     }
                                 });
                             } else {
-                                console.log("fail");
                                 this.showLoseScreen = true;
                                 this.endGameMenuButton.style.display = "flex";
                                 console.log(this.showLoseScreen)

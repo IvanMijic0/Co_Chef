@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Logo Animation">
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/controller.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Scenes/gameplayScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Scenes/gameplayScene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,15 +105,7 @@
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
-      <workItem from="1688950127411" duration="2164000" />
-    </task>
-    <task id="LOCAL-00037" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688597041196</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1688597041196</updated>
+      <workItem from="1688950127411" duration="2284000" />
     </task>
     <task id="LOCAL-00038" summary="Setting up swagger for routes">
       <option name="closed" value="true" />
@@ -502,7 +491,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688952075756</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Logo Animation">
+      <option name="closed" value="true" />
+      <created>1688952320337</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1688952320337</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
