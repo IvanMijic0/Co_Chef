@@ -42,6 +42,7 @@ export const UserService = {
                     console.log(entity["email"]);
                     UserService.updateCredentials(entity["email"], entity["password"]);
                 }, 500)
+                console.log(USER_NAME);
             },
             error: () => {
                 toastr.error("Invalid credentials");
