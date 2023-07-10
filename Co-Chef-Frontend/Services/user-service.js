@@ -45,7 +45,7 @@ export const UserService = {
                 console.log(USER_NAME);
             },
             error: () => {
-                toastr.error("Invalid credentials");
+                // toastr.error("Invalid credentials");
             },
         });
     },
