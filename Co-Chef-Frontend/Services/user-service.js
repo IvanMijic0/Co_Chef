@@ -19,6 +19,7 @@ export const UserService = {
             submitHandler: (form) => {
                 const entity = Object.fromEntries(new FormData(form).entries());
                 UserService.login(entity);
+                intro();
             },
         });
     },
@@ -33,6 +34,7 @@ export const UserService = {
                 console.log(result);
                 localStorage.setItem("user_token", result.token);
                 switchToScene(sceneData.INTRO.sceneId);
+                intro();
             },
             error: (error) => {
                 toastr.error(error);
