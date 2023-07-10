@@ -13,10 +13,7 @@ let displayChatIntervalId;
 const NOODLE_RECIPE = {
     name: "noodle",
     recipeArr: [
-        "Wash the vegetables",
-        "3 onions, 1 green onion, 3 carrots, 2 mushrooms",
-        "Add and stir noodles to pot",
-        "Mix well 7 times"
+
     ],
     onion_num_max: 3,
     greenOnion_num_max: 1,

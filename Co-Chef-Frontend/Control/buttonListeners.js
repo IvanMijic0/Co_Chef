@@ -618,6 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
         slotItem.style.width = "3.5vw";
         slotItem.src = greenOnionTile.querySelector("#green-onion").src;
         scenes[activeScene].changeItemFromSlot(8);
+        scenes[activeScene].changeItemFromSlot(8);
         scenes[activeScene].closeInventory();
     });
 
