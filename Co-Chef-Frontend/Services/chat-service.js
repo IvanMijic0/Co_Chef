@@ -25,8 +25,7 @@ export const ChatService = {
                 const chatText = response.chatText;
                 callback(chatText);
             },
-            error: (xhr, status, error) => {
-                console.error(error);
+            error: () => {
                 callback(null);
             }
         });

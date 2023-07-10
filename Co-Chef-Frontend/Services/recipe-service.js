@@ -1,7 +1,7 @@
 export const RecipeService = {
     getRecipes: (callback) => {
         $.ajax({
-            url: "/recipes",
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/recipes",
             type: "GET",
             beforeSend: (xhr) => {
                 xhr.setRequestHeader("Authorization", localStorage.getItem("user_token"))
@@ -18,7 +18,7 @@ export const RecipeService = {
 
     getRecipeByName: (name, callback) => {
         $.ajax({
-            url: "/recipeByName/" + name,
+            url: "https://shark-app-7dvmx.ondigitalocean.app/rest/recipeByName/" + name,
             type: "GET",
             beforeSend: (xhr) => {
                 xhr.setRequestHeader("Authorization", localStorage.getItem("user_token"))

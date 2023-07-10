@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up JWT">
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/recipe-service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/DialoguesDao.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/DishesDao.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/DialoguesRoutes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/DishesRoutes.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/DialoguesService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/DishesService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/dialogue-service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/dish-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/recipe-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/recipe-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/text-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/text-data.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,15 +118,7 @@
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
       <workItem from="1688950127411" duration="6579000" />
-      <workItem from="1688979195003" duration="2407000" />
-    </task>
-    <task id="LOCAL-00069" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688756435551</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1688756435551</updated>
+      <workItem from="1688979195003" duration="6133000" />
     </task>
     <task id="LOCAL-00070" summary="Getting chat to work">
       <option name="closed" value="true" />
@@ -503,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688980996297</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688981821843</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1688981821843</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

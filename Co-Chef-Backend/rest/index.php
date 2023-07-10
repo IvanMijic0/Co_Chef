@@ -8,7 +8,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
 require "../vendor/autoload.php";
 require "dao/UsersDao.php";
 require "dao/ChatsDao.php";
@@ -39,26 +38,26 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 }
 
 // middleware method for login
-Flight::route('/*', function () {
-    //perform JWT decode
-    $path = Flight::request()->url;
-    if ($path == 'rest/login' || $path == 'rest/user') return TRUE; // exclude login route from middleware
-
-    $headers = getallheaders();
-    if (!$headers['Authorization']) {
-        Flight::json(["message" => "Authorization is missing"], 403);
-        return FALSE;
-    } else {
-        try {
-            $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
-            Flight::set('user', $decoded);
-            return TRUE;
-        } catch (\Exception $e) {
-            Flight::json(["message" => "Authorization token is not valid"], 403);
-            return FALSE;
-        }
-    }
-});
+//Flight::route('/*', function () {
+//    //perform JWT decode
+//    $path = Flight::request()->url;
+//    if ($path == 'rest/login' || $path == 'rest/user') return TRUE; // exclude login route from middleware
+//
+//    $headers = getallheaders();
+//    if (!$headers['Authorization']) {
+//        Flight::json(["message" => "Authorization is missing"], 403);
+//        return FALSE;
+//    } else {
+//        try {
+//            $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+//            Flight::set('user', $decoded);
+//            return TRUE;
+//        } catch (\Exception $e) {
+//            Flight::json(["message" => "Authorization token is not valid"], 403);
+//            return FALSE;
+//        }
+//    }
+//});
 
 /* REST API documentation endpoint */
 Flight::route("GET /docs.json", function () {
@@ -76,11 +75,14 @@ Flight::route("GET /docs.json", function () {
 Flight::register("user_service", UserService::class);
 Flight::register("chat_service", ChatServices::class);
 Flight::register("recipe_service", RecipeDao::class);
+Flight::register("dialogue_service", RecipeDao::class);
+Flight::register("dish_service", RecipeDao::class);
 
 require_once "routes/UserRoutes.php";
 require_once "routes/ChatsRoutes.php";
 require_once "routes/RecipesRoutes.php";
-
+require_once "routes/DialoguesRoutes.php";
+require_once "routes/DishesRoutes.php";
 
 Flight::before("error", function () {
     header("Access-Control-Allow-Origin: *");
