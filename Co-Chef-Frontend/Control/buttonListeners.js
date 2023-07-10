@@ -1,10 +1,6 @@
 import {sceneData} from "../data-utils/scene-data.js";
 import {switchToScene, volumeBar, audio, activeScene, scenes} from "./controller.js";
 import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
-import {
-    UserService
-} from "../Services/user-service.js";
-import {ChatService} from "../Services/chat-service.js";
 import {displayChatMessages} from "./chatting.js";
 
 export const userHeader = document.getElementById("userHeader");
