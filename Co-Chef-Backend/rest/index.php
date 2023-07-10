@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 Flight::route('/*', function () {
     //perform JWT decode
     $path = Flight::request()->url;
-    if ($path == 'rest/login' || $path == 'rest/user') return TRUE; // exclude login route from middleware
+    if ($path == 'https://shark-app-7dvmx.ondigitalocean.app/rest/login' || $path == 'rest/user') return TRUE; // exclude login route from middleware
 
     $headers = getallheaders();
     if (!$headers['Authorization']) {
@@ -52,7 +52,7 @@ Flight::route('/*', function () {
             $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
             Flight::set('user', $decoded);
             return TRUE;
-        } catch (\Exception $e) {
+        } catch (Exception) {
             Flight::json(["message" => "Authorization token is not valid"], 403);
             return FALSE;
         }
