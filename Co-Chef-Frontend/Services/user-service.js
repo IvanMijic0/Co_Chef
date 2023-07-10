@@ -15,6 +15,7 @@ export const UserService = {
         if (token) {
             switchToScene(sceneData.INTRO.sceneId);
             intro();
+            return;
         }
         $("#login-form").validate({
             submitHandler: (form) => {

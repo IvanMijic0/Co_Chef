@@ -104,15 +104,7 @@
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
-      <workItem from="1688950127411" duration="6264000" />
-    </task>
-    <task id="LOCAL-00064" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688755177273</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1688755177273</updated>
+      <workItem from="1688950127411" duration="6288000" />
     </task>
     <task id="LOCAL-00065" summary="Getting chat to work">
       <option name="closed" value="true" />
@@ -498,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688956408565</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688956514832</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1688956514832</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
