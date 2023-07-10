@@ -36,8 +36,8 @@ export const UserService = {
             dataType: "json",
             success: (result) => {
                 toastr.success("Successful Login");
-                localStorage.setItem("user-token", result.token);
-                console.log(result.token);
+                localStorage.setItem("user-token", result["user_token"]);
+                console.log(result["user_token"]);
                 switchToScene(sceneData.INTRO.sceneId);
                 intro();
             },
