@@ -50,7 +50,7 @@ Flight::route('/*', function () {
     }
 
     $headers = getallheaders();
-    if (!$headers['Authorization']) {
+    if ($headers['Authorization'] == null) {
         Flight::json(["message" => "Authorization is missing"], 403);
         return FALSE;
     } else {
