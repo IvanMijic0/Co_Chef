@@ -11,6 +11,7 @@ import {sceneData} from "../data-utils/scene-data.js";
 import {LazyAudio} from "../utils/audio.js";
 import {VolumeBar} from "../utils/volume-bar.js";
 import {ConnectScene} from "../Scenes/connectScene.js";
+import {UserService} from "../Services/user-service.js";
 
 // Check if the Screen Orientation API is supported
 if (screen.orientation && screen.orientation.lock) {
@@ -53,6 +54,7 @@ let currentImageIndex = 0;
 let iterations = 0;
 let changeLogoTimeout;
 
+UserService.init();
 scenes[activeScene].show();
 
 const logoImages = [

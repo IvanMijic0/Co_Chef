@@ -1,8 +1,5 @@
 import {
-    clearChatText,
-    getChatTextByUsername,
-    updateChatTextByUserName,
-    updateDisplay
+    ChatService
 } from "../Services/chat-service.js";
 import {UserService} from "../Services/user-service.js";
 
@@ -26,16 +23,16 @@ chatField.addEventListener("keydown", (e) => {
         inputField.disabled = !inputField.disabled;
         const input = e.target;
         const message = input.value.trim();
-        updateChatTextByUserName(USER_NAME, message);
+        ChatService.updateChatTextByUserName(USER_NAME, message);
         UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
             if (gameOpponent) {
-                updateDisplay(USER_NAME, 1);
-                updateDisplay(gameOpponent, 1);
+                ChatService.updateDisplay(USER_NAME, 1);
+                ChatService.updateDisplay(gameOpponent, 1);
             }
         });
         input.value = "";
         setTimeout(() => {
-            clearChatText(USER_NAME);
+            ChatService.clearChatText(USER_NAME);
         }, 1500);
     }
 });
@@ -53,7 +50,7 @@ export const displayChatMessages = () => {
     // chatLog.innerHTML = '';
     UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
         if (gameOpponent) {
-            getChatTextByUsername(gameOpponent, (chatText) => {
+            ChatService.getChatTextByUsername(gameOpponent, (chatText) => {
                 if (chatText) {
                     const messageElement = document.createElement('div');
                     messageElement.classList.add('chat-message');
@@ -79,7 +76,7 @@ export const displayChatMessages = () => {
         }
     });
 
-    getChatTextByUsername(USER_NAME, (chatText) => {
+    ChatService.getChatTextByUsername(USER_NAME, (chatText) => {
         if (chatText) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message');

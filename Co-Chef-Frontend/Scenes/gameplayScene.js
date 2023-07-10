@@ -4,10 +4,7 @@ import {InputHandler} from "../Control/input-handler.js";
 import {extractFileNameWithExtension, extractFileNameWithoutExtension} from "../utils/string-manipulation.js";
 import {checkAllPropertiesEqualMax} from "../utils/object-manipulation.js";
 import {
-    updateUserTaskCompleted,
-    checkUsersHaveSameTaskCompleted,
-    getRecipeByUserName,
-    getGameOpponentByUserName
+    UserService
 } from "../Services/user-service.js";
 
 export class GameplayScene extends Scene {
@@ -209,14 +206,14 @@ export class GameplayScene extends Scene {
             this.timer.style.color = "#e10000";
             timerValueSec = 0;
             if (this.checkOnce) {
-                getRecipeByUserName(USER_NAME, (recipe) => {
+                UserService.getRecipeByUserName(USER_NAME, (recipe) => {
                     if (recipe) {
                         if (recipe === sceneData.DISH_SELECT.noodlesName) {
                             if (checkAllPropertiesEqualMax(NOODLE_RECIPE)) {
-                                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                     if (gameOpponent) {
-                                        updateUserTaskCompleted(USER_NAME, 1);
-                                        checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                        UserService.updateUserTaskCompleted(USER_NAME, 1);
+                                        UserService.checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
                                             if (areCompleted) {
                                                 this.showWinScreen = true;
                                                 this.endGameMenuButton.style.display = "flex";
@@ -237,10 +234,10 @@ export class GameplayScene extends Scene {
                             }
                         } else if (recipe === sceneData.DISH_SELECT.curryName) {
                             if (checkAllPropertiesEqualMax(CURRY_RECIPE)) {
-                                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                     if (gameOpponent) {
-                                        updateUserTaskCompleted(USER_NAME, 1);
-                                        checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                        UserService.updateUserTaskCompleted(USER_NAME, 1);
+                                        UserService.checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
                                             if (areCompleted) {
                                                 this.showWinScreen = true;
                                                 this.endGameMenuButton.style.display = "flex";
@@ -260,10 +257,10 @@ export class GameplayScene extends Scene {
                             }
                         } else if (recipe === sceneData.DISH_SELECT.fishTacoName) {
                             if (checkAllPropertiesEqualMax(FISH_TACO_RECIPE)) {
-                                getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
+                                UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                     if (gameOpponent) {
-                                        updateUserTaskCompleted(USER_NAME, 1);
-                                        checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
+                                        UserService.updateUserTaskCompleted(USER_NAME, 1);
+                                        UserService.checkUsersHaveSameTaskCompleted(USER_NAME, gameOpponent, (areCompleted) => {
                                             if (areCompleted) {
                                                 this.showWinScreen = true;
                                                 this.endGameMenuButton.style.display = "flex";
@@ -419,7 +416,7 @@ export class GameplayScene extends Scene {
                 let propertyName = extractFileNameWithoutExtension(this.sinkItem.src) + "_num";
                 let pileNum = parseInt(pileNumElement.innerHTML[1]) + 1;
                 pileNumElement.innerHTML = "x" + pileNum;
-                getRecipeByUserName(USER_NAME, (recipe) => {
+                UserService.getRecipeByUserName(USER_NAME, (recipe) => {
                     if (recipe) {
                         if (recipe === sceneData.DISH_SELECT.noodlesName) {
                             NOODLE_RECIPE[propertyName]++;
@@ -450,7 +447,7 @@ export class GameplayScene extends Scene {
                             if (this.changeStirNum) {
                                 this.stirNumber++;
                                 this.stirNumberElement.innerHTML = this.stirNumber;
-                                getRecipeByUserName(USER_NAME, (recipe) => {
+                                UserService.getRecipeByUserName(USER_NAME, (recipe) => {
                                     if (recipe) {
                                         if (recipe === sceneData.DISH_SELECT.noodlesName) {
                                             NOODLE_RECIPE.stir_num++;

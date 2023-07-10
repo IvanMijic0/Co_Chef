@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Logo Animation">
-      <change beforePath="$PROJECT_DIR$/.idea/Co_Chef.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Co_Chef.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/UsersDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/UsersDao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/UserService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/chatting.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Scenes/gameplayScene.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Scenes/gameplayScene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/chat-service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,15 +108,7 @@
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
-      <workItem from="1688950127411" duration="1870000" />
-    </task>
-    <task id="LOCAL-00036" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688596816409</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1688596816409</updated>
+      <workItem from="1688950127411" duration="2164000" />
     </task>
     <task id="LOCAL-00037" summary="Setting up swagger for routes">
       <option name="closed" value="true" />
@@ -507,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688852030123</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="Logo Animation">
+      <option name="closed" value="true" />
+      <created>1688952075756</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1688952075756</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

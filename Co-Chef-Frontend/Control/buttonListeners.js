@@ -4,7 +4,7 @@ import {extractFileNameWithExtension} from "../utils/string-manipulation.js";
 import {
     UserService
 } from "../Services/user-service.js";
-import {checkUpdateDisplay, updateDisplay} from "../Services/chat-service.js";
+import {ChatService} from "../Services/chat-service.js";
 import {displayChatMessages} from "./chatting.js";
 
 export const userHeader = document.getElementById("userHeader");
@@ -261,13 +261,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                                     UserService.updateWaitingToPlay(USER_NAME, 0)
                                                 }, 1000)
                                                 displayChatIntervalId = setInterval(() => {
-                                                    checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
+                                                    ChatService.checkUpdateDisplay(USER_NAME, (isUpdateDisplay) => {
                                                         if (isUpdateDisplay) {
                                                             displayChatMessages();
                                                             UserService.getGameOpponentByUserName(USER_NAME, (gameOpponent) => {
                                                                 if (gameOpponent) {
-                                                                    updateDisplay(USER_NAME, 0);
-                                                                    updateDisplay(gameOpponent, 0);
+                                                                    ChatService.updateDisplay(USER_NAME, 0);
+                                                                    ChatService.updateDisplay(gameOpponent, 0);
                                                                 }
                                                             });
                                                         }
