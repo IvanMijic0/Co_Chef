@@ -37,7 +37,6 @@ export const UserService = {
             success: (result) => {
                 toastr.success("Successful Login");
                 localStorage.setItem("user-token", result["user_token"]);
-                console.log(result["user_token"]);
                 switchToScene(sceneData.INTRO.sceneId);
                 intro();
             },
@@ -72,7 +71,6 @@ export const UserService = {
                     USER_PASSWORD = userPassword;
                     setTimeout(() => {
                         switchToScene(sceneData.LOGIN.sceneId);
-                        intro();
                     }, 1000);
                 }
             },
