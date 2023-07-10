@@ -1,6 +1,5 @@
 import {DialogueService} from "../Services/dialogue-service.js";
 
-
 export const textData = {
     pup: () => DialogueService.getDefaultTextByActor("pup", (text) => {
         if (text) {
