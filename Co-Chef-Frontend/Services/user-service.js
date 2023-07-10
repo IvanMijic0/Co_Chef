@@ -677,7 +677,7 @@ export const UserService = {
             url: "https://shark-app-7dvmx.ondigitalocean.app/rest/getGameOpponentByUser/" + username,
             method: "GET",
             beforeSend: (xhr) => {
-                xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user-token"))
+                xhr.setRequestHeader("Authorization", localStorage.getItem("user-token"))
             },
             success: (response) => {
                 if (response.gameOpponent) {

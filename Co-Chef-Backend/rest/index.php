@@ -37,36 +37,36 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     exit;
 }
 
-// middleware method for login
-Flight::route('/*', function () {
-    //perform JWT decode
-    $path = Flight::request()->url;
-    if (
-        $path == '/login' ||
-        $path == '/user' ||
-        $path == "/docs.js"
-    ) {
-        return TRUE; // exclude login route from middleware
-    }
-
-    $headers = getallheaders();
-    if ($headers['Authorization'] == null) {
-        Flight::json(["message" => "Authorization is missing"], 403);
-        return FALSE;
-    } else {
-        try {
-            $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
-            Flight::set('user', $decoded);
-            return TRUE;
-        } catch (Exception) {
-            Flight::json([
-                "path" => $path,
-                "message" => "Authorization token is not valid"
-            ], 403);
-            return FALSE;
-        }
-    }
-});
+//// middleware method for login
+//Flight::route('/*', function () {
+//    //perform JWT decode
+//    $path = Flight::request()->url;
+//    if (
+//        $path == '/login' ||
+//        $path == '/user' ||
+//        $path == "/docs.js"
+//    ) {
+//        return TRUE; // exclude login route from middleware
+//    }
+//
+//    $headers = getallheaders();
+//    if ($headers['Authorization'] == null) {
+//        Flight::json(["message" => "Authorization is missing"], 403);
+//        return FALSE;
+//    } else {
+//        try {
+//            $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+//            Flight::set('user', $decoded);
+//            return TRUE;
+//        } catch (Exception) {
+//            Flight::json([
+//                "path" => $path,
+//                "message" => "Authorization token is not valid"
+//            ], 403);
+//            return FALSE;
+//        }
+//    }
+//});
 
 /* REST API documentation endpoint */
 Flight::route("GET /docs.json", function () {
