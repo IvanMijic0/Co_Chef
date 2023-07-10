@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up JWT">
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/UserRoutes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Services/user-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,15 +105,7 @@
       <workItem from="1688746291556" duration="11880000" />
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
-      <workItem from="1688950127411" duration="4562000" />
-    </task>
-    <task id="LOCAL-00050" summary="Setting up swagger for routes">
-      <option name="closed" value="true" />
-      <created>1688599164914</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1688599164914</updated>
+      <workItem from="1688950127411" duration="4656000" />
     </task>
     <task id="LOCAL-00051" summary="Getting chat to work">
       <option name="closed" value="true" />
@@ -499,7 +491,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688954071924</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688954805929</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1688954805929</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

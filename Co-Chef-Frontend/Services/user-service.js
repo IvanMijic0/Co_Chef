@@ -18,7 +18,6 @@ export const UserService = {
         $("#login-form").validate({
             submitHandler: (form) => {
                 const entity = Object.fromEntries(new FormData(form).entries());
-                console.log(entity)
                 UserService.login(entity);
             },
         });
