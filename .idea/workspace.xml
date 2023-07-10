@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8534720-5aa5-446a-8ff0-8f4a8f0c914e" name="Changes" comment="Setting up JWT">
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/RecipeDao.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/RecipesRoutes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/RecipeService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/Control/buttonListeners.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/global_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Frontend/data-utils/global_variables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/RecipeDao.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/dao/RecipeDao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/RecipesRoutes.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/routes/RecipesRoutes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/RecipeService.php" beforeDir="false" afterPath="$PROJECT_DIR$/Co-Chef-Backend/rest/services/RecipeService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,15 +108,7 @@
       <workItem from="1688760547419" duration="9000" />
       <workItem from="1688850163252" duration="1869000" />
       <workItem from="1688950127411" duration="6579000" />
-      <workItem from="1688979195003" duration="1240000" />
-    </task>
-    <task id="LOCAL-00067" summary="Getting chat to work">
-      <option name="closed" value="true" />
-      <created>1688755778824</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1688755778824</updated>
+      <workItem from="1688979195003" duration="1792000" />
     </task>
     <task id="LOCAL-00068" summary="Getting chat to work">
       <option name="closed" value="true" />
@@ -505,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688956812769</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="Setting up JWT">
+      <option name="closed" value="true" />
+      <created>1688980474485</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1688980474485</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

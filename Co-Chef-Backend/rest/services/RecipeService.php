@@ -13,4 +13,8 @@ class RecipeService extends BaseService
         $this->recipesDao = new RecipeDao();
     }
 
+    public function getRecipeByName($name)
+    {
+        return $this->recipesDao->getRecipeByName($name);
+    }
 }
